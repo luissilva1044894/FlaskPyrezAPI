@@ -8,11 +8,11 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 try:
-    HYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
-    HYREZ_DEV_ID = config("PYREZ_DEV_ID")
+    PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
+    PYREZ_DEV_ID = config("PYREZ_DEV_ID")
 except:
-    HYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
-    HYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
+    PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
+    PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
 
 paladinsPC = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
 paladinsPS4 = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.PS4)
