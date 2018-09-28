@@ -8,15 +8,15 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 try:
-    HYREZ_AUTH_ID = config("HYREZ_AUTH_ID")
-    HYREZ_DEV_ID = config("HYREZ_DEV_ID")
+    HYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
+    HYREZ_DEV_ID = config("PYREZ_DEV_ID")
 except:
-    HYREZ_AUTH_ID = os.environ("HYREZ_AUTH_ID")
-    HYREZ_DEV_ID = os.environ("HYREZ_DEV_ID")
+    HYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
+    HYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
 
-paladinsPC = PaladinsAPI(devId=HYREZ_DEV_ID, authKey=HYREZ_AUTH_ID)
-paladinsPS4 = PaladinsAPI(devId=HYREZ_DEV_ID, authKey=HYREZ_AUTH_ID, platform=Platform.PS4)
-paladinsXBOX = PaladinsAPI(devId=HYREZ_DEV_ID, authKey=HYREZ_AUTH_ID, platform=Platform.XBOX)
+paladinsPC = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
+paladinsPS4 = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.PS4)
+paladinsXBOX = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.XBOX)
 
 @app.route('/api/gameversion', methods=['GET'])
 def getGameVersion():
