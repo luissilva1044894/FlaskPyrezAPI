@@ -9,23 +9,23 @@ CURRENT_MATCH_PLAYER_STRINGS = {
     "pt" : "{0}: {1} ({2}){3}",
 }
 PLAYER_NULL_STRINGS = {
-    "en" : "Player not specified!",
-    "es" : "Player not specified!",
-    "pt" : "Player not specified!",
+    "en" : "ERROR: Player not specified!",
+    "es" : "ERROR: Player not specified!",
+    "pt" : "ERROR: Player not specified!",
 }
 PLAYER_NOT_FOUND_STRINGS = {
-    "en" : "Player not found!",
-    "es" : "Player not found!",
-    "pt" : "Jogador inválido!",
+    "en" : "ERROR: Player not found!",
+    "es" : "ERROR: Player not found!",
+    "pt" : "ERRO: Jogador inválido!",
 }
 PLAYER_NOT_MATCH_STRINGS = {
-    "en" : "Player isn't in a match!",
-    "es" : "Player isn't in a match!",
-    "pt" : "Jogador não está em partida!",
+    "en" : "ERROR: Player isn't in a match!",
+    "es" : "ERROR: Player isn't in a match!",
+    "pt" : "ERRO: Jogador não está em partida!",
 }
 PLAYER_GET_RANK_STRINGS = {
     "en" : "{0} (Level {1}) is {2}{3} with {4} wins and {5} losses.{6}",
-    "es" : "{0} (Level {1}) is {2}{3} with {4} wins and {5} losses.{6}",
+    "es" : "{0} (Level {1}) eres {2}{3} con {4} victorias y {5} derrotas.{6}",
     "pt" : "{0} (Nível {1}) é {2}{3} com {4} vitórias e {5} derrotas.{6}",
 }
 PLAYER_RANK_STRINGS = {

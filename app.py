@@ -34,7 +34,7 @@ def getGameVersion():
 @app.route('/api/stalk', methods=['GET'])
 def getStalk():
     platform = request.args.get("platform") if request.args.get("platform") else "pc"
-    player = request.args.get("player")
+    player = str(request.args.get("player")).lower()
     language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
 
     if not player:
@@ -45,7 +45,7 @@ def getStalk():
 @app.route('/api/lastmatch', methods=['GET'])
 def getLastMatch():
     platform = request.args.get("platform") if request.args.get("platform") else "pc"
-    player = request.args.get("player")
+    player = str(request.args.get("player")).lower()
     language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
 
     if not player:
@@ -58,7 +58,7 @@ def getLastMatch():
 @app.route('/api/currentmatch', methods=['GET'])
 def getCurrentMatch():
     platform = request.args.get("platform") if request.args.get("platform") else "pc"
-    player = request.args.get("player")
+    player = str(request.args.get("player")).lower()
     language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
     
     if not player:
@@ -85,7 +85,7 @@ def getCurrentMatch():
 @app.route('/api/rank', methods=['GET'])
 def getRank():
     platform = request.args.get("platform") if request.args.get("platform") else "pc"
-    player = request.args.get("player")
+    player = str(request.args.get("player")).lower()
     language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
 
     if not player:
@@ -102,7 +102,7 @@ def getRank():
 @app.route('/api/winrate', methods=['GET'])
 def getWinrate():
     platform = request.args.get("platform") if request.args.get("platform") else "pc"
-    player = request.args.get("player")
+    player = str(request.args.get("player")).lower()
     champion = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") else None
     language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
 
