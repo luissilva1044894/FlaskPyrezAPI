@@ -88,10 +88,10 @@ def getCurrentMatch():
             for player in players:
                 rank = paladinsXBOX.getPlayer(player.playerId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(player.playerId) if platform.startswith("ps") else paladinsPC.getPlayer(player.playerId)
                 if player.taskForce == 1:
-                    tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName.capitalize(), player.championName.capitalize(), PLAYER_RANK_STRINGS[language][rank.playerElo.value], "{0}".format(", " if tim1Aux <= 4 else ""))
+                    tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.championName.capitalize(), PLAYER_RANK_STRINGS[language][rank.playerElo.value], "{0}".format(", " if tim1Aux <= 4 else ""))
                     tim1Aux += 1
                 else:
-                    tim2 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName.capitalize(), player.championName.capitalize(), PLAYER_RANK_STRINGS[language][rank.playerElo.value], "{0}".format(", " if tim2Aux <= 4 else ""))
+                    tim2 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.championName.capitalize(), PLAYER_RANK_STRINGS[language][rank.playerElo.value], "{0}".format(", " if tim2Aux <= 4 else ""))
                     tim2Aux += 1
             return CURRENT_MATCH_STRINGS[language].format(tim1, tim2)
         else:
@@ -109,7 +109,7 @@ def getRank():
         playerRank = paladinsXBOX.getPlayer(player) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(player) if platform.startswith("ps") else paladinsPC.getPlayer(player)
     except:
         return PLAYER_NOT_FOUND_STRINGS[language]
-    return PLAYER_GET_RANK_STRINGS[language].format(playerRank.playerName.capitalize(), playerRank.accountLevel, PLAYER_RANK_STRINGS[language][playerRank.rankedConquest.currentElo.value],
+    return PLAYER_GET_RANK_STRINGS[language].format(playerRank.playerName, playerRank.accountLevel, PLAYER_RANK_STRINGS[language][playerRank.rankedConquest.currentElo.value],
                                                 "" if playerRank.rankedConquest.currentElo == Tier.Unranked else " ({0} TP{1})".format(format(playerRank.rankedConquest.currentTrumpPoints, ',d'),
                                                 ON_LEADERBOARD_STRINGS[language].format(playerRank.rankedConquest.leaderboardIndex) if playerRank.rankedConquest.leaderboardIndex > 0 else ""),
                                                 format(playerRank.rankedConquest.wins, ',d'), format(playerRank.rankedConquest.losses, ',d'), " (Winrate Global: {0}% & Ranked: {1}%)".format(playerRank.getWinratio(), playerRank.rankedConquest.getWinratio()))
@@ -137,7 +137,7 @@ def getWinrate():
             deaths += playerGlobalKDA[i].deaths
             assists += playerGlobalKDA[i].assists
         kda = ((assists / 2) + kills) / deaths if deaths > 1 else 1
-        return CHAMP_WINRATE_STRINGS[language].format(playerGlobalWinrate.playerName.capitalize(), playerGlobalWinrate.accountLevel, playerGlobalWinrate.wins,
+        return CHAMP_WINRATE_STRINGS[language].format(playerGlobalWinrate.playerName, playerGlobalWinrate.accountLevel, playerGlobalWinrate.wins,
                                                       playerGlobalWinrate.losses, format(kills, ',d'), format(deaths, ',d'),
                                                       format(assists, ',d'), int(kda) if kda % 2 == 0 else round(kda, 2), playerGlobalWinrate.getWinratio())
     else:
