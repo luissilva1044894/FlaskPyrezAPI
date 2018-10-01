@@ -84,15 +84,18 @@ def getCurrentMatch():
         tim2Aux = 1
         tim2 = ""
         players = paladinsXBOX.getMatchPlayerDetails(playerStatusRequest.currentMatchID) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getMatchPlayerDetails(playerStatusRequest.currentMatchID) if platform.startswith("ps") else paladinsPC.getMatchPlayerDetails(playerStatusRequest.currentMatchID)
-        for player in players:
-            rank = paladinsXBOX.getPlayer(player.playerId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(player.playerId) if platform.startswith("ps") else paladinsPC.getPlayer(player.playerId)
-            if player.taskForce == 1:
-                tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName.capitalize(), player.championName.capitalize(), PLAYER_RANK_STRINGS[language][rank.playerElo.value], "{0}".format(", " if tim1Aux <= 4 else ""))
-                tim1Aux += 1
-            else:
-                tim2 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName.capitalize(), player.championName.capitalize(), PLAYER_RANK_STRINGS[language][rank.playerElo.value], "{0}".format(", " if tim2Aux <= 4 else ""))
-                tim2Aux += 1
-        return CURRENT_MATCH_STRINGS[language].format(tim1, tim2)
+        if players:
+            for player in players:
+                rank = paladinsXBOX.getPlayer(player.playerId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(player.playerId) if platform.startswith("ps") else paladinsPC.getPlayer(player.playerId)
+                if player.taskForce == 1:
+                    tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName.capitalize(), player.championName.capitalize(), PLAYER_RANK_STRINGS[language][rank.playerElo.value], "{0}".format(", " if tim1Aux <= 4 else ""))
+                    tim1Aux += 1
+                else:
+                    tim2 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName.capitalize(), player.championName.capitalize(), PLAYER_RANK_STRINGS[language][rank.playerElo.value], "{0}".format(", " if tim2Aux <= 4 else ""))
+                    tim2Aux += 1
+            return CURRENT_MATCH_STRINGS[language].format(tim1, tim2)
+        else:
+            return PLAYER_NOT_MATCH_STRINGS[language]
     
 @app.route('/api/rank', methods=['GET'])
 def getRank():
@@ -150,5 +153,4 @@ def getWinrate():
 
 if __name__ == "__main__":
     app.run(debug=False)
-
 
