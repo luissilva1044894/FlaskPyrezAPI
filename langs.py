@@ -31,29 +31,29 @@ PLAYER_GET_RANK_STRINGS = {
 PLAYER_RANK_STRINGS = {
     "en" : {
         0: "Unranked",
-        1: "Bronze V", 2: "Bronze IV", 3: "Bronze III", 4: "Bronze II", 5: "Bronze I",
-        6: "Silver V", 7: "Silver IV", 8: "Silver III", 9: "Silver II", 10: "Silver I",
-        11: "Gold V", 12: "Gold IV", 13: "Gold III", 14: "Gold II", 15: "Gold I",
-        16: "Platinum V", 17: "Platinum IV", 18: "Platinum III", 19: "Platinum II", 20: "Platinum I",
-        21: "Diamond V", 22: "Diamond IV", 23: "Diamond III", 24: "Diamond II", 25: "Diamond I",
+        1: "Bronze 5", 2: "Bronze 4", 3: "Bronze 3", 4: "Bronze 2", 5: "Bronze 1",
+        6: "Silver 5", 7: "Silver 4", 8: "Silver 3", 9: "Silver 2", 10: "Silver 1",
+        11: "Gold 5", 12: "Gold 4", 13: "Gold 3", 14: "Gold 2", 15: "Gold 1",
+        16: "Platinum 5", 17: "Platinum 4", 18: "Platinum 3", 19: "Platinum 2", 20: "Platinum 1",
+        21: "Diamond 5", 22: "Diamond 4", 23: "Diamond 3", 24: "Diamond 2", 25: "Diamond 1",
         26: "Master", 27: "Grandmaster"
     },
     "es" : {
         0: "Unranked",
-        1: "Bronce V", 2: "Bronce IV", 3: "Bronce III", 4: "Bronce II", 5: "Bronce I",
-        6: "Plata V", 7: "Plata IV", 8: "Plata III", 9: "Plata II", 10: "Plata I",
-        11: "Oro V", 12: "Oro IV", 13: "Oro III", 14: "Oro II", 15: "Oro I",
-        16: "Platino V", 17: "Platino IV", 18: "Platino III", 19: "Platino II", 20: "Platino I",
-        21: "Diamante V", 22: "Diamante IV", 23: "Diamante III", 24: "Diamante II", 25: "Diamante I",
+        1: "Bronce 5", 2: "Bronce 4", 3: "Bronce 3", 4: "Bronce 2", 5: "Bronce 1",
+        6: "Plata 5", 7: "Plata 4", 8: "Plata 3", 9: "Plata 2", 10: "Plata 1",
+        11: "Oro 5", 12: "Oro 4", 13: "Oro 3", 14: "Oro 2", 15: "Oro 1",
+        16: "Platino 5", 17: "Platino 4", 18: "Platino 3", 19: "Platino 2", 20: "Platino 1",
+        21: "Diamante 5", 22: "Diamante 4", 23: "Diamante 3", 24: "Diamante 2", 25: "Diamante 1",
         26: "Maestro", 27: "Gran maestro"
     },
     "pt" : {
         0: "Unranked",
-        1: "Bronze V", 2: "Bronze IV", 3: "Bronze III", 4: "Bronze II", 5: "Bronze I",
-        6: "Prata V", 7: "Prata IV", 8: "Prata III", 9: "Prata II", 10: "Prata I",
-        11: "Ouro V", 12: "Ouro IV", 13: "Ouro III", 14: "Ouro II", 15: "Ouro I",
-        16: "Platina V", 17: "Platina IV", 18: "Platina III", 19: "Platina II", 20: "Platina I",
-        21: "Diamante V", 22: "Diamante IV", 23: "Diamante III", 24: "Diamante II", 25: "Diamante I",
+        1: "Bronze 5", 2: "Bronze 4", 3: "Bronze 3", 4: "Bronze 2", 5: "Bronze 1",
+        6: "Prata 5", 7: "Prata 4", 8: "Prata 3", 9: "Prata 2", 10: "Prata 1",
+        11: "Ouro 5", 12: "Ouro 4", 13: "Ouro 3", 14: "Ouro 2", 15: "Ouro 1",
+        16: "Platina 5", 17: "Platina 4", 18: "Platina 3", 19: "Platina 2", 20: "Platina 1",
+        21: "Diamante 5", 22: "Diamante 4", 23: "Diamante 3", 24: "Diamante 2", 25: "Diamante 1",
         26: "Mestre", 27: "Grão-mestre"
     }
 }
@@ -64,12 +64,12 @@ ON_LEADERBOARD_STRINGS = {
 }
 CHAMP_WINRATE_STRINGS = {
     "en" : "{0} (Level {1}): {2} Wins, {3} Losses (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
-    "es" : "{0} (Level {1}): {2} Wins, {3} Losses (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
-    "pt" : "{0} (Nível {1}): vitórias: {2}, Derrotas: {3} (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
+    "es" : "{0} (Level {1}): {2} victorias, {3} derrotas (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
+    "pt" : "{0} (Nível {1}): {2} vitórias, {3} derrotas (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
 }
 GAME_VERSION_STRINGS = {
     "en" : "{0} {1} is {2} - Current version: {3} ({4})",
-    "es" : "{0} {1} is {2} - Current version: {3} ({4})",
+    "es" : "{0} {1} esta {2} - actual version: {3} ({4})",
     "pt" : "{0} {1} está {2} - Versão atual: {3} ({4})",
 }
 LAST_MATCH_STRINGS = {
