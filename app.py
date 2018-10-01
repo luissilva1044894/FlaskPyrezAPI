@@ -1,11 +1,10 @@
 from pyrez.api import *
 from pyrez.enumerations import *
+from langs import *
 
 from decouple import config, Csv
 
 from flask import Flask, jsonify, request
-
-from langs import *
 
 app = Flask(__name__)
 
@@ -53,7 +52,11 @@ def getLastMatch():
     lastMatchRequest = paladinsXBOX.getMatchHistory(player.lower()) if platform.lower().startswith("xb") or platform.lower() == "switch" else paladinsPS4.getMatchHistory(player.lower()) if platform.lower().startswith("ps") else paladinsPC.getMatchHistory(player.lower())
     kda = ((lastMatchRequest[0].assists / 2) + lastMatchRequest[0].kills) / lastMatchRequest[0].deaths if lastMatchRequest[0].deaths > 1 else 1
     kda = int(kda) if kda % 2 == 0 else round(kda, 2)
-    return LAST_MATCH_STRINGS[language].format(lastMatchRequest[0].mapGame, lastMatchRequest[0].matchID, lastMatchRequest[0].championName.capitalize(), lastMatchRequest[0].kills, lastMatchRequest[0].deaths, lastMatchRequest[0].assists, kda, lastMatchRequest[0].killingSpree, format(lastMatchRequest[0].damage, ',d'), format(lastMatchRequest[0].credits, ',d'), lastMatchRequest[0].matchMinutes, lastMatchRequest[0].matchRegion, lastMatchRequest[0].winStatus, "{0}/{1}".format(lastMatchRequest[0].team1Score, lastMatchRequest[0].team2Score) if lastMatchRequest[0].taskForce == 1 else "{0}/{1}".format(lastMatchRequest[0].team2Score, lastMatchRequest[0].team1Score))
+    return LAST_MATCH_STRINGS[language].format(lastMatchRequest[0].mapGame, lastMatchRequest[0].matchID, lastMatchRequest[0].championName.capitalize(),
+                                                lastMatchRequest[0].kills, lastMatchRequest[0].deaths, lastMatchRequest[0].assists, kda, lastMatchRequest[0].killingSpree,
+                                                format(lastMatchRequest[0].damage, ',d'), format(lastMatchRequest[0].credits, ',d'), lastMatchRequest[0].matchMinutes,
+                                                lastMatchRequest[0].matchRegion, lastMatchRequest[0].winStatus, "{0}/{1}".format(lastMatchRequest[0].team1Score,
+                                                lastMatchRequest[0].team2Score) if lastMatchRequest[0].taskForce == 1 else "{0}/{1}".format(lastMatchRequest[0].team2Score, lastMatchRequest[0].team1Score))
 
 @app.route('/api/currentmatch', methods=['GET'])
 def getCurrentMatch():
@@ -73,7 +76,7 @@ def getCurrentMatch():
         tim2 = ""
         players = paladinsXBOX.getMatchPlayerDetails(playerStatusRequest.currentMatchID) if platform.lower().startswith("xb") or platform.lower() == "switch" else paladinsPS4.getMatchPlayerDetails(playerStatusRequest.currentMatchID) if platform.lower().startswith("ps") else paladinsPC.getMatchPlayerDetails(playerStatusRequest.currentMatchID)
         for player in players:
-            rank = paladinsXBOX.getPlayer(player.playerName) if platform.lower().startswith("xb") or platform.lower() == "switch" else paladinsPS4.getPlayer(player.playerName) if platform.lower().startswith("ps") else paladinsPC.getPlayer(player.playerName)
+            rank = paladinsXBOX.getPlayer(player.playerId) if platform.lower().startswith("xb") or platform.lower() == "switch" else paladinsPS4.getPlayer(player.playerId) if platform.lower().startswith("ps") else paladinsPC.getPlayer(player.playerId)
             if player.taskForce == 1:
                 tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName.capitalize(), player.championName.capitalize(), PLAYER_RANK_STRINGS[language][rank.playerElo.value], "{0}".format(", " if tim1Aux <= 4 else ""))
                 tim1Aux += 1
@@ -133,21 +136,10 @@ def getWinrate():
             for i in range(0, len(playerChampionWinrate)):
                 if playerChampionWinrate[i].godName.lower().replace(" ", "").replace("'", "") == champion:
                     return CHAMP_WINRATE_STRINGS[language].format(playerChampionWinrate[i].godName.replace("'", " ").capitalize(), playerChampionWinrate[i].godLevel, playerChampionWinrate[i].wins,
-                                                                  playerChampionWinrate[i].losses, playerChampionWinrate[i].getWinratio(), format(playerChampionWinrate[i].kills, ',d'),
-                                                                  format(playerChampionWinrate[i].deaths, ',d'), format(playerChampionWinrate[i].assists, ',d'), playerChampionWinrate[i].getKDA())
+                                                                  playerChampionWinrate[i].losses, format(playerChampionWinrate[i].kills, ',d'), format(playerChampionWinrate[i].deaths, ',d'),
+                                                                  format(playerChampionWinrate[i].assists, ',d'), playerChampionWinrate[i].getKDA(), playerChampionWinrate[i].getWinratio())
         except:
             return PLAYER_NOT_FOUND_STRINGS[language]
 
 if __name__ == "__main__":
     app.run(debug=False)
-
-"""
-http://gotme.site-meute.com/api/v1/commands-list
-
-!mostPlayed
-!lastgame           Display the statistics of your last ranked game.                        Trahanqc: !lastgame  Nightbot: Last game won with Gragas 5/4/11 (4 KDA with 51.6% kill participation) 1 double kill
-!queue              Display your current queue type. Note: The summoner must be in a game.  Trahanqc: !queue Nightbot: Ranked 5v5 Draft Pick
-!rank               Display your current League of Legends ranking.                         Trahanqc: !rank Nightbot: Platinum V (86 LP) Series: ✓ X -
-!streak             Display your current winning/losing streak in ranked games.             Trahanqc: !streak Nightbot: Win (1)
-!version            Display the current patch version                                       Trahanqc: !version Nightbot: Current version : 8.17.1
-"""
