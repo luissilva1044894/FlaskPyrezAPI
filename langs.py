@@ -1,3 +1,13 @@
+INTERNAL_ERROR_404_STRINGS = {
+    "en" : "INTERNAL SERVER ERROR: Page not found.",
+    "es" : "INTERNAL SERVER ERROR: Page not found.",
+    "pt" : "INTERNAL SERVER ERROR: Página não encontrada.",
+}
+INTERNAL_ERROR_500_STRINGS = {
+    "en" : "INTERNAL SERVER ERROR: An unexpected error has occurred.",
+    "es" : "INTERNAL SERVER ERROR: An unexpected error has occurred.",
+    "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu.",
+}
 CURRENT_MATCH_STRINGS = {
     "en" : "Current match: {0} | VS | {1}",
     "es" : "Current match: {0} | VS | {1}",
@@ -19,9 +29,9 @@ PLAYER_NOT_FOUND_STRINGS = {
     "pt" : "ERRO: Jogador inválido!",
 }
 PLAYER_NOT_MATCH_STRINGS = {
-    "en" : "ERROR: Player isn't in a match!",
-    "es" : "ERROR: Player isn't in a match!",
-    "pt" : "ERRO: Jogador não está em partida!",
+    "en" : "ERROR: {0} isn't in a match!",
+    "es" : "ERROR: {0} isn't in a match!",
+    "pt" : "ERRO: {0} não está em partida!",
 }
 PLAYER_GET_RANK_STRINGS = {
     "en" : "{0} (Level {1}) is {2}{3} with {4} wins and {5} losses.{6}",
@@ -55,7 +65,7 @@ PLAYER_RANK_STRINGS = {
         16: "Platina 5", 17: "Platina 4", 18: "Platina 3", 19: "Platina 2", 20: "Platina 1",
         21: "Diamante 5", 22: "Diamante 4", 23: "Diamante 3", 24: "Diamante 2", 25: "Diamante 1",
         26: "Mestre", 27: "Grão-mestre"
-    }
+    },
 }
 ON_LEADERBOARD_STRINGS = {
     "en" : ", {0} on the leaderboard",

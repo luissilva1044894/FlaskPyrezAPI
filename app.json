@@ -1,6 +1,10 @@
 {
-    "name": "FlaskPyrezAPI",
     "buildpacks": [
         { "url": "https://github.com/heroku/heroku-buildpack-python" }
-    ]
+    ],
+    "description": "A Paladins API endpoint for Twitch commands",
+    "keywords": [ "flask", "flask-api", "flask-backend", "hirez", "hi-rez", "paladins", "paladins-api", "api-server", "twitch", "nightbot", "endpoint", "endpoints", "open-source" ],
+    "name": "FlaskPyrezAPI",
+    "repository": "https://github.com/luissilva1044894/FlaskPyrezAPI",
+    "website": "http://nonsocial.herokuapp.com"
 }

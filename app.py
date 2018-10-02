@@ -9,9 +9,11 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 try:
+    DEBUG = config("DEBUG", default=False, cast=bool)
     PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = config("PYREZ_DEV_ID")
 except:
+    DEBUG = os.environ ["DEBUG"] if os.environ ["DEBUG"] else False
     PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
 
@@ -19,18 +21,32 @@ paladinsPC = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
 paladinsPS4 = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.PS4)
 paladinsXBOX = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.XBOX)
 
-@app.route('/api/version', methods=['GET'])
+#from flask import render_template
+@app.errorhandler(404)
+def not_found_error(error):
+    language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
+    return INTERNAL_ERROR_404_STRINGS[language], 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
+    return INTERNAL_ERROR_500_STRINGS[language], 500
+
+@app.route("/api/version", methods=["GET"])
 def getGameVersion():
     platform = str(request.args.get("platform")).lower() if request.args.get("platform") else "pc"
     language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
     
-    hiRezServerStatus = paladinsXBOX.getHiRezServerStatus() if platform.startswith("xb") or platform == "switch" else paladinsPS4.getHiRezServerStatus() if platform.startswith("ps") else paladinsPC.getHiRezServerStatus()
-    patchInfo = paladinsXBOX.getPatchInfo() if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPatchInfo() if platform.startswith("ps") else paladinsPC.getPatchInfo()
+    try:
+        hiRezServerStatus = paladinsXBOX.getHiRezServerStatus() if platform.startswith("xb") or platform == "switch" else paladinsPS4.getHiRezServerStatus() if platform.startswith("ps") else paladinsPC.getHiRezServerStatus()
+        patchInfo = paladinsXBOX.getPatchInfo() if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPatchInfo() if platform.startswith("ps") else paladinsPC.getPatchInfo()
+    except:
+        return ""
     return GAME_VERSION_STRINGS[language].format("Paladins", "PC" if platform == "pc" else "PS4" if platform.startswith("ps") else "Nintendo Switch" if platform == "switch" else "Xbox One",
                                                 PALADINS_UP_STRINGS[language] if hiRezServerStatus.status else PALADINS_DOWN_STRINGS[language],
                                                 patchInfo.gameVersion, hiRezServerStatus.version)
 
-@app.route('/api/stalk', methods=['GET'])
+@app.route("/api/stalk", methods=["GET"])
 def getStalk():
     platform = str(request.args.get("platform")).lower() if request.args.get("platform") else "pc"
     player = str(request.args.get("player")).lower()
@@ -44,7 +60,7 @@ def getStalk():
         return PLAYER_NOT_FOUND_STRINGS[language]
     return "{0} is {1}.".format(player.capitalize(), (playerStalkRequest.playerStatusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.playerStatus != 3 else CURRENTLY_MATCH_STRINGS[language].format(playerStalkRequest.currentMatchID)))
 
-@app.route('/api/lastmatch', methods=['GET'])
+@app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
     platform = str(request.args.get("platform")).lower() if request.args.get("platform") else "pc"
     player = str(request.args.get("player")).lower()
@@ -64,7 +80,7 @@ def getLastMatch():
                                             lastMatchRequest[0].matchRegion, lastMatchRequest[0].winStatus, "{0}/{1}".format(lastMatchRequest[0].team1Score,
                                             lastMatchRequest[0].team2Score) if lastMatchRequest[0].taskForce == 1 else "{0}/{1}".format(lastMatchRequest[0].team2Score, lastMatchRequest[0].team1Score))
 
-@app.route('/api/currentmatch', methods=['GET'])
+@app.route("/api/currentmatch", methods=["GET"])
 def getCurrentMatch():
     platform = str(request.args.get("platform")).lower() if request.args.get("platform") else "pc"
     player = str(request.args.get("player")).lower()
@@ -77,7 +93,7 @@ def getCurrentMatch():
     except:
         return PLAYER_NOT_FOUND_STRINGS[language]
     if playerStatusRequest.playerStatus != 3:
-        return PLAYER_NOT_MATCH_STRINGS[language]
+        return PLAYER_NOT_MATCH_STRINGS[language].format(player.capitalize())
     else:
         tim1 = ""
         tim1Aux = 1
@@ -97,7 +113,7 @@ def getCurrentMatch():
         else:
             return PLAYER_NOT_MATCH_STRINGS[language]
     
-@app.route('/api/rank', methods=['GET'])
+@app.route("/api/rank", methods=["GET"])
 def getRank():
     platform = str(request.args.get("platform")).lower() if request.args.get("platform") else "pc"
     player = str(request.args.get("player")).lower()
@@ -114,7 +130,7 @@ def getRank():
                                                 ON_LEADERBOARD_STRINGS[language].format(playerRank.rankedConquest.leaderboardIndex) if playerRank.rankedConquest.leaderboardIndex > 0 else ""),
                                                 format(playerRank.rankedConquest.wins, ',d'), format(playerRank.rankedConquest.losses, ',d'), " (Winrate Global: {0}% & Ranked: {1}%)".format(playerRank.getWinratio(), playerRank.rankedConquest.getWinratio()))
 
-@app.route('/api/winrate', methods=['GET'])
+@app.route("/api/winrate", methods=["GET"])
 def getWinrate():
     platform = str(request.args.get("platform")).lower() if request.args.get("platform") else "pc"
     player = str(request.args.get("player")).lower()
@@ -152,5 +168,4 @@ def getWinrate():
                                                               format(playerChampionWinrate[i].assists, ',d'), playerChampionWinrate[i].getKDA(), playerChampionWinrate[i].getWinratio())
 
 if __name__ == "__main__":
-    app.run(debug=False)
-
+    app.run(debug=DEBUG)
