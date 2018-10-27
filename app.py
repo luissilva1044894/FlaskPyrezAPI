@@ -39,7 +39,7 @@ def index():#ip = request.remote_addr
 
 @app.route('/api')
 def apiIndex():
-    return redirect(url_for("index"))
+    return render_template("index.html") #redirect(url_for("index"))
 
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
