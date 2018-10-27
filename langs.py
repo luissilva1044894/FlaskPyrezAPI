@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 INTERNAL_ERROR_404_STRINGS = {
     "en" : "INTERNAL SERVER ERROR: Page not found.",
     "es" : "INTERNAL SERVER ERROR: Page not found.",
