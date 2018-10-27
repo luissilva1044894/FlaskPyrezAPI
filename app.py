@@ -33,6 +33,14 @@ def internal_error(error):
     language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
     return INTERNAL_ERROR_500_STRINGS[language], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
 
+@app.route('/')
+def index():#ip = request.remote_addr
+    return render_template("index.html")
+
+@app.route('/api')
+def apiIndex():
+    return redirect(url_for("index"))
+
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
     platform = str(request.args.get("platform")).lower() if request.args.get("platform") else "pc"
