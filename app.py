@@ -6,7 +6,7 @@ from langs import *
 
 from decouple import config, Csv
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
