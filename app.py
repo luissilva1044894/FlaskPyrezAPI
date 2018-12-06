@@ -156,6 +156,7 @@ def getRank():
                                                 "" if playerRank.rankedConquest.currentRank == Tier.Unranked and playerRank.rankedConquest.wins + playerRank.rankedConquest.losses == 0 else WINS_LOSSES_STRINGS[language].format(format(playerRank.rankedConquest.wins, ',d'), format(playerRank.rankedConquest.losses, ',d')),
                                                 " (Winrate Global: {0}%{1})".format (playerRank.getWinratio(), "" if playerRank.rankedConquest.wins + playerRank.rankedConquest.losses == 0 else " & Ranked: {0}%".format(playerRank.rankedConquest.getWinratio())))
 
+@app.route("/api/kda", methods=["GET"])
 @app.route("/api/winrate", methods=["GET"])
 def getWinrate():
     platform = str(request.args.get("platform")).lower() if request.args.get("platform") else "pc"
