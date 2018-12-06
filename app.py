@@ -4,6 +4,8 @@ from pyrez.api import *
 from pyrez.enumerations import *
 from langs import *
 
+from datetime import datetime
+
 from decouple import config, Csv
 
 from flask import Flask, jsonify, request, render_template
@@ -64,16 +66,14 @@ def getStalk():
         return PLAYER_NULL_STRINGS[language]
     try:
         #Se der Player not found, retornar só "Nonsocial is not found"?!
-        getPlayerRequest = paladinsXBOX.getPlayer(player) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(player) if platform.startswith("ps") else paladinsPC.getPlayer(player)
-        #if not getPlayerRequest:
-            #return PLAYER_NOT_FOUND_STRINGS[language]
-        playerStalkRequest = paladinsXBOX.getPlayerStatus(getPlayerRequest.playerId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayerStatus(getPlayerRequest.playerId) if platform.startswith("ps") else paladinsPC.getPlayerStatus(getPlayerRequest.playerId)
+        getPlayerRequest = paladinsPC.getPlayer(player)#paladinsXBOX.getPlayer(player) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(player) if platform.startswith("ps") else paladinsPC.getPlayer(player)
+        playerStalkRequest = paladinsPC.getPlayerStatus(getPlayerRequest.playerId)#paladinsXBOX.getPlayerStatus(getPlayerRequest.playerId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayerStatus(getPlayerRequest.playerId) if platform.startswith("ps") else paladinsPC.getPlayerStatus(getPlayerRequest.playerId)
     except:
         return PLAYER_NOT_FOUND_STRINGS[language]
     #return "{0} is {1}.".format(player.capitalize(), (playerStalkRequest.playerStatusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.playerStatus != 3 else CURRENTLY_MATCH_STRINGS[language].format(playerStalkRequest.currentMatchID)))
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                     playerStalkRequest.playerStatusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.playerStatus != 3 else CURRENTLY_MATCH_STRINGS[language].format(playerStalkRequest.currentMatchId),
-                    getPlayerRequest.createdDatetime.strptime(HOUR_FORMAT_STRINGS[language]), getPlayerRequest.lastLoginDatetime.strptime(HOUR_FORMAT_STRINGS[language]), getPlayerRequest.hoursPlayed, getPlayerRequest.platform, getPlayerRequest.playerRegion)
+                    getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getPlayerRequest.lastLoginDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getPlayerRequest.hoursPlayed, getPlayerRequest.platform, getPlayerRequest.playerRegion)
 
 @app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
