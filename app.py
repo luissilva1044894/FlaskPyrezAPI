@@ -119,9 +119,9 @@ def getCurrentMatch():
         tim2 = ""
         players = paladinsXBOX.getMatchPlayerDetails(playerStatusRequest.currentMatchId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getMatchPlayerDetails(playerStatusRequest.currentMatchId) if platform.startswith("ps") else paladinsPC.getMatchPlayerDetails(playerStatusRequest.currentMatchId)
         if players:
-            for player in players:
+            for play in players:
                 if playerStatusRequest.currentMatchQueueId == 428:
-                    rank = player.tier
+                    rank = play.tier
                 else:
                     if play.playerName.lower() == player.lower():
                         rank = getPlayerRequest.playerRank.value
