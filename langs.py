@@ -46,9 +46,9 @@ UNABLE_TO_CONNECT_STRINGS = {
     "pt" : "ERRO: Não foi possível conectar à API da Hi-Rez Studios!",
 }
 WINS_LOSSES_STRINGS = {
-    "en" : " with {0} wins and {1} losses.",
-    "es" : " con {0} victorias y {1} derrotas.",
-    "pt" : " com {0} vitórias e {1} derrotas.",
+    "en" : " with {0} wins and {1} losses",
+    "es" : " con {0} victorias y {1} derrotas",
+    "pt" : " com {0} vitórias e {1} derrotas",
 }
 PLAYER_GET_RANK_STRINGS = {
     "en" : "{0} is {1}{2}{3}.{4}",
@@ -61,9 +61,9 @@ UNRANKED_STRINGS = {
     "pt" : "Não-ranqueado",
 }
 QUALIFYING_STRINGS = {
-    "en" : "Qualifying",
-    "es" : "Qualifying",
-    "pt" : "Qualificatória",
+    "en" : "Placements/Qualifying",
+    "es" : "Placements/Qualifying",
+    "pt" : "MD10/Qualificatória",
 }
 PLAYER_RANK_STRINGS = {
     "en" : {
