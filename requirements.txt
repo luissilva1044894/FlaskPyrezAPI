@@ -1,4 +1,4 @@
-pyrez==0.9.6.5
+pyrez==0.9.6.6
 gunicorn==19.7.1
 beautifulsoup4==4.6.3
 certifi==2018.8.24

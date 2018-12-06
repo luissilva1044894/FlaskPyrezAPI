@@ -1,10 +1,27 @@
 {
-    "buildpacks": [
-        { "url": "https://github.com/heroku/heroku-buildpack-python" }
-    ],
-    "description": "A Paladins API endpoint for Twitch commands",
+    "buildpacks": [ { "url": "https://github.com/heroku/heroku-buildpack-python" } ],
+    "description": "FlaskPyrezAPI is an open-source endpoint for Twitch commands that provides datas about players, matches and others stats of Paladins game.",
+    "env": {
+    	"DEBUG": {
+    		"description": "",
+    		"required": "true",
+    		"value": "false"
+    	},
+    	"PYREZ_AUTH_ID": {
+    		"description": "Used for authentication. This is the authentication key that you receive from Hi-Rez Studios.",
+    		"required": "true",
+    		"value": "23DF3C7E9BD14D84BF892AD206B6755C"
+    	},
+    	"PYREZ_DEV_ID": {
+    		"description": "Used for authentication. This is the developer ID that you receive from Hi-Rez Studios.",
+    		"required": "true",
+    		"value": "1004"
+    	}
+	},
     "keywords": [ "flask", "flask-api", "flask-backend", "hirez", "hi-rez", "paladins", "paladins-api", "api-server", "twitch", "nightbot", "endpoint", "endpoints", "open-source" ],
+    "logo": "https://web2.hirez.com/paladins/assets/paladins-logo.png",
     "name": "FlaskPyrezAPI",
     "repository": "https://github.com/luissilva1044894/FlaskPyrezAPI",
+    "success_url": "/index",
     "website": "http://nonsocial.herokuapp.com"
 }

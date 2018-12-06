@@ -27,7 +27,7 @@
   <tr>
     <td class="tg-us36">Current Match</td>
     <td class="tg-us36">All players rank in a live match</td>
-    <td class="tg-us36">http://nonsocial.herokuapp.com/api/currentmatch</td>
+    <td class="tg-us36">{{ url_for("getCurrentMatch", _external=True) }}</td>
     <td class="tg-yw4l">?player=IGN</td>
     <td class="tg-yw4l">&platform=PLATFORM</td>
     <td class="tg-yw4l">&language=EN</td>
@@ -45,7 +45,7 @@
   <tr>
     <td class="tg-yw4l">KDA</td>
     <td class="tg-yw4l">KDA of a player or champion</td>
-    <td class="tg-us36">http://nonsocial.herokuapp.com/api/winrate</td>
+    <td class="tg-us36">{{ url_for("getWinrate", _external=True) }}</td>
     <td class="tg-yw4l">?player=IGN</td>
     <td class="tg-yw4l">&champion=CHAMPION</td>
     <td class="tg-yw4l">&platform=PLATFORM</td>
@@ -54,7 +54,7 @@
   <tr>
     <td class="tg-yw4l">Last Match</td>
     <td class="tg-yw4l">Info about the last played match</td>
-    <td class="tg-us36">http://nonsocial.herokuapp.com/api/lastmatch</td>
+    <td class="tg-us36">{{ url_for("getLastMatch", _external=True) }}</td>
     <td class="tg-yw4l">?player=IGN</td>
     <td class="tg-yw4l">&platform=PLATFORM</td>
     <td class="tg-yw4l">&language=EN</td>
@@ -62,8 +62,8 @@
   </tr>
   <tr>
     <td class="tg-yw4l">Rank</td>
-    <td class="tg-yw4l">Currently rank of a player</td>
-    <td class="tg-us36">http://nonsocial.herokuapp.com/api/rank</td>
+    <td class="tg-yw4l">Currently rank of a specified player</td>
+    <td class="tg-us36">{{ url_for("getRank", _external=True) }}</td>
     <td class="tg-yw4l">?player=IGN</td>
     <td class="tg-yw4l">&platform=PLATFORM</td>
     <td class="tg-yw4l">&language=EN</td>
@@ -72,7 +72,7 @@
   <tr>
     <td class="tg-yw4l">Server</td>
     <td class="tg-yw4l">Currently status of Paladins Server</td>
-    <td class="tg-us36">http://nonsocial.herokuapp.com/api/server</td>
+    <td class="tg-us36">{{ url_for("getGameVersion", _external=True) }}</td>
     <td class="tg-yw4l">?platform=PLATFORM</td>
     <td class="tg-yw4l">&language=EN</td>
     <td class="tg-yw4l"></td>
@@ -80,8 +80,8 @@
   </tr>
   <tr>
     <td class="tg-yw4l">Stalk</td>
-    <td class="tg-yw4l">Currently online status of a player</td>
-    <td class="tg-us36">http://nonsocial.herokuapp.com/api/stalk</td>
+    <td class="tg-yw4l">Currently online status of a specified player</td>
+    <td class="tg-us36">{{ url_for("getStalk", _external=True) }}</td>
     <td class="tg-yw4l">?player=IGN</td>
     <td class="tg-yw4l">&platform=PLATFORM</td>
     <td class="tg-yw4l">&language=EN</td>
@@ -89,13 +89,19 @@
   </tr>
 </table>
 <h2><strong>NIGHTBOT CUSTOM API</strong><br /></h2>
-<h3>Example: !addcom !rank $(customapi http://nonsocial.herokuapp.com/api/rank?player=Nonsocial&platform=pc&language=pt)<br /></h3>
+<h3>Example: !addcom !rank $(customapi {{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN)<br /></h3>
 <br />
-<strong>Current match:</strong> $(urlfetch http://nonsocial.herokuapp.com/api/currentmatch?player=Nonsocial&platform=pc&language=en)<br />
+<strong>Current match:</strong> $(urlfetch {{ url_for("getCurrentMatch", _external=True) }}?player=FeyRazzle&platform=PC&language=EN)<br />
 <br />
 <br />
 
-<h2><strong>STREAMLABS CHATBOT CUSTOM API</strong><br /></h2>
-<h3>Example: !command add !rank $readapi(http://nonsocial.herokuapp.com/api/rank?player=Nonsocial&platform=pc&language=en)<br /></h3>
+<h2><strong>DEEPBOT CUSTOM API</strong><br /></h2>
+<h3>Example: !addcmd !rank @customapi@[{{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN]<br /></h3>
+
+<h2><strong>STREAM ELEMENTS CUSTOM API</strong><br /></h2>
+<h3>Example: !command add !rank ${customapi.{{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN} <br /></h3>
+
+<h2><strong>STREAMLABS CHATBOT / ANKHBOT CUSTOM API</strong><br /></h2>
+<h3>Example: !command add !rank $readapi({{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN)<br /></h3>
 </body>
 </html>

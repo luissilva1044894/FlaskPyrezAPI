@@ -28,17 +28,32 @@ PLAYER_NULL_STRINGS = {
 PLAYER_NOT_FOUND_STRINGS = {
     "en" : "ERROR: Player not found!",
     "es" : "ERROR: Player not found!",
-    "pt" : "ERRO: Jogador inválido!",
+    "pt" : "ERRO: Jogador não encontrado!",
 }
 PLAYER_NOT_MATCH_STRINGS = {
     "en" : "ERROR: {0} isn't in a match!",
     "es" : "ERROR: {0} isn't in a match!",
     "pt" : "ERRO: {0} não está em partida!",
 }
+PLAYER_LEVEL_STRINGS = {
+    "en" : "{0} (Level {1})",
+    "es" : "{0} (Level {1})",
+    "pt" : "{0} (Nível {1})",
+}
 PLAYER_GET_RANK_STRINGS = {
-    "en" : "{0} (Level {1}) is {2}{3} with {4} wins and {5} losses.{6}",
-    "es" : "{0} (Level {1}) eres {2}{3} con {4} victorias y {5} derrotas.{6}",
-    "pt" : "{0} (Nível {1}) é {2}{3} com {4} vitórias e {5} derrotas.{6}",
+    "en" : "{0} is {2}{3} with {4} wins and {5} losses.{6}",
+    "es" : "{0} eres {2}{3} con {4} victorias y {5} derrotas.{6}",
+    "pt" : "{0} é {2}{3} com {4} vitórias e {5} derrotas.{6}",
+}
+UNRANKED_STRINGS = {
+    "en" : "Unranked",
+    "es" : "Unranked",
+    "pt" : "Não-ranqueado",
+}
+QUALIFYING_STRINGS = {
+    "en" : "Qualifying",
+    "es" : "Qualifying",
+    "pt" : "Qualificatória",
 }
 PLAYER_RANK_STRINGS = {
     "en" : {
@@ -51,7 +66,7 @@ PLAYER_RANK_STRINGS = {
         26: "Master", 27: "Grandmaster"
     },
     "es" : {
-        0: "Unranked",
+        0: "Unranked",#Qualifying
         1: "Bronce 5", 2: "Bronce 4", 3: "Bronce 3", 4: "Bronce 2", 5: "Bronce 1",
         6: "Plata 5", 7: "Plata 4", 8: "Plata 3", 9: "Plata 2", 10: "Plata 1",
         11: "Oro 5", 12: "Oro 4", 13: "Oro 3", 14: "Oro 2", 15: "Oro 1",
@@ -75,9 +90,9 @@ ON_LEADERBOARD_STRINGS = {
     "pt" : ", {0}° no rank",
 }
 CHAMP_WINRATE_STRINGS = {
-    "en" : "{0} (Level {1}): {2} Wins, {3} Losses (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
-    "es" : "{0} (Level {1}): {2} victorias, {3} derrotas (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
-    "pt" : "{0} (Nível {1}): {2} vitórias, {3} derrotas (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
+    "en" : "{0}: {2} Wins, {3} Losses (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
+    "es" : "{0}: {2} victorias, {3} derrotas (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
+    "pt" : "{0}: {2} vitórias, {3} derrotas (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
 }
 GAME_VERSION_STRINGS = {
     "en" : "{0} {1} is {2} - Current version: {3} ({4})",
@@ -93,6 +108,11 @@ CURRENTLY_MATCH_STRINGS = {
     "en" : "currently in a match (Match ID: {0})",
     "es" : "currently in a match (Match ID: {0})",
     "pt" : "está em partida (ID da partida: {0})",
+}
+PLAYER_STALK_STRINGS = {
+    "en" : "{0} is {1} - Created at: {2}, Last Seen: {3}, Playtime: {4}, Platform: {5}, Region: {6}",
+    "es" : "{0} is {1} - Created at: {2}, Last Seen: {3}, Playtime: {4}, Platform: {5}, Region: {6}",
+    "pt" : "{0} está {1} - Criado em: {2}, Último login: {3}, Horas jogadas: {4}, Platforma: {5}, Região: {6}",
 }
 PALADINS_UP_STRINGS = {
     "en" : "UP",
