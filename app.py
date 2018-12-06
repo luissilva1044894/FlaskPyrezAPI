@@ -49,7 +49,7 @@ def getGameVersion():
         hiRezServerStatus = paladinsXBOX.getHiRezServerStatus() if platform.startswith("xb") or platform == "switch" else paladinsPS4.getHiRezServerStatus() if platform.startswith("ps") else paladinsPC.getHiRezServerStatus()
         patchInfo = paladinsXBOX.getPatchInfo() if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPatchInfo() if platform.startswith("ps") else paladinsPC.getPatchInfo()
     except:
-        return "Unable to connect to Hi-Rez Studios API"
+        return UNABLE_TO_CONNECT_STRINGS[language]
     return GAME_VERSION_STRINGS[language].format("Paladins", "PC" if platform == "pc" else "PS4" if platform.startswith("ps") else "Nintendo Switch" if platform == "switch" else "Xbox One",
                                                 PALADINS_UP_STRINGS[language] if hiRezServerStatus.status else PALADINS_DOWN_STRINGS[language],
                                                 patchInfo.gameVersion, hiRezServerStatus.version)
@@ -73,7 +73,7 @@ def getStalk():
     #return "{0} is {1}.".format(player.capitalize(), (playerStalkRequest.playerStatusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.playerStatus != 3 else CURRENTLY_MATCH_STRINGS[language].format(playerStalkRequest.currentMatchID)))
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                     playerStalkRequest.playerStatusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.playerStatus != 3 else CURRENTLY_MATCH_STRINGS[language].format(playerStalkRequest.currentMatchId),
-                    getPlayerRequest.createdDatetime, getPlayerRequest.lastLoginDatetime, getPlayerRequest.hoursPlayed, getPlayerRequest.platform, getPlayerRequest.playerRegion)
+                    getPlayerRequest.createdDatetime.strptime(HOUR_FORMAT_STRINGS[language]), getPlayerRequest.lastLoginDatetime.strptime(HOUR_FORMAT_STRINGS[language]), getPlayerRequest.hoursPlayed, getPlayerRequest.platform, getPlayerRequest.playerRegion)
 
 @app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
@@ -154,7 +154,7 @@ def getRank():
                                                 "" if playerRank.rankedConquest.currentRank == Tier.Unranked else " ({0} TP{1})".format(format(playerRank.rankedConquest.currentTrumpPoints, ',d'),
                                                 ON_LEADERBOARD_STRINGS[language].format(playerRank.rankedConquest.leaderboardIndex) if playerRank.rankedConquest.leaderboardIndex > 0 else ""),
                                                 format(playerRank.rankedConquest.wins, ',d'), format(playerRank.rankedConquest.losses, ',d'),
-                                                " (Winrate Global: {0}%{1})".format (playerRank.getWinratio(), "" if playerRank.rankedConquest.wins + playerRank.rankedConquest.losses == 0 else " & Ranked: {1}%".format(playerRank.rankedConquest.getWinratio())))
+                                                " (Winrate Global: {0}%{1})".format (playerRank.getWinratio(), "" if playerRank.rankedConquest.wins + playerRank.rankedConquest.losses == 0 else " & Ranked: {0}%".format(playerRank.rankedConquest.getWinratio())))
 
 @app.route("/api/winrate", methods=["GET"])
 def getWinrate():

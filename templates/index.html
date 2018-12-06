@@ -89,19 +89,19 @@
   </tr>
 </table>
 <h2><strong>NIGHTBOT CUSTOM API</strong><br /></h2>
-<h3>Example: !addcom !rank $(customapi {{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN)<br /></h3>
+<strong>Example</strong>: !addcom !rank $(customapi {{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN)<br />
 <br />
-<strong>Current match:</strong> $(urlfetch {{ url_for("getCurrentMatch", _external=True) }}?player=FeyRazzle&platform=PC&language=EN)<br />
+<strong>Current match:</strong> !addcom !currentmatch $(customapi {{ url_for("getCurrentMatch", _external=True) }}?player=FeyRazzle&platform=PC&language=EN)<br />
 <br />
 <br />
 
 <h2><strong>DEEPBOT CUSTOM API</strong><br /></h2>
-<h3>Example: !addcmd !rank @customapi@[{{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN]<br /></h3>
+<strong>Example</strong>: !addcmd !rank @customapi@[{{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN]<br />
 
 <h2><strong>STREAM ELEMENTS CUSTOM API</strong><br /></h2>
-<h3>Example: !command add !rank ${customapi.{{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN} <br /></h3>
+<strong>Example</strong>: !command add !rank ${customapi.{{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN} <br />
 
 <h2><strong>STREAMLABS CHATBOT / ANKHBOT CUSTOM API</strong><br /></h2>
-<h3>Example: !command add !rank $readapi({{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN)<br /></h3>
+<strong>Example</strong>: !command add !rank $readapi({{ url_for("getRank", _external=True) }}?player=FeyRazzle&platform=PC&language=EN)<br />
 </body>
 </html>

@@ -40,10 +40,20 @@ PLAYER_LEVEL_STRINGS = {
     "es" : "{0} (Level {1})",
     "pt" : "{0} (Nível {1})",
 }
+UNABLE_TO_CONNECT_STRINGS = {
+    "en" : "ERROR: Unable to connect to Hi-Rez Studios API!",
+    "es" : "ERROR: Unable to connect to Hi-Rez Studios API!",
+    "pt" : "ERRO: Não foi possível conectar à API da Hi-Rez Studios!",
+}
+WINS_LOSSES_STRINGS = {
+    "en" : " with {0} wins and {1} losses.",
+    "es" : " con {0} victorias y {1} derrotas.",
+    "pt" : " com {0} vitórias e {1} derrotas.",
+}
 PLAYER_GET_RANK_STRINGS = {
-    "en" : "{0} is {2}{3} with {4} wins and {5} losses.{6}",
-    "es" : "{0} eres {2}{3} con {4} victorias y {5} derrotas.{6}",
-    "pt" : "{0} é {2}{3} com {4} vitórias e {5} derrotas.{6}",
+    "en" : "{0} is {1}{2}{3}.{4}",
+    "es" : "{0} eres {1}{2}{3}.{4}",
+    "pt" : "{0} é {1}{2}{3}.{4}",
 }
 UNRANKED_STRINGS = {
     "en" : "Unranked",
@@ -90,9 +100,14 @@ ON_LEADERBOARD_STRINGS = {
     "pt" : ", {0}° no rank",
 }
 CHAMP_WINRATE_STRINGS = {
-    "en" : "{0}: {2} Wins, {3} Losses (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
-    "es" : "{0}: {2} victorias, {3} derrotas (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
-    "pt" : "{0}: {2} vitórias, {3} derrotas (Kills: {4} / Deaths: {5} / Assists: {6} - {7} KDA) - Winrate: {8}%",
+    "en" : "{0}: {1} Wins, {2} Losses (Kills: {3} / Deaths: {4} / Assists: {5} - {6} KDA) - Winrate: {7}%",
+    "es" : "{0}: {1} victorias, {2} derrotas (Kills: {3} / Deaths: {4} / Assists: {5} - {6} KDA) - Winrate: {7}%",
+    "pt" : "{0}: {1} vitórias, {2} derrotas (Kills: {3} / Deaths: {4} / Assists: {5} - {6} KDA) - Winrate: {7}%",
+}
+HOUR_FORMAT_STRINGS = {
+    "en" : "%m/%d/%Y %H:%M:%S %p",
+    "es" : "%m/%d/%Y %H:%M:%S %p",
+    "pt" : "%d/%m/%Y %H:%M:%S",
 }
 GAME_VERSION_STRINGS = {
     "en" : "{0} {1} is {2} - Current version: {3} ({4})",
@@ -110,9 +125,9 @@ CURRENTLY_MATCH_STRINGS = {
     "pt" : "está em partida (ID da partida: {0})",
 }
 PLAYER_STALK_STRINGS = {
-    "en" : "{0} is {1} - Created at: {2}, Last Seen: {3}, Playtime: {4}, Platform: {5}, Region: {6}",
-    "es" : "{0} is {1} - Created at: {2}, Last Seen: {3}, Playtime: {4}, Platform: {5}, Region: {6}",
-    "pt" : "{0} está {1} - Criado em: {2}, Último login: {3}, Horas jogadas: {4}, Platforma: {5}, Região: {6}",
+    "en" : "{0} is {1} - Created at: {2}, Last Seen: {3}, Playtime: {4}H, Platform: {5}, Region: {6}",
+    "es" : "{0} is {1} - Created at: {2}, Last Seen: {3}, Playtime: {4}H, Platform: {5}, Region: {6}",
+    "pt" : "{0} está {1} - Criado em: {2}, Último login: {3}, Horas jogadas: {4}H, Platforma: {5}, Região: {6}",
 }
 PALADINS_UP_STRINGS = {
     "en" : "UP",
