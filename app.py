@@ -150,10 +150,10 @@ def getRank():
         playerRank = paladinsXBOX.getPlayer(player) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(player) if platform.startswith("ps") else paladinsPC.getPlayer(player)
     except:
         return PLAYER_NOT_FOUND_STRINGS[language]
-    return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(playerRank.playerName, playerRank.accountLevel), PLAYER_RANK_STRINGS[language][playerRank.rankedConquest.currentRank.value],
-                                                "" if playerRank.rankedConquest.currentRank == Tier.Unranked else " ({0} TP{1})".format(format(playerRank.rankedConquest.currentTrumpPoints, ',d'),
-                                                ON_LEADERBOARD_STRINGS[language].format(playerRank.rankedConquest.leaderboardIndex) if playerRank.rankedConquest.leaderboardIndex > 0 else ""),
-                                                format(playerRank.rankedConquest.wins, ',d'), format(playerRank.rankedConquest.losses, ',d'),
+    return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(playerRank.playerName, playerRank.accountLevel),
+                                                PLAYER_RANK_STRINGS[language][playerRank.rankedConquest.currentRank.value],
+                                                "" if playerRank.rankedConquest.currentRank == Tier.Unranked else " ({0} TP{1})".format(format(playerRank.rankedConquest.currentTrumpPoints, ',d'), ON_LEADERBOARD_STRINGS[language].format(playerRank.rankedConquest.leaderboardIndex) if playerRank.rankedConquest.leaderboardIndex > 0 else ""),
+                                                "" if playerRank.rankedConquest.currentRank == Tier.Unranked else WINS_LOSSES_STRINGS[language].format(format(playerRank.rankedConquest.wins, ',d'), format(playerRank.rankedConquest.losses, ',d')),
                                                 " (Winrate Global: {0}%{1})".format (playerRank.getWinratio(), "" if playerRank.rankedConquest.wins + playerRank.rankedConquest.losses == 0 else " & Ranked: {0}%".format(playerRank.rankedConquest.getWinratio())))
 
 @app.route("/api/winrate", methods=["GET"])
