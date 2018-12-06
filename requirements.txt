@@ -1,4 +1,4 @@
-git+https://gitlab.com/luissilva1044894/pyrez.git
+-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez-master
 gunicorn==19.7.1
 beautifulsoup4==4.6.3
 certifi==2018.8.24
