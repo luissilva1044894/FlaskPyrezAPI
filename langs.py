@@ -11,9 +11,9 @@ INTERNAL_ERROR_500_STRINGS = {
     "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu.",
 }
 CURRENT_MATCH_STRINGS = {
-    "en" : "Current match: {0} | VS | {1}",
-    "es" : "Current match: {0} | VS | {1}",
-    "pt" : "Partida atual: {0} | VS | {1}",
+    "en" : "Current match ({0}): {1} | VS | {2}",
+    "es" : "Current match ({0}): {1} | VS | {2}",
+    "pt" : "Partida atual ({0}): {1} | VS | {2}",
 }
 CURRENT_MATCH_PLAYER_STRINGS = {
     "en" : "{0} as {1} ({2}){3}",

@@ -133,7 +133,7 @@ def getCurrentMatch():
                 else:
                     tim2 += CURRENT_MATCH_PLAYER_STRINGS[language].format(play.playerName, play.championName, PLAYER_RANK_STRINGS[language][rank], "{0}".format(", " if tim2Aux <= 4 else ""))
                     tim2Aux += 1
-            return CURRENT_MATCH_STRINGS[language].format(tim1, tim2)
+            return CURRENT_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[playerStatusRequest.currentMatchQueueId], tim1, tim2)
         else:
             return PLAYER_NOT_MATCH_STRINGS[language]
     
