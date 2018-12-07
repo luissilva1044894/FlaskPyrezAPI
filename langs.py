@@ -65,6 +65,24 @@ QUALIFYING_STRINGS = {
     "es" : "Placements/Qualifying",
     "pt" : "MD10/Qualificatória",
 }
+QUEUE_IDS_STRINGS = {
+        423: "Custom/Siege", 430: "Custom/Siege", 431: "Custom/Siege", 432: "Custom/Siege", 433: "Custom/Siege", 438: "Custom/Siege", 439: "Custom/Siege", 440: "Custom/Siege", 458: "Custom/Siege", 459: "Custom/Siege", 473: "Custom/Siege",
+        454: "Custom/Onslaught", 455: "Custom/Onslaught", 462: "Custom/Onslaught", 464: "Custom/Onslaught", 483: "Custom/Onslaught",
+        468: "Custom/TDM", 471: "Custom/TDM", 472: "Custom/TDM", 479: "Custom/TDM", 480: "Custom/TDM",
+        424: "Casual/Siege", 428: "Ranked", 445: "Casual/Test Maps", 452: "Casual/Onslaught", 469: "Casual/TDM", 
+        477: "Event/Ascension Peak", 478: "Event/Rise of Furia",
+        425: "Training/Siege", 453: "Training/Onslaught", 470: "Training/TDM", 434: "Training/Shooting Range", 427: "Training/Tutorial",
+        465: "Classic/Siege"
+}
+PLAYER_RANK_STRINGS = {
+        0: "Unranked",
+        1: "Bronze 5", 2: "Bronze 4", 3: "Bronze 3", 4: "Bronze 2", 5: "Bronze 1",
+        6: "Silver 5", 7: "Silver 4", 8: "Silver 3", 9: "Silver 2", 10: "Silver 1",
+        11: "Gold 5", 12: "Gold 4", 13: "Gold 3", 14: "Gold 2", 15: "Gold 1",
+        16: "Platinum 5", 17: "Platinum 4", 18: "Platinum 3", 19: "Platinum 2", 20: "Platinum 1",
+        21: "Diamond 5", 22: "Diamond 4", 23: "Diamond 3", 24: "Diamond 2", 25: "Diamond 1",
+        26: "Master", 27: "Grandmaster"
+}
 PLAYER_RANK_STRINGS = {
     "en" : {
         0: "Unranked",
@@ -120,9 +138,9 @@ LAST_MATCH_STRINGS = {
     "pt" : "{0} - Id da partida: {1}, Duração: {10}m, Região: {11}: {2} ({3}/{4}/{5} - {6} KDA) Sequência: {7}, Dano: {8}, Creditos: {9} - {12} (Score: {13})",
 }
 CURRENTLY_MATCH_STRINGS = {
-    "en" : "currently in a match (Match ID: {0})",
-    "es" : "currently in a match (Match ID: {0})",
-    "pt" : "está em partida (ID da partida: {0})",
+    "en" : "currently in a match (Queue: {0}, Match ID: {1})",
+    "es" : "currently in a match (Queue: {0}, Match ID: {1})",
+    "pt" : "está em partida (Fila: {0}, ID da partida: {1})",
 }
 PLAYER_STALK_STRINGS = {
     "en" : "{0} is {1} - Created at: {2}, Last Seen: {3}, Playtime: {4}H, Platform: {5}, Region: {6}",
