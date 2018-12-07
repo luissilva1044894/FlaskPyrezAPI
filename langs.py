@@ -140,7 +140,7 @@ LAST_MATCH_STRINGS = {
 CURRENTLY_MATCH_STRINGS = {
     "en" : "currently in a match (Queue: {0}, Match ID: {1})",
     "es" : "currently in a match (Queue: {0}, Match ID: {1})",
-    "pt" : "está em partida (Fila: {0}, ID da partida: {1})",
+    "pt" : "em partida (Fila: {0}, ID da partida: {1})",
 }
 PLAYER_STALK_STRINGS = {
     "en" : "{0} is {1} - Created at: {2}, Last Seen: {3}, Playtime: {4}H, Platform: {5}, Region: {6}",
