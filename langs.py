@@ -143,9 +143,9 @@ CURRENTLY_MATCH_STRINGS = {
     "pt" : "em partida (Fila: {0}, ID da partida: {1})",
 }
 PLAYER_STALK_STRINGS = {
-    "en" : "{0} is {1} - Created at: {2}, Last Seen: {3}, Playtime: {4}H, Platform: {5}, Region: {6}",
-    "es" : "{0} is {1} - Created at: {2}, Last Seen: {3}, Playtime: {4}H, Platform: {5}, Region: {6}",
-    "pt" : "{0} está {1} - Criado em: {2}, Último login: {3}, Horas jogadas: {4}H, Platforma: {5}, Região: {6}",
+    "en" : "{0} is {1} - Created at: {2}, Last Seen: {3} ago, Playtime: {4}H, Platform: {5}, Region: {6}",
+    "es" : "{0} is {1} - Created at: {2}, Last Seen: {3} ago, Playtime: {4}H, Platform: {5}, Region: {6}",
+    "pt" : "{0} está {1} - Criado em: {2}, Último login: {3} atrás, Horas jogadas: {4}H, Platforma: {5}, Região: {6}",
 }
 PALADINS_UP_STRINGS = {
     "en" : "UP",
