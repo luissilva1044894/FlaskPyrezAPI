@@ -56,6 +56,15 @@ def getGameVersion():
                                                 PALADINS_UP_STRINGS[language] if hiRezServerStatus.status else PALADINS_DOWN_STRINGS[language],
                                                 patchInfo.gameVersion, hiRezServerStatus.version)
 
+def getLastSeen(lastSeen, language = "en"):
+    now = datetime.utcnow()
+    delta = now - lastSeen
+    hours, remainder = divmod(int(delta.total_seconds()), 3600)
+    minutes, seconds = divmod(remainder, 60)
+    days, hours = divmod(hours, 24)
+    fmt = "{d}d" if days else "{h}h, {m}m" if hours else "{m}m, {s}s"
+    return fmt.format(d=days, h=hours, m=minutes, s=seconds)
+
 @app.route("/api/stalk", methods=["GET"])
 def getStalk():
     platform = str(request.args.get("platform")).lower() if request.args.get("platform") else "pc"
@@ -72,7 +81,7 @@ def getStalk():
         return PLAYER_NOT_FOUND_STRINGS[language]
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                     playerStalkRequest.playerStatusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.playerStatus != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[playerStalkRequest.currentMatchQueueId], playerStalkRequest.currentMatchId),
-                    getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getPlayerRequest.lastLoginDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getPlayerRequest.hoursPlayed, getPlayerRequest.platform, getPlayerRequest.playerRegion)
+                    getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getLastSeen(getPlayerRequest.lastLoginDatetime), getPlayerRequest.hoursPlayed, getPlayerRequest.platform, getPlayerRequest.playerRegion)
 
 @app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
