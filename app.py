@@ -12,6 +12,19 @@ from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
+try:
+    DEBUG = config("DEBUG", default=False, cast=bool)
+    PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
+    PYREZ_DEV_ID = config("PYREZ_DEV_ID")
+except:
+    DEBUG = os.environ["DEBUG"] if os.environ["DEBUG"] else False
+    PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
+    PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
+
+paladinsPC = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
+paladinsPS4 = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.PS4)
+paladinsXBOX = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.XBOX)
+
 @app.errorhandler(404)
 def not_found_error(error):
     language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
@@ -198,19 +211,6 @@ def getWinrate():
                         format(assists, ',d'), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
 
 if __name__ == "__main__":
-    try:
-        DEBUG = config("DEBUG", default=False, cast=bool)
-        PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
-        PYREZ_DEV_ID = config("PYREZ_DEV_ID")
-    except:
-        DEBUG = os.environ["DEBUG"] if os.environ["DEBUG"] else False
-        PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
-        PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
-    
-    paladinsPC = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
-    paladinsPS4 = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.PS4)
-    paladinsXBOX = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.XBOX)
-    
     app.run(debug=DEBUG)
 #!champrank nonsocial jenos
 #!top gm 3
