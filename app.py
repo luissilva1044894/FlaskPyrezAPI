@@ -192,11 +192,11 @@ def getWinrate():
     except:
         return INTERNAL_ERROR_500_STRINGS[language]
     if champion:
-        for i in range(0, len(playerChampionWinrate)):
-            if playerChampionWinrate[i].godName.lower().replace(" ", "").replace("'", "") == champion:
-                return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(playerChampionWinrate[i].godName.replace("'", " "), playerChampionWinrate[i].godLevel), playerChampionWinrate[i].wins,
-                        playerChampionWinrate[i].losses, format(playerChampionWinrate[i].kills, ',d'), format(playerChampionWinrate[i].deaths, ',d'),
-                        format(playerChampionWinrate[i].assists, ',d'), playerChampionWinrate[i].getKDA(), playerChampionWinrate[i].getWinratio())
+        for i in range(0, len(playerGlobalKDA)):
+            if playerGlobalKDA[i].godName.lower().replace(" ", "").replace("'", "") == champion:
+                return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(playerGlobalKDA[i].godName.replace("'", " "), playerGlobalKDA[i].godLevel), playerGlobalKDA[i].wins,
+                        playerGlobalKDA[i].losses, format(playerGlobalKDA[i].kills, ',d'), format(playerGlobalKDA[i].deaths, ',d'),
+                        format(playerGlobalKDA[i].assists, ',d'), playerGlobalKDA[i].getKDA(), playerGlobalKDA[i].getWinratio())
     else:
         deaths = 0
         kills = 0
