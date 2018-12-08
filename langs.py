@@ -61,9 +61,9 @@ UNRANKED_STRINGS = {
     "pt" : "Não-ranqueado",
 }
 QUALIFYING_STRINGS = {
-    "en" : "Placements/Qualifying",
-    "es" : "Placements/Qualifying",
-    "pt" : "MD10/Qualificatória",
+    "en" : "Placements",#Qualifying
+    "es" : "Placements",#Qualifying
+    "pt" : "MD10",#Qualificatória
 }
 QUEUE_IDS_STRINGS = {
         423: "Custom/Siege", 430: "Custom/Siege", 431: "Custom/Siege", 432: "Custom/Siege", 433: "Custom/Siege", 438: "Custom/Siege", 439: "Custom/Siege", 440: "Custom/Siege", 458: "Custom/Siege", 459: "Custom/Siege", 473: "Custom/Siege",
@@ -73,15 +73,6 @@ QUEUE_IDS_STRINGS = {
         477: "Event/Ascension Peak", 478: "Event/Rise of Furia",
         425: "Training/Siege", 453: "Training/Onslaught", 470: "Training/TDM", 434: "Training/Shooting Range", 427: "Training/Tutorial",
         465: "Classic/Siege"
-}
-PLAYER_RANK_STRINGS = {
-        0: "Unranked",
-        1: "Bronze 5", 2: "Bronze 4", 3: "Bronze 3", 4: "Bronze 2", 5: "Bronze 1",
-        6: "Silver 5", 7: "Silver 4", 8: "Silver 3", 9: "Silver 2", 10: "Silver 1",
-        11: "Gold 5", 12: "Gold 4", 13: "Gold 3", 14: "Gold 2", 15: "Gold 1",
-        16: "Platinum 5", 17: "Platinum 4", 18: "Platinum 3", 19: "Platinum 2", 20: "Platinum 1",
-        21: "Diamond 5", 22: "Diamond 4", 23: "Diamond 3", 24: "Diamond 2", 25: "Diamond 1",
-        26: "Master", 27: "Grandmaster"
 }
 PLAYER_RANK_STRINGS = {
     "en" : {
@@ -143,9 +134,9 @@ CURRENTLY_MATCH_STRINGS = {
     "pt" : "em partida (Fila: {0}, ID da partida: {1})",
 }
 PLAYER_STALK_STRINGS = {
-    "en" : "{0} is {1} - Created at: {2}, Last Seen: {3} ago, Playtime: {4}H, Platform: {5}, Region: {6}",
-    "es" : "{0} is {1} - Created at: {2}, Last Seen: {3} ago, Playtime: {4}H, Platform: {5}, Region: {6}",
-    "pt" : "{0} está {1} - Criado em: {2}, Último login: {3} atrás, Horas jogadas: {4}H, Platforma: {5}, Região: {6}",
+    "en" : "{0} is {1} - Created at: {2}, Last Seen: {3} ago, Playtime: {4}h, Platform: {5}, Region: {6}",
+    "es" : "{0} is {1} - Created at: {2}, Last Seen: {3} ago, Playtime: {4}h, Platform: {5}, Region: {6}",
+    "pt" : "{0} está {1} - Criado em: {2}, Último login: {3} atrás, Horas jogadas: {4}h, Platforma: {5}, Região: {6}",
 }
 PALADINS_UP_STRINGS = {
     "en" : "UP",
