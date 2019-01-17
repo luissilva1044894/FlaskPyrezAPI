@@ -58,7 +58,7 @@ PLAYER_GET_RANK_STRINGS = {
 UNRANKED_STRINGS = {
     "en" : "Unranked",
     "es" : "Unranked",
-    "pt" : "Não-ranqueado",
+    "pt" : "Unranked",
 }
 QUALIFYING_STRINGS = {
     "en" : "Placements",#Qualifying
