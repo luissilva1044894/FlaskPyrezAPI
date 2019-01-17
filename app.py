@@ -83,7 +83,7 @@ def getStalk():
         return INTERNAL_ERROR_500_STRINGS[language]
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                         playerStalkRequest.playerStatusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.playerStatus != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[playerStalkRequest.currentMatchQueueId], playerStalkRequest.currentMatchId),
-                        getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getLastSeen(getPlayerRequest.lastLoginDatetime, language), getPlayerRequest.hoursPlayed, getPlayerRequest.platform, getPlayerRequest.playerRegion)
+                        getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getLastSeen(getPlayerRequest.lastLoginDatetime, language), format(getPlayerRequest.hoursPlayed, ',d'), getPlayerRequest.platform, getPlayerRequest.playerRegion)
 
 @app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
@@ -125,7 +125,10 @@ def getCurrentMatch():
         return INTERNAL_ERROR_500_STRINGS[language]
     if playerStatusRequest.playerStatus != 3:
         return PLAYER_NOT_MATCH_STRINGS[language].format(getPlayerRequest.playerName)
+        # Posso mostrar se o cara tá off, jogando outra coisa ou algo assim
     else:
+        #if playerStatusRequest.currentMatchQueueId != 424 or playerStatusRequest.currentMatchQueueId != 428 or playerStatusRequest.currentMatchQueueId != 445 or playerStatusRequest.currentMatchQueueId != 452:#Olhar o id da fila 424, 428, 445, 452
+            #return ""
         tim1 = ""
         tim1Aux = 1
         tim2Aux = 1
