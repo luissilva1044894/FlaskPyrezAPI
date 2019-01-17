@@ -26,12 +26,12 @@ paladinsPS4 = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Pl
 paladinsXBOX = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.XBOX)
 
 @app.errorhandler(404)
-def not_found_error(error):
+def not_found_error(error=None):
     language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
     return INTERNAL_ERROR_404_STRINGS[language], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
 
 @app.errorhandler(500)
-def internal_error(error):
+def internal_error(error=None):
     language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
     return INTERNAL_ERROR_500_STRINGS[language], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
 
@@ -124,11 +124,8 @@ def getCurrentMatch():
     except:
         return INTERNAL_ERROR_500_STRINGS[language]
     if playerStatusRequest.playerStatus != 3:
-        return PLAYER_NOT_MATCH_STRINGS[language].format(player.capitalize())
-        # Posso mostrar se o cara tá off, jogando outra coisa ou algo assim
+        return PLAYER_NOT_MATCH_STRINGS[language].format(getPlayerRequest.playerName)
     else:
-        if playerStatusRequest.currentMatchQueueId != 424 or playerStatusRequest.currentMatchQueueId != 428 or playerStatusRequest.currentMatchQueueId != 445 or playerStatusRequest.currentMatchQueueId != 452:#Olhar o id da fila 424, 428, 445, 452
-            return ""
         tim1 = ""
         tim1Aux = 1
         tim2Aux = 1
@@ -136,14 +133,14 @@ def getCurrentMatch():
         players = paladinsXBOX.getMatchPlayerDetails(playerStatusRequest.currentMatchId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getMatchPlayerDetails(playerStatusRequest.currentMatchId) if platform.startswith("ps") else paladinsPC.getMatchPlayerDetails(playerStatusRequest.currentMatchId)
         if players:
             for play in players:
-                if playerStatusRequest.currentMatchQueueId == 428:
+                if playerStatusRequest.currentMatchQueueId == 428 or playerStatusRequest.currentMatchQueueId == 486:
                     rank = PLAYER_RANK_STRINGS[language][play.tier]# if play.tier != 0 else UNRANKED_STRINGS[language] if play.wins + play.losses == 0 else QUALIFYING_STRINGS[language]
                 else:
                     if play.playerName.lower() == player.lower():
                         rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.playerRank.value]
                     else:
-                        rank = paladinsXBOX.getPlayer(play.playerId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(play.playerId) if platform.startswith("ps") else paladinsPC.getPlayer(play.playerId)
-                        rank = PLAYER_RANK_STRINGS[language][rank.playerRank.value]
+                        getPlayer = paladinsXBOX.getPlayer(play.playerId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(play.playerId) if platform.startswith("ps") else paladinsPC.getPlayer(play.playerId)
+                        rank = PLAYER_RANK_STRINGS[language][getPlayer.playerRank.value]
                 if play.taskForce == 1:
                     tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(play.playerName, play.championName, rank, "{0}".format(", " if tim1Aux <= 4 else ""))
                     tim1Aux += 1
@@ -212,6 +209,3 @@ def getWinrate():
 
 if __name__ == "__main__":
     app.run(debug=DEBUG)
-#!champrank nonsocial jenos
-#!top gm 3
-#!champranks 3
