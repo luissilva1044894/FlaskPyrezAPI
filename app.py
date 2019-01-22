@@ -168,11 +168,18 @@ def getRank():
             return PLAYER_NOT_FOUND_STRINGS[language]
     except:
         return INTERNAL_ERROR_500_STRINGS[language]
-    return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
-                        PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedConquest.currentRank.value] if getPlayerRequest.rankedConquest.currentRank != Tier.Unranked else UNRANKED_STRINGS[language] if getPlayerRequest.rankedConquest.wins + getPlayerRequest.rankedConquest.losses == 0 else QUALIFYING_STRINGS[language],
-                        "" if getPlayerRequest.rankedConquest.currentRank == Tier.Unranked else " ({0} TP{1})".format(format(getPlayerRequest.rankedConquest.currentTrumpPoints, ',d'), ON_LEADERBOARD_STRINGS[language].format(getPlayerRequest.rankedConquest.leaderboardIndex) if getPlayerRequest.rankedConquest.leaderboardIndex > 0 else ""),
-                        "" if getPlayerRequest.rankedConquest.currentRank == Tier.Unranked and getPlayerRequest.rankedConquest.wins + getPlayerRequest.rankedConquest.losses == 0 else WINS_LOSSES_STRINGS[language].format(format(getPlayerRequest.rankedConquest.wins, ',d'), format(getPlayerRequest.rankedConquest.losses, ',d')),
-                        " (Winrate Global: {0}%{1})".format (getPlayerRequest.getWinratio(), "" if getPlayerRequest.rankedConquest.wins + getPlayerRequest.rankedConquest.losses == 0 else " & Ranked: {0}%".format(getPlayerRequest.rankedConquest.getWinratio())))
+    if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 and getPlayerRequest.rankedKeyboard.wins + getPlayerRequest.rankedKeyboard.losses >= 1:
+        return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
+                                PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.currentRank.value] if getPlayerRequest.rankedKeyboard.currentRank != Tier.Unranked else UNRANKED_STRINGS[language] if getPlayerRequest.rankedKeyboard.wins + getPlayerRequest.rankedKeyboard.losses == 0 else QUALIFYING_STRINGS[language],
+                                "" if getPlayerRequest.rankedKeyboard.currentRank == Tier.Unranked else " ({0} TP{1})".format(format(getPlayerRequest.rankedKeyboard.currentTrumpPoints, ',d'), ON_LEADERBOARD_STRINGS[language].format(getPlayerRequest.rankedKeyboard.leaderboardIndex) if getPlayerRequest.rankedKeyboard.leaderboardIndex > 0 else ""),
+                                "" if getPlayerRequest.rankedKeyboard.currentRank == Tier.Unranked and getPlayerRequest.rankedKeyboard.wins + getPlayerRequest.rankedKeyboard.losses == 0 else WINS_LOSSES_STRINGS[language].format(format(getPlayerRequest.rankedKeyboard.wins, ',d'), format(getPlayerRequest.rankedKeyboard.losses, ',d')),
+                                " (Winrate Global: {0}%{1})".format (getPlayerRequest.getWinratio(), "" if getPlayerRequest.rankedKeyboard.wins + getPlayerRequest.rankedKeyboard.losses == 0 else " & Ranked: {0}%".format(getPlayerRequest.rankedKeyboard.getWinratio())))
+    else:
+        return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
+                                PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedController.currentRank.value] if getPlayerRequest.rankedController.currentRank != Tier.Unranked else UNRANKED_STRINGS[language] if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else QUALIFYING_STRINGS[language],
+                                "" if getPlayerRequest.rankedController.currentRank == Tier.Unranked else " ({0} TP{1})".format(format(getPlayerRequest.rankedController.currentTrumpPoints, ',d'), ON_LEADERBOARD_STRINGS[language].format(getPlayerRequest.rankedController.leaderboardIndex) if getPlayerRequest.rankedController.leaderboardIndex > 0 else ""),
+                                "" if getPlayerRequest.rankedController.currentRank == Tier.Unranked and getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else WINS_LOSSES_STRINGS[language].format(format(getPlayerRequest.rankedController.wins, ',d'), format(getPlayerRequest.rankedController.losses, ',d')),
+                                " (Winrate Global: {0}%{1})".format (getPlayerRequest.getWinratio(), "" if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else " & Ranked: {0}%".format(getPlayerRequest.rankedController.getWinratio())))
 
 @app.route("/api/kda", methods=["GET"])
 @app.route("/api/winrate", methods=["GET"])
