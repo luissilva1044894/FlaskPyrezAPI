@@ -136,19 +136,14 @@ def getCurrentMatch():
         players = paladinsXBOX.getMatchPlayerDetails(playerStatusRequest.currentMatchId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getMatchPlayerDetails(playerStatusRequest.currentMatchId) if platform.startswith("ps") else paladinsPC.getMatchPlayerDetails(playerStatusRequest.currentMatchId)
         if players:
             for play in players:
-                #if playerStatusRequest.currentMatchQueueId == 428 or playerStatusRequest.currentMatchQueueId == 486:
-                    #rank = PLAYER_RANK_STRINGS[language][play.tier]# if play.tier != 0 else UNRANKED_STRINGS[language] if play.wins + play.losses == 0 else QUALIFYING_STRINGS[language]
-                #else:
-                    #if play.playerName.lower() == player.lower():
-                        #rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.value]
-                    #else:
-                        #getPlayer = paladinsXBOX.getPlayer(play.playerId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(play.playerId) if platform.startswith("ps") else paladinsPC.getPlayer(play.playerId)
-                        #rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.value]
-                if play.playerName.lower() == player.lower():
-                    rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.value]
+                if playerStatusRequest.currentMatchQueueId == 428 or playerStatusRequest.currentMatchQueueId == 486:
+                    rank = PLAYER_RANK_STRINGS[language][play.tier]# if play.tier != 0 else UNRANKED_STRINGS[language] if play.wins + play.losses == 0 else QUALIFYING_STRINGS[language]
                 else:
-                    getPlayer = paladinsPC.getPlayer(play.playerId)
-                    rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.value]
+                    if play.playerName.lower() == player.lower():
+                        rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.value]
+                    else:
+                        getPlayer = paladinsXBOX.getPlayer(play.playerId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(play.playerId) if platform.startswith("ps") else paladinsPC.getPlayer(play.playerId)
+                        rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.value]
                 if play.taskForce == 1:
                     tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(play.playerName, play.championName, rank, "{0}".format(", " if tim1Aux <= 4 else ""))
                     tim1Aux += 1
