@@ -21,6 +21,7 @@ except:
     PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
 
+paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
 paladinsPC = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
 paladinsPS4 = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.PS4)
 paladinsXBOX = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, platform=Platform.XBOX)
@@ -143,6 +144,7 @@ def getCurrentMatch():
                         rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.value]
                     else:
                         getPlayer = paladinsXBOX.getPlayer(play.playerId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(play.playerId) if platform.startswith("ps") else paladinsPC.getPlayer(play.playerId)
+                        #rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.value if getPlayer.rankedController.wins + getPlayer.rankedController.losses == 0 else getPlayer.rankedController.value]
                         rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.value]
                 if play.taskForce == 1:
                     tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(play.playerName, play.championName, rank, "{0}".format(", " if tim1Aux <= 4 else ""))
@@ -163,7 +165,13 @@ def getRank():
     if not player or str(player).lower() == "none" or str(player).lower() == "null":
         return PLAYER_NULL_STRINGS[language]
     try:
-        getPlayerRequest = paladinsXBOX.getPlayer(player) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(player) if platform.startswith("ps") else paladinsPC.getPlayer(player)
+        #getPlayerRequest = paladinsXBOX.getPlayer(player) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(player) if platform.startswith("ps") else paladinsPC.getPlayer(player)
+        if platform.lower() == "pc":
+            playerId = paladinsAPI.getPlayerIdByName(player)[0].get("player_id")
+        else:
+            portalId = 10 if platform.startswith("xb") else 22 if platform.startswith("sw") else 22
+            playerId = paladinsAPI.getPlayerIdsByGamerTag(portalId, player)[0].get("player_id")
+        getPlayerRequest = paladinsAPI.getPlayer(playerId)
         if not getPlayerRequest:
             return PLAYER_NOT_FOUND_STRINGS[language]
     except:
