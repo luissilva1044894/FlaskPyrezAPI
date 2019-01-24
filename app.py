@@ -212,7 +212,7 @@ def getWinrate():
         if not getPlayerRequest:
             return PLAYER_NOT_FOUND_STRINGS[language]
         #playerGlobalKDA = paladinsXBOX.getChampionRanks(getPlayerRequest.playerId) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getChampionRanks(getPlayerRequest.playerId) if platform.startswith("ps") else paladinsPC.getChampionRanks(getPlayerRequest.playerId)
-        playerGlobalKDA = paladinsAPI.getPlayer(getPlayerRequest.playerId)
+        playerGlobalKDA = paladinsAPI.getChampionRanks(getPlayerRequest.playerId)
     except:
         return INTERNAL_ERROR_500_STRINGS[language]
     if champion:
