@@ -155,10 +155,17 @@ def getCurrentMatch():
             return CURRENT_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[playerStatusRequest.currentMatchQueueId], tim1, tim2)
         else:
             return PLAYER_NOT_MATCH_STRINGS[language]
-    
+
+def getPlayerId(playerName, platform = "pc"):
+    if platform.lower() == "pc":
+        return paladinsAPI.getPlayerIdByName(playerName)[0].get("player_id")
+    else:
+        portalId = 10 if platform.startswith("xb") else 22 if platform.startswith("sw") else 22
+        return paladinsAPI.getPlayerIdsByGamerTag(portalId, playerName)[0].get("player_id")
+
 @app.route("/api/rank", methods=["GET"])
 def getRank():
-    platform = str(request.args.get("platform")).lower() if request.args.get("platform") else "pc"
+    platform = str(request.args.get("platform")).lower() if request.args.get("platform") and request.args.get("platform").lower() != "null" else "pc"
     player = str(request.args.get("player")).lower()
     language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
 
@@ -166,12 +173,7 @@ def getRank():
         return PLAYER_NULL_STRINGS[language]
     try:
         #getPlayerRequest = paladinsXBOX.getPlayer(player) if platform.startswith("xb") or platform == "switch" else paladinsPS4.getPlayer(player) if platform.startswith("ps") else paladinsPC.getPlayer(player)
-        if platform.lower() == "pc":
-            playerId = paladinsAPI.getPlayerIdByName(player)[0].get("player_id")
-        else:
-            portalId = 10 if platform.startswith("xb") else 22 if platform.startswith("sw") else 22
-            playerId = paladinsAPI.getPlayerIdsByGamerTag(portalId, player)[0].get("player_id")
-        getPlayerRequest = paladinsAPI.getPlayer(playerId)
+        getPlayerRequest = paladinsAPI.getPlayer(getPlayerId(player, platform))
         if not getPlayerRequest:
             return PLAYER_NOT_FOUND_STRINGS[language]
     except:
