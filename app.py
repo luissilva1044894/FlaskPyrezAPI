@@ -47,7 +47,7 @@ def getPlayerId(playerName, platform = "pc"):
     if platform.lower() == "pc":
         return paladinsAPI.getPlayerIdByName(playerName)[0].get("player_id")
     else:
-        portalId = 10 if platform.startswith("xb") else 22 if platform.startswith("sw") else 22
+        portalId = 10 if platform.startswith("xb") else 22 if platform.startswith("sw") else 9
         return paladinsAPI.getPlayerIdsByGamerTag(portalId, playerName)[0].get("player_id")
 
 def getLastSeen(lastSeen, language = "en"):
