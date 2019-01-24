@@ -56,10 +56,8 @@ def getLastSeen(lastSeen, language = "en"):
     hours, remainder = divmod(int(delta.total_seconds()), 3600)
     minutes, seconds = divmod(remainder, 60)
     days, hours = divmod(hours, 24)
-    months, days = divmod(days, 30)
-    year, months = divmod(months, 12)
-    fmt = "{y}y" if year else "{m}m" if months else "{d}d" if days else "{h}h, {mn}min" if hours else "{mn}min, {s}s"
-    return fmt.format(y=year, m=months, d=days, h=hours, mn=minutes, s=seconds)
+    fmt = "{d}d" if days else "{h}h, {m}m" if hours else "{m}m, {s}s"
+    return fmt.format(d=days, h=hours, m=minutes, s=seconds)
 
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
