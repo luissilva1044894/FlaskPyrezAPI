@@ -68,9 +68,8 @@ def getGameVersion():
         hiRezServerStatus = paladinsAPI.getHiRezServerStatus()
         hiRezServerStatus = hiRezServerStatus[1] if platform.startswith("xb") or platform.startswith("sw") else hiRezServerStatus[2] if platform.startswith("ps") else hiRezServerStatus[0]
         patchInfo = paladinsAPI.getPatchInfo()
-    except Exception exc:
-        return "{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc))
-        #return UNABLE_TO_CONNECT_STRINGS[language]
+    except:
+        return UNABLE_TO_CONNECT_STRINGS[language]
     return GAME_VERSION_STRINGS[language].format("Paladins", "PC" if platform == "pc" else "PS4" if platform.startswith("ps") else "Nintendo Switch" if platform .startswith("sw") else "Xbox One",
                         PALADINS_UP_STRINGS[language] if hiRezServerStatus.status else PALADINS_DOWN_STRINGS[language],
                         patchInfo.gameVersion, hiRezServerStatus.version)
