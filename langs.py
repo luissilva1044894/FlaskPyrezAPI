@@ -66,9 +66,9 @@ QUALIFYING_STRINGS = {
     "pt" : "MD10",#Qualificatória
 }
 QUEUE_IDS_STRINGS = {
-        423: "Custom/Siege", 430: "Custom/Siege", 431: "Custom/Siege", 432: "Custom/Siege", 433: "Custom/Siege", 438: "Custom/Siege", 439: "Custom/Siege", 440: "Custom/Siege", 458: "Custom/Siege", 459: "Custom/Siege", 473: "Custom/Siege",
+        423: "Custom/Siege", 430: "Custom/Siege", 431: "Custom/Siege", 432: "Custom/Siege", 433: "Custom/Siege", 438: "Custom/Siege", 439: "Custom/Siege", 440: "Custom/Siege", 458: "Custom/Siege", 459: "Custom/Siege", 473: "Custom/Siege", 485: "Custom/Siege",
         454: "Custom/Onslaught", 455: "Custom/Onslaught", 462: "Custom/Onslaught", 464: "Custom/Onslaught", 483: "Custom/Onslaught",
-        468: "Custom/TDM", 471: "Custom/TDM", 472: "Custom/TDM", 479: "Custom/TDM", 480: "Custom/TDM",
+        468: "Custom/TDM", 471: "Custom/TDM", 472: "Custom/TDM", 479: "Custom/TDM", 480: "Custom/TDM", 484: "Custom/TDM",
         424: "Casual/Siege", 428: "Ranked/GamePad", 486: "Ranked/Keyboard", 445: "Casual/Test Maps", 452: "Casual/Onslaught", 469: "Casual/TDM", 
         477: "Event/Ascension Peak", 478: "Event/Rise of Furia",
         425: "Training/Siege", 453: "Training/Onslaught", 470: "Training/TDM", 434: "Training/Shooting Range", 427: "Training/Tutorial",
