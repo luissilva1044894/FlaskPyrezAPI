@@ -160,8 +160,7 @@ def getCurrentMatch():
                         rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.currentRank.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.currentRank.value]
                     else:
                         getPlayer = paladinsAPI.getPlayer(play.playerId)
-                        #rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.value if getPlayer.rankedController.wins + getPlayer.rankedController.losses == 0 else getPlayer.rankedController.value]
-                        rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.currentRank.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.currentRank.value]
+                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank.value if getPlayer.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayer.rankedController.currentRank.value]
                 if play.taskForce == 1:
                     tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(play.playerName, play.championName, rank, "{0}".format(", " if tim1Aux <= 4 else ""))
                     tim1Aux += 1
