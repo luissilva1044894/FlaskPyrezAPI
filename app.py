@@ -64,12 +64,12 @@ def getGameVersion():
     platform = str(request.args.get("platform")).lower() if request.args.get("platform") and request.args.get("platform").lower() != "null" else "pc"
     language = str(request.args.get("language")).lower() if request.args.get("language") and request.args.get("language").lower() != "null" else "en"
 
-    try:
-        hiRezServerStatus = paladinsAPI.getHiRezServerStatus()
-        hiRezServerStatus = hiRezServerStatus[1] if platform.startswith("xb") or platform.startswith("sw") else hiRezServerStatus[2] if platform.startswith("ps") else hiRezServerStatus[0]
-        patchInfo = paladinsAPI.getPatchInfo()
-    except:
-        return UNABLE_TO_CONNECT_STRINGS[language]
+    #try:
+    hiRezServerStatus = paladinsAPI.getHiRezServerStatus()
+    hiRezServerStatus = hiRezServerStatus[1] if platform.startswith("xb") or platform.startswith("sw") else hiRezServerStatus[2] if platform.startswith("ps") else hiRezServerStatus[0]
+    patchInfo = paladinsAPI.getPatchInfo()
+    #except:
+        #return UNABLE_TO_CONNECT_STRINGS[language]
     return GAME_VERSION_STRINGS[language].format("Paladins", "PC" if platform == "pc" else "PS4" if platform.startswith("ps") else "Nintendo Switch" if platform .startswith("sw") else "Xbox One",
                         PALADINS_UP_STRINGS[language] if hiRezServerStatus.status else PALADINS_DOWN_STRINGS[language],
                         patchInfo.gameVersion, hiRezServerStatus.version)
@@ -151,17 +151,17 @@ def getCurrentMatch():
                 if playerStatusRequest.currentMatchQueueId == 428 or playerStatusRequest.currentMatchQueueId == 486:
                     #rank = PLAYER_RANK_STRINGS[language][play.tier]# if play.tier != 0 else UNRANKED_STRINGS[language] if play.wins + play.losses == 0 else QUALIFYING_STRINGS[language]
                     if play.playerName.lower() == player.lower():
-                        rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedController.value if playerStatusRequest.currentMatchQueueId == 428 else getPlayerRequest.rankedKeyboard.value]
+                        rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.playerRankController.value if playerStatusRequest.currentMatchQueueId == 428 else getPlayerRequest.playerRankKeyboard.value]
                     else:
                         getPlayer = paladinsAPI.getPlayer(play.playerId)
-                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedController.value if playerStatusRequest.currentMatchQueueId == 428 else getPlayer.rankedKeyboard.value]
+                        rank = PLAYER_RANK_STRINGS[language][getPlayer.playerRankController.value if playerStatusRequest.currentMatchQueueId == 428 else getPlayer.playerRankKeyboard.value]
                 else:
                     if play.playerName.lower() == player.lower():
-                        rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.value]
+                        rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.currentRank.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.currentRank.value]
                     else:
                         getPlayer = paladinsAPI.getPlayer(play.playerId)
                         #rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.value if getPlayer.rankedController.wins + getPlayer.rankedController.losses == 0 else getPlayer.rankedController.value]
-                        rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.value]
+                        rank = PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.currentRank.value if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayerRequest.rankedController.currentRank.value]
                 if play.taskForce == 1:
                     tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(play.playerName, play.championName, rank, "{0}".format(", " if tim1Aux <= 4 else ""))
                     tim1Aux += 1
