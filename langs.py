@@ -26,9 +26,9 @@ PLAYER_NULL_STRINGS = {
     "pt" : "ERROR: Player not specified!",
 }
 PLAYER_NOT_FOUND_STRINGS = {
-    "en" : "ERROR: Player '{0}' not found!",
-    "es" : "ERROR: Player '{0}' not found!",
-    "pt" : "ERRO: Jogador '{0}' não encontrado!",
+    "en" : "ERROR: '{0}' not found!",
+    "es" : "ERROR: '{0}' not found!",
+    "pt" : "ERRO: '{0}' não encontrado!",
 }
 PLAYER_NOT_MATCH_STRINGS = {
     "en" : "ERROR: {0} isn't in a match!",
