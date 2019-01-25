@@ -12,6 +12,17 @@ from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
+from enum import Enum
+class LanguagesSupported(Enum):
+    English = "en"
+    Portuguese = "pt"
+    Spanish = "es"
+class PlatformsSupported(Enum):
+    PC = "pc"
+    Xbox = "10"
+    PS4 = "9"
+    Switch = "22"
+
 try:
     DEBUG = config("DEBUG", default=False, cast=bool)
     PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
@@ -25,12 +36,12 @@ paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
 
 @app.errorhandler(404)
 def not_found_error(error=None):
-    language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
+    language = getLanguage(request.args)
     return INTERNAL_ERROR_404_STRINGS[language], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
 
 @app.errorhandler(500)
 def internal_error(error=None):
-    language = str(request.args.get("language")).lower() if request.args.get("language") else "en"
+    language = getLanguage(request.args)
     return INTERNAL_ERROR_500_STRINGS[language], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
 
 @app.route('/', methods=["GET"])
@@ -39,15 +50,25 @@ def internal_error(error=None):
 @app.route("/index.html", methods=["GET"])
 def index():#ip = request.remote_addr
     return render_template("index.html") #redirect(url_for("index"))
+        
+def getLanguage(requestArgs):
+    aux = str(requestArgs.get("language")).lower() if requestArgs.get("language") else LanguagesSupported.English.value
+    try:
+        return LanguagesSupported(aux).value
+    except ValueError:
+        return LanguagesSupported.English.value
+
+def getPlatform(requestArgs):
+    aux = str(requestArgs.get("platform")).lower() if requestArgs.get("platform") else PlatformsSupported.PC
+    return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("sw") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PC
 
 def getPlayerId(playerName, platform = "pc"):
     if str(playerName).isnumeric():
         return playerName
-    elif platform == "pc":
-        temp = paladinsAPI.getPlayerIdByName(playerName)
+    elif str(platform.value).isnumeric():
+        temp = paladinsAPI.getPlayerIdsByGamerTag(platform, playerName)
     else:
-        portalId = "10" if platform.startswith("xb") else "22" if platform.startswith("sw") else "9"
-        temp = paladinsAPI.getPlayerIdsByGamerTag(portalId, playerName)
+        temp = paladinsAPI.getPlayerIdByName(playerName)
     return temp[0].get("player_id") if temp else -1
 
 def getLastSeen(lastSeen, language = "en"):
@@ -61,32 +82,32 @@ def getLastSeen(lastSeen, language = "en"):
 
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
-    platform = str(request.args.get("platform")).lower() if request.args.get("platform") and request.args.get("platform").lower() != "null" else "pc"
-    language = str(request.args.get("language")).lower() if request.args.get("language") and request.args.get("language").lower() != "null" else "en"
+    platform = getPlatform(request.args)
+    language = getLanguage(request.args)
 
-    #try:
-    hiRezServerStatus = paladinsAPI.getHiRezServerStatus()
-    hiRezServerStatus = hiRezServerStatus[1] if platform.startswith("xb") or platform.startswith("sw") else hiRezServerStatus[2] if platform.startswith("ps") else hiRezServerStatus[0]
-    patchInfo = paladinsAPI.getPatchInfo()
-    #except:
-        #return UNABLE_TO_CONNECT_STRINGS[language]
-    return GAME_VERSION_STRINGS[language].format("Paladins", "PC" if platform == "pc" else "PS4" if platform.startswith("ps") else "Nintendo Switch" if platform .startswith("sw") else "Xbox One",
+    try:
+        hiRezServerStatus = paladinsAPI.getHiRezServerStatus()
+        hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[0]
+        patchInfo = paladinsAPI.getPatchInfo()
+    except:
+        return UNABLE_TO_CONNECT_STRINGS[language]
+    return GAME_VERSION_STRINGS[language].format("Paladins", "Xbox One" if platform == PlatformsSupported.Xbox else "PS4" if platform == PlatformsSupported.PS4 else "Nintendo Switch" if platform == PlatformsSupported.Switch else "PC",
                         PALADINS_UP_STRINGS[language] if hiRezServerStatus.status else PALADINS_DOWN_STRINGS[language],
                         patchInfo.gameVersion, hiRezServerStatus.version)
 
 @app.route("/api/stalk", methods=["GET"])
 def getStalk():
-    platform = str(request.args.get("platform")).lower() if request.args.get("platform") and request.args.get("platform").lower() != "null" else "pc"
+    platform = getPlatform(request.args)
     player = str(request.args.get("player")).lower()
-    language = str(request.args.get("language")).lower() if request.args.get("language") and request.args.get("language").lower() != "null" else "en"
+    language = getLanguage(request.args)
 
-    if not player or str(player).lower() == "none" or str(player).lower() == "null":
+    if not player or player == "none" or player == "null":
         return PLAYER_NULL_STRINGS[language]
     try:
         #Se der Player not found, retornar só "Nonsocial is not found"?!
         playerId = getPlayerId(player, platform)
         if playerId == -1:#if not getPlayerRequest:
-            return PLAYER_NOT_FOUND_STRINGS[language]
+            return PLAYER_NOT_FOUND_STRINGS[language].format(player)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         playerStalkRequest = paladinsAPI.getPlayerStatus(playerId)
     except:
@@ -97,16 +118,16 @@ def getStalk():
 
 @app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
-    platform = str(request.args.get("platform")).lower() if request.args.get("platform") and request.args.get("platform").lower() != "null" else "pc"
+    platform = getPlatform(request.args)
     player = str(request.args.get("player")).lower()
-    language = str(request.args.get("language")).lower() if request.args.get("language") and request.args.get("language").lower() != "null" else "en"
+    language = getLanguage(request.args)
 
-    if not player or str(player).lower() == "none" or str(player).lower() == "null":
+    if not player or player == "none" or player == "null":
         return PLAYER_NULL_STRINGS[language]
     try:
         playerId = getPlayerId(player, platform)
         if playerId == -1:#if not getPlayerRequest:
-            return PLAYER_NOT_FOUND_STRINGS[language]
+            return PLAYER_NOT_FOUND_STRINGS[language].format(player)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         lastMatchRequest = paladinsAPI.getMatchHistory(playerId)
     except:
@@ -121,16 +142,16 @@ def getLastMatch():
 
 @app.route("/api/currentmatch", methods=["GET"])
 def getCurrentMatch():
-    platform = str(request.args.get("platform")).lower() if request.args.get("platform") and request.args.get("platform").lower() != "null" else "pc"
+    platform = getPlatform(request.args)
     player = str(request.args.get("player")).lower()
-    language = str(request.args.get("language")).lower() if request.args.get("language") and request.args.get("language").lower() != "null" else "en"
+    language = getLanguage(request.args)
 
-    if not player or str(player).lower() == "none" or str(player).lower() == "null":
+    if not player or player == "none" or player == "null":
         return PLAYER_NULL_STRINGS[language]
     try:
         playerId = getPlayerId(player, platform)
         if playerId == -1:#if not getPlayerRequest:
-            return PLAYER_NOT_FOUND_STRINGS[language]
+            return PLAYER_NOT_FOUND_STRINGS[language].format(player)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         playerStatusRequest = paladinsAPI.getPlayerStatus(playerId)
     except:
@@ -173,16 +194,16 @@ def getCurrentMatch():
 
 @app.route("/api/rank", methods=["GET"])
 def getRank():
-    platform = str(request.args.get("platform")).lower() if request.args.get("platform") and request.args.get("platform").lower() != "null" else "pc"
+    platform = getPlatform(request.args)
     player = str(request.args.get("player")).lower()
-    language = str(request.args.get("language")).lower() if request.args.get("language") and request.args.get("language").lower() != "null" else "en"
+    language = getLanguage(request.args)
 
-    if not player or str(player).lower() == "none" or str(player).lower() == "null":
+    if not player or player == "none" or player == "null":
         return PLAYER_NULL_STRINGS[language]
     try:
         playerId = getPlayerId(player, platform)
         if playerId == -1:#if not getPlayerRequest:
-            return PLAYER_NOT_FOUND_STRINGS[language]
+            return PLAYER_NOT_FOUND_STRINGS[language].format(player)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
     except:
         return INTERNAL_ERROR_500_STRINGS[language]
@@ -202,17 +223,17 @@ def getRank():
 @app.route("/api/kda", methods=["GET"])
 @app.route("/api/winrate", methods=["GET"])
 def getWinrate():
-    platform = str(request.args.get("platform")).lower() if request.args.get("platform") and request.args.get("platform").lower() != "null" else "pc"
+    platform = getPlatform(request.args)
     player = str(request.args.get("player")).lower()
     champion = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
-    language = str(request.args.get("language")).lower() if request.args.get("language") and request.args.get("language").lower() != "null" else "en"
+    language = getLanguage(request.args)
 
-    if not player or str(player).lower() == "none" or str(player).lower() == "null":
+    if not player or player == "none" or player == "null":
         return PLAYER_NULL_STRINGS[language]
     try:
         playerId = getPlayerId(player, platform)
         if playerId == -1:#if not getPlayerRequest:
-            return PLAYER_NOT_FOUND_STRINGS[language]
+            return PLAYER_NOT_FOUND_STRINGS[language].format(player)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
     except:
