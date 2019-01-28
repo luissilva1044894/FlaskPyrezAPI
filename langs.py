@@ -55,16 +55,6 @@ PLAYER_GET_RANK_STRINGS = {
     "es" : "{0} eres {1}{2}{3}.{4}",
     "pt" : "{0} é {1}{2}{3}.{4}",
 }
-UNRANKED_STRINGS = {
-    "en" : "Unranked",
-    "es" : "Unranked",
-    "pt" : "Unranked",
-}
-QUALIFYING_STRINGS = {
-    "en" : "Placements",#Qualifying
-    "es" : "Placements",#Qualifying
-    "pt" : "MD10",#Qualificatória
-}
 QUEUE_IDS_STRINGS = {
         423: "Custom/Siege", 430: "Custom/Siege", 431: "Custom/Siege", 432: "Custom/Siege", 433: "Custom/Siege", 438: "Custom/Siege", 439: "Custom/Siege", 440: "Custom/Siege", 458: "Custom/Siege", 459: "Custom/Siege", 473: "Custom/Siege", 485: "Custom/Siege",
         454: "Custom/Onslaught", 455: "Custom/Onslaught", 462: "Custom/Onslaught", 464: "Custom/Onslaught", 483: "Custom/Onslaught",
@@ -73,6 +63,11 @@ QUEUE_IDS_STRINGS = {
         477: "Event/Ascension Peak", 478: "Event/Rise of Furia",
         425: "Training/Siege", 453: "Training/Onslaught", 470: "Training/TDM", 434: "Training/Shooting Range", 427: "Training/Tutorial",
         465: "Classic/Siege"
+}
+QUALIFYING_STRINGS = {
+    "en" : "Placements",#Qualifying
+    "es" : "Placements",#Qualifying
+    "pt" : "MD10",#Qualificatória
 }
 PLAYER_RANK_STRINGS = {
     "en" : {
