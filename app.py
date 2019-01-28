@@ -62,7 +62,7 @@ def getLanguage(requestArgs):
         return LanguagesSupported.English.value
 
 def getPlatform(requestArgs):
-    aux = str(requestArgs.get("platform")).lower() if requestArgs.get("platform") else PlatformsSupported.PC
+    aux = str(requestArgs.get("platform")).lower() if requestArgs.get("platform") else str(PlatformsSupported.PC.value)
     return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("sw") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PC
 
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
@@ -204,7 +204,7 @@ def getCurrentMatch():
 def getRank():
     if request.args.get("query"):
         query = request.args.get("query").split(' ')
-        player = query[0]
+        player = str(query[0]).lower()
     else:
         player = str(request.args.get("player")).lower()
     platform = getPlatform(request.args)
@@ -216,6 +216,7 @@ def getRank():
     elif playerId == -1:
         return PLAYER_NOT_FOUND_STRINGS[language].format(player)
     getPlayerRequest = paladinsAPI.getPlayer(playerId)
+    
     if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 and getPlayerRequest.rankedKeyboard.wins + getPlayerRequest.rankedKeyboard.losses >= 1:
         return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                                 PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.currentRank.value] if getPlayerRequest.rankedKeyboard.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if getPlayerRequest.rankedKeyboard.wins + getPlayerRequest.rankedKeyboard.losses == 0 else QUALIFYING_STRINGS[language],
