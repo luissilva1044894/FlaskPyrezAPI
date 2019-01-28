@@ -103,7 +103,7 @@ def getGameVersion():
 @app.route("/api/stalk", methods=["GET"])
 def getStalk():
     platform = getPlatform(request.args)
-    player = str(request.args.get("player")).lower()
+    player = str(request.args.get("query").split(' ')[0]).lower() if request.args.get("query") else str(request.args.get("player")).lower()
     language = getLanguage(request.args)
 
     try:
@@ -123,7 +123,7 @@ def getStalk():
 @app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
     platform = getPlatform(request.args)
-    player = str(request.args.get("player")).lower()
+    player = str(request.args.get("query").split(' ')[0]).lower() if request.args.get("query") else str(request.args.get("player")).lower()
     language = getLanguage(request.args)
 
     try:
@@ -147,7 +147,7 @@ def getLastMatch():
 @app.route("/api/currentmatch", methods=["GET"])
 def getCurrentMatch():
     platform = getPlatform(request.args)
-    player = str(request.args.get("player")).lower()
+    player = str(request.args.get("query").split(' ')[0]).lower() if request.args.get("query") else str(request.args.get("player")).lower()
     language = getLanguage(request.args)
 
     try:
@@ -202,21 +202,19 @@ def getCurrentMatch():
 
 @app.route("/api/rank", methods=["GET"])
 def getRank():
-    if request.args.get("query"):
-        query = request.args.get("query").split(' ')
-        player = str(query[0]).lower()
-    else:
-        player = str(request.args.get("player")).lower()
+    player = str(request.args.get("query").split(' ')[0]).lower() if request.args.get("query") else str(request.args.get("player")).lower()
     platform = getPlatform(request.args)
     language = getLanguage(request.args)
 
-    playerId = getPlayerId(player, platform)
-    if playerId == 0:
-        return PLAYER_NULL_STRINGS[language]
+    try:
+        playerId = getPlayerId(player, platform)
+        if playerId == 0:
+            return PLAYER_NULL_STRINGS[language]
     elif playerId == -1:
         return PLAYER_NOT_FOUND_STRINGS[language].format(player)
-    getPlayerRequest = paladinsAPI.getPlayer(playerId)
-    
+        getPlayerRequest = paladinsAPI.getPlayer(playerId)
+    except:
+        return INTERNAL_ERROR_500_STRINGS[language]
     if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 and getPlayerRequest.rankedKeyboard.wins + getPlayerRequest.rankedKeyboard.losses >= 1:
         return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                                 PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.currentRank.value] if getPlayerRequest.rankedKeyboard.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if getPlayerRequest.rankedKeyboard.wins + getPlayerRequest.rankedKeyboard.losses == 0 else QUALIFYING_STRINGS[language],
@@ -235,7 +233,7 @@ def getRank():
 @app.route("/api/winrate", methods=["GET"])
 def getWinrate():
     platform = getPlatform(request.args)
-    player = str(request.args.get("player")).lower()
+    player = str(request.args.get("query").split(' ')[0]).lower() if request.args.get("query") else str(request.args.get("player")).lower()
     champion = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
     language = getLanguage(request.args)
 
