@@ -52,7 +52,7 @@ def index():#ip = request.remote_addr
     return render_template("index.html") #redirect(url_for("index"))
 
 def formatDecimal(data, form = ",d"):
-    return format(data, form) if data else None
+    return format(data, form) if data else 0
 
 def getLanguage(requestArgs):
     aux = str(requestArgs.get("language")).lower() if requestArgs.get("language") else LanguagesSupported.English.value
@@ -166,10 +166,8 @@ def getCurrentMatch():
     else:
         #if playerStatusRequest.currentMatchQueueId != 424 or playerStatusRequest.currentMatchQueueId != 428 or playerStatusRequest.currentMatchQueueId != 445 or playerStatusRequest.currentMatchQueueId != 452:#Olhar o id da fila 424, 428, 445, 452
             #return ""
-        tim1 = ""
-        tim1Aux = 1
-        tim2Aux = 1
-        tim2 = ""
+        tim1Aux = tim2Aux = 1
+        tim1 = tim2 = ""
         players = paladinsAPI.getMatchPlayerDetails(playerStatusRequest.currentMatchId)
         if players:
             for play in players:
