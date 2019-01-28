@@ -204,14 +204,10 @@ def getCurrentMatch():
 def getRank():
     if request.args.get("query"):
         query = request.args.get("query").split(' ')
-        if len(query) >= 2:
-            player = query[0]
-            platform = getPlatform(query[1])
-        else:
-            player = query[0]
+        player = query[0]
     else:
-        platform = getPlatform(request.args)
         player = str(request.args.get("player")).lower()
+    platform = getPlatform(request.args)
     language = getLanguage(request.args)
 
     playerId = getPlayerId(player, platform)
