@@ -214,15 +214,12 @@ def getRank():
         player = str(request.args.get("player")).lower()
     language = getLanguage(request.args)
 
-    try:
-        playerId = getPlayerId(player, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        elif playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(player)
-        getPlayerRequest = paladinsAPI.getPlayer(playerId)
-    except:
-        return INTERNAL_ERROR_500_STRINGS[language]
+    playerId = getPlayerId(player, platform)
+    if playerId == 0:
+        return PLAYER_NULL_STRINGS[language]
+    elif playerId == -1:
+        return PLAYER_NOT_FOUND_STRINGS[language].format(player)
+    getPlayerRequest = paladinsAPI.getPlayer(playerId)
     if getPlayerRequest.rankedController.wins + getPlayerRequest.rankedController.losses == 0 and getPlayerRequest.rankedKeyboard.wins + getPlayerRequest.rankedKeyboard.losses >= 1:
         return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                                 PLAYER_RANK_STRINGS[language][getPlayerRequest.rankedKeyboard.currentRank.value] if getPlayerRequest.rankedKeyboard.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if getPlayerRequest.rankedKeyboard.wins + getPlayerRequest.rankedKeyboard.losses == 0 else QUALIFYING_STRINGS[language],
