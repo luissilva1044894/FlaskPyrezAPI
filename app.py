@@ -202,8 +202,16 @@ def getCurrentMatch():
 
 @app.route("/api/rank", methods=["GET"])
 def getRank():
-    platform = getPlatform(request.args)
-    player = str(request.args.get("player")).lower()
+    if requestArgs.get("query"):
+        query = request.args.get("query").split(' ')
+        if len(query) >= 2:
+            player = query[0]
+            platform = query[1]
+        else:
+            player = query[0]
+    else:
+        platform = getPlatform(request.args)
+        player = str(request.args.get("player")).lower()
     language = getLanguage(request.args)
 
     try:
