@@ -210,8 +210,8 @@ def getRank():
         playerId = getPlayerId(player, platform)
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
-    elif playerId == -1:
-        return PLAYER_NOT_FOUND_STRINGS[language].format(player)
+        elif playerId == -1:
+            return PLAYER_NOT_FOUND_STRINGS[language].format(player)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
     except:
         return INTERNAL_ERROR_500_STRINGS[language]
