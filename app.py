@@ -202,7 +202,7 @@ def getCurrentMatch():
 
 @app.route("/api/rank", methods=["GET"])
 def getRank():
-    if requestArgs.get("query"):
+    if request.args.get.get("query"):
         query = request.args.get("query").split(' ')
         if len(query) >= 2:
             player = query[0]
