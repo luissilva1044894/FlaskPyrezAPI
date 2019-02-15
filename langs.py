@@ -60,7 +60,7 @@ QUEUE_IDS_STRINGS = {
         454: "Custom/Onslaught", 455: "Custom/Onslaught", 462: "Custom/Onslaught", 464: "Custom/Onslaught", 483: "Custom/Onslaught",
         468: "Custom/TDM", 471: "Custom/TDM", 472: "Custom/TDM", 479: "Custom/TDM", 480: "Custom/TDM", 484: "Custom/TDM",
         424: "Casual/Siege", 428: "Ranked/GamePad", 486: "Ranked/Keyboard", 445: "Casual/Test Maps", 452: "Casual/Onslaught", 469: "Casual/TDM", 
-        477: "Event/Ascension Peak", 478: "Event/Rise of Furia", 488: "Event/End Times",
+        477: "Event/Ascension Peak", 478: "Event/Rise of Furia", 488: "Event/End Times", 489: "Custom/End Times"
         425: "Training/Siege", 453: "Training/Onslaught", 470: "Training/TDM", 434: "Training/Shooting Range", 427: "Training/Tutorial",
         465: "Classic/Siege"
 }
