@@ -178,7 +178,7 @@ def getCurrentMatch():
                 else:
                     if player.accountLevel >= 15:
                         getPlayer = paladinsAPI.getPlayer(player.playerId)
-                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank.value if getPlayer.rankedController.wins + getPlayerRequest.rankedController.losses == 0 else getPlayer.rankedController.currentRank.value]
+                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank.value if getPlayer.rankedController.wins + getPlayer.rankedController.losses == 0 else getPlayer.rankedController.currentRank.value]
                     else:
                         rank = PLAYER_RANK_STRINGS[language][0]
                 if player.taskForce == 1:
