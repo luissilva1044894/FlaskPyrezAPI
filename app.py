@@ -62,11 +62,11 @@ def getLanguage(requestArgs):
         return LanguagesSupported.English.value
 
 def getPlatform(requestArgs):
-    aux = str(requestArgs.get("platform")).lower() if requestArgs.get("platform") else str(PlatformsSupported.PC.value)
+    aux = str(requestArgs.get("platform", default=str(PlatformsSupported.PC.value))).lower()
     return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("sw") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PC
 
 def getPlayerName(requestArgs):
-    return str(request.args.get("query").split(' ')[0]).lower() if request.args.get("query") else str(request.args.get("player")).lower()
+    return str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
 
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
     if not playerName or playerName == "none" or playerName == "null":
