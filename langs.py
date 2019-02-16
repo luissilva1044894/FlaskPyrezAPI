@@ -45,6 +45,11 @@ UNABLE_TO_CONNECT_STRINGS = {
     "es" : "ERROR: Unable to connect to Hi-Rez Studios API!",
     "pt" : "ERRO: Não foi possível conectar à API da Hi-Rez Studios!",
 }
+QUEUE_ID_NOT_SUPPORTED_STRINGS = {
+    "en" : "ERROR: {0} isn't supported!",
+    "es" : "ERROR: {0} isn't supported!",
+    "pt" : "ERRO: {0} não é suportado!",
+}
 WINS_LOSSES_STRINGS = {
     "en" : " with {0} wins and {1} losses",
     "es" : " con {0} victorias y {1} derrotas",
