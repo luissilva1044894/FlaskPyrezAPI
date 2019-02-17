@@ -87,7 +87,6 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
     days, hours = divmod(hours, 24)
     fmt = "{d}d" if days else "{h}h, {m}m" if hours else "{m}m, {s}s"
     return fmt.format(d=days, h=hours, m=minutes, s=seconds)
-
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
     platform = getPlatform(request.args)
@@ -120,7 +119,7 @@ def getStalk():
     except:
         return INTERNAL_ERROR_500_STRINGS[language]
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
-                        playerStalkRequest.playerStatusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.playerStatus != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[playerStalkRequest.currentMatchQueueId], playerStalkRequest.currentMatchId),
+                        playerStalkRequest.playerStatusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.playerStatusId != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[playerStalkRequest.currentMatchQueueId], playerStalkRequest.currentMatchId),
                         getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getLastSeen(getPlayerRequest.lastLoginDatetime, language), formatDecimal(getPlayerRequest.hoursPlayed), getPlayerRequest.platform, getPlayerRequest.playerRegion)
 
 @app.route("/api/lastmatch", methods=["GET"])
@@ -163,7 +162,7 @@ def getCurrentMatch():
         playerStatusRequest = paladinsAPI.getPlayerStatus(playerId)
     except:
         return INTERNAL_ERROR_500_STRINGS[language]
-    if playerStatusRequest.playerStatus != 3:
+    if playerStatusRequest.playerStatusId != 3:
         return PLAYER_NOT_MATCH_STRINGS[language].format(playerName)
     else:
         if not isQueueIdValid(playerStatusRequest.currentMatchQueueId):
