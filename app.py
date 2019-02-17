@@ -87,6 +87,7 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
     days, hours = divmod(hours, 24)
     fmt = "{d}d" if days else "{h}h, {m}m" if hours else "{m}m, {s}s"
     return fmt.format(d=days, h=hours, m=minutes, s=seconds)
+
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
     platform = getPlatform(request.args)
@@ -139,7 +140,7 @@ def getLastMatch():
         return INTERNAL_ERROR_500_STRINGS[language]
     kda = ((lastMatchRequest.assists / 2) + lastMatchRequest.kills) / lastMatchRequest.deaths if lastMatchRequest.deaths > 1 else 1
     kda = int(kda) if kda % 2 == 0 else round(kda, 2)
-    return LAST_MATCH_STRINGS[language].format(lastMatchRequest.mapGame, lastMatchRequest.matchId, lastMatchRequest.championName,
+    return LAST_MATCH_STRINGS[language].format(lastMatchRequest.mapGame, lastMatchRequest.matchId, lastMatchRequest.godName,
                         lastMatchRequest.kills, lastMatchRequest.deaths, lastMatchRequest.assists, kda, lastMatchRequest.killingSpree,
                         formatDecimal(lastMatchRequest.damage), formatDecimal(lastMatchRequest.credits), lastMatchRequest.matchMinutes,
                         lastMatchRequest.matchRegion, lastMatchRequest.winStatus, "{0}/{1}".format(lastMatchRequest.team1Score,
