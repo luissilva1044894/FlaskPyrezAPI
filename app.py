@@ -77,7 +77,7 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
         temp = paladinsAPI.getPlayerIdsByGamerTag(platform, playerName)
     else:
         temp = paladinsAPI.getPlayerIdByName(playerName)
-    return temp[0].get("player_id") if temp else -1
+    return temp[0].playerId if temp else -1
 
 def getLastSeen(lastSeen, language = LanguagesSupported.English):
     now = datetime.utcnow()
@@ -182,10 +182,10 @@ def getCurrentMatch():
                     else:
                         rank = PLAYER_RANK_STRINGS[language][0]
                 if player.taskForce == 1:
-                    tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.championName, rank, "{0}".format(", " if tim1Aux <= 4 else ""))
+                    tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godName, rank, "{0}".format(", " if tim1Aux <= 4 else ""))
                     tim1Aux += 1
                 else:
-                    tim2 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.championName, rank, "{0}".format(", " if tim2Aux <= 4 else ""))
+                    tim2 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godName, rank, "{0}".format(", " if tim2Aux <= 4 else ""))
                     tim2Aux += 1
             return CURRENT_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[playerStatusRequest.currentMatchQueueId], tim1, tim2)
         else:
