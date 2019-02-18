@@ -74,7 +74,7 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
     elif str(playerName).isnumeric():
         return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
     elif str(platform.value).isnumeric():
-        temp = paladinsAPI.getPlayerIdsByGamerTag(platform, playerName)
+        temp = paladinsAPI.getPlayerIdsByGamerTag(playerName, platform)
     else:
         temp = paladinsAPI.getPlayerIdByName(playerName)
     return temp[0].playerId if temp else -1
