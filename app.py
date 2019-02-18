@@ -174,7 +174,7 @@ def getCurrentMatch():
         if players:
             for player in players:
                 if playerStatusRequest.currentMatchQueueId == 428 or playerStatusRequest.currentMatchQueueId == 486:
-                    rank = PLAYER_RANK_STRINGS[language][player.tier] if player.tier != 0 else PLAYER_RANK_STRINGS[language][0] if player.wins + player.losses == 0 else QUALIFYING_STRINGS[language]
+                    rank = PLAYER_RANK_STRINGS[language][player.tier] if player.tier != 0 else PLAYER_RANK_STRINGS[language][0] if player.tierWins + player.tierLosses == 0 else QUALIFYING_STRINGS[language]
                 else:
                     if player.accountLevel >= 15:
                         getPlayer = paladinsAPI.getPlayer(player.playerId)
