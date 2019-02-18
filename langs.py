@@ -11,14 +11,14 @@ INTERNAL_ERROR_500_STRINGS = {
     "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu.",
 }
 CURRENT_MATCH_STRINGS = {
-    "en" : "Current match ({0}): {1} | VS | {2}",
-    "es" : "Current match ({0}): {1} | VS | {2}",
-    "pt" : "Partida atual ({0}): {1} | VS | {2}",
+    "en" : "Current match ({0}):{1} | VS |{2}",
+    "es" : "Current match ({0}):{1} | VS |{2}",
+    "pt" : "Partida atual ({0}):{1} | VS |{2}",
 }
 CURRENT_MATCH_PLAYER_STRINGS = {
-    "en" : "{0} as {1} ({2}){3}",
-    "es" : "{0}: {1} ({2}){3}",
-    "pt" : "{0}: {1} ({2}){3}",
+    "en" : " {0} as {1} ({2})",
+    "es" : " {0}: {1} ({2})",
+    "pt" : " {0}: {1} ({2})",
 }
 PLAYER_NULL_STRINGS = {
     "en" : "ERROR: Player not specified!",

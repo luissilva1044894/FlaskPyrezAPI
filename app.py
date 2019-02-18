@@ -168,8 +168,8 @@ def getCurrentMatch():
     else:
         if not isQueueIdValid(playerStatusRequest.currentMatchQueueId):
             return QUEUE_ID_NOT_SUPPORTED_STRINGS[language].format(QUEUE_IDS_STRINGS[playerStatusRequest.currentMatchQueueId])
-        tim1Aux = tim2Aux = 1
-        tim1 = tim2 = ""
+        team1 = []
+        team2 = []
         players = paladinsAPI.getMatchPlayerDetails(playerStatusRequest.currentMatchId)
         if players:
             for player in players:
@@ -182,12 +182,10 @@ def getCurrentMatch():
                     else:
                         rank = PLAYER_RANK_STRINGS[language][0]
                 if player.taskForce == 1:
-                    tim1 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godName, rank, "{0}".format(", " if tim1Aux <= 4 else ""))
-                    tim1Aux += 1
+                    team1.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godName, rank))
                 else:
-                    tim2 += CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godName, rank, "{0}".format(", " if tim2Aux <= 4 else ""))
-                    tim2Aux += 1
-            return CURRENT_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[playerStatusRequest.currentMatchQueueId], tim1, tim2)
+                    team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godName, rank))
+            return CURRENT_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[playerStatusRequest.currentMatchQueueId], ",".join(team1), ",".join(team2))
         else:
             return PLAYER_NOT_MATCH_STRINGS[language]
 
