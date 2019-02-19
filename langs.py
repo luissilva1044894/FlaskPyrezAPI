@@ -35,25 +35,19 @@ PLAYER_NOT_MATCH_STRINGS = {
         0: "ERROR: {0} is Offline.",
         1: "ERROR: {0} is still in Lobby.",
         2: "ERROR: {0} is still selecting a champion. You need to wait until the match has started.",
-        3: CURRENTLY_MATCH_STRINGS["en"],
         4: "ERROR: {0} is Online, but not in a match.",
-        5: PLAYER_NOT_FOUND_STRINGS["en"]
     },
     "es" : {
         0: "ERROR: {0} is Offline.",
         1: "ERROR: {0} is still in Lobby.",
         2: "ERROR: {0} is still selecting a champion. You need to wait until the match has started.",
-        3: CURRENTLY_MATCH_STRINGS["es"],
         4: "ERROR: {0} is Online, but not in a match.",
-        5: PLAYER_NOT_FOUND_STRINGS["es"]
     },
     "pt" : {
        0: "ERROR: {0} está Offline.",
        1: "ERROR: {0} ainda está no Lobby.",
        2: "ERROR: {0} ainda está escolhendo um campeão. Você precisa esperar a partida começar.",
-       3: CURRENTLY_MATCH_STRINGS["pt"],
        4: "ERROR: {0} está Online, mas não em partida.",
-       5: PLAYER_NOT_FOUND_STRINGS["pt"]
     },
 }
 PLAYER_LEVEL_STRINGS = {
@@ -194,4 +188,13 @@ PALADINS_LIMITED_ACCESS_STRINGS = {
     "es" : " but it's in maintenance (Limited Access)",
     "pt" : " mas está em manutenção (Acesso limitado)",
 }
- 
+CHAMP_NOT_PLAYED_STRINGS = {
+    "en" : "ERROR: {0} doesn't played with {1}! Maybe you misspelled the champName.",
+    "es" : "ERROR: {0} doesn't played with {1}! Maybe you misspelled the champName.",
+    "pt" : "ERRO: {0} não jogou com {1}! Talvez você tenha digitado um campeão incorreto.",
+}
+PLAYER_LOW_LEVEL_STRINGS = {
+    "en" : "ERROR: Player must be at least level 5.",
+    "es" : "ERROR: Player must be at least level 5.",
+    "pt" : "ERRO: O jogador precisa ter pelo menos nível 5.",
+}
