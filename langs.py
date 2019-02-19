@@ -31,9 +31,30 @@ PLAYER_NOT_FOUND_STRINGS = {
     "pt" : "ERRO: '{0}' não encontrado!",
 }
 PLAYER_NOT_MATCH_STRINGS = {
-    "en" : "ERROR: {0} isn't in a match!",
-    "es" : "ERROR: {0} isn't in a match!",
-    "pt" : "ERRO: {0} não está em partida!",
+    "en" : {
+        0: "ERROR: {0} is Offline.",
+        1: "ERROR: {0} is still in Lobby.",
+        2: "ERROR: {0} is still selecting a champion. You need to wait until the match has started.",
+        3: CURRENTLY_MATCH_STRINGS["en"],
+        4: "ERROR: {0} is Online, but not in a match.",
+        5: PLAYER_NOT_FOUND_STRINGS["en"]
+    },
+    "es" : {
+        0: "ERROR: {0} is Offline.",
+        1: "ERROR: {0} is still in Lobby.",
+        2: "ERROR: {0} is still selecting a champion. You need to wait until the match has started.",
+        3: CURRENTLY_MATCH_STRINGS["es"],
+        4: "ERROR: {0} is Online, but not in a match.",
+        5: PLAYER_NOT_FOUND_STRINGS["es"]
+    },
+    "pt" : {
+       0: "ERROR: {0} está Offline.",
+       1: "ERROR: {0} ainda está no Lobby.",
+       2: "ERROR: {0} ainda está escolhendo um campeão. Você precisa esperar a partida começar.",
+       3: CURRENTLY_MATCH_STRINGS["pt"],
+       4: "ERROR: {0} está Online, mas não em partida.",
+       5: PLAYER_NOT_FOUND_STRINGS["pt"]
+    },
 }
 PLAYER_LEVEL_STRINGS = {
     "en" : "{0} (Level {1})",
@@ -46,9 +67,9 @@ UNABLE_TO_CONNECT_STRINGS = {
     "pt" : "ERRO: Não foi possível conectar à API da Hi-Rez Studios!",
 }
 QUEUE_ID_NOT_SUPPORTED_STRINGS = {
-    "en" : "ERROR: {0} isn't supported!",
-    "es" : "ERROR: {0} isn't supported!",
-    "pt" : "ERRO: {0} não é suportado!",
+    "en" : "ERROR: {0} isn't supported! {1} isn't playing casual or ranked, so you can't get details about their match.",
+    "es" : "ERROR: {0} isn't supported! {1} isn't playing casual or ranked, so you can't get details about their match.",
+    "pt" : "ERRO: {0} não é suportado! {1} não está jogando casual ou ranked, você não pode ver detalhes sobre a partida.",
 }
 WINS_LOSSES_STRINGS = {
     "en" : " with {0} wins and {1} losses",
@@ -57,10 +78,11 @@ WINS_LOSSES_STRINGS = {
 }
 PLAYER_GET_RANK_STRINGS = {
     "en" : "{0} is {1}{2}{3}.{4}",
-    "es" : "{0} eres {1}{2}{3}.{4}",
+    "es" : "{0} es {1}{2}{3}.{4}",
     "pt" : "{0} é {1}{2}{3}.{4}",
 }
 QUEUE_IDS_STRINGS = {
+    "en" : {
         423: "Custom/Siege", 430: "Custom/Siege", 431: "Custom/Siege", 432: "Custom/Siege", 433: "Custom/Siege", 438: "Custom/Siege", 439: "Custom/Siege", 440: "Custom/Siege", 458: "Custom/Siege", 459: "Custom/Siege", 473: "Custom/Siege", 485: "Custom/Siege", 487: "Custom/Siege",
         454: "Custom/Onslaught", 455: "Custom/Onslaught", 462: "Custom/Onslaught", 464: "Custom/Onslaught", 483: "Custom/Onslaught",
         468: "Custom/TDM", 471: "Custom/TDM", 472: "Custom/TDM", 479: "Custom/TDM", 480: "Custom/TDM", 484: "Custom/TDM",
@@ -68,6 +90,25 @@ QUEUE_IDS_STRINGS = {
         477: "Event/Ascension Peak", 478: "Event/Rise of Furia", 488: "Event/End Times", 489: "Custom/End Times",
         425: "Training/Siege", 453: "Training/Onslaught", 470: "Training/TDM", 434: "Training/Shooting Range", 427: "Training/Tutorial",
         465: "Classic/Siege"
+    },
+    "es" : {
+        423: "Custom/Asedio", 430: "Custom/Asedio", 431: "Custom/Asedio", 432: "Custom/Asedio", 433: "Custom/Asedio", 438: "Custom/Asedio", 439: "Custom/Asedio", 440: "Custom/Asedio", 458: "Custom/Asedio", 459: "Custom/Asedio", 473: "Custom/Asedio", 485: "Custom/Asedio", 487: "Custom/Asedio",
+        454: "Custom/Matanza", 455: "Custom/Matanza", 462: "Custom/Matanza", 464: "Custom/Matanza", 483: "Custom/Matanza",
+        468: "Custom/Batalla a muerte", 471: "Custom/Batalla a muerte", 472: "Custom/Batalla a muerte", 479: "Custom/Batalla a muerte", 480: "Custom/Batalla a muerte", 484: "Custom/Batalla a muerte",
+        424: "Casual/Asedio", 428: "Ranked/GamePad", 486: "Ranked/Keyboard", 445: "Casual/Test Maps", 452: "Casual/Matanza", 469: "Casual/Batalla a muerte", 
+        477: "Evento/Asedio del Pico Ascensión", 478: "Evento/El Ascenso de Furia", 488: "Evento/Fin de los Tiempos", 489: "Custom/Fin de los Tiempos",
+        425: "Training/Asedio", 453: "Training/Matanza", 470: "Training/Batalla a muerte", 434: "Training/Shooting Range", 427: "Training/Tutorial",
+        465: "Classic/Asedio"
+    },
+    "pt" : {
+       423: "Custom/Cerco", 430: "Custom/Cerco", 431: "Custom/Cerco", 432: "Custom/Cerco", 433: "Custom/Cerco", 438: "Custom/Cerco", 439: "Custom/Cerco", 440: "Custom/Cerco", 458: "Custom/Cerco", 459: "Custom/Cerco", 473: "Custom/Cerco", 485: "Custom/Cerco", 487: "Custom/Cerco",
+       454: "Custom/Chacina", 455: "Custom/Chacina", 462: "Custom/Chacina", 464: "Custom/Chacina", 483: "Custom/Chacina",
+       468: "Custom/Mata mata", 471: "Custom/Mata mata", 472: "Custom/Mata mata", 479: "Custom/Mata mata", 480: "Custom/Mata mata", 484: "Custom/Mata mata",
+       424: "Casual/Cerco", 428: "Ranked/Controle", 486: "Ranked/Teclado-Mouse", 445: "Casual/Mapa de teste", 452: "Casual/Chacina", 469: "Casual/Cerco", 
+       477: "Evento/Cerco ao Pico da Ascensão", 478: "Evento/O surgimento de Furia", 488: "Evento/Fim dos Tempos", 489: "Custom/Fim dos Tempos",
+       425: "Treinamento/Cerco", 453: "Treinamento/Chacina", 470: "Treinamento/Mata mata", 434: "Treinamento/Galeria de tiro", 427: "Treinamento/Tutorial",
+       465: "Classic/Siege"
+    },
 }
 QUALIFYING_STRINGS = {
     "en" : "Placements",#Qualifying
@@ -139,12 +180,18 @@ PLAYER_STALK_STRINGS = {
     "pt" : "{0} está {1} - Criado em: {2}, Último login: {3} atrás, Horas jogadas: {4}h, Platforma: {5}, Região: {6}",
 }
 PALADINS_UP_STRINGS = {
-    "en" : "UP",
-    "es" : "DISPONIBLE",
-    "pt" : "OPERANTE",
+    "en" : "UP{0}",
+    "es" : "DISPONIBLE{0}",
+    "pt" : "OPERANTE{0}",
 }
 PALADINS_DOWN_STRINGS = {
     "en" : "DOWN",
     "es" : "INDISPONIBLE",
     "pt" : "INOPERANTE",
 }
+PALADINS_LIMITED_ACCESS_STRINGS = {
+    "en" : " but it's in maintenance (Limited Access)",
+    "es" : " but it's in maintenance (Limited Access)",
+    "pt" : " mas está em manutenção (Acesso limitado)",
+}
+ 
