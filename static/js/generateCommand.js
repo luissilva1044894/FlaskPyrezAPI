@@ -44,13 +44,13 @@ function generateCommand() {
                 default: perm = "everyone";
             }
             if(String(commandType.value).toLowerCase() === "getdecks" || String(commandType.value).toLowerCase() === "getwinrate") {
-                cmd = "!addcom -cd={cd} -ul={perm} !{commandName} $(eval `$(querystring)`.trim()==''?'$(customapi {{ url_for(\"{commandType}\", _external=True) }}?player={playerName}&platform={platform}&champion={championName}&language={language})':'$(customapi {{ url_for(\"{commandType}\", _external=True) }}?query=$(querystring)&champion=$(2)&platform=$(3)&language={language})' ; )";
+                cmd = "!addcom -cd={cd} -ul={perm} !{commandName} $(eval `$(querystring)`.trim()==''?'$(customapi {{ url_for('{commandType}', _external=True) }}?player={playerName}&platform={platform}&champion={championName}&language={language})':'$(customapi {{ url_for('{commandType}', _external=True) }}?query=$(querystring)&champion=$(2)&platform=$(3)&language={language})' ; )";
                 cmd = cmd.replace("{cd}", cooldown.value).replace("{perm}", perm).replace("{commandName}", commandName.value).replace("{commandType}", commandType.value).replace("{playerName}", encodeURI(playerName.value)).replace("{platform}", platform.value).replace("{language}", language.value).replace("{championName}", championName.value)
                 cmd = cmd.replace("{commandType}", commandType.value).replace("{language}", language.value)
                 getElementById("demo").innerHTML = cmd
                 alert(cmd);
             } else {
-                cmd = "!addcom -cd={cd} -ul={perm} !{commandName} $(eval `$(querystring)`.trim()==''?'$(customapi {{ url_for(\"{commandType}\", _external=True) }}?player={playerName}&platform={platform}&language={language})':'$(customapi {{ url_for(\"{commandType}\", _external=True) }}?query=$(querystring)&platform=$(2)&language={language})' ; )";
+                cmd = "!addcom -cd={cd} -ul={perm} !{commandName} $(eval `$(querystring)`.trim()==''?'$(customapi {{ url_for('{commandType}', _external=True) }}?player={playerName}&platform={platform}&language={language})':'$(customapi {{ url_for('{commandType}', _external=True) }}?query=$(querystring)&platform=$(2)&language={language})' ; )";
                 cmd = cmd.replace("{cd}", cooldown.value).replace("{perm}", perm).replace("{commandName}", commandName.value).replace("{commandType}", commandType.value).replace("{playerName}", encodeURI(playerName.value)).replace("{platform}", platform.value).replace("{language}", language.value)
                 cmd = cmd.replace("{commandType}", commandType.value).replace("{language}", language.value)
                 getElementById("demo").innerHTML = cmd
