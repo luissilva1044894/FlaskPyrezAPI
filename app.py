@@ -69,7 +69,7 @@ def getPlayerName(requestArgs):
     return str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
 
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
-    if not playerName or playerName == "none" or playerName == "null":
+    if not playerName or playerName == "none" or playerName == "null" or playerName == "$(1)":
         return 0
     elif str(playerName).isnumeric():
         return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
@@ -87,6 +87,14 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
     days, hours = divmod(hours, 24)
     fmt = "{d}d" if days else "{h}h, {m}m" if hours else "{m}m, {s}s"
     return fmt.format(d=days, h=hours, m=minutes, s=seconds)
+
+@app.route("/api/decks", methods=["GET"])
+def getDecks():
+    platform = getPlatform(request.args)
+    playerName = getPlayerName(request.args)
+    championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
+    language = getLanguage(request.args)
+    return INTERNAL_ERROR_404_STRINGS[language]
 
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
@@ -234,7 +242,7 @@ def getWinrate():
         elif playerId == -1:
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
-        if getPlayerRequest.accountLevel>5:
+        if getPlayerRequest.accountLevel > 5:
             playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
         else:
             return PLAYER_LOW_LEVEL_STRINGS[language]
