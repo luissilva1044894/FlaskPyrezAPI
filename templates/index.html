@@ -13,49 +13,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/indexStyle.css') }}">
   <script src="{{ url_for('static', filename='js/indexMethods.js') }}"></script>
   <script src="{{ url_for('static', filename='js/generateCommand.js') }}"></script>
-  <script type="text/javascript">
-    function generateCommand() {
-      var commandName = getElementById("command_name"),
-              commandType = getElementById("command_type"),
-              cooldown = getElementById("command_cooldown"),
-              playerName = getElementById("player_name"),
-              championName = getElementById("champion_name"),
-              platform = getElementById("platform_form"),
-              language = getElementById("language_form"), // int
-              botName = getElementById("bot_name"), // int
-              userAccess = getElementById("user_access"),
-              resultsElement = getElementById("results");
-      cmd = ""
-
-      var endpointLink = "{{ url_for('commandType.value', _external=True) }}";
-      alert(endpointLink)
-      if (String(commandName.value).trim().replace(' ', '').length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
-          if(String(botName.value) === "1") {
-              perm = ""
-              switch(userAccess.value) {
-                  case "2" : perm = "reg"; break;
-                  case "3" : perm = "susbcriber"; break;
-                  case "4" : perm = "mod"; break;
-                  case "5" : perm = "owner"; break;
-                  default: perm = "everyone";
-              }
-              if(String(commandType.value).toLowerCase() === "getdecks" || String(commandType.value).toLowerCase() === "getwinrate") {
-                  cmd = "!addcom -cd={cd} -ul={perm} !{commandName} $(eval `$(querystring)`.trim()==''?'$(customapi {endpointLink}?player={playerName}&platform={platform}&champion={championName}&language={language})':'$(customapi {endpointLink}?query=$(querystring)&champion=$(2)&platform=$(3)&language={language})' ; )";
-                  cmd = cmd.replace("{endpointLink}", endpointLink).replace("{cd}", cooldown.value).replace("{perm}", perm).replace("{commandName}", commandName.value).replace("{commandType}", commandType.value).replace("{playerName}", encodeURI(playerName.value)).replace("{platform}", platform.value).replace("{language}", language.value).replace("{championName}", championName.value)
-                  cmd = cmd.replace("{endpointLink}", endpointLink).replace("{commandType}", commandType.value).replace("{language}", language.value)
-                  getElementById("demo").innerHTML = cmd
-                  alert(cmd);
-              } else {
-                  cmd = "!addcom -cd={cd} -ul={perm} !{commandName} $(eval `$(querystring)`.trim()==''?'$(customapi {endpointLink}?player={playerName}&platform={platform}&language={language})':'$(customapi {endpointLink}?query=$(querystring)&platform=$(2)&language={language})' ; )";
-                  cmd = cmd.replace("{endpointLink}", endpointLink).replace("{cd}", cooldown.value).replace("{perm}", perm).replace("{commandName}", commandName.value).replace("{commandType}", commandType.value).replace("{playerName}", encodeURI(playerName.value)).replace("{platform}", platform.value).replace("{language}", language.value)
-                  cmd = cmd.replace("{endpointLink}", endpointLink).replace("{commandType}", commandType.value).replace("{language}", language.value)
-                  getElementById("demo").innerHTML = cmd
-                  alert(cmd);
-              }
-          }
-      }
-  }
-  </script>
   
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
