@@ -49,7 +49,7 @@ def internal_error(error=None):
 @app.route("/index", methods=["GET"])
 @app.route("/index.html", methods=["GET"])
 def index():#ip = request.remote_addr
-    return render_template("index.html") #redirect(url_for("index"))
+    return render_template("index.html", testAthing=url_for("index", _external=True)) #redirect(url_for("index"))
 
 def formatDecimal(data, form = ",d"):
     return format(data, form) if data else 0
