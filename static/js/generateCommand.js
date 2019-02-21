@@ -32,7 +32,9 @@ function generateCommand() {
             resultsElement = getElementById("results");
     cmd = ""
 
-    var endpointLink = "{{ url_for(commandType.value, _external=True) }}";
+    var cmdType = String(commandType.value)
+    var endpointLink = "{{ url_for(cmdType, _external=True) }}";
+    alert(endpointLink)
     // alert(checkChampName(String(championName.value).trim().replace(' ', '').replace("'", "").toLowerCase()))
     if (String(commandName.value).trim().replace(' ', '').length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
         if(String(botName.value) === "1") {
