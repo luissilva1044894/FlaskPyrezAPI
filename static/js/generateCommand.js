@@ -31,8 +31,7 @@ function generateCommand() {
             resultsElement = getElementById("results");
     cmd = ""
 
-    var endpointLink = "https://nonsocial.herokuapp.com/api/" + String(commandType.value);//"{{ url_for('commandType.value', _external=True) }}";
-    alert(getEndpoint().replace("index.html", ""))
+    var endpointLink = getEndpoint().replace("index.html", "") + "api/" + String(commandType.value);//"{{ url_for('commandType.value', _external=True) }}";
     // alert(checkChampName(String(championName.value).trim().replace(' ', '').replace("'", "").toLowerCase()))
     if (String(commandName.value).trim().replace(' ', '').length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
         if(String(botName.value) === "1") {
