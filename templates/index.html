@@ -13,7 +13,11 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/indexStyle.css') }}">
   <script src="{{ url_for('static', filename='js/indexMethods.js') }}"></script>
   <script src="{{ url_for('static', filename='js/generateCommand.js') }}"></script>
-
+  <script type="text/javascript">
+    function getEndpoint() {
+      return "{{ url_for('index', _external=True) }}"
+    }
+  </script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.6.1/css/mdb.min.css" rel="stylesheet">

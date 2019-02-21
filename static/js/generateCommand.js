@@ -19,7 +19,6 @@ function generateCommand() {
     // http://nonsocial.herokuapp.com/api/version?platform={PLATFORM}&language={LANGUAGE}
     // http://nonsocial.herokuapp.com/api/stalk?{IGN}&platform={PLATFORM}&language={LANGUAGE}
 
-
     var commandName = getElementById("command_name"),
             commandType = getElementById("command_type"),
             cooldown = getElementById("command_cooldown"),
@@ -33,7 +32,7 @@ function generateCommand() {
     cmd = ""
 
     var endpointLink = "https://nonsocial.herokuapp.com/api/" + String(commandType.value);//"{{ url_for('commandType.value', _external=True) }}";
-    alert(endpointLink)
+    alert(getEndpoint())
     // alert(checkChampName(String(championName.value).trim().replace(' ', '').replace("'", "").toLowerCase()))
     if (String(commandName.value).trim().replace(' ', '').length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
         if(String(botName.value) === "1") {
