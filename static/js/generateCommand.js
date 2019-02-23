@@ -9,7 +9,7 @@ function checkChampName(championName) {
     return false;
 }
 
-function generateCommand(lang="en") { // !command add duo Estou duo com X e o elo dele é: (_ELO2_)
+function generateCommand() { // !command add duo Estou duo com X e o elo dele é: (_ELO2_)
     var commandName = String(getElementById("command_name").value).trim().replace(' ', '').replace('!', ''),
             commandType = getElementById("command_type"),
             cooldown = String(getElementById("command_cooldown").value).length > 0 && getElementById("command_cooldown").value >= 5 && getElementById("command_cooldown").value <= 300 ? defaultFor(getElementById("command_cooldown").value) : String(commandType.value).toLowerCase() === "currentmatch" ? 25 : 5;
@@ -20,6 +20,7 @@ function generateCommand(lang="en") { // !command add duo Estou duo com X e o el
             botName = getElementById("bot_name"), // int
             userLevel = getElementById("user_access"),
             userCanUse = getElementById("user_can_use");
+    lang = typeof $("#generate_command").attr("data-lang") === "undefined" ? "en" : $("#generate_command").attr("data-lang");
     var endpointLink = getEndpoint().replace("index.html", "") + "api/" + String(commandType.value);
     $("#result-warning").show();
     if (commandName.length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
