@@ -9,7 +9,7 @@ function checkChampName(championName) {
     return false;
 }
 
-function generateCommand() { // !command add duo Estou duo com X e o elo dele é: (_ELO2_)
+function generateCommand(lang) { // !command add duo Estou duo com X e o elo dele é: (_ELO2_)
     var commandName = String(getElementById("command_name").value).trim().replace(' ', '').replace('!', ''),
             commandType = getElementById("command_type"),
             cooldown = String(getElementById("command_cooldown").value).length > 0 && getElementById("command_cooldown").value >= 5 && getElementById("command_cooldown").value <= 300 ? defaultFor(getElementById("command_cooldown").value) : String(commandType.value).toLowerCase() === "currentmatch" ? 25 : 5;
@@ -20,9 +20,8 @@ function generateCommand() { // !command add duo Estou duo com X e o elo dele é
             botName = getElementById("bot_name"), // int
             userLevel = getElementById("user_access"),
             userCanUse = getElementById("user_can_use");
-    var lang = getElementById("generate_command").getAttribute("data-lang");//typeof $("#generate_command").attr("data-lang") === "undefined" ? "en" : $("#generate_command").attr("data-lang");
-    lang = lang.length > 0 ? String(lang).toLowerCase() : "en";
-    console.log(lang)
+    lang = defaultFor(lang, defaultFor(typeof $("#generate_command").attr("data-lang"), defaultFor(getElementById("generate_command").getAttribute("data-lang"), "en")))
+    
     var endpointLink = getEndpoint().replace("index.html", "") + "api/" + String(commandType.value);
     $("#result-warning").show();
     if (commandName.length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
@@ -100,7 +99,7 @@ function generateCommand() { // !command add duo Estou duo com X e o elo dele é
                 cmd += userCanUse.checked ? cmdUsers : customAPICode;
             break;
         }
-        addAlert("{CMD_CREATED}".replace("{CMD_CREATED}", getTranslatedString(lang, "cmdCreated").replace("{NAME}", commandName)), "alert-success", true, true, "#result-warning", lang);//, 1 * 60);
+        addAlert("{CMD_CREATED}".replace("{CMD_CREATED}", getTranslatedString(lang, "cmdCreated").replace("{CMD_NAME}", commandName)), "alert-success", true, true, "#result-warning", lang);//, 1 * 60);
         cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{PLAYER_NAME}", encodeURI(playerName.value)).replace("{PLATFORM}", platform.value).replace("{LANGUAGE}", language.value).replace("{BOT_NAME}", botName[botName.value - 1].text.replace(" ", "")).replace("{championName}", championName)
         cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{LANGUAGE}", language.value).replace("{BOT_NAME}", botName[botName.value - 1].text.replace(" ", ""))
         addCommandOutput(cmdChat + cmd, cmd, botName[botName.value - 1].text, lang)

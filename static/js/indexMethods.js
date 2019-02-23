@@ -1,28 +1,28 @@
 function getTranslatedString(language, msg) {
     var engString = [];
     engString["chatMsg"] = "Copy paste the following command in your chat"
-    engString["dontChange"] = "YOU DON'T NEED TO CHANGE ANYTHING"
-    engString["backendMsg"] = "Or put the following command in <span id=\"backend-title-bot\">{BOTNAME}</span> backend"
+    engString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
+    engString["backendMsg"] = "Or put the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
     engString["close"] = "Close"
-    engString["cmdCreated"] = "Command !{NAME} <strong>created</strong> successfully!"
+    engString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
     engString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
     engString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
 
     var esString = [];
     esString["chatMsg"] = "Copy paste the following command in your chat"
-    esString["dontChange"] = "YOU DON'T NEED TO CHANGE ANYTHING"
-    esString["backendMsg"] = "Or put the following command in <span id=\"backend-title-bot\">{BOTNAME}</span> backend"
+    esString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
+    esString["backendMsg"] = "Or put the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
     esString["close"] = "Close"
-    esString["cmdCreated"] = "Command !{NAME} <strong>created</strong> successfully!"
+    esString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
     esString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
     esString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
 
     var ptString = [];
     ptString["chatMsg"] = "Copie e cole o código em seu chat"
-    ptString["dontChange"] = "VOCÊ NÃO PRECISA MUDAR NADA"
-    ptString["backendMsg"] = "Or put the following command in <span id=\"backend-title-bot\">{BOTNAME}</span> backend"
+    ptString["dontChange"] = "(VOCÊ NÃO PRECISA MUDAR NADA)"
+    ptString["backendMsg"] = "Or put the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
     ptString["close"] = "Fechar"
-    ptString["cmdCreated"] = "Comando !{NAME} <strong>criado</strong> com sucesso!"
+    ptString["cmdCreated"] = "Comando !{CMD_NAME} <strong>criado</strong> com sucesso!"
     ptString["invalidCmdName"] = "<strong>Nome do comando inválido</strong>!"
     ptString["invalidPlayerName"] = "<strong>Nome do comando inválido</strong>!"
 
