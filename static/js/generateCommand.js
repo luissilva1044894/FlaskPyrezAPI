@@ -9,7 +9,7 @@ function checkChampName(championName) {
     return false;
 }
 
-function generateCommand(language="en") { // !command add duo Estou duo com X e o elo dele é: (_ELO2_)
+function generateCommand(lang="en") { // !command add duo Estou duo com X e o elo dele é: (_ELO2_)
     var commandName = String(getElementById("command_name").value).trim().replace(' ', '').replace('!', ''),
             commandType = getElementById("command_type"),
             cooldown = String(getElementById("command_cooldown").value).length > 0 && getElementById("command_cooldown").value >= 5 && getElementById("command_cooldown").value <= 300 ? defaultFor(getElementById("command_cooldown").value) : String(commandType.value).toLowerCase() === "currentmatch" ? 25 : 5;
