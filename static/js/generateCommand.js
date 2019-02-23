@@ -9,7 +9,7 @@ function checkChampName(championName) {
     return false;
 }
 
-function generateCommand() { // !command add duo Estou duo com X e o elo dele é: (_ELO2_)
+function generateCommand(language="en") { // !command add duo Estou duo com X e o elo dele é: (_ELO2_)
     var commandName = String(getElementById("command_name").value).trim().replace(' ', '').replace('!', ''),
             commandType = getElementById("command_type"),
             cooldown = String(getElementById("command_cooldown").value).length > 0 && getElementById("command_cooldown").value >= 5 && getElementById("command_cooldown").value <= 300 ? defaultFor(getElementById("command_cooldown").value) : String(commandType.value).toLowerCase() === "currentmatch" ? 25 : 5;
@@ -97,17 +97,17 @@ function generateCommand() { // !command add duo Estou duo com X e o elo dele é
                 cmd += userCanUse.checked ? cmdUsers : customAPICode;
             break;
         }
-        addAlert("Command !{NAME} <strong>created</strong> successfully!".replace("{NAME}", commandName), "alert-success", true, true, "#result-warning", 1 * 60);
+        addAlert("{CMD_CREATED}".replace("{CMD_CREATED}", getTranslatedString[lang]["cmdCreated"].replace("{NAME}", commandName)), "alert-success", true, true, "#result-warning", lang);//, 1 * 60);
         cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{PLAYER_NAME}", encodeURI(playerName.value)).replace("{PLATFORM}", platform.value).replace("{LANGUAGE}", language.value).replace("{BOT_NAME}", botName[botName.value - 1].text.replace(" ", "")).replace("{championName}", championName)
         cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{LANGUAGE}", language.value).replace("{BOT_NAME}", botName[botName.value - 1].text.replace(" ", ""))
-        addCommandOutput(cmdChat + cmd, cmd, botName[botName.value - 1].text)
+        addCommandOutput(cmdChat + cmd, cmd, botName[botName.value - 1].text, lang)
     } else {
         if(commandName.length <= 0) {
-            addAlert("<strong>Invalid command name</strong>!", "alert-danger", true, true, "#result-warning");
+            addAlert("{INVALID_CMD_NAME}".replace("{INVALID_CMD_NAME}", getTranslatedString[lang]["invalidCmdName"]), "alert-danger", true, true, "#result-warning", lang);
             $("#command_name").focus();
         } else {
-            addAlert("<strong>Invalid Player Name</strong>!", "alert-danger", true, true, "#result-warning");
-            $("#result").html('');
+            addAlert("{INVALID_PLAYER_NAME}".replace("{INVALID_PLAYER_NAME}", getTranslatedString[lang]["invalidPlayerName"]), "alert-danger", true, true, "#result-warning", lang);
+            //$("#result").html('');
             $("#player_name").focus();
         }
     }
