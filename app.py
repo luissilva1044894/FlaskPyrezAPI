@@ -70,7 +70,8 @@ def getPlayerName(requestArgs):
     return str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
 
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
-    playerName = playerName.strip()#.strip(',.-')
+    if PlatformsSupported.PC:
+        playerName = playerName.strip()#.strip(',.-')
     if not playerName or playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)":
         return 0
     elif str(playerName).isnumeric():
@@ -119,16 +120,16 @@ def getStalk():
     playerName = getPlayerName(request.args)
     language = getLanguage(request.args)
 
-    try:
-        playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        elif playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
-        getPlayerRequest = paladinsAPI.getPlayer(playerId)
-        playerStalkRequest = paladinsAPI.getPlayerStatus(playerId)
-    except:
-        return INTERNAL_ERROR_500_STRINGS[language]
+    #try:
+    playerId = getPlayerId(playerName, platform)
+    if playerId == 0:
+        return PLAYER_NULL_STRINGS[language]
+    elif playerId == -1:
+        return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+    getPlayerRequest = paladinsAPI.getPlayer(playerId)
+    playerStalkRequest = paladinsAPI.getPlayerStatus(playerId)
+    #except:
+    #    return INTERNAL_ERROR_500_STRINGS[language]
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                         playerStalkRequest.playerStatusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.playerStatusId != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStalkRequest.currentMatchQueueId], playerStalkRequest.currentMatchId),
                         getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getLastSeen(getPlayerRequest.lastLoginDatetime, language), formatDecimal(getPlayerRequest.hoursPlayed), getPlayerRequest.platform, getPlayerRequest.playerRegion)
@@ -205,15 +206,15 @@ def getRank():
     platform = getPlatform(request.args)
     language = getLanguage(request.args)
 
-    try:
-        playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        elif playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
-        getPlayerRequest = paladinsAPI.getPlayer(playerId)
-    except:
-        return INTERNAL_ERROR_500_STRINGS[language]
+    #try:
+    playerId = getPlayerId(playerName, platform)
+    if playerId == 0:
+        return PLAYER_NULL_STRINGS[language]
+    elif playerId == -1:
+        return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+    getPlayerRequest = paladinsAPI.getPlayer(playerId)
+#except:
+    #    return INTERNAL_ERROR_500_STRINGS[language]
     r1 = getPlayerRequest.rankedController
     r2 = getPlayerRequest.rankedKeyboard
     if r1.wins + r1.losses == 0 and r2.wins + r2.losses >= 1:
@@ -237,19 +238,19 @@ def getWinrate():
     championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
     language = getLanguage(request.args)
 
-    try:
-        playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        elif playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
-        getPlayerRequest = paladinsAPI.getPlayer(playerId)
-        if getPlayerRequest.accountLevel > 5:
-            playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
-        else:
-            return PLAYER_LOW_LEVEL_STRINGS[language]
-    except:
-        return INTERNAL_ERROR_500_STRINGS[language]
+    #try:
+    playerId = getPlayerId(playerName, platform)
+    if playerId == 0:
+        return PLAYER_NULL_STRINGS[language]
+    elif playerId == -1:
+        return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+    getPlayerRequest = paladinsAPI.getPlayer(playerId)
+    if getPlayerRequest.accountLevel > 5:
+        playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
+    else:
+        return PLAYER_LOW_LEVEL_STRINGS[language]
+    #except:
+    #    return INTERNAL_ERROR_500_STRINGS[language]
     if championName:
         for champ in playerGlobalKDA:
             if champ.godName.lower().replace(" ", "").replace("'", "") == championName:
