@@ -21,7 +21,7 @@ function generateCommand() { // !command add duo Estou duo com X e o elo dele é
             userLevel = getElementById("user_access"),
             userCanUse = getElementById("user_can_use");
     var lang = getElementById("generate_command").getAttribute("data-lang");//typeof $("#generate_command").attr("data-lang") === "undefined" ? "en" : $("#generate_command").attr("data-lang");
-    lang = lang.length > 0 ? lang : "en";
+    lang = lang.length > 0 ? String(lang).toLowerCase() : "en";
     console.log(lang)
     var endpointLink = getEndpoint().replace("index.html", "") + "api/" + String(commandType.value);
     $("#result-warning").show();
