@@ -70,7 +70,8 @@ def getPlayerName(requestArgs):
     return str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
 
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
-    if not playerName or playerName == "none" or playerName == "null" or playerName == "$(1)":
+    playerName = playerName.strip()#.strip(',.-')
+    if not playerName or playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)":
         return 0
     elif str(playerName).isnumeric():
         return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
