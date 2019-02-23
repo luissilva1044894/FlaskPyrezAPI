@@ -20,7 +20,9 @@ function generateCommand() { // !command add duo Estou duo com X e o elo dele é
             botName = getElementById("bot_name"), // int
             userLevel = getElementById("user_access"),
             userCanUse = getElementById("user_can_use");
-    lang = typeof $("#generate_command").attr("data-lang") === "undefined" ? "en" : $("#generate_command").attr("data-lang");
+    var lang = getElementById("generate_command").getAttribute("data-lang");//typeof $("#generate_command").attr("data-lang") === "undefined" ? "en" : $("#generate_command").attr("data-lang");
+    lang = lang.length > 0 ? lang : "en";
+    console.log(lang)
     var endpointLink = getEndpoint().replace("index.html", "") + "api/" + String(commandType.value);
     $("#result-warning").show();
     if (commandName.length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
