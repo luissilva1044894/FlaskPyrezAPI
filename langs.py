@@ -98,7 +98,7 @@ QUEUE_IDS_STRINGS = {
        423: "Custom/Cerco", 430: "Custom/Cerco", 431: "Custom/Cerco", 432: "Custom/Cerco", 433: "Custom/Cerco", 438: "Custom/Cerco", 439: "Custom/Cerco", 440: "Custom/Cerco", 458: "Custom/Cerco", 459: "Custom/Cerco", 473: "Custom/Cerco", 485: "Custom/Cerco", 487: "Custom/Cerco",
        454: "Custom/Chacina", 455: "Custom/Chacina", 462: "Custom/Chacina", 464: "Custom/Chacina", 483: "Custom/Chacina",
        468: "Custom/Mata mata", 471: "Custom/Mata mata", 472: "Custom/Mata mata", 479: "Custom/Mata mata", 480: "Custom/Mata mata", 484: "Custom/Mata mata",
-       424: "Casual/Cerco", 428: "Ranked/Controle", 486: "Ranked/Teclado-Mouse", 445: "Casual/Mapa de teste", 452: "Casual/Chacina", 469: "Casual/Cerco", 
+       424: "Casual/Cerco", 428: "Ranked/Controle", 486: "Ranked/Keyboard", 445: "Casual/Mapa de teste", 452: "Casual/Chacina", 469: "Casual/Cerco", 
        477: "Evento/Cerco ao Pico da Ascensão", 478: "Evento/O surgimento de Furia", 488: "Evento/Fim dos Tempos", 489: "Custom/Fim dos Tempos",
        425: "Treinamento/Cerco", 453: "Treinamento/Chacina", 470: "Treinamento/Mata mata", 434: "Treinamento/Galeria de tiro", 427: "Treinamento/Tutorial",
        465: "Classic/Siege"
