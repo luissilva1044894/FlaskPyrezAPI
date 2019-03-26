@@ -142,18 +142,18 @@ def getLastMatch():
     playerName = getPlayerName(request.args)
     language = getLanguage(request)
 
-    try:
-        playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        elif playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
-        lastMatchRequest = paladinsAPI.getMatchHistory(playerId)[0]
-    except:
-        return INTERNAL_ERROR_500_STRINGS[language]
+    #try:
+    playerId = getPlayerId(playerName, platform)
+    if playerId == 0:
+        return PLAYER_NULL_STRINGS[language]
+    if playerId == -1:
+        return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+    lastMatchRequest = paladinsAPI.getMatchHistory(playerId)[0]
+    #except:
+    #    return INTERNAL_ERROR_500_STRINGS[language]
     kda = ((lastMatchRequest.assists / 2) + lastMatchRequest.kills) / lastMatchRequest.deaths if lastMatchRequest.deaths > 1 else 1
     kda = int(kda) if kda % 2 == 0 else round(kda, 2)
-    return LAST_MATCH_STRINGS[language].format(lastMatchRequest.mapGame, lastMatchRequest.matchId, lastMatchRequest.godName,
+    return LAST_MATCH_STRINGS[language].format(lastMatchRequest.mapGame, lastMatchRequest.matchId, lastMatchRequest.godId.getName() if isinstance(lastMatchRequest.godId, Champions) else lastMatchRequest.godName,
                         lastMatchRequest.kills, lastMatchRequest.deaths, lastMatchRequest.assists, kda, lastMatchRequest.killingSpree,
                         formatDecimal(lastMatchRequest.damage), formatDecimal(lastMatchRequest.credits), lastMatchRequest.matchMinutes,
                         lastMatchRequest.matchRegion, lastMatchRequest.winStatus, "{0}/{1}".format(lastMatchRequest.team1Score,
@@ -187,11 +187,11 @@ def getCurrentMatch():
         if players:
             for player in players:
                 if playerStatusRequest.matchQueueId == 428 or playerStatusRequest.matchQueueId == 486:
-                    rank = PLAYER_RANK_STRINGS[language][player.tier.value] if player.tier.value != 0 else PLAYER_RANK_STRINGS[language][0] if player.tierWins + player.tierLosses == 0 else QUALIFYING_STRINGS[language]
+                    rank = PLAYER_RANK_STRINGS[language][player.tier] if player.tier != 0 else PLAYER_RANK_STRINGS[language][0] if player.tierWins + player.tierLosses == 0 else QUALIFYING_STRINGS[language]
                 else:
                     if player.accountLevel >= 15:
                         getPlayer = paladinsAPI.getPlayer(player.playerId)
-                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank.value if getPlayer.rankedController.wins + getPlayer.rankedController.losses == 0 else getPlayer.rankedController.currentRank.value]
+                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedController.wins + getPlayer.rankedController.losses == 0 else getPlayer.rankedController.currentRank]
                     else:
                         rank = PLAYER_RANK_STRINGS[language][0]
                 if player.taskForce == 1:
