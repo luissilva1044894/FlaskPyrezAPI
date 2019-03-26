@@ -178,7 +178,7 @@ def getCurrentMatch():
     if playerStatusRequest.status != 3:
         return PLAYER_NOT_MATCH_STRINGS[language][playerStatusRequest.status].format(playerName)
     print("is QueueId valid? {}".format(playerStatusRequest.matchQueueId.isLiveMatch() or playerStatusRequest.matchQueueId.isPraticeMatch()))
-    if not isQueueIdValid(playerStatusRequest.matchQueueId):
+    if not (playerStatusRequest.matchQueueId.isLiveMatch() or playerStatusRequest.matchQueueId.isPraticeMatch()): #not isQueueIdValid(playerStatusRequest.matchQueueId):
         return QUEUE_ID_NOT_SUPPORTED_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.matchQueueId], playerName)
     team1 = []
     team2 = []
