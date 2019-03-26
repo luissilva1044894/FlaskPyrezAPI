@@ -176,7 +176,7 @@ def getCurrentMatch():
         return INTERNAL_ERROR_500_STRINGS[language]
     if not playerStatusRequest.status.isInGame():
         return PLAYER_NOT_MATCH_STRINGS[language][playerStatusRequest.status].format(playerName)
-    if not playerStatusRequest.matchQueueId.isLiveMatch() or not playerStatusRequest.matchQueueId.isPraticeMatch():#isQueueIdValid(playerStatusRequest.matchQueueId):
+    if not isQueueIdValid(playerStatusRequest.matchQueueId):
         return QUEUE_ID_NOT_SUPPORTED_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.matchQueueId], playerName)
     team1 = []
     team2 = []
