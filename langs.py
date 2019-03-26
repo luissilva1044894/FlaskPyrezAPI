@@ -16,7 +16,7 @@ CURRENT_MATCH_STRINGS = {
     "en" : "Current match (Map: {0} - {1}):{2} | VS |{3}",
     "es" : "Current match (Map: {0} - {1}):{2} | VS |{3}",
     "pl" : "Tryb gry (Map: {0} - {1}):{2} | VS |{3}",
-    "pt" : "Partida atual (Map: {0} - {1}):{2} | VS |{3}",
+    "pt" : "Partida atual (Mapa: {0} - {1}):{2} | VS |{3}",
 }
 CURRENT_MATCH_PLAYER_STRINGS = {
     "en" : " {0} as {1} ({2})",
