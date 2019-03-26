@@ -1,7 +1,7 @@
 # FlaskPyrezAPI
 [![License](https://img.shields.io/github/license/luissilva1044894/FlaskPyrezAPI.svg?style=plastic&logoWidth=10)](./LICENSE "FlaskPyrezAPI LICENSE")
 [![Runtime Version](https://img.shields.io/pypi/pyversions/pyrez.svg?style=plastic&logo=python&logoWidth=10)](https://pypi.org/project/pyrez "Python Runtime Versions")
-[![Discord Server](https://img.shields.io/discord/549020573846470659.svg?style=plastic&logo=discord&logoWidth=10)](https://discord.gg/XkydRPS "Pyrez - Discord Server")
+[![Discord Server](https://img.shields.io/discord/549020573846470659.svg?style=plastic&logo=discord&logoWidth=10)](https://discord.gg/XkydRPS "Support Server on Discord")
 
 **FlaskPyrezAPI** is an open-source endpoint for [Twitch](https://twitch.tv "Twitch") commands, written in Python, that provides datas about players, matches and others stats of the game [Paladins](https://paladins.com "Paladins Game"). This API uses [Pyrez](https://github.com/luissilva1044894/Pyrez "Pyrez Repo") for handling connections and requests to [Hi-Rez Studios'](https://www.hirezstudios.com) API.
 
@@ -30,3 +30,9 @@ https://discord.gg/XkydRPS "Support Server on Discord") on [Discord](https://dis
 10. `git commit -m "Going to Heroku"`
 11. `git push heroku master`
 12. `heroku open` and a window will open with your app online
+
+### Thanks
+* [`Lukash`](https://www.facebook.com/PaladinsPoland/ "Paladins Poland") - Polish translation.
+
+### License
+This project is provided under the MIT License, which you can view in [`LICENSE.md`](./LICENSE "FlaskPyrezAPI License")
