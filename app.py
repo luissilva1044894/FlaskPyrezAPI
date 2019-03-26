@@ -169,38 +169,36 @@ def getCurrentMatch():
 
     try:
         playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        elif playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+        if playerId == 0 or playerId == -1:
+            return PLAYER_NULL_STRINGS[language] if playerId == 0 else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         playerStatusRequest = paladinsAPI.getPlayerStatus(playerId)
     except:
         return INTERNAL_ERROR_500_STRINGS[language]
-    if playerStatusRequest.status  != 3:
+    if not playerStatusRequest.status.isInGame():
         return PLAYER_NOT_MATCH_STRINGS[language][playerStatusRequest.status].format(playerName)
+    if not playerStatusRequest.matchQueueId.isLiveMatch() or not playerStatusRequest.matchQueueId.isPraticeMatch():#isQueueIdValid(playerStatusRequest.matchQueueId):
+        return QUEUE_ID_NOT_SUPPORTED_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.matchQueueId], playerName)
+    team1 = []
+    team2 = []
+    players = paladinsAPI.getLiveMatchDetails(playerStatusRequest.matchId)
+    if players:
+        for player in players:
+            if playerStatusRequest.matchQueueId.isRanked():#playerStatusRequest.matchQueueId == 428 or playerStatusRequest.matchQueueId == 486:
+                rank = PLAYER_RANK_STRINGS[language][player.tier] if player.tier != 0 else PLAYER_RANK_STRINGS[language][0] if player.tierWins + player.tierLosses == 0 else QUALIFYING_STRINGS[language]
+            else:
+                if player.accountLevel >= 15:
+                    getPlayer = paladinsAPI.getPlayer(player.playerId)
+                    rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedController.hasPlayedRanked() else getPlayer.rankedController.currentRank]
+                else:
+                    rank = PLAYER_RANK_STRINGS[language][0]
+            if player.taskForce == 1:
+                team1.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godId.getName() if isinstance(player.godId, Champions) else player.godName, rank))
+            else:
+                team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godId.getName() if isinstance(player.godId, Champions) else player.godName, rank))
+        return CURRENT_MATCH_STRINGS[language].format(players[0].mapName.replace("LIVE ").replace("Practice ").replace(" (Onslaught)").replace(" (Onslaught) ").replace(" (TDM)").replace(" (TDM) ").replace("Ranked ").replace("'", ''),
+                        QUEUE_IDS_STRINGS[language][playerStatusRequest.matchQueueId], ",".join(team1), ",".join(team2))
     else:
-        if not isQueueIdValid(playerStatusRequest.matchQueueId):
-            return QUEUE_ID_NOT_SUPPORTED_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.matchQueueId], playerName)
-        team1 = []
-        team2 = []
-        players = paladinsAPI.getLiveMatchDetails(playerStatusRequest.matchId)
-        if players:
-            for player in players:
-                if playerStatusRequest.matchQueueId == 428 or playerStatusRequest.matchQueueId == 486:
-                    rank = PLAYER_RANK_STRINGS[language][player.tier] if player.tier != 0 else PLAYER_RANK_STRINGS[language][0] if player.tierWins + player.tierLosses == 0 else QUALIFYING_STRINGS[language]
-                else:
-                    if player.accountLevel >= 15:
-                        getPlayer = paladinsAPI.getPlayer(player.playerId)
-                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedController.wins + getPlayer.rankedController.losses == 0 else getPlayer.rankedController.currentRank]
-                    else:
-                        rank = PLAYER_RANK_STRINGS[language][0]
-                if player.taskForce == 1:
-                    team1.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godId.getName() if isinstance(player.godId, Champions) else player.godName, rank))
-                else:
-                    team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godId.getName() if isinstance(player.godId, Champions) else player.godName, rank))
-            return CURRENT_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.matchQueueId], ",".join(team1), ",".join(team2))
-        else:
-            return "An unexpected error has occurred!"
+        return "An unexpected error has occurred!"
 
 @app.route("/api/rank", methods=["GET"])
 def getRank():
