@@ -12,7 +12,7 @@ function checkChampName(championName) {
 function generateCommand(lang) { // !command add duo Estou duo com X e o elo dele é: (_ELO2_)
     var commandName = String(getElementById("command_name").value).trim().replace(' ', '').replace('!', ''),
             commandType = getElementById("command_type"),
-            cooldown = String(getElementById("command_cooldown").value).length > 0 && getElementById("command_cooldown").value >= 5 && getElementById("command_cooldown").value <= 300 ? defaultFor(getElementById("command_cooldown").value) : String(commandType.value).toLowerCase() === "currentmatch" ? 25 : 5;
+            cooldown = getElementById("command_cooldown").value > 0 && getElementById("command_cooldown").value >= 5 && getElementById("command_cooldown").value <= 300 ? defaultFor(getElementById("command_cooldown").value, 25) : String(commandType.value).toLowerCase() === "currentmatch" ? 25 : 5;
             playerName = getElementById("player_name"), // Usar o PaladinsGuru para ver se o player existe: https://github.com/Protovision/paladins_scouter/blob/master/paladins_scouter.c
             championName = checkChampName(defaultFor(getElementById("champion_name").value, "")) ? getElementById("champion_name").value : "",
             platform = getElementById("platform_form"),
@@ -22,11 +22,10 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
             userCanUse = getElementById("user_can_use");
     lang = defaultFor(lang, defaultFor(typeof $("#generate_command").attr("data-lang"), defaultFor(getElementById("generate_command").getAttribute("data-lang"), "en")))
     
-    var endpointLink = getEndpoint().replace("index.html", "") + "api/" + String(commandType.value);
+    var endpointLink = getEndpoint() + "api/" + String(commandType.value);
     $("#result-warning").show();
     if (commandName.length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
         var permLvl = "", cmd = "", cmdChat = "";
-
         switch(botName.value) {
             case "2" :
                 switch(userLevel.value) {
@@ -35,7 +34,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                     case "4" :  case "5" : "%8"; break;
                 }
                 cmdChat += "!addcom !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
-                cmd += userCanUse.checked ? "@customapi@[{ENDPOINT_LINK}?player=@target@[1]&platform=@target@[3]&champion=@target@[2]&language={LANGUAGE}&channel=@channel@&bot={BOT_NAME}&user=@user@)" : "@customapi@[{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}&channel=@channel@&bot={BOT_NAME}&user=@user@)";
+                cmd += userCanUse.checked ? "@customapi@[{ENDPOINT_LINK}?player=@target@[1]&platform=@target@[3]&champion=@target@[2]&language={LANGUAGE})" : "@customapi@[{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
             break;
             case "3" : case "5" :
                 switch(userLevel.value) {
@@ -46,7 +45,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                     default: permLvl = "+a";
                 }
                 cmdChat += "!command add !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
-                cmd += userCanUse.checked ? "$readapi({ENDPOINT_LINK}?query=$dummyormsg&platform={platform}&language={LANGUAGE}&channel=$mychannel&user=$realuser&bot={BOT_NAME})" : "$readapi({ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}&channel=$mychannel&user=$realuser&bot={BOT_NAME})";
+                cmd += userCanUse.checked ? "$readapi({ENDPOINT_LINK}?query=$dummyormsg&platform={platform}&language={LANGUAGE})" : "$readapi({ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
             break;
             case "4" :
                 switch(userLevel.value) {
@@ -58,13 +57,14 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                     default: permLvl = 100;
                 }
                 cmdChat += "!command add !{CMD_NAME} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
-                if(String(commandType.value).toLowerCase() === commandType["1"].text.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].text.toLowerCase()) {
-                    cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?query=${1:}&champion=${2:}&platform=${3:}&language={LANGUAGE}&channel=${channel}&bot={BOT_NAME}&user=${sender}}" : "${customapi.{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}&channel=${channel}&bot={BOT_NAME}&user=${sender}}";
+
+                if(String(commandType.value).toLowerCase() === commandType["1"].value.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].value.toLowerCase()) {
+                    cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?query=${1:}&champion=${2:}&platform=${3:}&language={LANGUAGE}}" : "${customapi.{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}}";
                 } else {
-                    if(String(commandType.value).toLowerCase() === commandType["5"].text.toLowerCase()) {
-                        cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?platform=${1}&language={LANGUAGE}&channel=${channel}&bot={BOT_NAME}&user=${sender}}" : "${customapi.{ENDPOINT_LINK}?platform={PLATFORM}&language={LANGUAGE}&channel=${channel}&bot={BOT_NAME}&user=${sender}}"
+                    if(String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
+                        cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?platform=${1}&language={LANGUAGE}}" : "${customapi.{ENDPOINT_LINK}?platform={PLATFORM}&language={LANGUAGE}}";
                     } else {
-                        cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?query=${1:}&platform=${2:}&language={LANGUAGE}&channel=${channel}&bot={BOT_NAME}&user=${sender}}" : "${customapi.{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}&channel=${channel}&bot={BOT_NAME}&user=${sender}}";
+                        cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?query=${1}&platform=${2}&language={LANGUAGE}}" : "${customapi.{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}}";
                     }
                 }
             break;
@@ -80,20 +80,20 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 
                 customAPICode = "$(customapi {ENDPOINT_LINK}?{PARAMS})";
                 cmdUsers = "$(eval `$(querystring)`.trim()==''?\"{IF}\":\"{ELSE}\" ; )"
-                if(String(commandType.value).toLowerCase() === commandType["1"].text.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].text.toLowerCase()) {
+                if(String(commandType.value).toLowerCase() === commandType["1"].value.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].value.toLowerCase()) {
                     if(userCanUse.checked) {
-                        cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&champion={championName}&language={LANGUAGE}&channel=$(channel)&bot={BOT_NAME}&user=$(user)"))
-                        cmdUsers = cmdUsers.replace("{ELSE}", customAPICode.replace("{PARAMS}", "query=$(querystring)&champion=$(2)&platform=$(3)&language={LANGUAGE}&channel=$(channel)&bot={BOT_NAME}&user=$(user)"))
-                    } else customAPICode = customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&champion=$(1)&language={LANGUAGE}&channel=$(channel)&bot={BOT_NAME}&user=$(user)");
+                        cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&champion={championName}&language={LANGUAGE}"));
+                        cmdUsers = cmdUsers.replace("{ELSE}", customAPICode.replace("{PARAMS}", "query=$(querystring)&champion=$(2)&platform=$(3)&language={LANGUAGE}"));
+                    } else customAPICode = customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&champion=$(1)&language={LANGUAGE}");
                 } else {
-                    if(String(commandType.value).toLowerCase() === commandType["5"].text.toLowerCase()) {
-                        if(userCanUse.checked) customAPICode = customAPICode.replace("{PARAMS}", "platform=$(1)&language={LANGUAGE}&channel=$(channel)&bot={BOT_NAME}&user=$(user)");
-                        else customAPICode = customAPICode.replace("{PARAMS}", "platform={PLATFORM}&language={language}&channel=$(channel)&bot={BOT_NAME}&user=$(user)");
+                    if(String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
+                        if(userCanUse.checked) customAPICode = customAPICode.replace("{PARAMS}", "platform=$(1)&language={LANGUAGE}");
+                        else customAPICode = customAPICode.replace("{PARAMS}", "platform={PLATFORM}&language={language}");
                     } else {
                         if(userCanUse.checked) {
-                            cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}&channel=$(channel)&bot={BOT_NAME}&user=$(user)"))
-                            cmdUsers = cmdUsers.replace("{ELSE}", customAPICode.replace("{PARAMS}", "query=$(querystring)&platform=$(2)&language={LANGUAGE}&channel=$(channel)&bot={BOT_NAME}&user=$(user)"))
-                        } else customAPICode = customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}&channel=$(channel)&bot={BOT_NAME}&user=$(user)");
+                            cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}"));
+                            cmdUsers = cmdUsers.replace("{ELSE}", customAPICode.replace("{PARAMS}", "query=$(querystring)&platform=$(2)&language={LANGUAGE}"));
+                        } else customAPICode = customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}");
                     }
                 }
                 cmd += userCanUse.checked ? cmdUsers : customAPICode;

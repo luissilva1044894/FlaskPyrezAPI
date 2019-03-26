@@ -10,12 +10,12 @@
     	"PYREZ_AUTH_ID": {
     		"description": "Used for authentication. This is the authentication key that you receive from Hi-Rez Studios.",
     		"required": "true",
-    		"value": "23DF3C7E9BD14D84BF892AD206B6755C"
+    		"value": ""
     	},
     	"PYREZ_DEV_ID": {
     		"description": "Used for authentication. This is the developer ID that you receive from Hi-Rez Studios.",
     		"required": "true",
-    		"value": "1004"
+    		"value": ""
     	}
 	},
     "keywords": [ "flask", "flask-api", "flask-backend", "hirez", "hi-rez", "paladins", "paladins-api", "api-server", "twitch", "nightbot", "endpoint", "endpoints", "open-source" ],

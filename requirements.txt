@@ -1,18 +1,24 @@
--e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez
-gunicorn==19.7.1
+-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=Pyrez
+gunicorn==19.9.0
 beautifulsoup4==4.6.3
 certifi==2018.8.24
 chardet==3.0.4
 Click==7.0
 Flask==1.0.2
+Flask-Migrate==2.2.1
+Flask-Script==2.0.6
+Flask-SQLAlchemy==2.3.2
 idna==2.7
 itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
 pip==19.0.2
 python-decouple==3.1
-requests==2.20.0
+psycopg2==2.7.4
+psycopg2-binary==2.7.5
+requests==2.21.0
 requests-aeaweb==0.0.1
 setuptools==40.4.3
+SQLAlchemy==1.2.11
 urllib3==1.23
 Werkzeug==0.14.1

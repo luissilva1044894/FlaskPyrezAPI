@@ -36,12 +36,12 @@ paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
 
 @app.errorhandler(404)
 def not_found_error(error=None):
-    language = getLanguage(request.args)
+    language = getLanguage(request)
     return INTERNAL_ERROR_404_STRINGS[language], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
 
 @app.errorhandler(500)
 def internal_error(error=None):
-    language = getLanguage(request.args)
+    language = getLanguage(request)
     return INTERNAL_ERROR_500_STRINGS[language], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
 
 @app.route('/', methods=["GET"])
@@ -49,20 +49,16 @@ def internal_error(error=None):
 @app.route("/index", methods=["GET"])
 @app.route("/index.html", methods=["GET"])
 def index():#ip = request.remote_addr
-    return render_template("index-{0}.html".format(getAcceptedLanguages(request))) #redirect(url_for("index"))
+    return render_template("index-{0}.html".format(getLanguage(request))) #redirect(url_for("index"))
 
 def formatDecimal(data, form = ",d"):
     return format(data, form) if data else 0
 
 def getAcceptedLanguages(requestArgs):
-    aux = str(request.accept_languages).split('-')[0] if len(str(request.accept_languages)) > 0 else LanguagesSupported.English.value
-    try:
-        return LanguagesSupported(aux).value
-    except ValueError:
-        return LanguagesSupported.English.value
+    return str(request.accept_languages).split('-')[0] if len(str(request.accept_languages)) > 0 else LanguagesSupported.English.value
 
 def getLanguage(requestArgs):
-    aux = str(requestArgs.get("language", default=LanguagesSupported.English.value)).lower()
+    aux = str(requestArgs.args.get("language", default=getAcceptedLanguages(requestArgs))).lower()
     try:
         return LanguagesSupported(aux).value
     except ValueError:
@@ -102,13 +98,13 @@ def getDecks():
     platform = getPlatform(request.args)
     playerName = getPlayerName(request.args)
     championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
-    language = getLanguage(request.args)
+    language = getLanguage(request)
     return INTERNAL_ERROR_404_STRINGS[language]
 
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
     platform = getPlatform(request.args)
-    language = getLanguage(request.args)
+    language = getLanguage(request)
 
     try:
         hiRezServerStatus = paladinsAPI.getHiRezServerStatus()
@@ -124,7 +120,7 @@ def getGameVersion():
 def getStalk():
     platform = getPlatform(request.args)
     playerName = getPlayerName(request.args)
-    language = getLanguage(request.args)
+    language = getLanguage(request)
 
     try:
         playerId = getPlayerId(playerName, platform)
@@ -144,7 +140,7 @@ def getStalk():
 def getLastMatch():
     platform = getPlatform(request.args)
     playerName = getPlayerName(request.args)
-    language = getLanguage(request.args)
+    language = getLanguage(request)
 
     try:
         playerId = getPlayerId(playerName, platform)
@@ -169,7 +165,7 @@ def isQueueIdValid(queueId):
 def getCurrentMatch():
     platform = getPlatform(request.args)
     playerName = getPlayerName(request.args)
-    language = getLanguage(request.args)
+    language = getLanguage(request)
 
     try:
         playerId = getPlayerId(playerName, platform)
@@ -210,7 +206,7 @@ def getCurrentMatch():
 def getRank():
     playerName = getPlayerName(request.args)
     platform = getPlatform(request.args)
-    language = getLanguage(request.args)
+    language = getLanguage(request)
 
     try:
         playerId = getPlayerId(playerName, platform)
@@ -242,7 +238,7 @@ def getWinrate():
     platform = getPlatform(request.args)
     playerName = getPlayerName(request.args)
     championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
-    language = getLanguage(request.args)
+    language = getLanguage(request)
 
     try:
         playerId = getPlayerId(playerName, platform)

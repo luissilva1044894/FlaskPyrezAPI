@@ -1,242 +1,104 @@
 
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-  <title>Comandos para Twitch</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0 minimal-ui">
-  <meta name="keywords" content="twitch, api, nonsocial, Feyrazzle, pyrez, hirez, hi-rez, rank, customapi, nightbot, custom, commands, comandos, personalizado, streamer, paladins, champions of the realm, champions, ninja, master, trends, player, guru, meta, discord, twitter, community, reviews, review, esports, recruitment, stats, statistics, coach, tp, elo, mobile, bot, app, mobile app">
-  <meta name="author" content="Nonsocial">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="description" content="FlaskPyrezAPI é um endpointt open-source endpoint de comandos para Twitch, escrito em Python, that provides datas about players, matches and others stats of the game Paladins. Esta API usa Pyrez para se conectar e requisitar dados à API da Hi-Rez Studios.">
-  <link rel="shortcut icon" sizes="1024x1024" href="https://web2.hirez.com/paladins/wp-content/uploads/2016/06/cropped-2016-06-03-192x192.png">
-  
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/indexStyle.css') }}">
-  <script src="{{ url_for('static', filename='js/indexMethods.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/generateCommand.js') }}"></script>
-  <script type="text/javascript">
-    function getEndpoint() {
-      return "{{ url_for('index', _external=True) }}"
-    }
-  </script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.6.1/css/mdb.min.css" rel="stylesheet">
+{% extends 'baseIndex.html' %}
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</head>
+{% block languague %}pt{% endblock %}
 
-<body onload="onPageLoaded()">
-<header>
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#"><strong>Paladins Endpoints</strong></a>
-    <div class="collapse navbar-collapse" id="basicExampleNav"></div>
-    <ul class="navbar-nav nav-flex-icons">
-      <li class="nav-item">
-        <a href="https://github.com/luissilva1044894/FlaskPyrezAPI" class="nav-link waves-effect" target="_blank" title="Repositório do Github"><i class="fab fa-github-alt" style="font-size:24px" aria-hidden="true"></i></a>
-      </li>
-      <li class="nav-item">
-        <a href="https://twitch.tv/nonsocial_" class="nav-link waves-effect" target="_blank" title="Perfil no Twitch"><i class="fab fa-twitch" style="font-size:24px" aria-hidden="true"></i></a>
-      </li>
-      <li class="nav-item">
-        <a href="https://pastebin.com/KreHef36" class="nav-link waves-effect" title="Exemplo Pastebin" target="_blank"><i class="fas fa-file-alt" style="font-size:24px" aria-hidden="true"></i></a>
-      </li>
-    </ul>
-  </nav>
-</header>
+{% block title %}Comandos para Twitch{% endblock %}
 
-<br /><br /><br />
-<h2><strong>Wrappers available</strong><br /></h2>
-<table class="tg">
-  <tr>
-    <th class="tg-gmla"><span style="font-weight:bold">Comando</span></th>
-    <th class="tg-gmla"><span style="font-weight:bold">Descrição</span></th>
-    <th class="tg-gmla"><span style="font-weight:bold">Link</span></th>
-    <th class="tg-lvth"><span style="font-weight:bold">Opção 1</span></th>
-    <th class="tg-lvth"><span style="font-weight:bold">Opção 2</span></th>
-    <th class="tg-lvth"><span style="font-weight:bold">Opção 3</span></th>
-    <th class="tg-lvth"><span style="font-weight:bold">Opção 4</span></th>
-  </tr>
-  <tr>
-    <td class="tg-us36">Partida</td>
-    <td class="tg-us36">Mostra os ranks de todos jogadores em uma partida</td>
-    <td class="tg-us36">{{ url_for("getCurrentMatch", _external=True) }}</td>
-    <td class="tg-yw4l">?player=JOGADOR</td>
-    <td class="tg-yw4l">&platform=PLATFORMA</td>
-    <td class="tg-yw4l">&language=PT</td>
-    <td class="tg-yw4l"></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">Decks</td>
-    <td class="tg-yw4l">Baralhos de um campeão</td>
-    <td class="tg-us36">{{ url_for("getDecks", _external=True) }}</td>
-    <td class="tg-yw4l">?player=JOGADOR</td>
-    <td class="tg-yw4l">&champion=CHAMPION</td>
-    <td class="tg-yw4l">&platform=PLATFORMA</td>
-    <td class="tg-yw4l">&language=PT</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">KDA</td>
-    <td class="tg-yw4l">KDA de um jogador ou campeão</td>
-    <td class="tg-us36">{{ url_for("getWinrate", _external=True) }}</td>
-    <td class="tg-yw4l">?player=JOGADOR</td>
-    <td class="tg-yw4l">&champion=CHAMPION</td>
-    <td class="tg-yw4l">&platform=PLATFORMA</td>
-    <td class="tg-yw4l">&language=PT</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">Última partida</td>
-    <td class="tg-yw4l">Informações sobre a última partida jogada</td>
-    <td class="tg-us36">{{ url_for("getLastMatch", _external=True) }}</td>
-    <td class="tg-yw4l">?player=JOGADOR</td>
-    <td class="tg-yw4l">&platform=PLATFORMA</td>
-    <td class="tg-yw4l">&language=PT</td>
-    <td class="tg-yw4l"></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">Rank</td>
-    <td class="tg-yw4l">O rank atual de um jogador</td>
-    <td class="tg-us36">{{ url_for("getRank", _external=True) }}</td>
-    <td class="tg-yw4l">?player=JOGADOR</td>
-    <td class="tg-yw4l">&platform=PLATFORMA</td>
-    <td class="tg-yw4l">&language=PT</td>
-    <td class="tg-yw4l"></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">Server</td>
-    <td class="tg-yw4l">Status do servidor do Paladins</td>
-    <td class="tg-us36">{{ url_for("getGameVersion", _external=True) }}</td>
-    <td class="tg-yw4l">?platform=PLATFORMA</td>
-    <td class="tg-yw4l">&language=PT</td>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l"></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">Stalk</td>
-    <td class="tg-yw4l">Status sobre um jogador</td>
-    <td class="tg-us36">{{ url_for("getStalk", _external=True) }}</td>
-    <td class="tg-yw4l">?player=JOGADOR</td>
-    <td class="tg-yw4l">&platform=PLATFORMA</td>
-    <td class="tg-yw4l">&language=PT</td>
-    <td class="tg-yw4l"></td>
-  </tr>
-</table>
+{% block metacontent %}FlaskPyrezAPI é um endpoint open-source de comandos para Twitch, escrito em Python, que manipula dados sobre jogadores, partidas e outras estatísticas do jogo Paladins. Esta API usa Pyrez para se conectar e requisitar dados à API da Hi-Rez Studios.{% endblock %}
 
-<br/>
-  <main>
-    <div id="result-warning"></div>
-    <table class="table padding-top" id="commands-generator">
-      <thead>
-        <tr>
-          <th>Nome do comando</th>
-          <th>Comando</th>
-          <th>Cooldown</th>
-          <th>Jogador</th>
-          <th>Nome do campeão</th>
-          <th>Platforma</th>
-          <th>Idioma</th>
-          <th>Bot</th>
-          <th></th>
-          <th>User Access</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon" id="addon-command-1"><strong>!</strong></span>
-                <input type="text" class="form-control" id="command_name" aria-describedby="addon-command-1" value="" placeholder="partida" title="Nome do comando (sem !)" pattern=".{1,}" required onchange="checkButtonPos()">
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <select id="command_type" class="form-control full-width" onchange="commandTypeChanged()">
-                <option value="currentmatch">!partida</option>
-                <option value="decks">!decks</option>
-                <option value="winrate">!winrate</option>
-                <option value="lastmatch">!lastmatch</option>
-                <option value="rank">!rank</option>
-                <option value="version">!server</option>
-                <option value="stalk">!stalk</option>
-              </select>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <div class="input-group">
-                <input type="number" class="form-control" id="command_cooldown" value="5" min="5" max="100">
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <input type="text" class="form-control" id="player_name" value="" placeholder="FeyRazzle" pattern=".{4,}" title="Nome do jogador" required onchange="checkButtonPos()">
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <input type="text" class="form-control" id="champion_name" value="" disabled>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <select id="platform_form" class="form-control full-width" size="1">
-                <option value="PC">PC/Steam</option>
-                <option value="XBOX">Xbox One</option>
-                <option value="PS4">PS4</option>
-                <option value="SWITCH">Nintendo Switch</option>
-              </select>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <select id="language_form" class="form-control full-width">
+{% block navbard_title %}Paladins Endpoints{% endblock %}
+
+
+{% block commands_table_titles_title %}Wrappers available{% endblock %}
+
+{% block commands_table_titles_action %}Comando{% endblock %}
+{% block commands_table_titles_desc %}Descrição{% endblock %}
+{% block commands_table_titles_url %}Link{% endblock %}
+{% block commands_table_titles_option1 %}Opção 1{% endblock %}
+{% block commands_table_titles_option2 %}Opção 2{% endblock %}
+{% block commands_table_titles_option3 %}Opção 3{% endblock %}
+{% block commands_table_titles_option4 %}Opção 4{% endblock %}
+
+{% block commands_table_contents_currentmatch %}Partida{% endblock %}
+{% block commands_table_contents_currentmatch_desc %}Mostra os ranks dos jogadores em uma partida{% endblock %}
+{% block commands_table_contents_currentmatch_ign %}JOGADOR{% endblock %}
+{% block commands_table_contents_currentmatch_plat %}PLATAFORMA{% endblock %}
+{% block commands_table_contents_currentmatch_lang %}PT{% endblock %}
+
+{% block commands_table_contents_decks %}Decks{% endblock %}
+{% block commands_table_contents_decks_desc %}Baralhos de um campeão{% endblock %}
+{% block commands_table_contents_decks_ign %}JOGADOR{% endblock %}
+{% block commands_table_contents_decks_champ %}CAMPEÃO{% endblock %}
+{% block commands_table_contents_decks_plat %}PLATAFORMA{% endblock %}
+{% block commands_table_contents_decks_lang %}PT{% endblock %}
+
+{% block commands_table_contents_winrate %}KDA{% endblock %}
+{% block commands_table_contents_winrate_desc %}KDA de um jogador ou campeão{% endblock %}
+{% block commands_table_contents_winrate_ign %}JOGADOR{% endblock %}
+{% block commands_table_contents_winrate_champ %}CAMPEÃO{% endblock %}
+{% block commands_table_contents_winrate_plat %}PLATAFORMA{% endblock %}
+{% block commands_table_contents_winrate_lang %}PT{% endblock %}
+
+{% block commands_table_contents_lastmatch %}Última partida{% endblock %}
+{% block commands_table_contents_lastmatch_desc %}Informações sobre a última partida jogada{% endblock %}
+{% block commands_table_contents_lastmatch_ign %}JOGADOR{% endblock %}
+{% block commands_table_contents_lastmatch_plat %}PLATAFORMA{% endblock %}
+{% block commands_table_contents_lastmatch_lang %}PT{% endblock %}
+
+{% block commands_table_contents_rank %}Rank{% endblock %}
+{% block commands_table_contents_rank_desc %}O rank atual de um jogador{% endblock %}
+{% block commands_table_contents_rank_ign %}JOGADOR{% endblock %}
+{% block commands_table_contents_rank_plat %}PLATAFORMA{% endblock %}
+{% block commands_table_contents_rank_lang %}PT{% endblock %}
+
+{% block commands_table_contents_version %}Server{% endblock %}
+{% block commands_table_contents_version_desc %}Status do servidor do Paladins{% endblock %}
+{% block commands_table_contents_version_plat %}PLATAFORMA{% endblock %}
+{% block commands_table_contents_version_lang %}PT{% endblock %}
+
+{% block commands_table_contents_stalk %}Stalk{% endblock %}
+{% block commands_table_contents_stalk_desc %}Status sobre um jogador{% endblock %}
+{% block commands_table_contents_stalk_ign %}JOGADOR{% endblock %}
+{% block commands_table_contents_stalk_plat %}PLATAFORMA{% endblock %}
+{% block commands_table_contents_stalk_lang %}PT{% endblock %}
+
+{% block commands_generator_cmdname %}Nome do comando{% endblock %}
+{% block commands_generator_cmdtype %}Comando{% endblock %}
+{% block commands_generator_cmdcd %}Cooldown{% endblock %}
+{% block commands_generator_paladinsign %}Jogador{% endblock %}
+{% block commands_generator_paladinschamp %}Nome do campeão{% endblock %}
+{% block commands_generator_paladinsplat %}Plataforma{% endblock %}
+{% block commands_generator_cmdlang %}Idioma{% endblock %}
+{% block commands_generator_chatbot %}Bot{% endblock %}
+{% block commands_generator_chatbotuseraccess %}User Access{% endblock %}
+
+{% block commands_generator_cmdname_placeholder %}partida{% endblock %}
+{% block commands_generator_cmdname_title %}Nome do comando (sem !){% endblock %}
+
+{% block commands_generator_cmdtype_cmdcurrentmatch %}partida{% endblock %}
+{% block commands_generator_cmdtype_cmdwinrate %}winrate{% endblock %}
+{% block commands_generator_cmdtype_cmddecks %}decks{% endblock %}
+{% block commands_generator_cmdtype_cmdlastmatch %}lastmatch{% endblock %}
+{% block commands_generator_cmdtype_cmdrank %}rank{% endblock %}
+{% block commands_generator_cmdtype_cmdserver %}server{% endblock %}
+{% block commands_generator_cmdtype_cmdstalk %}stalk{% endblock %}
+
+{% block commands_generator_langs_order %}
                 <option value="PT">Português</option>
                 <option value="EN">English</option>
                 <option value="ES">Español</option>
-              </select>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <select id="bot_name" class="form-control full-width">
-                <option value="1">Nightbot</option>
-                <option value="2">DeepBot</option>
-                <option value="3">AnkhBot</option>
-                <option value="4">StreamElements Bot</option>
-                <option value="5">StreamLab Chatbot</option>
-              </select>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <div class="input-group">
-                <input type="checkbox" id="user_can_use" checked>Viewers podem olhar suas contas<br>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <select id="user_access" class="form-control full-width">
-                <option value="1">Everybody</option>
-                <option value="2">Regular</option>
-                <option value="3">Subscriber</option>
-                <option value="4">Mod</option>
-                <option value="5">Owner</option>
-              </select>
-            </div>
-          </td>
-          <td>
-            <button data-lang="pt" onclick="generateCommand('pt')" id="generate_command" class="btn btn-default">Gerar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
-</body>
-</html>
+                <option value="PL">Polish</option>
+{% endblock %}
+
+{% block commands_generator_usercanuse %}Viewers podem olhar suas contas{% endblock %}
+
+{% block commands_generator_userlvl_everybody %}Todos{% endblock %}
+{% block commands_generator_userlvl_regular %}Regulares{% endblock %}
+{% block commands_generator_userlvl_subscriber %}Subs{% endblock %}
+{% block commands_generator_userlvl_mod %}Mods{% endblock %}
+{% block commands_generator_userlvl_owner %}Streamer{% endblock %}
+
+{% block commands_generator_generatebtn %}Gerar{% endblock %}
+{% block commands_generator_paramslang %}pt{% endblock %}
+{% block commands_generator_datalang %}pt{% endblock %}

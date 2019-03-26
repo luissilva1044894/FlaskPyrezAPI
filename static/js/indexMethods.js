@@ -20,7 +20,7 @@ function getTranslatedString(language, msg) {
     var ptString = [];
     ptString["chatMsg"] = "Copie e cole o código em seu chat"
     ptString["dontChange"] = "(VOCÊ NÃO PRECISA MUDAR NADA)"
-    ptString["backendMsg"] = "Or put the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
+    ptString["backendMsg"] = "Ou adicione diretamente como comando nas configurações do <span id=\"backend-title-bot\">{BOT_NAME}</span>"
     ptString["close"] = "Fechar"
     ptString["cmdCreated"] = "Comando !{CMD_NAME} <strong>criado</strong> com sucesso!"
     ptString["invalidCmdName"] = "<strong>Nome do comando inválido</strong>!"
@@ -38,8 +38,9 @@ function getTranslatedString(language, msg) {
 function getElementById(elementName) { return document.getElementById(elementName) }
 
 function commandTypeChanged() {
-    var commandType = String(getElementById("command_type").value).toLowerCase();
-    getElementById("champion_name").disabled = !(commandType === commandType["1"].text.toLowerCase() || commandType === commandType["2"].text.toLowerCase());
+    var commandType = getElementById("command_type");
+    getElementById("champion_name").disabled = !(commandType.value.toLowerCase() === commandType["1"].value.toLowerCase() || commandType.value.toLowerCase() === commandType["2"].value.toLowerCase());
+    getElementById("command_cooldown").value = commandType.value.toLowerCase() === commandType["0"].value.toLowerCase() ? 25 : 5;
 }
 
 function checkButtonPos() {
