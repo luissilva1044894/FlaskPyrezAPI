@@ -24,7 +24,7 @@ https://discord.gg/XkydRPS "Support Server on Discord") on [Discord](https://dis
 4. `git init`
 5. `heroku git:remote -a your-app-name`
 6. Download this repo and copy all files into `your-app-name` folder
-7. Edit [`.env`](./env) and replace the `PYREZ_AUTH_ID` and `PYREZ_DEV_ID` with the `authId` and `devId` that you receive from [Hi-Rez Studios](https://fs12.formsite.com/HiRez/form48/secure_index.html).
+7. Edit [`.env`](./.env) and replace the `PYREZ_AUTH_ID` and `PYREZ_DEV_ID` with the `authId` and `devId` that you receive from [Hi-Rez Studios](https://fs12.formsite.com/HiRez/form48/secure_index.html).
 8. `heroku config:push`
 9. `git add .`
 10. `git commit -m "Going to Heroku"`
