@@ -174,8 +174,10 @@ def getCurrentMatch():
         playerStatusRequest = paladinsAPI.getPlayerStatus(playerId)
     except:
         return INTERNAL_ERROR_500_STRINGS[language]
+    print("Is in game? {}".format(playerStatusRequest.status.isInGame()))
     if playerStatusRequest.status != 3:
         return PLAYER_NOT_MATCH_STRINGS[language][playerStatusRequest.status].format(playerName)
+    print("is QueueId valid? {}".format(playerStatusRequest.matchQueueId.isLiveMatch() or playerStatusRequest.matchQueueId.isPraticeMatch()))
     if not isQueueIdValid(playerStatusRequest.matchQueueId):
         return QUEUE_ID_NOT_SUPPORTED_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.matchQueueId], playerName)
     team1 = []
@@ -183,7 +185,7 @@ def getCurrentMatch():
     players = paladinsAPI.getLiveMatchDetails(playerStatusRequest.matchId)
     if players:
         for player in players:
-            if playerStatusRequest.matchQueueId.isRanked():#playerStatusRequest.matchQueueId == 428 or playerStatusRequest.matchQueueId == 486:
+            if playerStatusRequest.matchQueueId.isRanked():
                 rank = PLAYER_RANK_STRINGS[language][player.tier] if player.tier != 0 else PLAYER_RANK_STRINGS[language][0] if player.tierWins + player.tierLosses == 0 else QUALIFYING_STRINGS[language]
             else:
                 if player.accountLevel >= 15:
