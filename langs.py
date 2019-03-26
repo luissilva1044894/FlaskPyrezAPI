@@ -10,7 +10,7 @@ INTERNAL_ERROR_500_STRINGS = {
     "en" : "INTERNAL SERVER ERROR: An unexpected error has occurred. If something isn't working, report on Discord Server: https://discord.gg/XkydRPS",
     "es" : "INTERNAL SERVER ERROR: An unexpected error has occurred. If something isn't working, report on Discord Server: https://discord.gg/XkydRPS",
     "pl" : "B£¥D SERWERA: Wyst¹pi³ nieoczekiwany b³¹d.",
-    "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu. Se o erro continuar, report no server do Discord: https://discord.gg/XkydRPS",
+    "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu. Se o erro persistir, report no server do Discord: https://discord.gg/XkydRPS",
 }
 CURRENT_MATCH_STRINGS = {
     "en" : "Current match ({0}):{1} | VS |{2}",
