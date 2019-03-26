@@ -137,30 +137,42 @@ QUALIFYING_STRINGS = {
     "pt" : "MD10",#Qualificatória
 }
 PLAYER_RANK_STRINGS = {
-    "en" : [ "Unranked", "Bronze 5", "Bronze 4", "Bronze 3", "Bronze 2", "Bronze 1",
-        "Silver 5", "Silver 4", "Silver 3", "Silver 2", "Silver 1",
-        "Gold 5", "Gold 4", "Gold 3", "Gold 2", "Gold 1",
-        "Platinum 5", "Platinum 4", "Platinum 3", "Platinum 2", "Platinum 1",
-        "Diamond 5", "Diamond 4", "Diamond 3", "Diamond 2", "Diamond 1",
-        "Master", "Grandmaster" ],
-    "es" : [ "Unranked", "Bronce 5", "Bronce 4", "Bronce 3", "Bronce 2", "Bronce 1",
-        "Plata 5", "Plata 4", "Plata 3", "Plata 2", "Plata 1",
-        "Oro 5", "Oro 4", "Oro 3", "Oro 2", "Oro 1",
-        "Platino 5", "Platino 4", "Platino 3", "Platino 2", "Platino 1",
-        "Diamante 5", "Diamante 4", "Diamante 3", "Diamante 2", "Diamante 1",
-        "Maestro", "Gran maestro" ],
-    "pl" : [ "Brak rangi", "Br¹z 5", "Br¹z 4", "Br¹z 3", "Br¹z 2", "Br¹z 1",
-        "Srebro 5", "Srebro 4", "Srebro 3", "Srebro 2", "Srebro 1",
-        "Z³oto 5", "Z³oto 4", "Z³oto 3", "Z³oto 2", "Z³oto 1",
-        "Platyna 5", "Platyna 4", "Platyna 3", "Platyna 2", "Platyna 1",
-        "Diament 5", "Diament 4", "Diament 3", "Diament 2", "Diament 1",
-        "Mistrz", "Arcymistrz" ],
-    "pt" : [ "Unranked", "Bronze 5", "Bronze 4", "Bronze 3", "Bronze 2", "Bronze 1",
-        "Prata 5", "Prata 4", "Prata 3", "Prata 2", "Prata 1",
-        "Ouro 5", "Ouro 4", "Ouro 3", "Ouro 2", "Ouro 1",
-        "Platina 5", "Platina 4", "Platina 3", "Platina 2", "Platina 1",
-        "Diamante 5", "Diamante 4", "Diamante 3", "Diamante 2", "Diamante 1",
-        "Mestre", "Grão-mestre" ],
+        "en" : {
+        0: "Unranked",
+        1: "Bronze 5", 2: "Bronze 4", 3: "Bronze 3", 4: "Bronze 2", 5: "Bronze 1",
+        6: "Silver 5", 7: "Silver 4", 8: "Silver 3", 9: "Silver 2", 10: "Silver 1",
+        11: "Gold 5", 12: "Gold 4", 13: "Gold 3", 14: "Gold 2", 15: "Gold 1",
+        16: "Platinum 5", 17: "Platinum 4", 18: "Platinum 3", 19: "Platinum 2", 20: "Platinum 1",
+        21: "Diamond 5", 22: "Diamond 4", 23: "Diamond 3", 24: "Diamond 2", 25: "Diamond 1",
+        26: "Master", 27: "Grandmaster"
+    },
+    "es" : {
+        0: "Unranked",#Qualifying
+        1: "Bronce 5", 2: "Bronce 4", 3: "Bronce 3", 4: "Bronce 2", 5: "Bronce 1",
+        6: "Plata 5", 7: "Plata 4", 8: "Plata 3", 9: "Plata 2", 10: "Plata 1",
+        11: "Oro 5", 12: "Oro 4", 13: "Oro 3", 14: "Oro 2", 15: "Oro 1",
+        16: "Platino 5", 17: "Platino 4", 18: "Platino 3", 19: "Platino 2", 20: "Platino 1",
+        21: "Diamante 5", 22: "Diamante 4", 23: "Diamante 3", 24: "Diamante 2", 25: "Diamante 1",
+        26: "Maestro", 27: "Gran maestro"
+    },
+    "pt" : {
+        0: "Unranked",
+        1: "Bronze 5", 2: "Bronze 4", 3: "Bronze 3", 4: "Bronze 2", 5: "Bronze 1",
+        6: "Prata 5", 7: "Prata 4", 8: "Prata 3", 9: "Prata 2", 10: "Prata 1",
+        11: "Ouro 5", 12: "Ouro 4", 13: "Ouro 3", 14: "Ouro 2", 15: "Ouro 1",
+        16: "Platina 5", 17: "Platina 4", 18: "Platina 3", 19: "Platina 2", 20: "Platina 1",
+        21: "Diamante 5", 22: "Diamante 4", 23: "Diamante 3", 24: "Diamante 2", 25: "Diamante 1",
+        26: "Mestre", 27: "Grão-mestre"
+    },
+    "pl" : {
+        0: "Brak rangi",
+        1: "Br¹z 5", 2: "Br¹z 4", 3: "Br¹z 3", 4: "Br¹z 2", 5: "Br¹z 1",
+        6: "Srebro 5", 7: "Srebro 4", 8: "Srebro 3", 9: "Srebro 2", 10: "Srebro 1",
+        11: "Z³oto 5", 12: "Z³oto 4", 13: "Z³oto 3", 14: "Z³oto 2", 15: "Z³oto 1",
+        16: "Platyna 5", 17: "Platyna 4", 18: "Platyna 3", 19: "Platyna 2", 20: "Platyna 1",
+        21: "Diament 5", 22: "Diament 4", 23: "Diament 3", 24: "Diament 2", 25: "Diament 1",
+        26: "Mistrz", 27: "Grão-Arcymistrz"
+    },
 }
 ON_LEADERBOARD_STRINGS = {
     "en" : ", {0} on the leaderboard",
@@ -174,7 +186,7 @@ CHAMP_WINRATE_STRINGS = {
     "pl" : "{0}: Wygrane: {1}, Przegrane: {2} (Zabójstwa: {3} / Œmierci: {4} / Asysty: {5} - {6} KDA) - Winrate: {7}%",
     "pt" : "{0}: {1} vitórias, {2} derrotas (Kills: {3} / Deaths: {4} / Assists: {5} - {6} KDA) - Win rate: {7}%",
 }
-HOUR_FORMAT_STRINGS = { #24h format
+HOUR_FORMAT_STRINGS = {
     "en" : "%m/%d/%Y %H:%M:%S %p",
     "es" : "%m/%d/%Y %H:%M:%S %p",
     "pl" : "%d/%m/%Y %H:%M:%S %p",
