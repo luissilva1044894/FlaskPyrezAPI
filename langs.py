@@ -3,20 +3,20 @@
 INTERNAL_ERROR_404_STRINGS = {
     "en" : "INTERNAL SERVER ERROR: Page not found.",
     "es" : "INTERNAL SERVER ERROR: Page not found.",
-    "pl" : "B£¥D SERWERA: Nie znaleziono strony",
+    "pl" : "BŁĄD SERWERA: Nie znaleziono strony",
     "pt" : "INTERNAL SERVER ERROR: Página não encontrada.",
 }
 INTERNAL_ERROR_500_STRINGS = {
     "en" : "INTERNAL SERVER ERROR: An unexpected error has occurred. If something isn't working, report on Discord Server: https://discord.gg/XkydRPS",
     "es" : "INTERNAL SERVER ERROR: An unexpected error has occurred. If something isn't working, report on Discord Server: https://discord.gg/XkydRPS",
-    "pl" : "B£¥D SERWERA: Wyst¹pi³ nieoczekiwany b³¹d.",
+    "pl" : "BŁĄD SERWERA: Wystąpił nieoczekiwany błąd. If something isn't working, report on Discord Server: https://discord.gg/XkydRPS",
     "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu. Se o erro persistir, report no server do Discord: https://discord.gg/XkydRPS",
 }
 CURRENT_MATCH_STRINGS = {
-    "en" : "Current match ({0}):{1} | VS |{2}",
-    "es" : "Current match ({0}):{1} | VS |{2}",
-    "pl" : "Tryb gry ({0}):{1} | VS |{2}",
-    "pt" : "Partida atual ({0}):{1} | VS |{2}",
+    "en" : "Current match (Map: {0} - {1}):{2} | VS |{3}",
+    "es" : "Current match (Map: {0} - {1}):{2} | VS |{3}",
+    "pl" : "Tryb gry (Map: {0} - {1}):{2} | VS |{3}",
+    "pt" : "Partida atual (Map: {0} - {1}):{2} | VS |{3}",
 }
 CURRENT_MATCH_PLAYER_STRINGS = {
     "en" : " {0} as {1} ({2})",
@@ -27,13 +27,13 @@ CURRENT_MATCH_PLAYER_STRINGS = {
 PLAYER_NULL_STRINGS = {
     "en" : "ERROR: Player not specified!",
     "es" : "ERROR: Player not specified!",
-    "pl" : "B£¥D: Nie podano nazwy gracza!",
+    "pl" : "BŁĄD: Nie podano nazwy gracza!",
     "pt" : "ERROR: Player not specified!",
 }
 PLAYER_NOT_FOUND_STRINGS = {
     "en" : "ERROR: '{0}' not found!",
     "es" : "ERROR: '{0}' not found!",
-    "pl" : "B£¥D: Nie znaleziono gracza '{0}'!",
+    "pl" : "BŁĄD: Nie znaleziono gracza '{0}'!",
     "pt" : "ERRO: '{0}' não encontrado!",
 }
 PLAYER_NOT_MATCH_STRINGS = {
@@ -50,10 +50,10 @@ PLAYER_NOT_MATCH_STRINGS = {
         4: "ERROR: {0} is Online, but not in a match.",
     },
     "pl" : {
-        0: "B£¥D: {0} jest offline.",
-        1: "B£¥D: {0} jest w lobby.",
-        2: "B£¥D: {0} wybiera czempiona. Poczekaj a¿ rozpocznie siê mecz.",
-        4: "B£¥D: {0} jest Online, ale nie rozgrywa meczu.",
+        0: "BŁĄD: {0} jest offline.",
+        1: "BŁĄD: {0} jest w lobby.",
+        2: "BŁĄD: {0} wybiera czempiona. Poczekaj aż rozpocznie się mecz.",
+        4: "BŁĄD: {0} jest Online, ale nie rozgrywa meczu.",
     },
     "pt" : {
        0: "ERROR: {0} está Offline.",
@@ -69,27 +69,27 @@ PLAYER_LEVEL_STRINGS = {
     "pt" : "{0} (Nível {1})",
 }
 UNABLE_TO_CONNECT_STRINGS = {
-    "en" : "ERROR: Unable to connect to Hi-Rez Studios API!",
-    "es" : "ERROR: Unable to connect to Hi-Rez Studios API!",
-    "pl" : "B£¥D: Nie mo¿na po³¹czyæ siê z API Hi-Rez Studio!",
+    "en" : "ERROR: Unable to connect to Hi-Rez Studios' API!",
+    "es" : "ERROR: Unable to connect to Hi-Rez Studios' API!",
+    "pl" : "BŁĄD: Nie można połączyć się z API Hi-Rez Studio!",
     "pt" : "ERRO: Não foi possível conectar à API da Hi-Rez Studios!",
 }
 QUEUE_ID_NOT_SUPPORTED_STRINGS = {
     "en" : "ERROR: {0} isn't supported! {1} isn't playing casual or ranked, so you can't get details about their match.",
     "es" : "ERROR: {0} isn't supported! {1} isn't playing casual or ranked, so you can't get details about their match.",
-    "pl" : "B£¥D: Tryb {0} nie jest obs³ugiwany! Gracz {1} nie jest w trakcie szybkiej gry lub gry rankingowej, wiêc nie mo¿esz sprawdziæ szczegó³ów dotycz¹cych tego meczu.",
+    "pl" : "BŁĄD: Tryb {0} nie jest obsługiwany! Gracz {1} nie jest w trakcie szybkiej gry lub gry rankingowej, więc nie możesz sprawdzić szczegółów dotyczących tego meczu.",
     "pt" : "ERRO: {0} não é suportado! {1} não está jogando casual ou ranked, você não pode ver detalhes sobre a partida.",
 }
 WINS_LOSSES_STRINGS = {
     "en" : " with {0} wins and {1} losses",
     "es" : " con {0} victorias y {1} derrotas",
-    "pl" : " z iloœci¹ wygranych: {0} i przegranych: {1} meczy",
+    "pl" : " z ilością wygranych: {0} i przegranych: {1} meczy",
     "pt" : " com {0} vitórias e {1} derrotas",
 }
 PLAYER_GET_RANK_STRINGS = {
     "en" : "{0} is {1}{2}{3}.{4}",
     "es" : "{0} es {1}{2}{3}.{4}",
-    "pl" : "{0} posiada rangê {1}{2},{3}.{4}",
+    "pl" : "{0} posiada rangę {1}{2},{3}.{4}",
     "pt" : "{0} é {1}{2}{3}.{4}",
 }
 QUEUE_IDS_STRINGS = {
@@ -112,19 +112,19 @@ QUEUE_IDS_STRINGS = {
         465: "Classic/Asedio"
     },
     "pl" : {
-        423: "Niestandardowy/Oblê¿enie", 430: "Niestandardowy/Oblê¿enie", 431: "Niestandardowy/Oblê¿enie", 432: "Niestandardowy/Oblê¿enie", 433: "Niestandardowy/Oblê¿enie", 438: "Niestandardowy/Oblê¿enie", 439: "Niestandardowy/Oblê¿enie", 440: "Niestandardowy/Oblê¿enie", 458: "Niestandardowy/Oblê¿enie", 459: "Niestandardowy/Oblê¿enie", 473: "Niestandardowy/Oblê¿enie", 485: "Niestandardowy/Oblê¿enie", 487: "Niestandardowy/Oblê¿enie",
+        423: "Niestandardowy/Oblężenie", 430: "Niestandardowy/Oblężenie", 431: "Niestandardowy/Oblężenie", 432: "Niestandardowy/Oblężenie", 433: "Niestandardowy/Oblężenie", 438: "Niestandardowy/Oblężenie", 439: "Niestandardowy/Oblężenie", 440: "Niestandardowy/Oblężenie", 458: "Niestandardowy/Oblężenie", 459: "Niestandardowy/Oblężenie", 473: "Niestandardowy/Oblężenie", 485: "Niestandardowy/Oblężenie", 487: "Niestandardowy/Oblężenie",
         454: "Niestandardowy/Szturm", 455: "Niestandardowy/Szturm", 462: "Niestandardowy/Szturm", 464: "Niestandardowy/Szturm", 483: "Niestandardowy/Szturm",
         468: "Niestandardowy/TDM", 471: "Niestandardowy/TDM", 472: "Niestandardowy/TDM", 479: "Niestandardowy/TDM", 480: "Niestandardowy/TDM", 484: "Niestandardowy/TDM",
-        424: "Szybka gra/Oblê¿enie", 428: "Rankingowy/GamePad", 486: "Rankingowy/Klawiatura", 445: "Szybka gra/Mapy Testowe", 452: "Szybka gra/Szturm", 469: "Szybka gra/TDM",
-        477: "Wydarzenie/Oblê¿enie Wzgórza Wniebowst¹pienia", 478: "Wydarzenie/Bunt Furii", 488: "Wydarzenie/Kres Czasów", 489: "Niestandardowy/Kres Czasów",
-        425: "Treningowy/Oblê¿enie", 453: "Treningowy/Szturm", 470: "Treningowy/TDM", 434: "Treningowy/Strzelnica", 427: "Treningowy/Samouczek",
-        465: "Klasyczny/Oblê¿enie"
+        424: "Szybka gra/Oblężenie", 428: "Rankingowy/GamePad", 486: "Rankingowy/Klawiatura", 445: "Szybka gra/Mapy Testowe", 452: "Szybka gra/Szturm", 469: "Szybka gra/TDM", 
+        477: "Wydarzenie/Oblężenie Wzgórza Wniebowstąpienia", 478: "Wydarzenie/Bunt Furii", 488: "Wydarzenie/Kres Czasów", 489: "Niestandardowy/Kres Czasów",
+        425: "Treningowy/Oblężenie", 453: "Treningowy/Szturm", 470: "Treningowy/TDM", 434: "Treningowy/Strzelnica", 427: "Treningowy/Samouczek",
+        465: "Klasyczny/Oblężenie"
     },
     "pt" : {
        423: "Custom/Cerco", 430: "Custom/Cerco", 431: "Custom/Cerco", 432: "Custom/Cerco", 433: "Custom/Cerco", 438: "Custom/Cerco", 439: "Custom/Cerco", 440: "Custom/Cerco", 458: "Custom/Cerco", 459: "Custom/Cerco", 473: "Custom/Cerco", 485: "Custom/Cerco", 487: "Custom/Cerco",
        454: "Custom/Chacina", 455: "Custom/Chacina", 462: "Custom/Chacina", 464: "Custom/Chacina", 483: "Custom/Chacina",
        468: "Custom/Mata mata", 471: "Custom/Mata mata", 472: "Custom/Mata mata", 479: "Custom/Mata mata", 480: "Custom/Mata mata", 484: "Custom/Mata mata",
-       424: "Casual/Cerco", 428: "Ranked/Controle", 486: "Ranked/Keyboard", 445: "Casual/Mapa de teste", 452: "Casual/Chacina", 469: "Casual/Cerco",
+       424: "Casual/Cerco", 428: "Ranked/Gamepad", 486: "Ranked/Keyboard", 445: "Casual/Mapa de teste", 452: "Casual/Chacina", 469: "Casual/Cerco",
        477: "Evento/Cerco ao Pico da Ascensão", 478: "Evento/O surgimento de Furia", 488: "Evento/Fim dos Tempos", 489: "Custom/Fim dos Tempos",
        425: "Treinamento/Cerco", 453: "Treinamento/Chacina", 470: "Treinamento/Mata mata", 434: "Treinamento/Galeria de tiro", 427: "Treinamento/Tutorial",
        465: "Classic/Siege"
@@ -155,6 +155,15 @@ PLAYER_RANK_STRINGS = {
         21: "Diamante 5", 22: "Diamante 4", 23: "Diamante 3", 24: "Diamante 2", 25: "Diamante 1",
         26: "Maestro", 27: "Gran maestro"
     },
+    "pl" : {
+        0: "Brak rangi",
+        1: "Brąz 5", 2: "Brąz 4", 3: "Brąz 3", 4: "Brąz 2", 5: "Brąz 1",
+        6: "Srebro 5", 7: "Srebro 4", 8: "Srebro 3", 9: "Srebro 2", 10: "Srebro 1",
+        11: "Złoto 5", 12: "Złoto 4", 13: "Złoto 3", 14: "Złoto 2", 15: "Złoto 1",
+        16: "Platyna 5", 17: "Platyna 4", 18: "Platyna 3", 19: "Platyna 2", 20: "Platyna 1",
+        21: "Diament 5", 22: "Diament 4", 23: "Diament 3", 24: "Diament 2", 25: "Diament 1",
+        26: "Mistrz", 27: "Arcymistrz"
+    },
     "pt" : {
         0: "Unranked",
         1: "Bronze 5", 2: "Bronze 4", 3: "Bronze 3", 4: "Bronze 2", 5: "Bronze 1",
@@ -164,15 +173,6 @@ PLAYER_RANK_STRINGS = {
         21: "Diamante 5", 22: "Diamante 4", 23: "Diamante 3", 24: "Diamante 2", 25: "Diamante 1",
         26: "Mestre", 27: "Grão-mestre"
     },
-    "pl" : {
-        0: "Brak rangi",
-        1: "Br¹z 5", 2: "Br¹z 4", 3: "Br¹z 3", 4: "Br¹z 2", 5: "Br¹z 1",
-        6: "Srebro 5", 7: "Srebro 4", 8: "Srebro 3", 9: "Srebro 2", 10: "Srebro 1",
-        11: "Z³oto 5", 12: "Z³oto 4", 13: "Z³oto 3", 14: "Z³oto 2", 15: "Z³oto 1",
-        16: "Platyna 5", 17: "Platyna 4", 18: "Platyna 3", 19: "Platyna 2", 20: "Platyna 1",
-        21: "Diament 5", 22: "Diament 4", 23: "Diament 3", 24: "Diament 2", 25: "Diament 1",
-        26: "Mistrz", 27: "Grão-Arcymistrz"
-    },
 }
 ON_LEADERBOARD_STRINGS = {
     "en" : ", {0} on the leaderboard",
@@ -181,9 +181,9 @@ ON_LEADERBOARD_STRINGS = {
     "pt" : ", {0}° no rank",
 }
 CHAMP_WINRATE_STRINGS = {
-    "en" : "{0}: {1} Wins, {2} Losses (Kills: {3} / Deaths: {4} / Assists: {5} - {6} KDA) - Winrate: {7}%",
+    "en" : "{0}: {1} Wins, {2} Losses (Kills: {3} / Deaths: {4} / Assists: {5} - {6} KDA) - Win rate: {7}%",
     "es" : "{0}: {1} victorias, {2} derrotas (Kills: {3} / Deaths: {4} / Assists: {5} - {6} KDA) - Win rate: {7}%",
-    "pl" : "{0}: Wygrane: {1}, Przegrane: {2} (Zabójstwa: {3} / Œmierci: {4} / Asysty: {5} - {6} KDA) - Winrate: {7}%",
+    "pl" : "{0}: Wygrane: {1}, Przegrane: {2} (Zabójstwa: {3} / Śmierci: {4} / Asysty: {5} - {6} KDA) - Win rate: {7}%",
     "pt" : "{0}: {1} vitórias, {2} derrotas (Kills: {3} / Deaths: {4} / Assists: {5} - {6} KDA) - Win rate: {7}%",
 }
 HOUR_FORMAT_STRINGS = {
@@ -201,7 +201,7 @@ GAME_VERSION_STRINGS = {
 LAST_MATCH_STRINGS = {
     "en" : "{0} - Match ID: {1}, Duration: {10}m, Region: {11}: {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7}, Damage: {8}, Credits: {9} - {12} (Score: {13})",
     "es" : "{0} - Match ID: {1}, Duration: {10}m, Region: {11}: {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7}, Damage: {8}, Credits: {9} - {12} (Score: {13})",
-    "pl" : "{0} - ID meczu: {1}, Czas trwania: {10}m, Region: {11}: {2} ({3}/{4}/{5} - {6} KDA) Sza³ zabijania: {7}, Obra¿enia: {8}, Kredyty: {9} - {12} (Wynik: {13})",
+    "pl" : "{0} - ID meczu: {1}, Czas trwania: {10}m, Region: {11}: {2} ({3}/{4}/{5} - {6} KDA) Seria zabójstw: {7}, Obrażenia: {8}, Kredyty: {9} - {12} (Wynik: {13})",
     "pt" : "{0} - Id da partida: {1}, Duração: {10}m, Região: {11}: {2} ({3}/{4}/{5} - {6} KDA) Sequência: {7}, Dano: {8}, Creditos: {9} - {12} (Score: {13})",
 }
 CURRENTLY_MATCH_STRINGS = {
@@ -219,30 +219,30 @@ PLAYER_STALK_STRINGS = {
 PALADINS_UP_STRINGS = {
     "en" : "UP{0}",
     "es" : "DISPONIBLE{0}",
-    "pl" : "DOSTÊPNE{0}",
+    "pl" : "DOSTĘPNE{0}",
     "pt" : "OPERANTE{0}",
 }
 PALADINS_DOWN_STRINGS = {
     "en" : "DOWN",
     "es" : "INDISPONIBLE",
-    "pl" : "NIEDOSTÊPNE",
+    "pl" : "NIEDOSTĘPNE",
     "pt" : "INOPERANTE",
 }
 PALADINS_LIMITED_ACCESS_STRINGS = {
     "en" : " but it's in maintenance (Limited Access)",
     "es" : " but it's in maintenance (Limited Access)",
-    "pl" : " ,ale z limitowanym dostêpem",
+    "pl" : " ,ale z limitowanym dostępem",
     "pt" : " mas está em manutenção (Acesso limitado)",
 }
 CHAMP_NOT_PLAYED_STRINGS = {
     "en" : "ERROR: {0} doesn't played with {1}! Maybe you misspelled the champName.",
     "es" : "ERROR: {0} doesn't played with {1}! Maybe you misspelled the champName.",
-    "pl" : "B£AD: {0} nie gra³ jeszcze t¹ postaci¹! Mo¿e wpisa³eœ z³¹ nazwê czempiona?",
+    "pl" : "BŁAD: {0} nie grał jeszcze tą postacią! Może wpisałeś złą nazwę czempiona?",
     "pt" : "ERRO: {0} não jogou com {1}! Talvez você tenha digitado um campeão incorreto.",
 }
 PLAYER_LOW_LEVEL_STRINGS = {
     "en" : "ERROR: Player must be at least level 5.",
     "es" : "ERROR: Player must be at least level 5.",
-    "pl" : "B£¥D: Gracz musi mieæ minimalnie 5 poziom konta.",
+    "pl" : "BŁĄD: Gracz musi mieć minimalnie 5 poziom konta.",
     "pt" : "ERRO: O jogador precisa ter pelo menos nível 5.",
 }
