@@ -273,8 +273,17 @@
       langAlert = "{% block alert_msg_lang %}{% endblock %}"
       addAlert(getTranslatedString(langAlert, "copyToClipboardSuccess"), "alert-success", true, true, "#result-warning", langAlert);
       console.log(e);
-      console.log(e.trigger.attributes[3])
-      console.log(e.trigger.attributes["data-clipboard-text"])
+      //console.log(e.trigger.attributes[3])
+      //console.log(e.trigger.attributes["data-clipboard-text"])
+
+      const copyText = document.getElementById(e.trigger.id).textContent;
+      const textArea = document.createElement("textarea");
+      textArea.textContent = copyText;
+      document.body.append(textArea);
+      console.log(textArea.textContent);
+      //textArea.select();
+      //document.execCommand("copy");
+      //e.trigger.attributes["data-clipboard-text"]
     });
     clipboard.on("error", function(e) {
       console.log(e);
