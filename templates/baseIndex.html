@@ -50,18 +50,18 @@
       <div class="notification-bar notification-bar--danger">
         <span class="notification-bar__icon">
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-          <span class="sr-only">Warning:</span>
+          <span class="sr-only">{% block warning_unsupported_msg_title %}{% endblock %}:</span>
         </span>
-        <span class="notification-bar__message">You are using an unsupported browser, upgrade to a newer version.</span>
+        <span class="notification-bar__message">{% block warning_unsupported_msg_bar %}{% endblock %}</span>
       </div>
     <![endif]-->
     <noscript>
       <div class="notification-bar notification-bar--danger">
         <span class="notification-bar__icon">
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-          <span class="sr-only">Warning:</span>
+          <span class="sr-only">{% block warning_nojs_msg_title %}{% endblock %}:</span>
         </span>
-        <span class="notification-bar__message">Some features may not work without JavaScript. Please try enabling it if you encounter problems.</span>
+        <span class="notification-bar__message">{% block warning_nojs_msg_bar %}{% endblock %}</span>
       </div>
     </noscript>
   </section>
@@ -269,8 +269,8 @@
   <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
   <script type="text/javascript">
     var clipboard = new ClipboardJS(".copy-to-clip-button");
-    langAlert = "{% block alert_msg_lang %}{% endblock %}"
     clipboard.on("success", function(e) {
+      langAlert = "{% block alert_msg_lang %}{% endblock %}"
       addAlert(getTranslatedString("copyToClipboardSuccess", langAlert), "alert-success", true, true, "#result-warning", langAlert);
       console.log(e);
       console.log(e.trigger.attributes)
