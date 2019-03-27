@@ -166,90 +166,92 @@
       </thead>
       <tbody>
         <tr>
-          <td>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon" id="addon-command-1"><strong>!</strong></span>
-                <input type="text" class="form-control" id="command_name" aria-describedby="addon-command-1" value="" placeholder="{% block commands_generator_cmdname_placeholder %}{% endblock %}" title="{% block commands_generator_cmdname_title %}{% endblock %}" pattern=".{1,}" required onchange="checkButtonPos()">
+          <div class="first-div">
+            <td>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon" id="addon-command-1"><strong>!</strong></span>
+                  <input type="text" class="form-control" id="command_name" aria-describedby="addon-command-1" value="" placeholder="{% block commands_generator_cmdname_placeholder %}{% endblock %}" title="{% block commands_generator_cmdname_title %}{% endblock %}" pattern=".{1,}" required onchange="checkButtonPos()">
+                </div>
               </div>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <select id="command_type" class="form-control full-width" onchange="commandTypeChanged()">
-                <option value="currentmatch">!{% block commands_generator_cmdtype_cmdcurrentmatch %}{% endblock %}</option>
-                <option value="decks">!{% block commands_generator_cmdtype_cmddecks %}{% endblock %}</option>
-                <option value="winrate">!{% block commands_generator_cmdtype_cmdwinrate %}{% endblock %}</option>
-                <option value="lastmatch">!{% block commands_generator_cmdtype_cmdlastmatch %}{% endblock %}</option>
-                <option value="rank">!{% block commands_generator_cmdtype_cmdrank %}{% endblock %}</option>
-                <option value="version">!{% block commands_generator_cmdtype_cmdserver %}{% endblock %}</option>
-                <option value="stalk">!{% block commands_generator_cmdtype_cmdstalk %}{% endblock %}</option>
-              </select>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <div class="input-group">
-                <input type="number" class="form-control" id="command_cooldown" value="25" min="5" max="100">
+            </td>
+            <td>
+              <div class="form-group">
+                <select id="command_type" class="form-control full-width" onchange="commandTypeChanged()">
+                  <option value="currentmatch">!{% block commands_generator_cmdtype_cmdcurrentmatch %}{% endblock %}</option>
+                  <option value="decks">!{% block commands_generator_cmdtype_cmddecks %}{% endblock %}</option>
+                  <option value="winrate">!{% block commands_generator_cmdtype_cmdwinrate %}{% endblock %}</option>
+                  <option value="lastmatch">!{% block commands_generator_cmdtype_cmdlastmatch %}{% endblock %}</option>
+                  <option value="rank">!{% block commands_generator_cmdtype_cmdrank %}{% endblock %}</option>
+                  <option value="version">!{% block commands_generator_cmdtype_cmdserver %}{% endblock %}</option>
+                  <option value="stalk">!{% block commands_generator_cmdtype_cmdstalk %}{% endblock %}</option>
+                </select>
               </div>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <input type="text" class="form-control" id="player_name" value="" placeholder="FeyRazzle" pattern=".{4,}" title="Player Name" required onchange="checkButtonPos()">
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <input type="text" class="form-control" id="champion_name" value="" disabled>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <select id="platform_form" class="form-control full-width" size="1">
-                <option value="PC">PC/Steam</option>
-                <option value="XBOX">Xbox One</option>
-                <option value="PS4">PS4</option>
-                <option value="SWITCH">Nintendo Switch</option>
-              </select>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <select id="language_form" class="form-control full-width">
-                {% block commands_generator_langs_order %}{% endblock %}
-              </select>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <select id="bot_name" class="form-control full-width">
-                <option value="1">Nightbot</option>
-                <option value="2">DeepBot</option>
-                <option value="3">AnkhBot</option>
-                <option value="4">StreamElements Bot</option>
-                <option value="5">StreamLab Chatbot</option>
-              </select>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <div class="input-group">
-                <input type="checkbox" id="user_can_use" checked>{% block commands_generator_usercanuse %}{% endblock %}<br>
+            </td>
+            <td>
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="number" class="form-control" id="command_cooldown" value="25" min="5" max="100">
+                </div>
               </div>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
-              <select id="user_access" class="form-control full-width">
-                <option value="1">{% block commands_generator_userlvl_everybody %}{% endblock %}</option>
-                <option value="2">{% block commands_generator_userlvl_regular %}{% endblock %}</option>
-                <option value="3">{% block commands_generator_userlvl_subscriber %}{% endblock %}</option>
-                <option value="4">{% block commands_generator_userlvl_mod %}{% endblock %}</option>
-                <option value="5">{% block commands_generator_userlvl_owner %}{% endblock %}</option>
-              </select>
-            </div>
-          </td>
+            </td>
+            <td>
+              <div class="form-group">
+                <input type="text" class="form-control" id="player_name" value="" placeholder="FeyRazzle" pattern=".{4,}" title="Player Name" required onchange="checkButtonPos()">
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <input type="text" class="form-control" id="champion_name" value="" disabled>
+              </div>
+            </td>
+          </div>
+          <div class="second-div">
+            <td>
+              <div class="form-group">
+                <select id="platform_form" class="form-control full-width" size="1">
+                  <option value="PC">PC/Steam</option>
+                  <option value="XBOX">Xbox One</option>
+                  <option value="PS4">PS4</option>
+                  <option value="SWITCH">Nintendo Switch</option>
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <select id="language_form" class="form-control full-width">{% block commands_generator_langs_order %}{% endblock %}</select>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <select id="bot_name" class="form-control full-width">
+                  <option value="1">Nightbot</option>
+                  <option value="2">DeepBot</option>
+                  <option value="3">AnkhBot</option>
+                  <option value="4">StreamElements Bot</option>
+                  <option value="5">StreamLab Chatbot</option>
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="checkbox" id="user_can_use" checked>{% block commands_generator_usercanuse %}{% endblock %}<br>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <select id="user_access" class="form-control full-width">
+                  <option value="1">{% block commands_generator_userlvl_everybody %}{% endblock %}</option>
+                  <option value="2">{% block commands_generator_userlvl_regular %}{% endblock %}</option>
+                  <option value="3">{% block commands_generator_userlvl_subscriber %}{% endblock %}</option>
+                  <option value="4">{% block commands_generator_userlvl_mod %}{% endblock %}</option>
+                  <option value="5">{% block commands_generator_userlvl_owner %}{% endblock %}</option>
+                </select>
+              </div>
+            </td>
+          </div>
           <td> <!--<button id="generate_command" class="btn btn-default" disabled="disabled">Generate</button>-->
             <button data-lang="{% block commands_generator_datalang %}{% endblock %}" onclick="generateCommand('{% block commands_generator_paramslang %}{% endblock %}')" id="generate_command" class="btn btn-default">{% block commands_generator_generatebtn %}{% endblock %}</button>
           </td>
