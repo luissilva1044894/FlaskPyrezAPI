@@ -22,7 +22,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
             userCanUse = getElementById("user_can_use");
     lang = defaultFor(lang, defaultFor(typeof $("#generate_command").attr("data-lang"), defaultFor(getElementById("generate_command").getAttribute("data-lang"), "en")))
     
-    var endpointLink = getEndpoint() + "api/" + String(commandType.value);
+    var endpointLink = "{{ url_for('index', _external=True).replace('index.html', '') }}" + "api/" + String(commandType.value);//getEndpoint()
     $("#result-warning").show();
     if (commandName.length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
         var permLvl = "", cmd = "", cmdChat = "";
