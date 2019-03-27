@@ -134,7 +134,7 @@ QUALIFYING_STRINGS = {
     "en" : "Placements",#Qualifying
     "es" : "Placements",#Qualifying
     "pl" : "Kwalifikacje",
-    "pt" : "MD10",#Qualificatória
+    "pt" : "MD5",#Qualificatória
 }
 PLAYER_RANK_STRINGS = {
         "en" : {
