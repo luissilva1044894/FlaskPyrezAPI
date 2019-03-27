@@ -1,4 +1,4 @@
-function getTranslatedString(language, msg) {
+function getTranslatedString(msg, language="en") {
     var engString = [];
     engString["chatMsg"] = "Copy paste the following command in your chat"
     engString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
@@ -82,13 +82,13 @@ function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; }
 function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
     div = defaultFor(div, "#result-warning"), alert_div = $(div), divMsg = "";
 
-    divMsg = "<div class=\"alert alert-dismissible alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString(lang, "close"));
-    divMsg += "<div id=\"chat-title\" class=\"command-title\"><h4>{CHAT_MSG} <small>{DONT_CHANGE}</small>: ".replace("{CHAT_MSG}", getTranslatedString(lang, "chatMsg")).replace("{DONT_CHANGE}", getTranslatedString(lang, "dontChange"));
+    divMsg = "<div class=\"alert alert-dismissible alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString("close", lang));
+    divMsg += "<div id=\"chat-title\" class=\"command-title\"><h4>{CHAT_MSG} <small>{DONT_CHANGE}</small>: ".replace("{CHAT_MSG}", getTranslatedString(lang, "chatMsg")).replace("{DONT_CHANGE}", getTranslatedString("dontChange", lang));
     divMsg += "<code id=\"code-chat-bot\">{CODE_CHAT}</code>".replace("{CODE_CHAT}", codeMsgChat);
-    divMsg += "<span> </span><button id=\"code-chat-copy-to-clip-button\" class=\"copy-to-clip-button\" title=\"{COPY_TO_CLIPBOARD}\" data-clipboard-text=\"{CODE_CHAT}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_CHAT}", codeMsgChat).replace("{COPY_TO_CLIPBOARD}", getTranslatedString(lang, "copyToClipboardMsg"));
-    divMsg += "<div id=\"backend-title\" class=\"command-title\"><h4>{BACKEND_MSG} ".replace("{BACKEND_MSG}", getTranslatedString(lang, "backendMsg").replace("{BOT_NAME}", botName));
-    divMsg += "<small>{DONT_CHANGE}</small>: <code id=\"code-backend-bot\">{CODE_BACKEND}</code>".replace("{DONT_CHANGE}", getTranslatedString(lang, "dontChange")).replace("{CODE_BACKEND}", codeMsgBackend);
-    divMsg += "<span> </span><button id=\"backend-copy-to-clip-button\" class=\"copy-to-clip-button\" title=\"{COPY_TO_CLIPBOARD}\" data-clipboard-text=\"{CODE_BACKEND}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_BACKEND}", codeMsgBackend).replace("{COPY_TO_CLIPBOARD}", getTranslatedString(lang, "copyToClipboardMsg"));
+    divMsg += "<span> </span><button id=\"code-chat-copy-to-clip-button\" class=\"copy-to-clip-button\" title=\"{COPY_TO_CLIPBOARD}\" data-clipboard-text=\"{CODE_CHAT}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_CHAT}", codeMsgChat).replace("{COPY_TO_CLIPBOARD}", getTranslatedString("copyToClipboardMsg", lang));
+    divMsg += "<div id=\"backend-title\" class=\"command-title\"><h4>{BACKEND_MSG} ".replace("{BACKEND_MSG}", getTranslatedString("backendMsg", lang).replace("{BOT_NAME}", botName));
+    divMsg += "<small>{DONT_CHANGE}</small>: <code id=\"code-backend-bot\">{CODE_BACKEND}</code>".replace("{DONT_CHANGE}", getTranslatedString("dontChange", lang)).replace("{CODE_BACKEND}", codeMsgBackend);
+    divMsg += "<span> </span><button id=\"backend-copy-to-clip-button\" class=\"copy-to-clip-button\" title=\"{COPY_TO_CLIPBOARD}\" data-clipboard-text=\"{CODE_BACKEND}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_BACKEND}", codeMsgBackend).replace("{COPY_TO_CLIPBOARD}", getTranslatedString("copyToClipboardMsg", lang));
     alert_div.append(divMsg);
 }
 
@@ -100,7 +100,7 @@ function addAlert(message, classes, clear, dismiss, div, lang="en"/*, timer = 1 
     classe = (classes == 'alert-locked' || classes == 'alert-unlocked') ? 'alert-info' : classes;
     alert = '<div class="alert alert-dismissible ' + classe + '" role="alert">';
     if(dismiss)
-        alert += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString(lang, "close"));
+        alert += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString("close", lang));
 
     switch(classes) {
         case 'alert-danger' : alert += '<span class="fa fa-exclamation-circle" aria-hidden="true"></span> '; break;
