@@ -269,12 +269,13 @@
   <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
   <script type="text/javascript">
     var clipboard = new ClipboardJS(".copy-to-clip-button");
+    langAlert = "{% block alert_msg_lang %}{% endblock %}"
     clipboard.on("success", function(e) {
-      addAlert("Success copy!", "alert-success", false, true, "#result-warning", "en");
+      addAlert(getTranslatedString("copyToClipboardSuccess", langAlert), "alert-success", true, true, "#result-warning", langAlert);
       console.log(e);
+      console.log(e.trigger.attributes)
     });
     clipboard.on("error", function(e) {
-      addAlert("Success copy!", "alert-danger", false, true, "#result-warning", "en");
       console.log(e);
     });
     //if (ClipboardJS.isSupported()) {

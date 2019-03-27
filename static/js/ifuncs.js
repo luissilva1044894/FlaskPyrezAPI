@@ -7,6 +7,8 @@ function getTranslatedString(language, msg) {
     engString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
     engString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
     engString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
+    engString["copyToClipboardSuccess"] = "Copied!"
+    engString["copyToClipboardMsg"] = "Copy to clipboard"
 
     var esString = [];
     esString["chatMsg"] = "Copy paste the following command in your chat"
@@ -16,6 +18,8 @@ function getTranslatedString(language, msg) {
     esString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
     esString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
     esString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
+    esString["copyToClipboardSuccess"] = "Código copiado!"
+    esString["copyToClipboardMsg"] = "Copy to clipboard"
 
     var ptString = [];
     ptString["chatMsg"] = "Copie e cole o código em seu chat"
@@ -25,11 +29,25 @@ function getTranslatedString(language, msg) {
     ptString["cmdCreated"] = "Comando !{CMD_NAME} <strong>criado</strong> com sucesso!"
     ptString["invalidCmdName"] = "<strong>Nome do comando inválido</strong>!"
     ptString["invalidPlayerName"] = "<strong>Nome do comando inválido</strong>!"
+    ptString["copyToClipboardSuccess"] = "Copied!"
+    ptString["copyToClipboardMsg"] = "Copiar comando"
+
+    var plString = [];
+    plString["chatMsg"] = "Copy paste the following command in your chat"
+    plString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
+    plString["backendMsg"] = "Or put the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
+    plString["close"] = "Close"
+    plString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
+    plString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
+    plString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
+    plString["copyToClipboardSuccess"] = "Copied!"
+    plString["copyToClipboardMsg"] = "Copy to clipboard"
 
     var languages = [];
     
     languages["en"] = engString;
     languages["es"] = esString;
+    languages["pl"] = plString;
     languages["pt"] = ptString;
 
     return languages[language][msg]
@@ -67,10 +85,10 @@ function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
     divMsg = "<div class=\"alert alert-dismissible alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString(lang, "close"));
     divMsg += "<div id=\"chat-title\" class=\"command-title\"><h4>{CHAT_MSG} <small>{DONT_CHANGE}</small>: ".replace("{CHAT_MSG}", getTranslatedString(lang, "chatMsg")).replace("{DONT_CHANGE}", getTranslatedString(lang, "dontChange"));
     divMsg += "<code id=\"code-chat-bot\">{CODE_CHAT}</code>".replace("{CODE_CHAT}", codeMsgChat);
-    divMsg += "<span> </span><button class=\"copy-to-clip-button\" title=\"Copy to clipboard\" data-clipboard-text=\"{CODE_CHAT}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_CHAT}", codeMsgChat);
+    divMsg += "<span> </span><button id=\"code-chat-copy-to-clip-button\" class=\"copy-to-clip-button\" title=\"{COPY_TO_CLIPBOARD}\" data-clipboard-text=\"{CODE_CHAT}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_CHAT}", codeMsgChat).replace("{COPY_TO_CLIPBOARD}", getTranslatedString(lang, "COPY_TO_CLIPBOARD"));
     divMsg += "<div id=\"backend-title\" class=\"command-title\"><h4>{BACKEND_MSG} ".replace("{BACKEND_MSG}", getTranslatedString(lang, "backendMsg").replace("{BOT_NAME}", botName));
     divMsg += "<small>{DONT_CHANGE}</small>: <code id=\"code-backend-bot\">{CODE_BACKEND}</code>".replace("{DONT_CHANGE}", getTranslatedString(lang, "dontChange")).replace("{CODE_BACKEND}", codeMsgBackend);
-    divMsg += "<span> </span><button class=\"copy-to-clip-button\" title=\"Copy to clipboard\" data-clipboard-text=\"{CODE_BACKEND}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_BACKEND}", codeMsgBackend);
+    divMsg += "<span> </span><button id=\"backend-copy-to-clip-button\" class=\"copy-to-clip-button\" title=\"{COPY_TO_CLIPBOARD}\" data-clipboard-text=\"{CODE_BACKEND}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_BACKEND}", codeMsgBackend).replace("{COPY_TO_CLIPBOARD}", getTranslatedString(lang, "COPY_TO_CLIPBOARD"));
     alert_div.append(divMsg);
 }
 
