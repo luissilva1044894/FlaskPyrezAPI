@@ -69,7 +69,8 @@ function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
     divMsg += "<code id=\"code-chat-bot\">{CODE_CHAT}</code>".replace("{CODE_CHAT}", codeMsgChat);
     divMsg += "<button id=\"copy-to-clip-button\" data-clipboard-text=\"{CODE_CHAT}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_CHAT}", codeMsgChat);
     divMsg += "<div id=\"backend-title\" class=\"command-title\"><h4>{BACKEND_MSG} ".replace("{BACKEND_MSG}", getTranslatedString(lang, "backendMsg").replace("{BOT_NAME}", botName));
-    divMsg += "<small>{DONT_CHANGE}</small>: <code id=\"code-backend-bot\">{CODE_BACKEND}</code></h4></div>".replace("{DONT_CHANGE}", getTranslatedString(lang, "dontChange")).replace("{CODE_BACKEND}", codeMsgBackend);
+    divMsg += "<small>{DONT_CHANGE}</small>: <code id=\"code-backend-bot\">{CODE_BACKEND}</code>".replace("{DONT_CHANGE}", getTranslatedString(lang, "dontChange")).replace("{CODE_BACKEND}", codeMsgBackend);
+    divMsg += "<button id=\"copy-to-clip-button\" data-clipboard-text=\"{CODE_BACKEND}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_BACKEND}", codeMsgBackend);
     alert_div.append(divMsg);
 }
 
