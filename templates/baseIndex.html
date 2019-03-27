@@ -269,7 +269,7 @@
   <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
   <script type="text/javascript">
     function getEndpoint() { return "{{ url_for('index', _external=True) }}".replace("index.html", "") }
-    function myFunction() {
+    function copyToClipboard() {
       var copyText = document.getElementById("code-chat-bot");
       copyText.select();
       document.execCommand("copy");
