@@ -99,16 +99,16 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 cmd += userCanUse.checked ? cmdUsers : customAPICode;
             break;
         }
-        addAlert("{CMD_CREATED}".replace("{CMD_CREATED}", getTranslatedString(lang, "cmdCreated").replace("{CMD_NAME}", commandName)), "alert-success", true, true, "#result-warning", lang);//, 1 * 60);
+        addAlert("{CMD_CREATED}".replace("{CMD_CREATED}", getTranslatedString("cmdCreated", lang).replace("{CMD_NAME}", commandName)), "alert-success", true, true, "#result-warning", lang);//, 1 * 60);
         cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{PLAYER_NAME}", encodeURI(playerName.value)).replace("{PLATFORM}", platform.value).replace("{LANGUAGE}", language.value).replace("{BOT_NAME}", botName[botName.value - 1].text.replace(" ", "")).replace("{championName}", championName)
         cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{LANGUAGE}", language.value).replace("{BOT_NAME}", botName[botName.value - 1].text.replace(" ", ""))
         addCommandOutput(cmdChat + cmd, cmd, botName[botName.value - 1].text, lang)
     } else {
         if(commandName.length <= 0) {
-            addAlert("{INVALID_CMD_NAME}".replace("{INVALID_CMD_NAME}", getTranslatedString(lang, "invalidCmdName")), "alert-danger", true, true, "#result-warning", lang);
+            addAlert("{INVALID_CMD_NAME}".replace("{INVALID_CMD_NAME}", getTranslatedString("invalidCmdName", lang)), "alert-danger", true, true, "#result-warning", lang);
             $("#command_name").focus();
         } else {
-            addAlert("{INVALID_PLAYER_NAME}".replace("{INVALID_PLAYER_NAME}", getTranslatedString(lang, "invalidPlayerName")), "alert-danger", true, true, "#result-warning", lang);
+            addAlert("{INVALID_PLAYER_NAME}".replace("{INVALID_PLAYER_NAME}", getTranslatedString("invalidPlayerName", lang)), "alert-danger", true, true, "#result-warning", lang);
             //$("#result").html('');
             $("#player_name").focus();
         }
