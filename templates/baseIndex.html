@@ -277,7 +277,7 @@
       //console.log(e.trigger.attributes["data-clipboard-text"])
       console.log(e.trigger.id)
       console.log(typeof(e.trigger.id))
-      const copyText = document.getElementById(String(e.trigger.id)).textContent;
+      const copyText = getElementById(String(e.trigger.id)).outerHTML;
       const textArea = document.createElement("textarea");
       textArea.textContent = copyText;
       document.body.append(textArea);
