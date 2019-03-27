@@ -268,13 +268,14 @@
   <script src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
   <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
   <script type="text/javascript">
-    if (ClipboardJS.isSupported()) {
-      new ClipboardJS(".copy-to-clip-button", {
-        text: function(trigger) {
-          return trigger.getAttribute('aria-label');
-        }
-      });
-    }
+    var clipboard = new ClipboardJS(".copy-to-clip-button");
+    clipboard.on("success", function(e) {
+      console.log(e);
+    });
+    clipboard.on("error", function(e) {
+      console.log(e);
+    });
+    //if (ClipboardJS.isSupported()) {
     function getEndpoint() { return "{{ url_for('index', _external=True) }}".replace("index.html", "") }
   </script>
 
