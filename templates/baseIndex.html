@@ -8,6 +8,9 @@
   <meta name="author" content="Nonsocial">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="description" content="{% block metacontent %}{% endblock %}">
+  <meta name="defaultLanguage" content="en">
+  <meta name="availableLanguages" content="en, pt, pt-br, es, pl">
+
 
   <link rel="shortcut icon" sizes="1024x1024" href="https://web2.hirez.com/paladins/wp-content/uploads/2016/06/cropped-2016-06-03-192x192.png">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/iStyle.css') }}">
@@ -40,6 +43,28 @@
       </ul>
     </nav>
   </header>
+
+  <section id="sticky-notifications" class="stick-to-top js-stick-to-top">
+    <!-- Add browser warning. Will show for ie9 and below -->
+    <!--[if IE]>
+      <div class="notification-bar notification-bar--danger">
+        <span class="notification-bar__icon">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+          <span class="sr-only">Warning:</span>
+        </span>
+        <span class="notification-bar__message">You are using an unsupported browser, upgrade to a newer version.</span>
+      </div>
+    <![endif]-->
+    <noscript>
+      <div class="notification-bar notification-bar--danger">
+        <span class="notification-bar__icon">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+          <span class="sr-only">Warning:</span>
+        </span>
+        <span class="notification-bar__message">Some features may not work without JavaScript. Please try enabling it if you encounter problems.</span>
+      </div>
+    </noscript>
+  </section>
 
   <br/><br/><br/>
   <h2><strong>{% block commands_table_titles_title %}{% endblock %}</strong><br /></h2>
@@ -243,6 +268,12 @@
   <script src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
   <script type="text/javascript">
     function getEndpoint() { return "{{ url_for('index', _external=True) }}".replace("index.html", "") }
+    function myFunction() {
+      var copyText = document.getElementById("myInput");
+      copyText.select();
+      document.execCommand("copy");
+      alert("Copied the text: " + copyText.value);
+    }
   </script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
