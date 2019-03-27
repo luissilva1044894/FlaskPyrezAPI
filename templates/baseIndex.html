@@ -270,9 +270,11 @@
   <script type="text/javascript">
     var clipboard = new ClipboardJS(".copy-to-clip-button");
     clipboard.on("success", function(e) {
+      addAlert("Success copy!", "alert-success", true, true, "#result-warning", "en");
       console.log(e);
     });
     clipboard.on("error", function(e) {
+      addAlert("Success copy!", "alert-danger", true, true, "#result-warning", "en");
       console.log(e);
     });
     //if (ClipboardJS.isSupported()) {
