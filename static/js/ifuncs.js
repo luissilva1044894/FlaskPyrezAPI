@@ -67,10 +67,10 @@ function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
     divMsg = "<div class=\"alert alert-dismissible alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString(lang, "close"));
     divMsg += "<div id=\"chat-title\" class=\"command-title\"><h4>{CHAT_MSG} <small>{DONT_CHANGE}</small>: ".replace("{CHAT_MSG}", getTranslatedString(lang, "chatMsg")).replace("{DONT_CHANGE}", getTranslatedString(lang, "dontChange"));
     divMsg += "<code id=\"code-chat-bot\">{CODE_CHAT}</code>".replace("{CODE_CHAT}", codeMsgChat);
-    divMsg += "<button id=\"copy-to-clip-button\" title=\"Copy to clipboard\" data-clipboard-text=\"{CODE_CHAT}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_CHAT}", codeMsgChat);
+    divMsg += "<span> </span><button class=\"copy-to-clip-button\" title=\"Copy to clipboard\" data-clipboard-text=\"{CODE_CHAT}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_CHAT}", codeMsgChat);
     divMsg += "<div id=\"backend-title\" class=\"command-title\"><h4>{BACKEND_MSG} ".replace("{BACKEND_MSG}", getTranslatedString(lang, "backendMsg").replace("{BOT_NAME}", botName));
     divMsg += "<small>{DONT_CHANGE}</small>: <code id=\"code-backend-bot\">{CODE_BACKEND}</code>".replace("{DONT_CHANGE}", getTranslatedString(lang, "dontChange")).replace("{CODE_BACKEND}", codeMsgBackend);
-    divMsg += "<button id=\"copy-to-clip-button\" title=\"Copy to clipboard\" data-clipboard-text=\"{CODE_BACKEND}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_BACKEND}", codeMsgBackend);
+    divMsg += "<span> </span><button class=\"copy-to-clip-button\" title=\"Copy to clipboard\" data-clipboard-text=\"{CODE_BACKEND}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></h4></div>".replace("{CODE_BACKEND}", codeMsgBackend);
     alert_div.append(divMsg);
 }
 
