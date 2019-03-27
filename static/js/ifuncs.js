@@ -18,7 +18,7 @@ function getTranslatedString(language, msg) {
     esString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
     esString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
     esString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
-    esString["copyToClipboardSuccess"] = "Código copiado!"
+    esString["copyToClipboardSuccess"] = "Copied!"
     esString["copyToClipboardMsg"] = "Copy to clipboard"
 
     var ptString = [];
@@ -29,7 +29,7 @@ function getTranslatedString(language, msg) {
     ptString["cmdCreated"] = "Comando !{CMD_NAME} <strong>criado</strong> com sucesso!"
     ptString["invalidCmdName"] = "<strong>Nome do comando inválido</strong>!"
     ptString["invalidPlayerName"] = "<strong>Nome do comando inválido</strong>!"
-    ptString["copyToClipboardSuccess"] = "Copied!"
+    ptString["copyToClipboardSuccess"] = "Código copiado!"
     ptString["copyToClipboardMsg"] = "Copiar comando"
 
     var plString = [];
