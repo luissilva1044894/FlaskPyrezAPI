@@ -271,7 +271,7 @@
     var clipboard = new ClipboardJS(".copy-to-clip-button");
     clipboard.on("success", function(e) {
       langAlert = "{% block alert_msg_lang %}{% endblock %}"
-      addAlert(getTranslatedString("copyToClipboardSuccess", langAlert), "alert-success", true, true, "#result-warning", langAlert);
+      addAlert(getTranslatedString(langAlert, "copyToClipboardSuccess"), "alert-success", true, true, "#result-warning", langAlert);
       console.log(e);
       console.log(e.trigger.attributes)
     });
@@ -279,7 +279,7 @@
       console.log(e);
     });
     //if (ClipboardJS.isSupported()) {
-    function getEndpoint() { return "{{ url_for('index', _external=True).replace('index.html', '') }}" }
+    function getEndpoint() { return "{{ url_for('index', _external=True).replace('index.html', '') + 'api/' }}" }
   </script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
