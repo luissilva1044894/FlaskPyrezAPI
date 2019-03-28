@@ -276,7 +276,7 @@
         //$(".navbar-fixed-top .nav a").on('click', function() {
           //window.location.href = $(this).attr('href');
         //});
-        if (ClipboardJS.isSupported()) {
+        if(ClipboardJS.isSupported()) {
           var clipboard = new ClipboardJS(".copy-to-clip-button");
           clipboard.on("success", function(e) {
             langAlert = "{% block alert_msg_lang %}{% endblock %}"
