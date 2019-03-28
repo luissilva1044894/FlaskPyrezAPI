@@ -100,18 +100,18 @@ function addAlert(message, classes, clear, dismiss, div, lang="en"/*, timer = 1 
 
     if(clear) clearField(div);
 
-    classe = (classes == 'alert-locked' || classes == 'alert-unlocked') ? 'alert-info' : classes;
-    alert = '<div class="alert alert-dismissible ' + classe + '" role="alert">';
+    classe = (classes == "alert-locked" || classes == "alert-unlocked") ? "alert-info" : classes;
+    alert = "<div class=\"alert alert-dismissible " + classe + "\" role=\"alert\">";
     if(dismiss)
         alert += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString(lang, "close"));
 
     switch(classes) {
-        case 'alert-danger' : alert += '<span class="fa fa-exclamation-circle" aria-hidden="true"></span> '; break;
-        case 'alert-success' : alert += '<span class="fa fa-check" aria-hidden="true"></span> '; break;
-        case 'alert-warning' : alert += '<span class="fa fa-flag" aria-hidden="true"></span> '; break;
-        case 'alert-info' : alert += '<span class="fa fa-cog" aria-hidden="true"></span> '; break;
-        case 'alert-locked' : alert += '<span class="fa fa-lock" aria-hidden="true"></span> '; break;
-        case 'alert-unlocked' : alert += '<span class="fa fa-unlock" aria-hidden="true"></span> '; break;
+        case "alert-danger" : alert += "<span class=\"fa fa-exclamation-circle\" aria-hidden=\"true\"></span> "; break;
+        case "alert-success" : alert += "<span class=\"fa fa-check\" aria-hidden=\"true\"></span> "; break;
+        case "alert-warning" : alert += "<span class=\"fa fa-flag\" aria-hidden=\"true\"></span> "; break;
+        case "alert-info" : alert += "<span class=\"fa fa-cog\" aria-hidden=\"true\"></span> "; break;
+        case "alert-locked" : alert += "<span class=\"fa fa-lock\" aria-hidden=\"true\"></span> "; break;
+        case "alert-unlocked" : alert += "<span class=\"fa fa-unlock\" aria-hidden=\"true\"></span> "; break;
     }
     alert += message + '</div>';
     //if(timer != 0) var timeout = setInterval(function() { if(timer == 0) { clearInterval(timeout); alert_div.hide(); } else { console.log(--timer); } }, 1000);
