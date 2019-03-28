@@ -92,6 +92,40 @@ PLAYER_GET_RANK_STRINGS = {
     "pl" : "{0} posiada rangę {1}{2},{3}.{4}",
     "pt" : "{0} é {1}{2}{3}.{4}",
 }
+PLAYER_REGION_STRINGS = {
+    "en" : {
+        "LATIN_AMERICA_NORTH": "Latin America North",
+        "BRAZIL": "Brazil",
+        "EUROPE": "Europe",
+        "NORTH_AMERICA": "North America",
+        "SOUTHEAST_ASIA": "Southeast Asia",
+        "AUSTRALIA": "Australia"
+    }
+    "es" : {
+        "LATIN_AMERICA_NORTH": "Latin America North",
+        "BRAZIL": "Brazil",
+        "EUROPE": "Europe",
+        "NORTH_AMERICA": "North America",
+        "SOUTHEAST_ASIA": "Southeast Asia",
+        "AUSTRALIA": "Australia"
+    }
+    "pl" : {
+        "LATIN_AMERICA_NORTH": "Latin America North",
+        "BRAZIL": "Brazil",
+        "EUROPE": "Europe",
+        "NORTH_AMERICA": "North America",
+        "SOUTHEAST_ASIA": "Southeast Asia",
+        "AUSTRALIA": "Australia"
+    }
+    "pt" : {
+        "LATIN_AMERICA_NORTH": "América Latina",
+        "BRAZIL": "Brasil",
+        "EUROPE": "Europa",
+        "NORTH_AMERICA": "América do Norte",
+        "SOUTHEAST_ASIA": "Sudeste Asiático",
+        "AUSTRALIA": "Austrália"
+    }
+}
 QUEUE_IDS_STRINGS = {
     "en" : {
         423: "Custom/Siege", 430: "Custom/Siege", 431: "Custom/Siege", 432: "Custom/Siege", 433: "Custom/Siege", 438: "Custom/Siege", 439: "Custom/Siege", 440: "Custom/Siege", 458: "Custom/Siege", 459: "Custom/Siege", 473: "Custom/Siege", 485: "Custom/Siege", 487: "Custom/Siege",

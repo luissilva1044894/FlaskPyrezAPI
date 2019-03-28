@@ -134,7 +134,7 @@ def getStalk():
         return INTERNAL_ERROR_500_STRINGS[language]
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                         playerStalkRequest.statusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.status != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStalkRequest.matchQueueId], playerStalkRequest.matchId),
-                        getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getLastSeen(getPlayerRequest.lastLoginDatetime, language), formatDecimal(getPlayerRequest.hoursPlayed), getPlayerRequest.platform, getPlayerRequest.playerRegion)
+                        getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getLastSeen(getPlayerRequest.lastLoginDatetime, language), formatDecimal(getPlayerRequest.hoursPlayed), getPlayerRequest.platform, PLAYER_REGION_STRINGS[language][str(getPlayerRequest.playerRegion).replace(' ', "_").upper()])
 
 @app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
