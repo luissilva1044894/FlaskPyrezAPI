@@ -257,8 +257,7 @@ def getWinrate():
         return INTERNAL_ERROR_500_STRINGS[language]
     if championName:
         if not checkChampName(championName):
-            print("bk" or "bomb" in championName)
-            championName = "bombking" if "bk" or "bomb" in championName else "maldamba" if "mal" in championName else championName
+            championName = "bombking" if "bk" in championName or "bomb" in championName else "maldamba" if "mal" in championName else championName
         for champ in playerGlobalKDA:
             if champ.godName.lower().replace(" ", "").replace("'", "") == championName:
                 return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(champ.godName.replace("'", " "), champ.godLevel), champ.wins, champ.losses,
