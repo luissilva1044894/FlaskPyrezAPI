@@ -152,7 +152,7 @@
       </div>
 
       <div id="result-warning"></div>
-      <table class="table padding-top" id="commands-generator-table1">
+      <table class="table padding-top" id="commands-generator">
         <thead>
           <tr>
             <th>{% block commands_generator_cmdname %}{% endblock %}</th>
@@ -160,6 +160,11 @@
             <th>{% block commands_generator_cmdcd %}{% endblock %}</th>
             <th>{% block commands_generator_paladinsign %}{% endblock %}</th>
             <th>{% block commands_generator_paladinsplat %}{% endblock %}</th>
+            <th>{% block commands_generator_cmdlang %}{% endblock %}</th>
+            <th>Bot</th>
+            <th></th>
+            <th>{% block commands_generator_chatbotuseraccess %}{% endblock %}</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -207,19 +212,6 @@
                 </select>
               </div>
             </td>
-        </tbody>
-      </table>
-      <table class="table padding-top" id="commands-generator-table2">
-        <thead>
-          <thead>
-          <tr>
-            <th>{% block commands_generator_cmdlang %}{% endblock %}</th>
-            <th>Bot</th>
-            <th></th>
-            <th>{% block commands_generator_chatbotuseraccess %}{% endblock %}</th>
-          </tr>
-        </thead>
-        <tbody>
             <td>
               <div class="form-group">
                 <select id="language_form" class="form-control full-width">
@@ -256,17 +248,6 @@
                 </select>
               </div>
             </td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="table padding-top" id="commands-generator-table3">
-        <thead>
-          <thead>
-          <tr>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
             <td> <!--<button id="generate_command" class="btn btn-default" disabled="disabled">Generate</button>-->
               <button class="btn btn-default" id="generate_command" data-lang="{% block commands_generator_datalang %}{% endblock %}" onclick="generateCommand('{% block commands_generator_paramslang %}{% endblock %}')">{% block commands_generator_generatebtn %}{% endblock %}</button>
             </td>
