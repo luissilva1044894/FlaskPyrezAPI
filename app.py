@@ -232,8 +232,8 @@ def checkChampName(championName):
     "seris", "shalin", "skye", "strix", "talus", "terminus", "torvald", "tyra", "viktor", "vivian", "willo", "ying", "zhin" ];
     for champ in champs:
         if champ == championName.lower().replace(" ", "").replace("'", ""):
-            return true;
-    return false;
+            return True;
+    return False;
 @app.route("/api/kda", methods=["GET"])
 @app.route("/api/winrate", methods=["GET"])
 def getWinrate():
