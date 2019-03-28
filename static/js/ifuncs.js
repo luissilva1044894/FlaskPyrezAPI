@@ -64,12 +64,15 @@ function commandTypeChanged() {
 function checkButtonPos() {
     getElementById("generate_command").disabled = !(getElementById("command_name").value && getElementById("player_name").value)
 }
+function keyCodeTrigger(keyCode) {
+    if(keyCode == 13) { $("#generate_command").trigger("click"); }
+}
 function onPageLoaded() {
     getElementById("champion_name").disabled = true;
     $("#result").html('');
 
-    $("#player_name").on('keypress', function(e) {
-        if(e.keyCode == 13) { $("#generate_command").trigger('click'); }
+    $("#player_name").on("keypress", function(e) {
+        keyCodeTrigger(e.keyCode);
     });
 }
 function clearField(divName) {
