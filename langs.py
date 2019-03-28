@@ -100,7 +100,7 @@ PLAYER_REGION_STRINGS = {
         "NORTH_AMERICA": "North America",
         "SOUTHEAST_ASIA": "Southeast Asia",
         "AUSTRALIA": "Australia"
-    }
+    },
     "es" : {
         "LATIN_AMERICA_NORTH": "Latin America North",
         "BRAZIL": "Brazil",
@@ -108,7 +108,7 @@ PLAYER_REGION_STRINGS = {
         "NORTH_AMERICA": "North America",
         "SOUTHEAST_ASIA": "Southeast Asia",
         "AUSTRALIA": "Australia"
-    }
+    },
     "pl" : {
         "LATIN_AMERICA_NORTH": "Latin America North",
         "BRAZIL": "Brazil",
@@ -116,7 +116,7 @@ PLAYER_REGION_STRINGS = {
         "NORTH_AMERICA": "North America",
         "SOUTHEAST_ASIA": "Southeast Asia",
         "AUSTRALIA": "Australia"
-    }
+    },
     "pt" : {
         "LATIN_AMERICA_NORTH": "América Latina",
         "BRAZIL": "Brasil",
@@ -124,7 +124,7 @@ PLAYER_REGION_STRINGS = {
         "NORTH_AMERICA": "América do Norte",
         "SOUTHEAST_ASIA": "Sudeste Asiático",
         "AUSTRALIA": "Austrália"
-    }
+    },
 }
 QUEUE_IDS_STRINGS = {
     "en" : {
