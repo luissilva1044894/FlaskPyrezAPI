@@ -267,6 +267,12 @@
     <script src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
     <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
     <script type="text/javascript">
+      $(document).ready(function() {
+        window.location.href = "Testing";
+        //$(".navbar-fixed-top .nav a").on('click', function() {
+          //window.location.href = $(this).attr('href');
+        //});
+      });
       if (ClipboardJS.isSupported()) {
         var clipboard = new ClipboardJS(".copy-to-clip-button");
         clipboard.on("success", function(e) {
