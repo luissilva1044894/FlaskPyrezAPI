@@ -63,8 +63,15 @@
 
     <div class="container">
       <br/><br/><br/>
+      <!--
+      <div class="col-xs-12 col-sm-12 col-md-12 mt-2 text-center" id="center2">
+        <h2><strong>Wrappers available</strong><br/></h2>
+      </div>
+      <br/>
+      -->
+      <br/><br/><br/>
       
-      <a href="#commands-table-id" class="btn btn-primary" data-toggle="collapse"><strong>{% block commands_table_titles_title %}{% endblock %}</strong></a><br/>
+      <a href="#commands-table-id" class="btn btn-default" data-toggle="collapse"><strong>{% block commands_table_titles_title %}{% endblock %}</strong></a><br/>
       <div id="commands-table-id" class="collapse">
         <table class="tg">
           <thead class="thead-light">
@@ -250,7 +257,7 @@
               </div>
             </td>
             <td> <!--<button id="generate_command" class="btn btn-default" disabled="disabled">Generate</button>-->
-              <button data-lang="{% block commands_generator_datalang %}{% endblock %}" onclick="generateCommand('{% block commands_generator_paramslang %}{% endblock %}')" id="generate_command" class="btn btn-default">{% block commands_generator_generatebtn %}{% endblock %}</button>
+              <button class="btn btn-default" id="generate_command" data-lang="{% block commands_generator_datalang %}{% endblock %}" onclick="generateCommand('{% block commands_generator_paramslang %}{% endblock %}')">{% block commands_generator_generatebtn %}{% endblock %}</button>
             </td>
           </tr>
         </tbody>
