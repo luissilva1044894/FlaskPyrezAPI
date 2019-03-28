@@ -256,13 +256,13 @@
       </table>
     </main>
 
-    <footer>
-      <div class="form-group">
-        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 text-center" id="center2">
-          <p>{% block footer_hi_rez_copyright %}{% endblock %}</p>
-        </div>
+    <nav class="navbar navbar-bottom navbar-footer bg-inverse">
+      <a class="navbar-brand" href="#"><strong>{% block navbard_title %}{% endblock %}</strong></a>
+      <div class="col-xs-12 col-sm-12 col-md-12 mt-2 text-center" id="center2">
+        <p>{% block footer_hi_rez_copyright %}{% endblock %}</p>
+        <p>Created by <a href="https://twitch.tv/nonsocial_">@Nonsocial</a></p>
       </div>
-    </footer> 
+    </nav>
 
     <script src="{{ url_for('static', filename='js/ifuncs.js') }}"></script>
     <script src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
