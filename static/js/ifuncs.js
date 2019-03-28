@@ -57,7 +57,6 @@ function getElementById(elementName) { return document.getElementById(elementNam
 
 function commandTypeChanged() {
     var commandType = getElementById("command_type");
-    getElementById("champion_name").disabled = !(commandType.value.toLowerCase() === commandType["1"].value.toLowerCase() || commandType.value.toLowerCase() === commandType["2"].value.toLowerCase());
     getElementById("command_cooldown").value = commandType.value.toLowerCase() === commandType["0"].value.toLowerCase() ? 25 : 5;
 }
 
@@ -68,7 +67,6 @@ function keyCodeTrigger(keyCode) {
     if(keyCode == 13) { $("#generate_command").trigger("click"); }
 }
 function onPageLoaded() {
-    getElementById("champion_name").disabled = true;
     $("#result").html('');
 
     $("#player_name").on("keypress", function(e) {

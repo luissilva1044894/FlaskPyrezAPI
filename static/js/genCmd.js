@@ -1,20 +1,10 @@
-function checkChampName(championName) {
-    var champs = [ "androxus", "ash", "barik", "bombking", "buck", "cassie", "dredge", "drogoz", "evie", "fernando", "furia", "grohk", "grover",
-    "imani", "inara", "jenos", "khan", "kinessa", "koga", "lex", "lian", "maeve", "makoa", "maldamba", "moji", "pip", "ruckus",
-    "seris", "shalin", "skye", "strix", "talus", "terminus", "torvald", "tyra", "viktor", "vivian", "willo", "ying", "zhin" ];
-    for (i = 0; i < champs.length; i++) {
-        if (String(champs[i]).toLowerCase() === String(championName).toLowerCase())
-            return true;
-    }
-    return false;
-}
+
 
 function generateCommand(lang) { // !command add duo Estou duo com X e o elo dele é: (_ELO2_)
     var commandName = String(getElementById("command_name").value).trim().replace(' ', '').replace('!', ''),
             commandType = getElementById("command_type"),
             cooldown = getElementById("command_cooldown").value > 0 && getElementById("command_cooldown").value >= 5 && getElementById("command_cooldown").value <= 300 ? defaultFor(getElementById("command_cooldown").value, 25) : String(commandType.value).toLowerCase() === "currentmatch" ? 25 : 5;
             playerName = getElementById("player_name"), // Usar o PaladinsGuru para ver se o player existe: https://github.com/Protovision/paladins_scouter/blob/master/paladins_scouter.c
-            championName = checkChampName(defaultFor(getElementById("champion_name").value, "")) ? getElementById("champion_name").value : "",
             platform = getElementById("platform_form"),
             language = getElementById("language_form"), // int
             botName = getElementById("bot_name"), // int
@@ -82,7 +72,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 cmdUsers = "$(eval `$(querystring)`.trim()==``?`{IF}`:`{ELSE}`; )"
                 if(String(commandType.value).toLowerCase() === commandType["1"].value.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].value.toLowerCase()) {
                     if(userCanUse.checked) {
-                        cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&champion={championName}&language={LANGUAGE}"));
+                        cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}"));
                         cmdUsers = cmdUsers.replace("{ELSE}", customAPICode.replace("{PARAMS}", "query=$(querystring)&champion=$(2)&platform=$(3)&language={LANGUAGE}"));
                     } else customAPICode = customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&champion=$(1)&language={LANGUAGE}");
                 } else {
@@ -100,7 +90,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
             break;
         }
         addAlert("{CMD_CREATED}".replace("{CMD_CREATED}", getTranslatedString(lang, "cmdCreated").replace("{CMD_NAME}", commandName)), "alert-success", true, true, "#result-warning", lang);//, 1 * 60);
-        cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{PLAYER_NAME}", encodeURI(playerName.value)).replace("{PLATFORM}", platform.value).replace("{LANGUAGE}", language.value).replace("{BOT_NAME}", botName[botName.value - 1].text.replace(" ", "")).replace("{championName}", championName)
+        cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{PLAYER_NAME}", encodeURI(playerName.value)).replace("{PLATFORM}", platform.value).replace("{LANGUAGE}", language.value).replace("{BOT_NAME}", botName[botName.value - 1].text.replace(" ", ""))
         cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{LANGUAGE}", language.value).replace("{BOT_NAME}", botName[botName.value - 1].text.replace(" ", ""))
         addCommandOutput(cmdChat + cmd, cmd, botName[botName.value - 1].text, lang)
     } else {
