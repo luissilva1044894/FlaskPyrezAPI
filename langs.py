@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+#https://www.w3schools.com/tags/ref_language_codes.asp
 INTERNAL_ERROR_404_STRINGS = {
     "en" : "INTERNAL SERVER ERROR: Page not found.",
     "es" : "INTERNAL SERVER ERROR: Page not found.",
