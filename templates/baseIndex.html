@@ -63,88 +63,91 @@
 
     <div class="container">
       <br/><br/><br/>
-      <!-- <div class="col-xs-12 col-sm-12 col-md-12 mt-2 text-center" id="center2"> -->
+      <div class="col-xs-12 col-sm-12 col-md-12 mt-2 text-center" id="center2"> -->
         <h2><strong>{% block commands_table_titles_title %}{% endblock %}</strong><br/></h2>
-      <!-- </div> -->
+      </div>
       <br/>
-      <table class="tg">
-        <thead class="thead-light">
-          <tr>
-            <th class="tg-gmla"><span>{% block commands_table_titles_action %}{% endblock %}</span></th>
-            <th class="tg-gmla"><span>{% block commands_table_titles_desc %}{% endblock %}</span></th>
-            <th class="tg-gmla"><span>{% block commands_table_titles_url %}{% endblock %}</span></th>
-            <th class="tg-lvth"><span>{% block commands_table_titles_option1 %}{% endblock %}</span></th>
-            <th class="tg-lvth"><span>{% block commands_table_titles_option2 %}{% endblock %}</span></th>
-            <th class="tg-lvth"><span>{% block commands_table_titles_option3 %}{% endblock %}</span></th>
-            <th class="tg-lvth"><span>{% block commands_table_titles_option4 %}{% endblock %}</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="tg-us36">{% block commands_table_contents_currentmatch %}{% endblock %}</td>
-            <td class="tg-us36">{% block commands_table_contents_currentmatch_desc %}{% endblock %}</td>
-            <td class="tg-us36">{{ url_for("getCurrentMatch", _external=True) }}</td>
-            <td class="tg-yw4l">?player={% block commands_table_contents_currentmatch_ign %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;platform={% block commands_table_contents_currentmatch_plat %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;language={% block commands_table_contents_currentmatch_lang %}{% endblock %}</td>
-            <td class="tg-yw4l"></td>
-          </tr>
-          <tr>
-            <td class="tg-yw4l">{% block commands_table_contents_decks %}{% endblock %}</td>
-            <td class="tg-yw4l">{% block commands_table_contents_decks_desc %}{% endblock %}</td>
-            <td class="tg-us36">{{ url_for("getDecks", _external=True) }}</td>
-            <td class="tg-yw4l">?player={% block commands_table_contents_decks_ign %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;champion={% block commands_table_contents_decks_champ %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;platform={% block commands_table_contents_decks_plat %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;language={% block commands_table_contents_decks_lang %}{% endblock %}</td>
-          </tr>
-          <tr>
-            <td class="tg-yw4l">{% block commands_table_contents_winrate %}{% endblock %}</td>
-            <td class="tg-yw4l">{% block commands_table_contents_winrate_desc %}{% endblock %}</td>
-            <td class="tg-us36">{{ url_for("getWinrate", _external=True) }}</td>
-            <td class="tg-yw4l">?player={% block commands_table_contents_winrate_ign %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;champion={% block commands_table_contents_winrate_champ %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;platform={% block commands_table_contents_winrate_plat %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;language={% block commands_table_contents_winrate_lang %}{% endblock %}</td>
-          </tr>
-          <tr>
-            <td class="tg-yw4l">{% block commands_table_contents_lastmatch %}{% endblock %}</td>
-            <td class="tg-yw4l">{% block commands_table_contents_lastmatch_desc %}{% endblock %}</td>
-            <td class="tg-us36">{{ url_for("getLastMatch", _external=True) }}</td>
-            <td class="tg-yw4l">?player={% block commands_table_contents_lastmatch_ign %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;platform={% block commands_table_contents_lastmatch_plat %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;language={% block commands_table_contents_lastmatch_lang %}{% endblock %}</td>
-            <td class="tg-yw4l"></td>
-          </tr>
-          <tr>
-            <td class="tg-yw4l">{% block commands_table_contents_rank %}{% endblock %}</td>
-            <td class="tg-yw4l">{% block commands_table_contents_rank_desc %}{% endblock %}</td>
-            <td class="tg-us36">{{ url_for("getRank", _external=True) }}</td>
-            <td class="tg-yw4l">?player={% block commands_table_contents_rank_ign %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;platform={% block commands_table_contents_rank_plat %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;language={% block commands_table_contents_rank_lang %}{% endblock %}</td>
-            <td class="tg-yw4l"></td>
-          </tr>
-          <tr>
-            <td class="tg-yw4l">{% block commands_table_contents_version %}{% endblock %}</td>
-            <td class="tg-yw4l">{% block commands_table_contents_version_desc %}{% endblock %}</td>
-            <td class="tg-us36">{{ url_for("getGameVersion", _external=True) }}</td>
-            <td class="tg-yw4l">?platform={% block commands_table_contents_version_plat %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;language={% block commands_table_contents_version_lang %}{% endblock %}</td>
-            <td class="tg-yw4l"></td>
-            <td class="tg-yw4l"></td>
-          </tr>
-          <tr>
-            <td class="tg-yw4l">{% block commands_table_contents_stalk %}{% endblock %}</td>
-            <td class="tg-yw4l">{% block commands_table_contents_stalk_desc %}{% endblock %}</td>
-            <td class="tg-us36">{{ url_for("getStalk", _external=True) }}</td>
-            <td class="tg-yw4l">?player={% block commands_table_contents_stalk_ign %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;platform={% block commands_table_contents_stalk_plat %}{% endblock %}</td>
-            <td class="tg-yw4l">&amp;language={% block commands_table_contents_stalk_lang %}{% endblock %}</td>
-            <td class="tg-yw4l"></td>
-          </tr>
-        </tbody>
-      </table>
+      <a href="#commands-table-id" class="btn btn-primary" data-toggle="commands-table-collapse">Simple collapsible</a>
+      <div id="commands-table-id" class="commands-table-collapse">
+        <table class="tg">
+          <thead class="thead-light">
+            <tr>
+              <th class="tg-gmla"><span>{% block commands_table_titles_action %}{% endblock %}</span></th>
+              <th class="tg-gmla"><span>{% block commands_table_titles_desc %}{% endblock %}</span></th>
+              <th class="tg-gmla"><span>{% block commands_table_titles_url %}{% endblock %}</span></th>
+              <th class="tg-lvth"><span>{% block commands_table_titles_option1 %}{% endblock %}</span></th>
+              <th class="tg-lvth"><span>{% block commands_table_titles_option2 %}{% endblock %}</span></th>
+              <th class="tg-lvth"><span>{% block commands_table_titles_option3 %}{% endblock %}</span></th>
+              <th class="tg-lvth"><span>{% block commands_table_titles_option4 %}{% endblock %}</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tg-us36">{% block commands_table_contents_currentmatch %}{% endblock %}</td>
+              <td class="tg-us36">{% block commands_table_contents_currentmatch_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getCurrentMatch", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_currentmatch_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_currentmatch_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_currentmatch_lang %}{% endblock %}</td>
+              <td class="tg-yw4l"></td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_decks %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_decks_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getDecks", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_decks_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;champion={% block commands_table_contents_decks_champ %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_decks_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_decks_lang %}{% endblock %}</td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_winrate %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_winrate_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getWinrate", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_winrate_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;champion={% block commands_table_contents_winrate_champ %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_winrate_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_winrate_lang %}{% endblock %}</td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_lastmatch %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_lastmatch_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getLastMatch", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_lastmatch_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_lastmatch_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_lastmatch_lang %}{% endblock %}</td>
+              <td class="tg-yw4l"></td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_rank %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_rank_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getRank", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_rank_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_rank_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_rank_lang %}{% endblock %}</td>
+              <td class="tg-yw4l"></td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_version %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_version_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getGameVersion", _external=True) }}</td>
+              <td class="tg-yw4l">?platform={% block commands_table_contents_version_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_version_lang %}{% endblock %}</td>
+              <td class="tg-yw4l"></td>
+              <td class="tg-yw4l"></td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_stalk %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_stalk_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getStalk", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_stalk_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_stalk_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_stalk_lang %}{% endblock %}</td>
+              <td class="tg-yw4l"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <div id="result-warning"></div>
       <table class="table padding-top" id="commands-generator">
