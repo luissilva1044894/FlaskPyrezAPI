@@ -242,19 +242,19 @@ def getWinrate():
     championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
     language = getLanguage(request)
 
-    try:
-        playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        elif playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
-        getPlayerRequest = paladinsAPI.getPlayer(playerId)
-        if getPlayerRequest.accountLevel > 5:
-            playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
-        else:
-            return PLAYER_LOW_LEVEL_STRINGS[language]
-    except:
-        return INTERNAL_ERROR_500_STRINGS[language]
+    #try:
+    playerId = getPlayerId(playerName, platform)
+    if playerId == 0:
+        return PLAYER_NULL_STRINGS[language]
+    elif playerId == -1:
+        return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+    getPlayerRequest = paladinsAPI.getPlayer(playerId)
+    if getPlayerRequest.accountLevel > 5:
+        playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
+    else:
+        return PLAYER_LOW_LEVEL_STRINGS[language]
+    #except:
+    #    return INTERNAL_ERROR_500_STRINGS[language]
     if championName:
         if not checkChampName(championName):
             championName = "bombking" if "bk" in championName or "bomb" in championName else "maldamba" if "mal" in championName else championName
