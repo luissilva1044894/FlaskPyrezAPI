@@ -166,10 +166,10 @@ QUEUE_IDS_STRINGS = {
     },
 }
 QUALIFYING_STRINGS = {
-    "en" : "Placements",#Qualifying
-    "es" : "Placements",#Qualifying
+    "en" : "Placements (BO5)",#Qualifying
+    "es" : "Clasificatorias (MD5)",#Qualifying
     "pl" : "Kwalifikacje",
-    "pt" : "MD5",#Qualificatória
+    "pt" : "Qualificatória (MD5)",#
 }
 PLAYER_RANK_STRINGS = {
         "en" : {
