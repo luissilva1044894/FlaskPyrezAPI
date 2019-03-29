@@ -164,7 +164,7 @@
             <th class="plat-table-thead">{% block commands_generator_paladinsplat %}{% endblock %}</th>
             <th>&lt;{% block commands_generator_cmdlang %}{% endblock %}</th>
             <th>Bot</th>
-            <th class="usable-table-thead"> </th>
+            <th class="usable-table-thead">&lt;</th>
             <th>{% block commands_generator_chatbotuseraccess %}{% endblock %}</th>
             <th>&lt;</th>
           </tr>
@@ -272,22 +272,22 @@
     <script src="{{ url_for('static', filename='js/ifuncs.js') }}"></script>
     <script src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
     <script type="text/javascript">
+      $("#command_type").change(function() {
+        var commandType = getElementById("command_type");
+        if (String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
+          $(".player_name").css("display", "none");
+          $(".user_can_use").css("display", "none");
+          $(".player-table-thead").css("display", "none");
+          $(".usable-table-thead").css("display", "none");// Hide
+        } else {
+          $(".player-table-thead").css("display", "table-cell");// Show
+          $(".player_name").css("display", "table-cell");
+          $(".usable-table-thead").css("display", "table-cell");
+          $(".user_can_use").css("display", "table-cell");
+        }
+      });
       $(document).ready(function() {
         //console.log(window.location.href);
-        $("#command_type").change(function() {
-          var commandType = getElementById("command_type");
-          if (String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
-            $(".player_name").css("display", "none");
-            $(".user_can_use").css("display", "none");
-            $(".player-table-thead").css("display", "none");
-            $(".usable-table-thead").css("display", "none");// Hide
-          } else {
-            $(".player-table-thead").css("display", "table-cell");// Show
-            $(".player_name").css("display", "table-cell");
-            $(".usable-table-thead").css("display", "table-cell");
-            $(".user_can_use").css("display", "table-cell");
-          }
-        });
         //$(".navbar-fixed-top .nav a").on('click', function() {
           //window.location.href = $(this).attr('href');
         //});
