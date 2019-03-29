@@ -41,31 +41,30 @@
       </nav>
     </header>
 
-    <section id="sticky-notifications" class="stick-to-top js-stick-to-top">
-      <!-- Add browser warning. Will show for ie9 and below -->
-      <!--[if IE]>
-        <div class="notification-bar notification-bar--danger">
-          <span class="notification-bar__icon">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            <span class="sr-only">{% block warning_unsupported_msg_title %}{% endblock %}:</span>
-          </span>
-          <span class="notification-bar__message">{% block warning_unsupported_msg_bar %}{% endblock %}</span>
-        </div>
-      <![endif]-->
-      <noscript>
-        <br/><br/><br/><br/>
-        <div class="notification-bar notification-bar--danger">
-          <span class="notification-bar__icon">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            <span class="sr-only">{% block warning_nojs_msg_title %}{% endblock %}:</span>
-          </span>
-          <span class="notification-bar__message">{% block warning_nojs_msg_bar %}{% endblock %}</span>
-        </div>
-      </noscript>
-    </section>
-
     <div class="container">
       <br/><br/><br/>
+
+      <section id="sticky-notifications" class="stick-to-top js-stick-to-top">
+        <!-- Add browser warning. Will show for ie9 and below -->
+        <!--[if IE]>
+          <div class="notification-bar notification-bar--danger">
+            <span class="notification-bar__icon">
+              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+              <span class="sr-only">{% block warning_unsupported_msg_title %}{% endblock %}:</span>
+            </span>
+            <span class="notification-bar__message">{% block warning_unsupported_msg_bar %}{% endblock %}</span>
+          </div>
+        <![endif]-->
+        <noscript>
+          <div class="notification-bar notification-bar--danger">
+            <span class="notification-bar__icon">
+              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+              <span class="sr-only">{% block warning_nojs_msg_title %}{% endblock %}:</span>
+            </span>
+            <span class="notification-bar__message">{% block warning_nojs_msg_bar %}{% endblock %}</span>
+          </div>
+        </noscript>
+      </section>
       <!--
       <div class="col-xs-12 col-sm-12 col-md-12 mt-2 text-center" id="center2">
         <h2><strong>Wrappers available</strong><br/></h2>
@@ -156,6 +155,7 @@
 
       <div id="result-warning"></div>
       <table class="table padding-top" id="commands-generator">
+        <thead>
           <tr>
             <th>{% block commands_generator_cmdname %}{% endblock %}</th>
             <th>{% block commands_generator_cmdtype %}{% endblock %}</th>
@@ -168,6 +168,8 @@
             <th>{% block commands_generator_chatbotuseraccess %}{% endblock %}</th>
             <th></th>
           </tr>
+        </thead>
+        <tbody>
           <tr>
             <td>
               <div class="form-group">
@@ -252,6 +254,7 @@
               <button class="btn btn-default" id="generate_command" data-lang="{% block commands_generator_datalang %}{% endblock %}" onclick="generateCommand('{% block commands_generator_paramslang %}{% endblock %}')">{% block commands_generator_generatebtn %}{% endblock %}</button>
             </td>
           </tr>
+        </tbody>
       </table>
     </div>
 
