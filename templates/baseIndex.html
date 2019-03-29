@@ -164,7 +164,7 @@
             <th class="plat-table-thead">{% block commands_generator_paladinsplat %}{% endblock %}</th>
             <th>{% block commands_generator_cmdlang %}{% endblock %}</th>
             <th>Bot</th>
-            <th class="user-can-use-table-thead"></th>
+            <th class="usable-table-thead"> </th>
             <th>{% block commands_generator_chatbotuseraccess %}{% endblock %}</th>
             <th></th>
           </tr>
@@ -279,10 +279,10 @@
           var commandType = getElementById("command_type");
           if (String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
             $(".player-table-thead").css("display", "none");
-            $(".user-can-use-table-thead").css("display", "none");// Hide
+            $(".usable-table-thead").css("display", "none");// Hide
           } else {
             $(".player-table-thead").css("display", "table-cell");// Show
-            $(".user-can-use-table-thead").css("display", "table-cell");
+            $(".usable-table-thead").css("display", "table-cell");
           }
         });
         //$(".navbar-fixed-top .nav a").on('click', function() {
