@@ -127,6 +127,24 @@ PLAYER_REGION_STRINGS = {
         "AUSTRALIA": "Austrália"
     },
 }
+MATCH_STRINGS = {
+    "en" : {
+        "WIN": "Win",
+        "LOSS": "Loss",
+    },
+    "es" : {
+        "WIN": "Win",
+        "LOSS": "Loss",
+    },
+    "pl" : {
+        "WIN": "Win",
+        "LOSS": "Loss",
+    },
+    "pt" : {
+        "WIN": "Vitória",
+        "LOSS": "Derrota",
+    },
+}
 QUEUE_IDS_STRINGS = {
     "en" : {
         423: "Custom/Siege", 430: "Custom/Siege", 431: "Custom/Siege", 432: "Custom/Siege", 433: "Custom/Siege", 438: "Custom/Siege", 439: "Custom/Siege", 440: "Custom/Siege", 458: "Custom/Siege", 459: "Custom/Siege", 473: "Custom/Siege", 485: "Custom/Siege", 487: "Custom/Siege",
@@ -237,7 +255,7 @@ LAST_MATCH_STRINGS = {
     "en" : "{0} - Match ID: {1}, Duration: {10}m, Region: {11}: {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7}, Damage: {8}, Credits: {9} - {12} (Score: {13})",
     "es" : "{0} - Match ID: {1}, Duration: {10}m, Region: {11}: {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7}, Damage: {8}, Credits: {9} - {12} (Score: {13})",
     "pl" : "{0} - ID meczu: {1}, Czas trwania: {10}m, Region: {11}: {2} ({3}/{4}/{5} - {6} KDA) Seria zabójstw: {7}, Obrażenia: {8}, Kredyty: {9} - {12} (Wynik: {13})",
-    "pt" : "{0} - Id da partida: {1}, Duração: {10}m, Região: {11}: {2} ({3}/{4}/{5} - {6} KDA) Sequência: {7}, Dano: {8}, Creditos: {9} - {12} (Score: {13})",
+    "pt" : "{0} - Id da partida: {1}, Duração: {10}m, Região: {11}: {2} ({3}/{4}/{5} - {6} KDA) Sequência: {7}, Dano: {8}, Creditos: {9} - {12} (Pontuação: {13})",
 }
 CURRENTLY_MATCH_STRINGS = {
     "en" : "currently in a match (Queue: {0}, Match ID: {1})",
