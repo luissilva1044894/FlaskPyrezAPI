@@ -218,13 +218,13 @@ def getRank():
                                 PLAYER_RANK_STRINGS[language][r2.currentRank.value] if r2.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r2.wins + r2.losses == 0 else QUALIFYING_STRINGS[language],
                                 "" if r2.currentRank == Tier.Unranked else " ({0} TP{1})".format(formatDecimal(r2.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r2.leaderboardIndex) if r2.leaderboardIndex > 0 else ""),
                                 "" if r2.currentRank == Tier.Unranked and r2.wins + r2.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r2.wins), formatDecimal(r2.losses)),
-                                " (Winrate Global: {0}%{1})".format (getPlayerRequest.getWinratio(), "" if r2.wins + r2.losses == 0 else " & Ranked: {0}%".format(r2.getWinratio())))
+                                " (Win rate Global: {0}%{1})".format (getPlayerRequest.getWinratio(), "" if r2.wins + r2.losses == 0 else " & Ranked: {0}%".format(r2.getWinratio())))
     else:
         return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                                 PLAYER_RANK_STRINGS[language][r1.currentRank.value] if r1.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r1.wins + r1.losses == 0 else QUALIFYING_STRINGS[language],
                                 "" if r1.currentRank == Tier.Unranked else " ({0} TP{1})".format(formatDecimal(r1.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r1.leaderboardIndex) if r1.leaderboardIndex > 0 else ""),
                                 "" if r1.currentRank == Tier.Unranked and r1.wins + r1.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r1.wins), formatDecimal(r1.losses)),
-                                " (Winrate Global: {0}%{1})".format(getPlayerRequest.getWinratio(), "" if r1.wins + r1.losses == 0 else " & Ranked: {0}%".format(r1.getWinratio())))
+                                " (Win rate Global: {0}%{1})".format(getPlayerRequest.getWinratio(), "" if r1.wins + r1.losses == 0 else " & Ranked: {0}%".format(r1.getWinratio())))
 
 def checkChampName(championName):
     champs = [ "androxus", "atlas", "ash", "barik", "bombking", "buck", "cassie", "dredge", "drogoz", "evie", "fernando", "furia", "grohk", "grover",
