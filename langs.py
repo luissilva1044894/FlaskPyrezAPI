@@ -252,22 +252,22 @@ GAME_VERSION_STRINGS = {
     "pt" : "{0} {1} está {2} - Versão atual: {3} ({4})",
 }
 LAST_MATCH_STRINGS = {
-    "en" : "{0} (Match ID: {1}, Duration: {10}m, Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7}, Damage: {8}, Credits: {9} - {12} (Score: {13})",
-    "es" : "{0} (Match ID: {1}, Duration: {10}m, Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7}, Damage: {8}, Credits: {9} - {12} (Score: {13})",
-    "pl" : "{0} (ID meczu: {1}, Czas trwania: {10}m, Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Seria zabójstw: {7}, Obrażenia: {8}, Kredyty: {9} - {12} (Wynik: {13})",
-    "pt" : "{0} (Id da partida: {1}, Duração: {10}m, Região: {11}): {2} ({3}/{4}/{5} - {6} KDA) Sequência: {7}, Dano: {8}, Creditos: {9} - {12} (Pontuação: {13})",
+    "en" : "{0} (Match ID: {1} | Duration: {10}m | Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7} | Damage: {8} | Credits: {9} - {12} (Score: {13})",
+    "es" : "{0} (Match ID: {1} | Duration: {10}m | Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7} | Damage: {8} | Credits: {9} - {12} (Score: {13})",
+    "pl" : "{0} (ID meczu: {1} | Czas trwania: {10}m | Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Seria zabójstw: {7} | Obrażenia: {8} | Kredyty: {9} - {12} (Wynik: {13})",
+    "pt" : "{0} (Id da partida: {1} | Duração: {10}m | Região: {11}): {2} ({3}/{4}/{5} - {6} KDA) Sequência: {7} | Dano: {8} | Creditos: {9} - {12} (Pontuação: {13})",
 }
 CURRENTLY_MATCH_STRINGS = {
-    "en" : "currently in a match (Queue: {0}, Match ID: {1})",
-    "es" : "currently in a match (Queue: {0}, Match ID: {1})",
-    "pl" : "aktualnie jest w meczu (Tryb gry: {0}, ID Meczu: {1})",
-    "pt" : "em partida (Fila: {0}, ID da partida: {1})",
+    "en" : "currently in a match (Queue: {0} | Match ID: {1})",
+    "es" : "currently in a match (Queue: {0} | Match ID: {1})",
+    "pl" : "aktualnie jest w meczu (Tryb gry: {0} | ID Meczu: {1})",
+    "pt" : "em partida (Fila: {0} | ID da partida: {1})",
 }
 PLAYER_STALK_STRINGS = {
-    "en" : "{0} is {1} - Created at: {2}, Last Seen: {3} ago, Playtime: {4}h, Platform: {5}, Region: {6}",
-    "es" : "{0} is {1} - Created at: {2}, Last Seen: {3} ago, Playtime: {4}h, Platform: {5}, Region: {6}",
-    "pl" : "{0} jest {1} - Utworzono: {2}, Ostatnio widziany: {3} temu, Czas gry: {4}h, Platforma: {5}, Region: {6}",
-    "pt" : "{0} está {1} - Criado em: {2}, Último login: {3} atrás, Horas jogadas: {4}h, Platforma: {5}, Região: {6}",
+    "en" : "{0} is {1} - Created at: {2} | Last Seen: {3} ago | Playtime: {4}h | Platform: {5} | Region: {6}",
+    "es" : "{0} is {1} - Created at: {2} | Last Seen: {3} ago | Playtime: {4}h | Platform: {5} | Region: {6}",
+    "pl" : "{0} jest {1} - Utworzono: {2} | Ostatnio widziany: {3} temu | Czas gry: {4}h | Platforma: {5} | Region: {6}",
+    "pt" : "{0} está {1} - Criado em: {2} | Último login: {3} atrás | Horas jogadas: {4}h | Platforma: {5} | Região: {6}",
 }
 PALADINS_UP_STRINGS = {
     "en" : "UP{0}",
