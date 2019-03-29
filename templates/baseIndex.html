@@ -272,6 +272,7 @@
     <script src="{{ url_for('static', filename='js/ifuncs.js') }}"></script>
     <script src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
     <script type="text/javascript">
+      /* global WebAssembly */
       $("#command_type").change(function() {
         var commandType = getElementById("command_type");
         if (String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
