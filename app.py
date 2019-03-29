@@ -156,7 +156,7 @@ def getLastMatch():
     return LAST_MATCH_STRINGS[language].format(lastMatchRequest.mapName, lastMatchRequest.matchId, lastMatchRequest.godId.getName() if isinstance(lastMatchRequest.godId, Champions) else lastMatchRequest.godName,
                         lastMatchRequest.kills, lastMatchRequest.deaths, lastMatchRequest.assists, kda, lastMatchRequest.killingSpree,
                         formatDecimal(lastMatchRequest.damage), formatDecimal(lastMatchRequest.credits), lastMatchRequest.matchMinutes,
-                        lastMatchRequest.matchRegion, lastMatchRequest.winStatus, "{0}/{1}".format(lastMatchRequest.team1Score,
+                        PLAYER_REGION_STRINGS[language][str(lastMatchRequest.matchRegion).replace(' ', "_").upper()], MATCH_STRINGS[language][str(lastMatchRequest.winStatus).upper()], "{0}/{1}".format(lastMatchRequest.team1Score,
                         lastMatchRequest.team2Score) if lastMatchRequest.taskForce == 1 else "{0}/{1}".format(lastMatchRequest.team2Score, lastMatchRequest.team1Score))
 
 @app.route("/api/currentmatch", methods=["GET"])
