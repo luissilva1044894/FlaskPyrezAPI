@@ -278,10 +278,14 @@
           var commandType = getElementById("command_type");
           if (String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
             $(".player-table-thead").css("display", "none");
+            $(".player_name").css("display", "none");
             $(".usable-table-thead").css("display", "none");// Hide
+            $(".user_can_use").css("display", "none");
           } else {
             $(".player-table-thead").css("display", "table-cell");// Show
+            $(".player_name").css("display", "table-cell");
             $(".usable-table-thead").css("display", "table-cell");
+            $(".user_can_use").css("display", "table-cell");
           }
         });
         //$(".navbar-fixed-top .nav a").on('click', function() {
