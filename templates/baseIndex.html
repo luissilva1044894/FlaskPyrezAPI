@@ -155,8 +155,7 @@
 
       <div id="result-warning"></div>
       <table class="table padding-top" id="commands-generator">
-        <thead>
-          <tr>
+        <tr>
             <th>{% block commands_generator_cmdname %}{% endblock %}</th>
             <th>{% block commands_generator_cmdtype %}{% endblock %}</th>
             <th>{% block commands_generator_cmdcd %}{% endblock %}</th>
@@ -167,10 +166,8 @@
             <th class="usable-table-thead"></th>
             <th>{% block commands_generator_chatbotuseraccess %}{% endblock %}</th>
             <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
+        </tr>
+        <tr>
             <td>
               <div class="form-group">
                 <div class="input-group">
@@ -254,7 +251,6 @@
               <button class="btn btn-default" id="generate_command" data-lang="{% block commands_generator_datalang %}{% endblock %}" onclick="generateCommand('{% block commands_generator_paramslang %}{% endblock %}')">{% block commands_generator_generatebtn %}{% endblock %}</button>
             </td>
           </tr>
-        </tbody>
       </table>
     </div>
 
