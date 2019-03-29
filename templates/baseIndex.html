@@ -93,7 +93,7 @@
               <td class="tg-yw4l">?player={% block commands_table_contents_currentmatch_ign %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;platform={% block commands_table_contents_currentmatch_plat %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;language={% block commands_table_contents_currentmatch_lang %}{% endblock %}</td>
-              <td class="tg-yw4l"></td>
+              <td class="tg-yw4l">&lt;</td>
             </tr>
             <tr>
               <td class="tg-yw4l">{% block commands_table_contents_decks %}{% endblock %}</td>
@@ -120,7 +120,7 @@
               <td class="tg-yw4l">?player={% block commands_table_contents_lastmatch_ign %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;platform={% block commands_table_contents_lastmatch_plat %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;language={% block commands_table_contents_lastmatch_lang %}{% endblock %}</td>
-              <td class="tg-yw4l"></td>
+              <td class="tg-yw4l">&lt;</td>
             </tr>
             <tr>
               <td class="tg-yw4l">{% block commands_table_contents_rank %}{% endblock %}</td>
@@ -129,7 +129,7 @@
               <td class="tg-yw4l">?player={% block commands_table_contents_rank_ign %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;platform={% block commands_table_contents_rank_plat %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;language={% block commands_table_contents_rank_lang %}{% endblock %}</td>
-              <td class="tg-yw4l"></td>
+              <td class="tg-yw4l">&lt;</td>
             </tr>
             <tr>
               <td class="tg-yw4l">{% block commands_table_contents_version %}{% endblock %}</td>
@@ -137,8 +137,8 @@
               <td class="tg-us36">{{ url_for("getGameVersion", _external=True) }}</td>
               <td class="tg-yw4l">?platform={% block commands_table_contents_version_plat %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;language={% block commands_table_contents_version_lang %}{% endblock %}</td>
-              <td class="tg-yw4l"></td>
-              <td class="tg-yw4l"></td>
+              <td class="tg-yw4l">&lt;</td>
+              <td class="tg-yw4l">&lt;</td>
             </tr>
             <tr>
               <td class="tg-yw4l">{% block commands_table_contents_stalk %}{% endblock %}</td>
@@ -147,7 +147,7 @@
               <td class="tg-yw4l">?player={% block commands_table_contents_stalk_ign %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;platform={% block commands_table_contents_stalk_plat %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;language={% block commands_table_contents_stalk_lang %}{% endblock %}</td>
-              <td class="tg-yw4l"></td>
+              <td class="tg-yw4l">&lt;</td>
             </tr>
           </tbody>
         </table>
@@ -162,11 +162,11 @@
             <th>{% block commands_generator_cmdcd %}{% endblock %}</th>
             <th class="player-table-thead">{% block commands_generator_paladinsign %}{% endblock %}</th>
             <th class="plat-table-thead">{% block commands_generator_paladinsplat %}{% endblock %}</th>
-            <th>{% block commands_generator_cmdlang %}{% endblock %}</th>
+            <th>&lt;{% block commands_generator_cmdlang %}{% endblock %}</th>
             <th>Bot</th>
             <th class="usable-table-thead"> </th>
             <th>{% block commands_generator_chatbotuseraccess %}{% endblock %}</th>
-            <th></th>
+            <th>&lt;</th>
           </tr>
         </thead>
         <tbody>
@@ -277,10 +277,10 @@
         $("#command_type").change(function() {
           var commandType = getElementById("command_type");
           if (String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
-            $(".player-table-thead").css("display", "none");
             $(".player_name").css("display", "none");
-            $(".usable-table-thead").css("display", "none");// Hide
             $(".user_can_use").css("display", "none");
+            $(".player-table-thead").css("display", "none");
+            $(".usable-table-thead").css("display", "none");// Hide
           } else {
             $(".player-table-thead").css("display", "table-cell");// Show
             $(".player_name").css("display", "table-cell");
