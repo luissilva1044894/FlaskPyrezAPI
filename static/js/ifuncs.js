@@ -2,7 +2,7 @@ function getTranslatedString(language, msg) {
     var engString = [];
     engString["chatMsg"] = "Copy paste the following command in your chat"
     engString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
-    engString["backendMsg"] = "Or put the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
+    engString["backendMsg"] = "Or copy-paste the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
     engString["close"] = "Close"
     engString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
     engString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
@@ -13,7 +13,7 @@ function getTranslatedString(language, msg) {
     var esString = [];
     esString["chatMsg"] = "Copy paste the following command in your chat"
     esString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
-    esString["backendMsg"] = "Or put the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
+    esString["backendMsg"] = "Or copy-paste the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
     esString["close"] = "Close"
     esString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
     esString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
@@ -35,7 +35,7 @@ function getTranslatedString(language, msg) {
     var plString = [];
     plString["chatMsg"] = "Copy paste the following command in your chat"
     plString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
-    plString["backendMsg"] = "Or put the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
+    plString["backendMsg"] = "Or copy-paste the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
     plString["close"] = "Close"
     plString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
     plString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
