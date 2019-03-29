@@ -184,10 +184,10 @@ QUEUE_IDS_STRINGS = {
     },
 }
 QUALIFYING_STRINGS = {
-    "en" : "Placements (BO5)",#Qualifying
-    "es" : "Clasificatorias (MD5)",#Qualifying
+    "en" : "Placements - BO5",#Qualifying
+    "es" : "Clasificatorias - MD5",#Qualifying
     "pl" : "Kwalifikacje",
-    "pt" : "Qualificatória (MD5)",#
+    "pt" : "Qualificatória - MD5",#
 }
 PLAYER_RANK_STRINGS = {
         "en" : {
