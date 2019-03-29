@@ -273,8 +273,7 @@
     <script src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        //window.location.href = "Testing"
-        console.log(window.location.href);
+        //console.log(window.location.href);
         $("#command_type").change(function() {
           var commandType = getElementById("command_type");
           if (String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
