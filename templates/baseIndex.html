@@ -53,6 +53,7 @@
         </div>
       <![endif]-->
       <noscript>
+        <br/><br/><br/><br/>
         <div class="notification-bar notification-bar--danger">
           <span class="notification-bar__icon">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
@@ -155,7 +156,6 @@
 
       <div id="result-warning"></div>
       <table class="table padding-top" id="commands-generator">
-        <thead>
           <tr>
             <th>{% block commands_generator_cmdname %}{% endblock %}</th>
             <th>{% block commands_generator_cmdtype %}{% endblock %}</th>
@@ -168,8 +168,6 @@
             <th>{% block commands_generator_chatbotuseraccess %}{% endblock %}</th>
             <th></th>
           </tr>
-        </thead>
-        <tbody>
           <tr>
             <td>
               <div class="form-group">
@@ -254,7 +252,6 @@
               <button class="btn btn-default" id="generate_command" data-lang="{% block commands_generator_datalang %}{% endblock %}" onclick="generateCommand('{% block commands_generator_paramslang %}{% endblock %}')">{% block commands_generator_generatebtn %}{% endblock %}</button>
             </td>
           </tr>
-        </tbody>
       </table>
     </div>
 
