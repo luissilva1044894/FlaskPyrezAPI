@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="{% block languague %}{% endblock %}">
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 minimal-ui">
+    <meta name="keywords" content="twitch, api, nonsocial, Feyrazzle, pyrez, hirez, hi-rez, rank, customapi, nightbot, custom, commands, comandos, personalizado, streamer, paladins, champions of the realm, champions, ninja, master, trends, player, guru, meta, discord, twitter, community, reviews, review, esports, recruitment, stats, statistics, coach, tp, elo, mobile, bot, app, mobile app">
+    <meta name="author" content="Nonsocial">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="{% block metacontent %}{% endblock %}">
+    <meta name="defaultLanguage" content="en">
+    <meta name="availableLanguages" content="en, pt, pt-br, es, pl">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/paladins_icon.png') }}" sizes="1024x1024">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/iStyle.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.6.1/css/mdb.min.css">
+  </head>
+  <body onload="onPageLoaded()">
+    <header>
+      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#"><strong>{% block navbard_title %}{% endblock %}</strong></a>
+        <div class="collapse navbar-collapse" id="basicExampleNav"></div> <!-- ICONS: https://www.w3schools.com/icons/fontawesome_icons_brand.asp -->
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a href="https://github.com/luissilva1044894/FlaskPyrezAPI" class="nav-link waves-effect" title="{% block header_titles_github %}{% endblock %}" target="_blank"><i class="fab fa-github" style="font-size:24px" aria-hidden="true"></i></a><!--fab fa-github-alt -->
+          </li>
+          <!-- <li class="nav-item">
+            <a href="#" class="nav-link waves-effect" title="Linkedin"><i class="fab fa-linkedin" style="font-size:24px" aria-hidden="true"></i></a>
+          </li> -->
+          <li class="nav-item">
+            <a href="https://discord.gg/XkydRPS" class="nav-link waves-effect" title="{% block header_titles_discord %}{% endblock %}" target="_blank"><i class="fab fa-discord" style="font-size:24px" aria-hidden="true"></i></a>
+          </li>
+          <li class="nav-item">
+            <a href="https://pastebin.com/KreHef36" class="nav-link waves-effect" title="{% block header_titles_pastebin %}{% endblock %}" target="_blank"><i class="fas fa-file-alt" style="font-size:24px" aria-hidden="true"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="sticky-notifications" class="stick-to-top js-stick-to-top">
+      <!-- Add browser warning. Will show for ie9 and below -->
+      <!--[if IE]>
+        <div class="notification-bar notification-bar--danger">
+          <span class="notification-bar__icon">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <span class="sr-only">{% block warning_unsupported_msg_title %}{% endblock %}:</span>
+          </span>
+          <span class="notification-bar__message">{% block warning_unsupported_msg_bar %}{% endblock %}</span>
+        </div>
+      <![endif]-->
+      <noscript>
+        <div class="notification-bar notification-bar--danger">
+          <span class="notification-bar__icon">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <span class="sr-only">{% block warning_nojs_msg_title %}{% endblock %}:</span>
+          </span>
+          <span class="notification-bar__message">{% block warning_nojs_msg_bar %}{% endblock %}</span>
+        </div>
+      </noscript>
+    </section>
+
+    <div class="container">
+      <br/><br/><br/>
+      <!--
+      <div class="col-xs-12 col-sm-12 col-md-12 mt-2 text-center" id="center2">
+        <h2><strong>Wrappers available</strong><br/></h2>
+      </div>
+      <br/>
+      -->
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#cmd-tbl"><strong>{% block commands_table_titles_title %}{% endblock %}</strong></button><br/>
+      <div id="cmd-tbl" class="collapse">
+        <table class="tg">
+          <thead class="thead-light">
+            <tr>
+              <th class="tg-gmla"><span>{% block commands_table_titles_action %}{% endblock %}</span></th>
+              <th class="tg-gmla"><span>{% block commands_table_titles_desc %}{% endblock %}</span></th>
+              <th class="tg-gmla"><span>{% block commands_table_titles_url %}{% endblock %}</span></th>
+              <th class="tg-lvth"><span>{% block commands_table_titles_option1 %}{% endblock %}</span></th>
+              <th class="tg-lvth"><span>{% block commands_table_titles_option2 %}{% endblock %}</span></th>
+              <th class="tg-lvth"><span>{% block commands_table_titles_option3 %}{% endblock %}</span></th>
+              <th class="tg-lvth"><span>{% block commands_table_titles_option4 %}{% endblock %}</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tg-us36">{% block commands_table_contents_currentmatch %}{% endblock %}</td>
+              <td class="tg-us36">{% block commands_table_contents_currentmatch_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getCurrentMatch", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_currentmatch_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_currentmatch_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_currentmatch_lang %}{% endblock %}</td>
+              <td class="tg-yw4l"></td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_decks %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_decks_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getDecks", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_decks_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;champion={% block commands_table_contents_decks_champ %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_decks_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_decks_lang %}{% endblock %}</td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_winrate %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_winrate_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getWinrate", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_winrate_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;champion={% block commands_table_contents_winrate_champ %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_winrate_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_winrate_lang %}{% endblock %}</td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_lastmatch %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_lastmatch_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getLastMatch", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_lastmatch_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_lastmatch_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_lastmatch_lang %}{% endblock %}</td>
+              <td class="tg-yw4l"></td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_rank %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_rank_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getRank", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_rank_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_rank_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_rank_lang %}{% endblock %}</td>
+              <td class="tg-yw4l"></td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_version %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_version_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getGameVersion", _external=True) }}</td>
+              <td class="tg-yw4l">?platform={% block commands_table_contents_version_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_version_lang %}{% endblock %}</td>
+              <td class="tg-yw4l"></td>
+              <td class="tg-yw4l"></td>
+            </tr>
+            <tr>
+              <td class="tg-yw4l">{% block commands_table_contents_stalk %}{% endblock %}</td>
+              <td class="tg-yw4l">{% block commands_table_contents_stalk_desc %}{% endblock %}</td>
+              <td class="tg-us36">{{ url_for("getStalk", _external=True) }}</td>
+              <td class="tg-yw4l">?player={% block commands_table_contents_stalk_ign %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;platform={% block commands_table_contents_stalk_plat %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={% block commands_table_contents_stalk_lang %}{% endblock %}</td>
+              <td class="tg-yw4l"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="result-warning"></div>
+      <table class="table padding-top" id="commands-generator">
+        <thead>
+          <tr>
+            <th>{% block commands_generator_cmdname %}{% endblock %}</th>
+            <th>{% block commands_generator_cmdtype %}{% endblock %}</th>
+            <th>{% block commands_generator_cmdcd %}{% endblock %}</th>
+            <th>{% block commands_generator_paladinsign %}{% endblock %}</th>
+            <th>{% block commands_generator_paladinsplat %}{% endblock %}</th>
+            <th>{% block commands_generator_cmdlang %}{% endblock %}</th>
+            <th>Bot</th>
+            <th></th>
+            <th>{% block commands_generator_chatbotuseraccess %}{% endblock %}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon" id="addon-command-1"><strong>!</strong></span>
+                  <input type="text" class="form-control" id="command_name" aria-describedby="addon-command-1" value="" placeholder="{% block commands_generator_cmdname_placeholder %}{% endblock %}" title="{% block commands_generator_cmdname_title %}{% endblock %}" pattern=".{1,}" required onchange="checkButtonPos()">
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <select id="command_type" class="form-control full-width" onchange="commandTypeChanged()">
+                  <option value="currentmatch">!{% block commands_generator_cmdtype_cmdcurrentmatch %}{% endblock %}</option>
+                  <option value="decks">!{% block commands_generator_cmdtype_cmddecks %}{% endblock %}</option>
+                  <option value="winrate">!{% block commands_generator_cmdtype_cmdwinrate %}{% endblock %}</option>
+                  <option value="lastmatch">!{% block commands_generator_cmdtype_cmdlastmatch %}{% endblock %}</option>
+                  <option value="rank">!{% block commands_generator_cmdtype_cmdrank %}{% endblock %}</option>
+                  <option value="version">!{% block commands_generator_cmdtype_cmdserver %}{% endblock %}</option>
+                  <option value="stalk">!{% block commands_generator_cmdtype_cmdstalk %}{% endblock %}</option>
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="number" class="form-control" id="command_cooldown" value="25" min="5" max="100">
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <input type="text" class="form-control" id="player_name" value="" placeholder="FeyRazzle" pattern=".{4,}" title="Player Name" required onchange="checkButtonPos()">
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <select id="platform_form" class="form-control full-width" size="1">
+                  <option value="PC">PC/Steam</option>
+                  <option value="XBOX">Xbox One</option>
+                  <option value="PS4">PS4</option>
+                  <option value="SWITCH">Nintendo Switch</option>
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <select id="language_form" class="form-control full-width">
+                  {% block commands_generator_langs_order %}{% endblock %}
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <select id="bot_name" class="form-control full-width">
+                  <option value="1">Nightbot</option>
+                  <option value="2">DeepBot</option>
+                  <option value="3">AnkhBot</option>
+                  <option value="4">StreamElements Bot</option>
+                  <option value="5">StreamLab Chatbot</option>
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="checkbox" id="user_can_use" checked>{% block commands_generator_usercanuse %}{% endblock %}<br>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <select id="user_access" class="form-control full-width">
+                  <option value="1">{% block commands_generator_userlvl_everybody %}{% endblock %}</option>
+                  <option value="2">{% block commands_generator_userlvl_regular %}{% endblock %}</option>
+                  <option value="3">{% block commands_generator_userlvl_subscriber %}{% endblock %}</option>
+                  <option value="4">{% block commands_generator_userlvl_mod %}{% endblock %}</option>
+                  <option value="5">{% block commands_generator_userlvl_owner %}{% endblock %}</option>
+                </select>
+              </div>
+            </td>
+            <td> <!--<button id="generate_command" class="btn btn-default" disabled="disabled">Generate</button>-->
+              <button class="btn btn-default" id="generate_command" data-lang="{% block commands_generator_datalang %}{% endblock %}" onclick="generateCommand('{% block commands_generator_paramslang %}{% endblock %}')">{% block commands_generator_generatebtn %}{% endblock %}</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="navbar navbar-bottom navbar-footer bg-inverse">
+      <div class="col-xs-12 col-sm-12 col-md-12 mt-2 text-center">
+        <p>{% block footer_createby %}{% endblock %} <i class="fab fa-discord" style="font-size:15px" aria-hidden="true"></i><a href="https://twitch.tv/nonsocial_" title="{% block header_titles_twitch %}{% endblock %}" target="_blank"> Nonsocial#2731</a>.
+          <br/>{% block footer_hi_rez_copyright %}{% endblock %}</p>
+      </div>
+    </nav>
+
+    <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/ifuncs.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        //window.location.href = "Testing"
+        console.log(window.location.href);
+        //$(".navbar-fixed-top .nav a").on('click', function() {
+          //window.location.href = $(this).attr('href');
+        //});
+        if(ClipboardJS.isSupported()) {
+          var clipboard = new ClipboardJS(".copy-to-clip-button");
+          clipboard.on("success", function(e) {
+            langAlert = "{% block alert_msg_lang %}{% endblock %}"
+            addAlert(getTranslatedString(langAlert, "copyToClipboardSuccess"), "alert-success", true, true, "#result-warning", langAlert);
+            //console.log(e.trigger.attributes[3])
+            //console.log(e.trigger.attributes["data-clipboard-text"])
+            //console.log(e.trigger.id)
+          });
+          clipboard.on("error", function(e) {
+            console.log(e);
+          });
+        }
+      });
+      function getEndpoint() { return "{{ url_for('index', _external=True).replace('index.html', '') + 'api/' }}" }
+    </script>
+  </body>
+</html>
