@@ -268,20 +268,7 @@
     <script src="{{ url_for('static', filename='js/ifuncs.js') }}"></script>
     <script src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
     <script type="text/javascript">
-      /* global WebAssembly */
-      $("#command_type").change(function() {
-        var command = $("#command_type").val();  
-          switch(command) {
-            case "version":
-              $(".player-table-thead").css("display", "none");
-              $(".usable-table-thead").css("display", "none");// Hide
-            break;
-            default:
-              $(".player-table-thead").css("display", "table-cell");// Show
-              $(".usable-table-thead").css("display", "table-cell");
-            break;
-        }
-      });
+      
       $(document).ready(function() {
         //console.log(window.location.href);
         //$(".navbar-fixed-top .nav a").on('click', function() {
