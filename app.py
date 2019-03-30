@@ -14,6 +14,21 @@ app = Flask(__name__)
 
 from enum import Enum
 class LanguagesSupported(Enum):
+    def __str__(self):
+        return str(self.getId())
+    def __hash__(self):
+        return hash(self.getId())
+    def __eq__(self, other):
+        if isinstance(other, type(self)):
+            return self.getId() == other.getId()
+        try:
+            return other == type(other)(self.getId())
+        except ValueError:
+            return False
+    def getName(self):
+        return str(self.name.replace('_', ' '))
+    def getId(self):
+        return int(self.value) if str(self.value).isnumeric() else str(self.value)
     English = "en"
     Portuguese = "pt"
     Spanish = "es"
