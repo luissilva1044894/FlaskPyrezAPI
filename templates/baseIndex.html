@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.6.1/css/mdb.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
   </head>
   <body onload="onPageLoaded()">
     <header>
@@ -268,7 +268,20 @@
     <script src="{{ url_for('static', filename='js/ifuncs.js') }}"></script>
     <script src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
     <script type="text/javascript">
-      
+      /* global WebAssembly */
+      $("#command_type").change(function() {
+        var command = $("#command_type").val();  
+          switch(command) {
+            case "version":
+              $(".player-table-thead").css("display", "none");
+              $(".usable-table-thead").css("display", "none");// Hide
+            break;
+            default:
+              $(".player-table-thead").css("display", "table-cell");// Show
+              $(".usable-table-thead").css("display", "table-cell");
+            break;
+        }
+      });
       $(document).ready(function() {
         //console.log(window.location.href);
         //$(".navbar-fixed-top .nav a").on('click', function() {
