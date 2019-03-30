@@ -293,7 +293,7 @@
           });
         }
       });
-      function getEndpoint() { return "{{ url_for('/', _external=True) + 'api/' }}" }
+      function getEndpoint() { return "{{ url_for('/', _external=True).replace('index.html', '') + 'api/' }}" }
     </script>
   </body>
 </html>
