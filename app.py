@@ -36,13 +36,11 @@ paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
 
 @app.errorhandler(404)
 def not_found_error(error=None):
-    language = getLanguage(request)
-    return INTERNAL_ERROR_404_STRINGS[language], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
+    return INTERNAL_ERROR_404_STRINGS[getLanguage(request)], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
 
 @app.errorhandler(500)
 def internal_error(error=None):
-    language = getLanguage(request)
-    return INTERNAL_ERROR_500_STRINGS[language], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
+    return INTERNAL_ERROR_500_STRINGS[getLanguage(request)], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
 
 @app.route('/', methods=["GET"])
 @app.route("/api", methods=["GET"])
