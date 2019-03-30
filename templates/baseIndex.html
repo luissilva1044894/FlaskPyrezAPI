@@ -41,30 +41,30 @@
       </nav>
     </header>
 
+    <section id="sticky-notifications" class="stick-to-top js-stick-to-top">
+      <!-- Add browser warning. Will show for ie9 and below -->
+      <!--[if IE]>
+        <div class="notification-bar notification-bar--danger">
+          <span class="notification-bar__icon">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <span class="sr-only">{% block warning_unsupported_msg_title %}{% endblock %}:</span>
+          </span>
+          <span class="notification-bar__message">{% block warning_unsupported_msg_bar %}{% endblock %}</span>
+        </div>
+      <![endif]-->
+      <noscript>
+        <div class="notification-bar notification-bar--danger">
+          <span class="notification-bar__icon">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <span class="sr-only">{% block warning_nojs_msg_title %}{% endblock %}:</span>
+          </span>
+          <span class="notification-bar__message">{% block warning_nojs_msg_bar %}{% endblock %}</span>
+        </div>
+      </noscript>
+    </section>
+
     <div class="container">
       <br/><br/><br/>
-
-      <section id="sticky-notifications" class="stick-to-top js-stick-to-top">
-        <!-- Add browser warning. Will show for ie9 and below -->
-        <!--[if IE]>
-          <div class="notification-bar notification-bar--danger">
-            <span class="notification-bar__icon">
-              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-              <span class="sr-only">{% block warning_unsupported_msg_title %}{% endblock %}:</span>
-            </span>
-            <span class="notification-bar__message">{% block warning_unsupported_msg_bar %}{% endblock %}</span>
-          </div>
-        <![endif]-->
-        <noscript>
-          <div class="notification-bar notification-bar--danger">
-            <span class="notification-bar__icon">
-              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-              <span class="sr-only">{% block warning_nojs_msg_title %}{% endblock %}:</span>
-            </span>
-            <span class="notification-bar__message">{% block warning_nojs_msg_bar %}{% endblock %}</span>
-          </div>
-        </noscript>
-      </section>
       <!--
       <div class="col-xs-12 col-sm-12 col-md-12 mt-2 text-center" id="center2">
         <h2><strong>Wrappers available</strong><br/></h2>
@@ -155,19 +155,22 @@
 
       <div id="result-warning"></div>
       <table class="table padding-top" id="commands-generator">
-        <tr>
+        <thead>
+          <tr>
             <th>{% block commands_generator_cmdname %}{% endblock %}</th>
             <th>{% block commands_generator_cmdtype %}{% endblock %}</th>
             <th>{% block commands_generator_cmdcd %}{% endblock %}</th>
-            <th class="player-table-thead">{% block commands_generator_paladinsign %}{% endblock %}</th>
-            <th class="plat-table-thead">{% block commands_generator_paladinsplat %}{% endblock %}</th>
+            <th>{% block commands_generator_paladinsign %}{% endblock %}</th>
+            <th>{% block commands_generator_paladinsplat %}{% endblock %}</th>
             <th>{% block commands_generator_cmdlang %}{% endblock %}</th>
             <th>Bot</th>
-            <th class="usable-table-thead"></th>
+            <th></th>
             <th>{% block commands_generator_chatbotuseraccess %}{% endblock %}</th>
             <th></th>
-        </tr>
-        <tr>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
             <td>
               <div class="form-group">
                 <div class="input-group">
@@ -251,12 +254,13 @@
               <button class="btn btn-default" id="generate_command" data-lang="{% block commands_generator_datalang %}{% endblock %}" onclick="generateCommand('{% block commands_generator_paramslang %}{% endblock %}')">{% block commands_generator_generatebtn %}{% endblock %}</button>
             </td>
           </tr>
+        </tbody>
       </table>
     </div>
 
     <nav class="navbar navbar-bottom navbar-footer bg-inverse">
       <div class="col-xs-12 col-sm-12 col-md-12 mt-2 text-center">
-        <p>{% block footer_createby %}{% endblock %} <i class="fab fa-discord" style="font-size:18px"></i><a href="https://twitch.tv/nonsocial_" title="{% block header_titles_twitch %}{% endblock %}" target="_blank"> Nonsocial#2731</a>.
+        <p>{% block footer_createby %}{% endblock %} <i class="fab fa-discord" style="font-size:15px" aria-hidden="true"></i><a href="https://twitch.tv/nonsocial_" title="{% block header_titles_twitch %}{% endblock %}" target="_blank"> Nonsocial#2731</a>.
           <br/>{% block footer_hi_rez_copyright %}{% endblock %}</p>
       </div>
     </nav>
@@ -268,22 +272,9 @@
     <script src="{{ url_for('static', filename='js/ifuncs.js') }}"></script>
     <script src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
     <script type="text/javascript">
-      /* global WebAssembly */
-      $("#command_type").change(function() {
-        var command = $("#command_type").val();  
-          switch(command) {
-            case "version":
-              $(".player-table-thead").css("display", "none");
-              $(".usable-table-thead").css("display", "none");// Hide
-            break;
-            default:
-              $(".player-table-thead").css("display", "table-cell");// Show
-              $(".usable-table-thead").css("display", "table-cell");
-            break;
-        }
-      });
       $(document).ready(function() {
-        //console.log(window.location.href);
+        //window.location.href = "Testing"
+        console.log(window.location.href);
         //$(".navbar-fixed-top .nav a").on('click', function() {
           //window.location.href = $(this).attr('href');
         //});
