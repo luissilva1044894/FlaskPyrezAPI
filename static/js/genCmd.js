@@ -77,11 +77,8 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                     } else customAPICode = customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&champion=$(1)&language={LANGUAGE}");
                 } else {
                     if(String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
-                        if(userCanUse.checked) customAPICode = customAPICode.replace("{PARAMS}", "platform=$(1)&language={LANGUAGE}");
+                        if(userCanUse.checked) cmdUsers = customAPICode.replace("{PARAMS}", "platform=$(1)&language={LANGUAGE}");
                         else customAPICode = customAPICode.replace("{PARAMS}", "platform={PLATFORM}&language={language}");
-                        cmdUsers = customAPICode;
-                        console.log(customAPICode);
-                        console.log(cmdUsers);
                     } else {
                         if(userCanUse.checked) {
                             cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}"));
