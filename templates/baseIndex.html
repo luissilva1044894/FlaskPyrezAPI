@@ -270,8 +270,7 @@
     <script type="text/javascript">
       /* global WebAssembly */
       $("#command_type").change(function() {
-        var commandType = getElementById("command_type");
-        if ($("#command_type").val().toLowerCase() === commandType["5"].value.toLowerCase()) {
+        if ($("#command_type").val().toLowerCase() === getElementById("command_type")["5"].value.toLowerCase()) {
           $(".player-table-thead").css("display", "none");
           $(".usable-table-thead").css("display", "none");// Hide
         } else {
