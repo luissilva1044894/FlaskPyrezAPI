@@ -70,7 +70,6 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 
                 customAPICode = "$(customapi {ENDPOINT_LINK}?{PARAMS})";
                 cmdUsers = "$(eval `$(querystring)`.trim()==``?`{IF}`:`{ELSE}`; )";
-                console.log(commandType.value);
                 if(String(commandType.value).toLowerCase() === commandType["1"].value.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].value.toLowerCase()) {
                     if(userCanUse.checked) {
                         cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}"));
@@ -80,6 +79,8 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                     if(String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
                         if(userCanUse.checked) cmdUsers = cmdUsers.replace("{PARAMS}", "platform=$(1)&language={LANGUAGE}");
                         else customAPICode = customAPICode.replace("{PARAMS}", "platform={PLATFORM}&language={language}");
+                        console.log(customAPICode);
+                        console.log(cmdUsers);
                     } else {
                         if(userCanUse.checked) {
                             cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}"));
