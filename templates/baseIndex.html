@@ -270,12 +270,16 @@
     <script type="text/javascript">
       /* global WebAssembly */
       $("#command_type").change(function() {
-        if ($("#command_type").val().toLowerCase() === getElementById("command_type")["5"].value.toLowerCase()) {
-          $(".player-table-thead").css("display", "none");
-          $(".usable-table-thead").css("display", "none");// Hide
-        } else {
-          $(".player-table-thead").css("display", "table-cell");// Show
-          $(".usable-table-thead").css("display", "table-cell");
+        var command = $("#command_type").val();  
+          switch(command) {
+            case "version":
+              $(".player-table-thead").css("display", "none");
+              $(".usable-table-thead").css("display", "none");// Hide
+            break;
+            default:
+              $(".player-table-thead").css("display", "table-cell");// Show
+              $(".usable-table-thead").css("display", "table-cell");
+            break;
         }
       });
       $(document).ready(function() {
