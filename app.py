@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from pyrez.api import *
-from pyrez.enumerations import *
-from langs import *
-
+from enum import Enum
 from datetime import datetime
 
 from decouple import config, Csv
-
 from flask import Flask, jsonify, request, render_template
+
+from pyrez.api import *
+from pyrez.enumerations import *
+
+from langs import *
 
 app = Flask(__name__)
 
-from enum import Enum
 class LanguagesSupported(Enum):
     English = "en"
     Portuguese = "pt"
@@ -23,7 +23,6 @@ class PlatformsSupported(Enum):
     Xbox = "10"
     PS4 = "9"
     Switch = "22"
-
 try:
     DEBUG = config("DEBUG", default=False, cast=bool)
     PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
@@ -38,38 +37,33 @@ paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
 @app.errorhandler(404)
 def not_found_error(error=None):
     return INTERNAL_ERROR_404_STRINGS[getLanguage(request)], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
-
 @app.errorhandler(500)
 def internal_error(error=None):
     return INTERNAL_ERROR_500_STRINGS[getLanguage(request)], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
-
 @app.route('/', methods=["GET"])
 @app.route("/api", methods=["GET"])
 @app.route("/index", methods=["GET"])
 @app.route("/index.html", methods=["GET"])
 def index():#ip = request.remote_addr
     return render_template("index-{0}.html".format(getLanguage(request))) #redirect(url_for("index"))
-
 def formatDecimal(data, form = ",d"):
     return format(data, form) if data else 0
-
+#def encodeData(data):
+#    from urllib.parse import quote as URLEncoder
+#    return URLEncoder(data)
 def getAcceptedLanguages(requestArgs):
     return str(request.accept_languages).split('-')[0] if len(str(request.accept_languages)) > 0 else LanguagesSupported.English.value
-
 def getLanguage(requestArgs):
     aux = str(requestArgs.args.get("language", default=getAcceptedLanguages(requestArgs))).lower()
     try:
         return LanguagesSupported(aux).value
     except ValueError:
         return LanguagesSupported.English.value
-
 def getPlatform(requestArgs):
     aux = str(requestArgs.get("platform", default=str(PlatformsSupported.PC.value))).lower()
     return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("sw") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PC
-
 def getPlayerName(requestArgs):
     return str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
-
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
     if PlatformsSupported.PC:
         playerName = playerName.strip()#.strip(',.-')
@@ -82,7 +76,6 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
     else:
         temp = paladinsAPI.getPlayerIdByName(playerName)
     return temp[0].playerId if temp else -1
-
 def getLastSeen(lastSeen, language = LanguagesSupported.English):
     now = datetime.utcnow()
     delta = now - lastSeen
@@ -91,7 +84,6 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
     days, hours = divmod(hours, 24)
     fmt = "{d}d" if days else "{h}h, {m}m" if hours else "{m}m, {s}s"
     return fmt.format(d=days, h=hours, m=minutes, s=seconds)
-
 @app.route("/api/decks", methods=["GET"])
 def getDecks():
     platform = getPlatform(request.args)
@@ -99,12 +91,10 @@ def getDecks():
     championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
     language = getLanguage(request)
     return INTERNAL_ERROR_404_STRINGS[language]
-
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
     platform = getPlatform(request.args)
     language = getLanguage(request)
-
     try:
         hiRezServerStatus = paladinsAPI.getHiRezServerStatus()
         hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[0]
@@ -114,13 +104,11 @@ def getGameVersion():
     return GAME_VERSION_STRINGS[language].format("Paladins", "Xbox One" if platform == PlatformsSupported.Xbox else "PS4" if platform == PlatformsSupported.PS4 else "Nintendo Switch" if platform == PlatformsSupported.Switch else "PC",
                         PALADINS_UP_STRINGS[language].format(PALADINS_LIMITED_ACCESS_STRINGS[language] if hiRezServerStatus.limitedAccess else "") if hiRezServerStatus.status else PALADINS_DOWN_STRINGS[language],
                         patchInfo.gameVersion, hiRezServerStatus.version)
-
 @app.route("/api/stalk", methods=["GET"])
 def getStalk():
     platform = getPlatform(request.args)
     playerName = getPlayerName(request.args)
     language = getLanguage(request)
-
     try:
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
@@ -134,22 +122,20 @@ def getStalk():
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                         playerStalkRequest.statusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.status != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStalkRequest.matchQueueId], playerStalkRequest.matchId),
                         getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getLastSeen(getPlayerRequest.lastLoginDatetime, language), formatDecimal(getPlayerRequest.hoursPlayed), getPlayerRequest.platform, PLAYER_REGION_STRINGS[language][str(getPlayerRequest.playerRegion).replace(' ', "_").upper()])
-
 @app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
     platform = getPlatform(request.args)
     playerName = getPlayerName(request.args)
     language = getLanguage(request)
-
-    #try:
-    playerId = getPlayerId(playerName, platform)
-    if playerId == 0:
-        return PLAYER_NULL_STRINGS[language]
-    if playerId == -1:
-        return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
-    lastMatchRequest = paladinsAPI.getMatchHistory(playerId)[0]
-    #except:
-    #    return INTERNAL_ERROR_500_STRINGS[language]
+    try:
+        playerId = getPlayerId(playerName, platform)
+        if playerId == 0:
+            return PLAYER_NULL_STRINGS[language]
+        if playerId == -1:
+            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+        lastMatchRequest = paladinsAPI.getMatchHistory(playerId)[0]
+    except:
+        return INTERNAL_ERROR_500_STRINGS[language]
     kda = ((lastMatchRequest.assists / 2) + lastMatchRequest.kills) / lastMatchRequest.deaths if lastMatchRequest.deaths > 1 else 1
     kda = int(kda) if kda % 2 == 0 else round(kda, 2)
     return LAST_MATCH_STRINGS[language].format(lastMatchRequest.mapName, lastMatchRequest.matchId, lastMatchRequest.godId.getName() if isinstance(lastMatchRequest.godId, Champions) else lastMatchRequest.godName,
@@ -157,7 +143,6 @@ def getLastMatch():
                         formatDecimal(lastMatchRequest.damage), formatDecimal(lastMatchRequest.credits), lastMatchRequest.matchMinutes,
                         PLAYER_REGION_STRINGS[language][str(lastMatchRequest.matchRegion).replace(' ', "_").upper()], MATCH_STRINGS[language][str(lastMatchRequest.winStatus).upper()], "{0}/{1}".format(lastMatchRequest.team1Score,
                         lastMatchRequest.team2Score) if lastMatchRequest.taskForce == 1 else "{0}/{1}".format(lastMatchRequest.team2Score, lastMatchRequest.team1Score))
-
 @app.route("/api/currentmatch", methods=["GET"])
 def getCurrentMatch():
     platform = getPlatform(request.args)
@@ -194,13 +179,11 @@ def getCurrentMatch():
         return CURRENT_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.matchQueueId], ",".join(team1), ",".join(team2))
     else:
         return "An unexpected error has occurred!"
-
 @app.route("/api/rank", methods=["GET"])
 def getRank():
     playerName = getPlayerName(request.args)
     platform = getPlatform(request.args)
     language = getLanguage(request)
-
     try:
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
@@ -224,7 +207,6 @@ def getRank():
                                 "" if r1.currentRank == Tier.Unranked else " ({0} TP{1})".format(formatDecimal(r1.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r1.leaderboardIndex) if r1.leaderboardIndex > 0 else ""),
                                 "" if r1.currentRank == Tier.Unranked and r1.wins + r1.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r1.wins), formatDecimal(r1.losses)),
                                 " (Win rate Global: {0}%{1})".format(getPlayerRequest.getWinratio(), "" if r1.wins + r1.losses == 0 else " & Ranked: {0}%".format(r1.getWinratio())))
-
 def checkChampName(championName):
     champs = [ "androxus", "atlas", "ash", "barik", "bombking", "buck", "cassie", "dredge", "drogoz", "evie", "fernando", "furia", "grohk", "grover",
     "imani", "inara", "jenos", "khan", "kinessa", "koga", "lex", "lian", "maeve", "makoa", "maldamba", "moji", "pip", "ruckus",
@@ -240,7 +222,6 @@ def getWinrate():
     playerName = getPlayerName(request.args)
     championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
     language = getLanguage(request)
-
     try:
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
@@ -273,6 +254,5 @@ def getWinrate():
         kda = ((assists / 2) + kills) / deaths if deaths > 1 else 1
         return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
-
 if __name__ == "__main__":
     app.run(debug=DEBUG)
