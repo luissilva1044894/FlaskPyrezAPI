@@ -17,6 +17,7 @@ class LanguagesSupported(Enum):
     English = "en"
     Portuguese = "pt"
     Spanish = "es"
+    Polish = "pl"
 class PlatformsSupported(Enum):
     PC = "pc"
     Xbox = "10"
