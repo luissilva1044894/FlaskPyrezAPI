@@ -5,13 +5,38 @@ from datetime import datetime
 
 from decouple import config, Csv
 from flask import Flask, jsonify, request, render_template
+from flask_sqlalchemy import SQLAlchemy
 
 from pyrez.api import *
 from pyrez.enumerations import *
 
 from langs import *
 
+try:
+    DEBUG = config("DEBUG", default=False, cast=bool)
+    PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
+    PYREZ_DEV_ID = config("PYREZ_DEV_ID")
+    DATABASE_URL = config("DATABASE_URL")
+except:
+    DEBUG = os.environ["DEBUG"] if os.environ["DEBUG"] else False
+    PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
+    PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
+    DATABASE_URL = os.environ("DATABASE_URL")#"sqlite:///{}.db".format(__name__)
+
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db = SQLAlchemy(app)
+
+class Player(db.Model):
+    __tablename__ = "players"
+
+    id = db.Column("player_id", db.Integer, primary_key=True, unique=True, nullable=False)
+    name = db.Column("player_name", db.String(120), nullable=False)
+    platform = db.Column("player_platform", db.String(4), nullable=False)
+
+    def __repr__(self):
+        return "<Player {} (Id: {} - Platform: {})>".format(self.name, self.id, self.platform)
 
 class LanguagesSupported(Enum):
     English = "en"
@@ -19,19 +44,14 @@ class LanguagesSupported(Enum):
     Spanish = "es"
     Polish = "pl"
 class PlatformsSupported(Enum):
+    def __str__(self):
+        return str(self.value).lower()
+    def __hash__(self):
+        return hash(str(self.value).lower())
     PC = "pc"
     Xbox = "10"
     PS4 = "9"
     Switch = "22"
-try:
-    DEBUG = config("DEBUG", default=False, cast=bool)
-    PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
-    PYREZ_DEV_ID = config("PYREZ_DEV_ID")
-except:
-    DEBUG = os.environ["DEBUG"] if os.environ["DEBUG"] else False
-    PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
-    PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
-
 paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
 
 @app.errorhandler(404)
@@ -72,11 +92,15 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
         return 0
     elif str(playerName).isnumeric():
         return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
-    elif str(platform.value).isnumeric():
-        temp = paladinsAPI.getPlayerIdsByGamerTag(playerName, platform)
-    else:
-        temp = paladinsAPI.getPlayerIdByName(playerName)
-    return temp[0].playerId if temp else -1
+    _player = Player.query.filter_by(name=playerName, platform=str(platform)).first()
+    print("Player readed", _player)
+    if _player is None:
+        temp = paladinsAPI.getPlayerIdsByGamerTag(playerName, platform) if str(platform).isnumeric() else paladinsAPI.getPlayerIdByName(playerName)
+        _player = Player(name=playerName, id=temp[0].playerId, platform=str(platform))
+        print("Player created", _player)
+        db.session.add(_player)
+        db.session.commit()
+    return _player.id if _player else -1
 def getLastSeen(lastSeen, language = LanguagesSupported.English):
     now = datetime.utcnow()
     delta = now - lastSeen
@@ -256,4 +280,5 @@ def getWinrate():
         return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
 if __name__ == "__main__":
+    db.create_all()
     app.run(debug=DEBUG)

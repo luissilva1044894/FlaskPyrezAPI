@@ -16,7 +16,12 @@
     		"description": "Used for authentication. This is the developer ID that you receive from Hi-Rez Studios.",
     		"required": "true",
     		"value": ""
-    	}
+    	},
+        "DATABASE_URL": {
+            "description": "Database URL",
+            "required": "true",
+            "value": ""
+        }
 	},
     "keywords": [ "flask", "flask-api", "flask-backend", "hirez", "hi-rez", "paladins", "paladins-api", "api-server", "twitch", "nightbot", "endpoint", "endpoints", "open-source" ],
     "logo": "https://web2.hirez.com/paladins/assets/paladins-logo.png",
