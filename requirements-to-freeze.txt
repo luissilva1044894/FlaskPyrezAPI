@@ -1,0 +1,24 @@
+beautifulsoup4
+certifi
+chardet
+Click
+Flask
+Flask-Migrate
+Flask-Script
+Flask-SQLAlchemy
+gunicorn
+idna
+itsdangerous
+Jinja2
+MarkupSafe
+pip
+psycopg2
+psycopg2-binary
+python-decouple
+requests
+requests-aeaweb
+setuptools
+SQLAlchemy
+urllib3
+Werkzeug
+-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=Pyrez
