@@ -6,12 +6,13 @@ from datetime import datetime
 from decouple import config, Csv
 from flask import Flask, jsonify, request, render_template
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError
 
 from pyrez.api import *
 from pyrez.enumerations import *
 
 from langs import *
-
+import json
 try:
     DEBUG = config("DEBUG", default=False, cast=bool)
     PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
@@ -44,14 +45,19 @@ class Player(db.Model):
     def __repr__(self):
         return "<Player {} (Id: {} - Platform: {})>".format(self.name, self.id, self.platform)
     def save(self):
-        db.session.add(self)
-        print("Player created", self)
-        db.session.commit()
+        try:
+            db.session.add(self)
+            print("Player stored on database", self)
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
     def update(self, name):
+        print("Player updated on database", self)
         self.name = name
         db.session.commit()
     def delete(self):
         db.session.delete(self)
+        print("Player deleted on database", self)
         db.session.commit()
     def json(self):
         return { 'id': self.id, 'name': self.name, 'platform': self.platform }
@@ -295,4 +301,5 @@ def getWinrate():
         return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
 if __name__ == "__main__":
+    #db.create_all()
     app.run(debug=DEBUG)
