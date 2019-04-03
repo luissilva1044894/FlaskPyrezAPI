@@ -15,9 +15,7 @@ https://discord.gg/XkydRPS "Support Server on Discord") on [Discord](https://dis
 - [Access](https://fs12.formsite.com/HiRez/form48/secure_index.html "Form access to Hi-Rez API") to Hi-Rez Studios' API.
 
 ## Installation
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luissilva1044894/FlaskPyrezAPI/tree/master)
-
-### Deploy (Heroku)
+### Deploy (Heroku) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luissilva1044894/FlaskPyrezAPI/tree/master)
 1. Go to [Heroku](https://id.heroku.com/login) and create a new app (eg: `your-app-name`)
 2. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 3. `heroku login`
