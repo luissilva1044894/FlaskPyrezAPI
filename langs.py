@@ -265,7 +265,7 @@ CURRENTLY_MATCH_STRINGS = {
 }
 PLAYER_STALK_STRINGS = {
     "en" : "{0} is {1} - Created at: {2} | Last Seen: {3} ago | Playtime: {4}h | Platform: {5} | Region: {6}",
-    "es" : "{0} is {1} - Created at: {2} | Last Seen: {3} ago | Playtime: {4}h | Platform: {5} | Region: {6}",
+    "es" : "{0} está {1} - Creado en: {2} | Visto por última vez: {3} | Tiempo jugado: {4}h | Plataforma: {5} | Región: {6}",
     "pl" : "{0} jest {1} - Utworzono: {2} | Ostatnio widziany: {3} temu | Czas gry: {4}h | Platforma: {5} | Region: {6}",
     "pt" : "{0} está {1} - Criado em: {2} | Último login: {3} atrás | Horas jogadas: {4}h | Platforma: {5} | Região: {6}",
 }
