@@ -10,3 +10,7 @@ manager.add_command("db", MigrateCommand)
 
 if __name__ == "__main__":
     manager.run()
+#init: python manage.py db init
+#migrate: python manage.py db migrate
+#upgrade: python manage.py db upgrade
+#release: python manage.py db upgrade
