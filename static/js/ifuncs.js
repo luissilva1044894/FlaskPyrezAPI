@@ -64,8 +64,8 @@ function commandTypeChanged() {
 function checkButtonPos() {
     getElementById("generate_command").disabled = !(getElementById("command_name").value && getElementById("player_name").value)
 }
-function keyCodeTrigger(keyCode) {
-    if(keyCode == 13) { $("#generate_command").trigger("click"); }
+function keyCodeTrigger(keyCode, elementId) {
+    if(keyCode == 13) { $(elementId).trigger("click"); }
 }
 function onPageLoaded() {
     $("#result").html('');
@@ -80,7 +80,12 @@ function onPageLoaded() {
         console.log(commandCooldown.value);
     });
     $("#player_name").on("keypress", function(e) {
-        keyCodeTrigger(e.keyCode);
+        checkButtonPos();
+        keyCodeTrigger(e.keyCode, "#generate_command");
+    });
+    $("#command_name").on("keypress", function(e) {
+        checkButtonPos();
+        keyCodeTrigger(e.keyCode, "#generate_command");
     });
 }
 function clearField(divName) {
