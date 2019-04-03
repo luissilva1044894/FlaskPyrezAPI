@@ -47,31 +47,31 @@ class Player(db.Model):
     def save(self):
         try:
             db.session.add(self)
-            print("Player stored on database", self)
+            print("Player stored - Database", self)
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
     def update(self, name):
-        print("Player updated on database", self)
+        print("Player updated - Database", self)
         self.name = name
         db.session.commit()
     def delete(self):
         db.session.delete(self)
-        print("Player deleted on database", self)
+        print("Player deleted - Database", self)
         db.session.commit()
     def json(self):
-        return { 'id': self.id, 'name': self.name, 'platform': self.platform }
-
-class LanguagesSupported(Enum):
-    English = "en"
-    Portuguese = "pt"
-    Spanish = "es"
-    Polish = "pl"
-class PlatformsSupported(Enum):
+        return { "id": self.id, "name": self.name, "platform": self.platform }
+class BaseEnumeration(Enum):
     def __str__(self):
         return str(self.value).lower()
     def __hash__(self):
         return hash(str(self.value).lower())
+class LanguagesSupported(BaseEnumeration):
+    English = "en"
+    Portuguese = "pt"
+    Spanish = "es"
+    Polish = "pl"
+class PlatformsSupported(BaseEnumeration):
     PC = "pc"
     Xbox = "10"
     PS4 = "9"
@@ -117,7 +117,7 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
     elif str(playerName).isnumeric():
         return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
     _player = Player.query.filter_by(name=playerName, platform=str(platform)).first()
-    print("Player readed", _player)
+    print("Player readed - Database", _player)
     if _player is None:
         temp = paladinsAPI.getPlayerIdsByGamerTag(playerName, platform) if str(platform).isnumeric() else paladinsAPI.getPlayerIdByName(playerName)
         _player = Player(name=playerName, id=temp[0].playerId, platform=str(platform))
