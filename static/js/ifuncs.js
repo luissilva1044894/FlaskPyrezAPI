@@ -73,18 +73,18 @@ function onPageLoaded() {
     //    alert(this.value);
         //event.preventDefault();
     //});
-    $("#command_cooldown").on("keypress", function(e) {
-        keyCodeTrigger(e.keyCode);
+    $("#command_cooldown").on("keypress", function(e) {//https://mathiasbynens.be/notes/oninput
+        //keyCodeTrigger(e.keyCode);
         var commandCooldown = getElementById("command_cooldown");
         commandCooldown.value = commandCooldown.value % commandCooldown.max;
         console.log(commandCooldown.value);
     });
     $("#player_name").on("keypress", function(e) {
-        checkButtonPos();
+        //checkButtonPos();
         keyCodeTrigger(e.keyCode, "#generate_command");
     });
     $("#command_name").on("keypress", function(e) {
-        checkButtonPos();
+        //checkButtonPos();
         keyCodeTrigger(e.keyCode, "#generate_command");
     });
 }
