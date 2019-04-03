@@ -1,8 +1,6 @@
 
 {% extends 'baseIndex.html' %}
 
-{% block languague %}pt{% endblock %}
-
 {% block title %}Comandos para Twitch - Command generator{% endblock %}
 
 {% block metacontent %}FlaskPyrezAPI é um endpoint open-source de comandos para Twitch, escrito em Python, que manipula dados sobre jogadores, partidas e outras estatísticas do jogo Paladins. Esta API usa Pyrez para se conectar e requisitar dados à API da Hi-Rez Studios.{% endblock %}
@@ -28,44 +26,37 @@
 {% block commands_table_contents_currentmatch_desc %}Mostra os ranks dos jogadores em uma partida{% endblock %}
 {% block commands_table_contents_currentmatch_ign %}JOGADOR{% endblock %}
 {% block commands_table_contents_currentmatch_plat %}PLATAFORMA{% endblock %}
-{% block commands_table_contents_currentmatch_lang %}PT{% endblock %}
 
 {% block commands_table_contents_decks %}Decks{% endblock %}
 {% block commands_table_contents_decks_desc %}Baralhos de um campeão{% endblock %}
 {% block commands_table_contents_decks_ign %}JOGADOR{% endblock %}
 {% block commands_table_contents_decks_champ %}CAMPEÃO{% endblock %}
 {% block commands_table_contents_decks_plat %}PLATAFORMA{% endblock %}
-{% block commands_table_contents_decks_lang %}PT{% endblock %}
 
 {% block commands_table_contents_winrate %}KDA{% endblock %}
 {% block commands_table_contents_winrate_desc %}KDA de um jogador ou campeão{% endblock %}
 {% block commands_table_contents_winrate_ign %}JOGADOR{% endblock %}
 {% block commands_table_contents_winrate_champ %}CAMPEÃO{% endblock %}
 {% block commands_table_contents_winrate_plat %}PLATAFORMA{% endblock %}
-{% block commands_table_contents_winrate_lang %}PT{% endblock %}
 
 {% block commands_table_contents_lastmatch %}Última partida{% endblock %}
 {% block commands_table_contents_lastmatch_desc %}Informações sobre a última partida jogada{% endblock %}
 {% block commands_table_contents_lastmatch_ign %}JOGADOR{% endblock %}
 {% block commands_table_contents_lastmatch_plat %}PLATAFORMA{% endblock %}
-{% block commands_table_contents_lastmatch_lang %}PT{% endblock %}
 
 {% block commands_table_contents_rank %}Rank{% endblock %}
 {% block commands_table_contents_rank_desc %}O rank atual de um jogador{% endblock %}
 {% block commands_table_contents_rank_ign %}JOGADOR{% endblock %}
 {% block commands_table_contents_rank_plat %}PLATAFORMA{% endblock %}
-{% block commands_table_contents_rank_lang %}PT{% endblock %}
 
 {% block commands_table_contents_version %}Server{% endblock %}
 {% block commands_table_contents_version_desc %}Status do servidor do Paladins{% endblock %}
 {% block commands_table_contents_version_plat %}PLATAFORMA{% endblock %}
-{% block commands_table_contents_version_lang %}PT{% endblock %}
 
 {% block commands_table_contents_stalk %}Stalk{% endblock %}
 {% block commands_table_contents_stalk_desc %}Status sobre um jogador{% endblock %}
 {% block commands_table_contents_stalk_ign %}JOGADOR{% endblock %}
 {% block commands_table_contents_stalk_plat %}PLATAFORMA{% endblock %}
-{% block commands_table_contents_stalk_lang %}PT{% endblock %}
 
 {% block commands_generator_cmdname %}Nome do comando{% endblock %}
 {% block commands_generator_cmdtype %}Comando{% endblock %}
@@ -103,10 +94,7 @@
 {% block commands_generator_userlvl_owner %}Streamer{% endblock %}
 
 {% block commands_generator_generatebtn %}Gerar{% endblock %}
-{% block commands_generator_paramslang %}pt{% endblock %}
-{% block commands_generator_datalang %}pt{% endblock %}
 
-{% block alert_msg_lang %}pt{% endblock %}
 {% block warning_unsupported_msg_bar %}Você está usando um navegador não suportado, atualize para uma versão mais recente!{% endblock %}
 {% block warning_unsupported_msg_title %}Aviso{% endblock %}
 
