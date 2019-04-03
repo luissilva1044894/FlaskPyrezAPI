@@ -185,15 +185,15 @@ def getRank():
     playerName = getPlayerName(request.args)
     platform = getPlatform(request.args)
     language = getLanguage(request)
-    try:
-        playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        elif playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
-        getPlayerRequest = paladinsAPI.getPlayer(playerId)
-    except:
-        return INTERNAL_ERROR_500_STRINGS[language]
+    #try:
+    playerId = getPlayerId(playerName, platform)
+    if playerId == 0:
+        return PLAYER_NULL_STRINGS[language]
+    elif playerId == -1:
+        return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+    getPlayerRequest = paladinsAPI.getPlayer(playerId)
+    #except:
+    #    return INTERNAL_ERROR_500_STRINGS[language]
     r1 = getPlayerRequest.rankedController
     r2 = getPlayerRequest.rankedKeyboard
     if not r1.hasPlayedRanked() and r2.hasPlayedRanked():
