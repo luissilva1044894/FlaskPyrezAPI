@@ -18,8 +18,8 @@ Jinja2==2.10
 MarkupSafe==1.0
 pip==19.0.3
 python-decouple==3.1
+psycopg2-binary==2.7.7
 psycopg2==2.7.7
-psycopg2-binary==2.7.5
 requests==2.21.0
 requests-aeaweb==0.0.1
 setuptools==40.4.3
