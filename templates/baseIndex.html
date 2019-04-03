@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{% block languague %}{% endblock %}">
+<html lang="{{ lang }}">
   <head>
     <title>{% block title %}{% endblock %}</title>
     <meta charset="UTF-8">
@@ -93,7 +93,7 @@
               <td class="tg-us36">{{ url_for("getCurrentMatch", _external=True) }}</td>
               <td class="tg-yw4l">?player={% block commands_table_contents_currentmatch_ign %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;platform={% block commands_table_contents_currentmatch_plat %}{% endblock %}</td>
-              <td class="tg-yw4l">&amp;language={% block commands_table_contents_currentmatch_lang %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={{ lang.upper() }}</td>
               <td class="tg-yw4l"></td>
             </tr>
             <tr>
@@ -103,7 +103,7 @@
               <td class="tg-yw4l">?player={% block commands_table_contents_decks_ign %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;champion={% block commands_table_contents_decks_champ %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;platform={% block commands_table_contents_decks_plat %}{% endblock %}</td>
-              <td class="tg-yw4l">&amp;language={% block commands_table_contents_decks_lang %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={{ lang.upper() }}</td>
             </tr>
             <tr>
               <td class="tg-yw4l">{% block commands_table_contents_winrate %}{% endblock %}</td>
@@ -112,7 +112,7 @@
               <td class="tg-yw4l">?player={% block commands_table_contents_winrate_ign %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;champion={% block commands_table_contents_winrate_champ %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;platform={% block commands_table_contents_winrate_plat %}{% endblock %}</td>
-              <td class="tg-yw4l">&amp;language={% block commands_table_contents_winrate_lang %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={{ lang.upper() }}</td>
             </tr>
             <tr>
               <td class="tg-yw4l">{% block commands_table_contents_lastmatch %}{% endblock %}</td>
@@ -120,7 +120,7 @@
               <td class="tg-us36">{{ url_for("getLastMatch", _external=True) }}</td>
               <td class="tg-yw4l">?player={% block commands_table_contents_lastmatch_ign %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;platform={% block commands_table_contents_lastmatch_plat %}{% endblock %}</td>
-              <td class="tg-yw4l">&amp;language={% block commands_table_contents_lastmatch_lang %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={{ lang.upper() }}</td>
               <td class="tg-yw4l"></td>
             </tr>
             <tr>
@@ -129,7 +129,7 @@
               <td class="tg-us36">{{ url_for("getRank", _external=True) }}</td>
               <td class="tg-yw4l">?player={% block commands_table_contents_rank_ign %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;platform={% block commands_table_contents_rank_plat %}{% endblock %}</td>
-              <td class="tg-yw4l">&amp;language={% block commands_table_contents_rank_lang %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={{ lang.upper() }}</td>
               <td class="tg-yw4l"></td>
             </tr>
             <tr>
@@ -137,7 +137,7 @@
               <td class="tg-yw4l">{% block commands_table_contents_version_desc %}{% endblock %}</td>
               <td class="tg-us36">{{ url_for("getGameVersion", _external=True) }}</td>
               <td class="tg-yw4l">?platform={% block commands_table_contents_version_plat %}{% endblock %}</td>
-              <td class="tg-yw4l">&amp;language={% block commands_table_contents_version_lang %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={{ lang.upper() }}</td>
               <td class="tg-yw4l"></td>
               <td class="tg-yw4l"></td>
             </tr>
@@ -147,7 +147,7 @@
               <td class="tg-us36">{{ url_for("getStalk", _external=True) }}</td>
               <td class="tg-yw4l">?player={% block commands_table_contents_stalk_ign %}{% endblock %}</td>
               <td class="tg-yw4l">&amp;platform={% block commands_table_contents_stalk_plat %}{% endblock %}</td>
-              <td class="tg-yw4l">&amp;language={% block commands_table_contents_stalk_lang %}{% endblock %}</td>
+              <td class="tg-yw4l">&amp;language={{ lang.upper() }}</td>
               <td class="tg-yw4l"></td>
             </tr>
           </tbody>
@@ -252,7 +252,7 @@
               </div>
             </td>
             <td> <!--<button id="generate_command" class="btn btn-default" disabled="disabled">Generate</button>-->
-              <button class="btn btn-default" id="generate_command" data-lang="{% block commands_generator_datalang %}{% endblock %}" onclick="generateCommand('{% block commands_generator_paramslang %}{% endblock %}')">{% block commands_generator_generatebtn %}{% endblock %}</button>
+              <button class="btn btn-default" id="generate_command" data-lang="{{ lang }}" onclick="generateCommand('{{ lang }}')">{% block commands_generator_generatebtn %}{% endblock %}</button>
             </td>
           </tr>
         </tbody>
@@ -282,8 +282,7 @@
         if(ClipboardJS.isSupported()) {
           var clipboard = new ClipboardJS(".copy-to-clip-button");
           clipboard.on("success", function(e) {
-            langAlert = "{% block alert_msg_lang %}{% endblock %}"
-            addAlert(getTranslatedString(langAlert, "copyToClipboardSuccess"), "alert-success", true, true, "#result-warning", langAlert);
+            addAlert(getTranslatedString("{{ lang }}", "copyToClipboardSuccess"), "alert-success", true, true, "#result-warning", "{{ lang }}");
             //console.log(e.trigger.attributes[3])
             //console.log(e.trigger.attributes["data-clipboard-text"])
             //console.log(e.trigger.id)
