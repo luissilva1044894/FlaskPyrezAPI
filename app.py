@@ -77,7 +77,9 @@ class PlatformsSupported(BaseEnumeration):
     PS4 = "9"
     Switch = "22"
 paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
-
+paladinsAPI.onSessionCreated += sessionCreated
+def sessionCreated(sessionJson):
+    print("SESSION: {0}".format(sessionJson))
 @app.errorhandler(404)
 def not_found_error(error=None):
     return INTERNAL_ERROR_404_STRINGS[getLanguage(request)], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
