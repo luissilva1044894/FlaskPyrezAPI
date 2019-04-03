@@ -21,4 +21,4 @@ setuptools
 SQLAlchemy
 urllib3
 Werkzeug
--e git+https://github.com/luissilva1044894/pyrez.git@master#egg=Pyrez
+-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez
