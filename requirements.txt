@@ -5,7 +5,7 @@ python-editor==1.0.4
 six==1.12.0
 gunicorn==19.9.0
 beautifulsoup4==4.7.1
-certifi==2018.8.24
+certifi==2019.3.9
 chardet==3.0.4
 Click==7.0
 Flask==1.0.2
