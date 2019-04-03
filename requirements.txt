@@ -26,4 +26,4 @@ setuptools==40.8.0
 SQLAlchemy==1.3.1
 urllib3==1.24.1
 Werkzeug==0.14.1
-git+https://github.com/luissilva1044894/pyrez.git@4b28ab114a83a350e110d1771652e9b03b6afee9#egg=Pyrez
+git+https://github.com/luissilva1044894/pyrez.git@4b28ab114a83a350e110d1771652e9b03b6afee9#egg=pyrez
