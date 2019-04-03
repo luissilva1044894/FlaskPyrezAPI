@@ -29,6 +29,36 @@ app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
+class Session(db.Model):
+    __tablename__ = "session"
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    sessionId = db.Column(db.String(50), unique=True, nullable=False)
+    def __init__(self, sessionId):
+        self.sessionId = sessionId
+        self.save()
+    def __repr__(self):
+        return "<Session {}>".format(self.sessionId)
+    def save(self):
+        try:
+            for sess in Session.query.all():
+                sess.delete()
+            db.session.add(self)
+            db.session.commit()
+            print("SessionId store - Database", self)
+        except IntegrityError:
+            db.session.rollback()
+            print("SessionId not stored - Database rolledback", self)
+    def update(self, name):
+        self.name = name
+        db.session.commit()
+        print("SessionId updated - Database", self)
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        print("SessionId deleted - Database", self)
+    def json(self):
+        return { "session_id": self.sessionId }
 class Player(db.Model):
     __tablename__ = "players"
     
@@ -60,7 +90,7 @@ class Player(db.Model):
         db.session.commit()
         print("Player deleted - Database", self)
     def json(self):
-        return { "id": self.id, "name": self.name, "platform": self.platform }
+        return { "player_id": self.id, "player_name": self.name, "player_platform": self.platform }
 class BaseEnumeration(Enum):
     def __str__(self):
         return str(self.value).lower()
@@ -76,10 +106,14 @@ class PlatformsSupported(BaseEnumeration):
     Xbox = "10"
     PS4 = "9"
     Switch = "22"
-paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
-def sessionCreated(sessionJson):
-    print("SESSION: {0}".format(sessionJson))
+def sessionCreated(session):#print("SESSION: {0}".format(session))
+    _session = Session(sessionId=session.sessionId)
+    print(_session)
+lastSession = Session.query.first()
+print("Session: {}".format(lastSession))
+paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
 paladinsAPI.onSessionCreated += sessionCreated
+
 @app.errorhandler(404)
 def not_found_error(error=None):
     return INTERNAL_ERROR_404_STRINGS[getLanguage(request)], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
@@ -122,6 +156,8 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
     print("Player readed - Database", _player)
     if _player is None:
         temp = paladinsAPI.getPlayerIdsByGamerTag(playerName, platform) if str(platform).isnumeric() else paladinsAPI.getPlayerIdByName(playerName)
+        if not temp:
+            return -1
         _player = Player(name=playerName, id=temp[0].playerId, platform=str(platform))
     return _player.id if _player else -1
 def getLastSeen(lastSeen, language = LanguagesSupported.English):
@@ -303,5 +339,4 @@ def getWinrate():
         return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
 if __name__ == "__main__":
-    #db.create_all()
     app.run(debug=DEBUG)
