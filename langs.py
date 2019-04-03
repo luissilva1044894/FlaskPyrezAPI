@@ -32,10 +32,10 @@ PLAYER_NULL_STRINGS = {
     "pt" : "ERROR: Player not specified!",
 }
 PLAYER_NOT_FOUND_STRINGS = {
-    "en" : "ERROR: '{0}' not found!",
-    "es" : "ERROR: '{0}' not found!",
-    "pl" : "BŁĄD: Nie znaleziono gracza '{0}'!",
-    "pt" : "ERRO: '{0}' não encontrado!",
+    "en" : "ERROR: “{0}” not found!",
+    "es" : "ERROR: “{0}” no encontrado!",
+    "pl" : "BŁĄD: Nie znaleziono gracza “{0}”!",
+    "pt" : "ERRO: “{0}” não encontrado!",
 }
 PLAYER_NOT_MATCH_STRINGS = {
     "en" : {
@@ -45,7 +45,7 @@ PLAYER_NOT_MATCH_STRINGS = {
         4: "ERROR: {0} is Online, but not in a match.",
     },
     "es" : {
-        0: "ERROR: {0} is Offline.",
+        0: "ERROR: {0} está Desconectado.",
         1: "ERROR: {0} is still in Lobby.",
         2: "ERROR: {0} is still selecting a champion. You need to wait until the match has started.",
         4: "ERROR: {0} is Online, but not in a match.",
@@ -76,10 +76,10 @@ UNABLE_TO_CONNECT_STRINGS = {
     "pt" : "ERRO: Não foi possível conectar à API da Hi-Rez Studios!",
 }
 QUEUE_ID_NOT_SUPPORTED_STRINGS = {
-    "en" : "ERROR: {0} isn't supported! {1} isn't playing casual or ranked, so you can't get details about their match.",
-    "es" : "ERROR: {0} isn't supported! {1} isn't playing casual or ranked, so you can't get details about their match.",
-    "pl" : "BŁĄD: Tryb {0} nie jest obsługiwany! Gracz {1} nie jest w trakcie szybkiej gry lub gry rankingowej, więc nie możesz sprawdzić szczegółów dotyczących tego meczu.",
-    "pt" : "ERRO: {0} não é suportado! {1} não está jogando casual ou ranked, você não pode ver detalhes sobre a partida.",
+    "en" : "ERROR: “{0}” isn't supported! “{1}” isn't playing casual or ranked, so you can't get details about their match.",
+    "es" : "ERROR: “{0}” isn't supported! “{1}” isn't playing casual or ranked, so you can't get details about their match.",
+    "pl" : "BŁĄD: Tryb “{0}” nie jest obsługiwany! Gracz “{1}” nie jest w trakcie szybkiej gry lub gry rankingowej, więc nie możesz sprawdzić szczegółów dotyczących tego meczu.",
+    "pt" : "ERRO: “{0}” não é suportado! “{1}” não está jogando casual ou ranked, você não pode ver detalhes sobre a partida.",
 }
 WINS_LOSSES_STRINGS = {
     "en" : " with {0} wins and {1} losses",
@@ -103,11 +103,11 @@ PLAYER_REGION_STRINGS = {
         "AUSTRALIA": "Australia"
     },
     "es" : {
-        "LATIN_AMERICA_NORTH": "Latin America North",
-        "BRAZIL": "Brazil",
-        "EUROPE": "Europe",
-        "NORTH_AMERICA": "North America",
-        "SOUTHEAST_ASIA": "Southeast Asia",
+        "LATIN_AMERICA_NORTH": "Norte América Latina",
+        "BRAZIL": "Brasil",
+        "EUROPE": "Europa",
+        "NORTH_AMERICA": "Estados Unidos",
+        "SOUTHEAST_ASIA": "Sudeste Asiático",
         "AUSTRALIA": "Australia"
     },
     "pl" : {
@@ -133,8 +133,8 @@ MATCH_STRINGS = {
         "LOSS": "Loss",
     },
     "es" : {
-        "WIN": "Win",
-        "LOSS": "Loss",
+        "WIN": "Victoria",
+        "LOSS": "Derrota",
     },
     "pl" : {
         "WIN": "Win",
@@ -161,7 +161,7 @@ QUEUE_IDS_STRINGS = {
         468: "Custom/Batalla a muerte", 471: "Custom/Batalla a muerte", 472: "Custom/Batalla a muerte", 479: "Custom/Batalla a muerte", 480: "Custom/Batalla a muerte", 484: "Custom/Batalla a muerte",
         424: "Casual/Asedio", 428: "Ranked/GamePad", 486: "Ranked/Keyboard", 445: "Casual/Test Maps", 452: "Casual/Matanza", 469: "Casual/Batalla a muerte",
         477: "Evento/Asedio del Pico Ascensión", 478: "Evento/El Ascenso de Furia", 488: "Evento/Fin de los Tiempos", 489: "Custom/Fin de los Tiempos",
-        425: "Training/Asedio", 453: "Training/Matanza", 470: "Training/Batalla a muerte", 434: "Training/Shooting Range", 427: "Training/Tutorial",
+        425: "Entrenamiento/Asedio", 453: "Entrenamiento/Matanza", 470: "Entrenamiento/Batalla a muerte", 434: "Entrenamiento/Campo de Tiro", 427: "Entrenamiento/Tutorial",
         465: "Classic/Asedio"
     },
     "pl" : {
@@ -185,9 +185,9 @@ QUEUE_IDS_STRINGS = {
 }
 QUALIFYING_STRINGS = {
     "en" : "Placements",#Qualifying
-    "es" : "Clasificatorias",#Qualifying
+    "es" : "Clasificatorias",
     "pl" : "Kwalifikacje",
-    "pt" : "MD5",#
+    "pt" : "MD5",
 }
 PLAYER_RANK_STRINGS = {
         "en" : {
@@ -229,7 +229,7 @@ PLAYER_RANK_STRINGS = {
 }
 ON_LEADERBOARD_STRINGS = {
     "en" : ", {0} on the leaderboard",
-    "es" : ", {0} on the leaderboard",
+    "es" : ", {0}° en el marcador",
     "pl" : ", {0} w rankingu",
     "pt" : ", {0}° no rank",
 }
@@ -252,10 +252,10 @@ GAME_VERSION_STRINGS = {
     "pt" : "{0} {1} está {2} - Versão atual: {3} ({4})",
 }
 LAST_MATCH_STRINGS = {
-    "en" : "{0} (Match ID: {1} | Duration: {10}m | Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7} | Damage: {8} | Credits: {9} - {12} (Score: {13})",
-    "es" : "{0} (Match ID: {1} | Duration: {10}m | Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7} | Damage: {8} | Credits: {9} - {12} (Score: {13})",
-    "pl" : "{0} (ID meczu: {1} | Czas trwania: {10}m | Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Seria zabójstw: {7} | Obrażenia: {8} | Kredyty: {9} - {12} (Wynik: {13})",
-    "pt" : "{0} (Id da partida: {1} | Duração: {10}m | Região: {11}): {2} ({3}/{4}/{5} - {6} KDA) Sequência: {7} | Dano: {8} | Creditos: {9} - {12} (Pontuação: {13})",
+    "en" : "{0} (Match Id: {1} | Duration: {10}m | Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7} | Damage: {8} | Credits: {9} - {12} (Score: {13})",
+    "es" : "{0} (Id partida: {1} | Duración: {10}m | Región: {11}): {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7} | Daño: {8} | Créditos: {9} - {12} (Resultado: {13})",
+    "pl" : "{0} (Id meczu: {1} | Czas trwania: {10}m | Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Seria zabójstw: {7} | Obrażenia: {8} | Kredyty: {9} - {12} (Wynik: {13})",
+    "pt" : "{0} (Id da partida: {1} | Duração: {10}m | Região: {11}): {2} ({3}/{4}/{5} - {6} KDA) Sequência: {7} | Dano: {8} | Créditos: {9} - {12} (Pontuação: {13})",
 }
 CURRENTLY_MATCH_STRINGS = {
     "en" : "currently in a match (Queue: {0} | Match ID: {1})",
