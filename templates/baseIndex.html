@@ -203,7 +203,7 @@
             </td>
             <td>
               <div class="form-group">
-                <input type="text" class="form-control required" id="player_name" value="" placeholder="FeyRazzle" pattern=".{4,}" title="Player Name" required onchange="checkButtonPos()">
+                <input type="text" class="form-control required" id="player_name" value="" placeholder="{% block commands_generator_player_name_placeholder %}{% endblock %}" pattern=".{4,}" title="{% block commands_generator_player_name_title %}{% endblock %}" required onchange="checkButtonPos()">
               </div>
             </td>
             <td>
