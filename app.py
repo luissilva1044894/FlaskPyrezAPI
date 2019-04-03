@@ -31,7 +31,7 @@ db = SQLAlchemy(app)
 
 class Player(db.Model):
     __tablename__ = "players"
-
+    
     id = db.Column("player_id", db.Integer, primary_key=True, unique=True, nullable=False, autoincrement=False)
     name = db.Column("player_name", db.String(120), nullable=False)
     platform = db.Column("player_platform", db.String(4), nullable=False)
@@ -41,24 +41,24 @@ class Player(db.Model):
         self.name = name
         self.platform = platform
         self.save()
-
     def __repr__(self):
         return "<Player {} (Id: {} - Platform: {})>".format(self.name, self.id, self.platform)
     def save(self):
         try:
             db.session.add(self)
-            print("Player stored - Database", self)
             db.session.commit()
+            print("Player stored - Database", self)
         except IntegrityError:
             db.session.rollback()
+            print("Player not stored - Database rolledback", self)
     def update(self, name):
-        print("Player updated - Database", self)
         self.name = name
         db.session.commit()
+        print("Player updated - Database", self)
     def delete(self):
         db.session.delete(self)
-        print("Player deleted - Database", self)
         db.session.commit()
+        print("Player deleted - Database", self)
     def json(self):
         return { "id": self.id, "name": self.name, "platform": self.platform }
 class BaseEnumeration(Enum):
@@ -77,9 +77,9 @@ class PlatformsSupported(BaseEnumeration):
     PS4 = "9"
     Switch = "22"
 paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID)
-paladinsAPI.onSessionCreated += sessionCreated
 def sessionCreated(sessionJson):
     print("SESSION: {0}".format(sessionJson))
+paladinsAPI.onSessionCreated += sessionCreated
 @app.errorhandler(404)
 def not_found_error(error=None):
     return INTERNAL_ERROR_404_STRINGS[getLanguage(request)], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
