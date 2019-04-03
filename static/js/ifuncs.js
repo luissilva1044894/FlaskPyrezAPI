@@ -56,8 +56,9 @@ function getTranslatedString(language, msg) {
 function getElementById(elementName) { return document.getElementById(elementName) }
 
 function commandTypeChanged() {
-    var commandType = getElementById("command_type");
-    getElementById("command_cooldown").value = commandType.value.toLowerCase() === commandType["0"].value.toLowerCase() ? 25 : 5;
+    var commandType = getElementById("command_type"), commandCooldown = getElementById("command_cooldown");
+    commandCooldown.min = commandType.value.toLowerCase() === commandType["0"].value.toLowerCase() ? 25 : 5;
+    commandCooldown.value = commandCooldown.min;
 }
 
 function checkButtonPos() {
