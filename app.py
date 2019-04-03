@@ -45,7 +45,8 @@ def internal_error(error=None):
 @app.route("/index", methods=["GET"])
 @app.route("/index.html", methods=["GET"])
 def index():#ip = request.remote_addr
-    return render_template("index-{0}.html".format(getLanguage(request))) #redirect(url_for("index"))
+    lang = getLanguage(request)
+    return render_template("index-{}.html".format(lang), lang=lang) #redirect(url_for("index"))
 def formatDecimal(data, form = ",d"):
     return format(data, form) if data else 0
 #def encodeData(data):#https://www.urlencoder.io/python/
