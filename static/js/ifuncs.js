@@ -69,7 +69,16 @@ function keyCodeTrigger(keyCode) {
 }
 function onPageLoaded() {
     $("#result").html('');
-
+    //$("#any-number-of-elements").input(function(event) {
+    //    alert(this.value);
+        //event.preventDefault();
+    //});
+    $("#command_cooldown").on("keypress", function(e) {
+        keyCodeTrigger(e.keyCode);
+        var commandCooldown = getElementById("command_cooldown");
+        commandCooldown.value = commandCooldown.value % commandCooldown.max;
+        console.log(commandCooldown.value);
+    });
     $("#player_name").on("keypress", function(e) {
         keyCodeTrigger(e.keyCode);
     });
