@@ -73,7 +73,10 @@ function onPageLoaded() {
     //    alert(this.value);
         //event.preventDefault();
     //});
-    $("#command_cooldown").on("keypress", function(e) {//https://mathiasbynens.be/notes/oninput
+    $("#command_cooldown").on("keypress", function(e) {
+    //https://mathiasbynens.be/notes/oninput
+    //https://stackoverflow.com/questions/9361193/why-is-input-type-number-maxlength-3-not-working-in-safari
+    //https://stackoverflow.com/questions/8354975/how-can-i-limit-possible-inputs-in-a-html5-number-element : https://jsfiddle.net/DRSDavidSoft/zb4ft1qq/2/
         //keyCodeTrigger(e.keyCode);
         var commandCooldown = getElementById("command_cooldown");
         commandCooldown.value = commandCooldown.value % commandCooldown.max;
