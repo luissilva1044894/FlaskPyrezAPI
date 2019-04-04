@@ -1,4 +1,5 @@
 {
+    "addons": [ "heroku-postgresql" ],
     "buildpacks": [ { "url": "https://github.com/heroku/heroku-buildpack-python" } ],
     "description": "FlaskPyrezAPI is an open-source endpoint for Twitch commands that provides datas about players, matches and others stats of Paladins game.",
     "env": {
@@ -18,14 +19,6 @@
     		"value": ""
     	},
 	},
-    "addons": [
-        {
-            "plan": "heroku-postgresql",
-            "options": {
-                "version": "11"
-            }
-        }
-    ],
     "keywords": [ "flask", "flask-api", "flask-backend", "hirez", "hi-rez", "paladins", "paladins-api", "api-server", "twitch", "nightbot", "endpoint", "endpoints", "open-source" ],
     "logo": "https://web2.hirez.com/paladins/assets/paladins-logo.png",
     "name": "FlaskPyrezAPI",
