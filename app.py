@@ -6,7 +6,7 @@ from datetime import datetime
 from decouple import config, Csv
 from flask import Flask, jsonify, request, render_template
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError
 
 from pyrez.api import *
 from pyrez.enumerations import *
@@ -109,7 +109,10 @@ class PlatformsSupported(BaseEnumeration):
 def sessionCreated(session):#print("SESSION: {0}".format(session))
     _session = Session(sessionId=session.sessionId)
     print("New sessionId: {}".format(_session))
-lastSession = Session.query.first()
+try:
+    lastSession = Session.query.first()
+except (OperationalError, ProgrammingError):
+    lastSession = None
 print("Last sessionId: {}".format(lastSession))
 paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
 paladinsAPI.onSessionCreated += sessionCreated
@@ -339,5 +342,4 @@ def getWinrate():
         return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
 if __name__ == "__main__":
-    db.create_all()
     app.run(debug=DEBUG)
