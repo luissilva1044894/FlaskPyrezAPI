@@ -26,13 +26,11 @@
             "value": ""
         }
     },
+    "image": "heroku/python",
     "keywords": [ "flask", "flask-api", "flask-backend", "hirez", "hi-rez", "paladins", "paladins-api", "api-server", "twitch", "nightbot", "endpoint", "endpoints", "open-source" ],
     "logo": "https://web2.hirez.com/paladins/assets/paladins-logo.png",
     "name": "FlaskPyrezAPI",
     "repository": "https://github.com/luissilva1044894/flaskpyrezapi",
-    /*"scripts": {
-        "postdeploy": "python -c 'from app import db; db.create_all()'"
-    },*/
     "success_url": "/index",
     "website": "http://nonsocial.herokuapp.com"
 }
