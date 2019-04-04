@@ -10,5 +10,5 @@ manager.add_command("db", MigrateCommand)
 manager.add_command("debug", Server(host="0.0.0.0", port=8080, use_debugger=True))
 
 if __name__ == "__main__":
-    db.create_all()
+    #db.create_all()
     manager.run()
