@@ -9,7 +9,7 @@ certifi==2019.3.9
 chardet==3.0.4
 Click==7.0
 Flask==1.0.2
-Flask-Migrate==2.2.1
+Flask-Migrate==2.4.0
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.3.2
 idna==2.7
