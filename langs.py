@@ -99,6 +99,7 @@ PLAYER_REGION_STRINGS = {
         "BRAZIL": "Brazil",
         "EUROPE": "Europe",
         "NORTH_AMERICA": "North America",
+        "NA": "North America",
         "SOUTHEAST_ASIA": "Southeast Asia",
         "AUSTRALIA": "Australia"
     },
@@ -107,6 +108,7 @@ PLAYER_REGION_STRINGS = {
         "BRAZIL": "Brasil",
         "EUROPE": "Europa",
         "NORTH_AMERICA": "Estados Unidos",
+        "NA": "Estados Unidos",
         "SOUTHEAST_ASIA": "Sudeste Asiático",
         "AUSTRALIA": "Australia"
     },
@@ -115,6 +117,7 @@ PLAYER_REGION_STRINGS = {
         "BRAZIL": "Brazil",
         "EUROPE": "Europe",
         "NORTH_AMERICA": "North America",
+        "NA": "North America",
         "SOUTHEAST_ASIA": "Southeast Asia",
         "AUSTRALIA": "Australia"
     },
@@ -122,6 +125,7 @@ PLAYER_REGION_STRINGS = {
         "LATIN_AMERICA_NORTH": "América Latina",
         "BRAZIL": "Brasil",
         "EUROPE": "Europa",
+        "NA": "América do Norte",
         "NORTH_AMERICA": "América do Norte",
         "SOUTHEAST_ASIA": "Sudeste Asiático",
         "AUSTRALIA": "Austrália"
