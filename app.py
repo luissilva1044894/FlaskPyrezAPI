@@ -36,6 +36,7 @@ class Session(db.Model):
     sessionId = db.Column(db.String(50), unique=True, nullable=False)
     def __init__(self, sessionId):
         self.sessionId = sessionId
+        self.save()
     def __repr__(self):
         return "<Session {}>".format(self.sessionId)
     def save(self):
@@ -108,7 +109,6 @@ class PlatformsSupported(BaseEnumeration):
 def sessionCreated(session):#print("SESSION: {0}".format(session))
     _session = Session(sessionId=session.sessionId)
     print("New sessionId: {}".format(_session))
-    _session.save()
 lastSession = Session.query.first()
 print("Last sessionId: {}".format(lastSession))
 paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
