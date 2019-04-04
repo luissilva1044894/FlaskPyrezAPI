@@ -17,12 +17,15 @@
     		"required": "true",
     		"value": ""
     	},
-        "DATABASE_URL": {
-            "description": "Database URL",
-            "required": "true",
-            "value": ""
-        }
 	},
+    "addons": [
+        {
+            "plan": "heroku-postgresql",
+            "options": {
+                "version": "11"
+            }
+        }
+    ],
     "keywords": [ "flask", "flask-api", "flask-backend", "hirez", "hi-rez", "paladins", "paladins-api", "api-server", "twitch", "nightbot", "endpoint", "endpoints", "open-source" ],
     "logo": "https://web2.hirez.com/paladins/assets/paladins-logo.png",
     "name": "FlaskPyrezAPI",
