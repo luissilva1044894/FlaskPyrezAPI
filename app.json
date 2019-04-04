@@ -27,8 +27,12 @@
         }
     },
     "image": "heroku/python",
-    "keywords": [ "flask", "flask-api", "flask-backend", "hirez", "hi-rez", "paladins", "paladins-api", "api-server", "twitch", "nightbot", "endpoint", "endpoints", "open-source" ],
-    "logo": "https://web2.hirez.com/paladins/assets/paladins-logo.png",
+    "keywords": [
+        "flask", "flask-api", "flask-backend", "pyrez", "hirez", "hi-rez", "paladins",
+        "paladins-api", "api-server", "twitch", "nightbot", "endpoint", "endpoints",
+        "open-source", "heroku", "python", "bootstrap4", "bootstrap", "jquery", "javascript"
+    ],
+    "logo": "https://raw.githubusercontent.com/luissilva1044894/FlaskPyrezAPI/master/static/img/pyrez_server.png",
     "name": "FlaskPyrezAPI",
     "repository": "https://github.com/luissilva1044894/flaskpyrezapi",
     "success_url": "/index",
