@@ -1,7 +1,11 @@
+<div  align="center">
+<a href="https://github.com/luissilva1044894/FlaskPyrezAPI" title="FlaskPyrezAPI - Github repository" alt="FlaskPyrezAPI · Github repository"><img src="./static/img/pyrez.png" height="128" width="128"></a>
+
 # FlaskPyrezAPI
 [![License](https://img.shields.io/github/license/luissilva1044894/FlaskPyrezAPI.svg?style=plastic&logoWidth=10)](./LICENSE "FlaskPyrezAPI · LICENSE")
 [![Runtime Version](https://img.shields.io/pypi/pyversions/pyrez.svg?style=plastic&logo=python&logoWidth=10)](https://pypi.org/project/pyrez "Python Runtime Versions")
 [![Discord Server](https://img.shields.io/discord/549020573846470659.svg?style=plastic&logo=discord&logoWidth=10)](https://discord.gg/XkydRPS "Support Server · Discord")
+</div>
 
 **FlaskPyrezAPI** is an open-source endpoint for [`Twitch`](https://twitch.tv "Twitch") commands, written in Python, that provides datas about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game"). This API uses [`Pyrez`](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") for handling connections and requests to [`Hi-Rez Studios'`](https://www.hirezstudios.com) API.
 
@@ -17,12 +21,12 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 ## Installation
 ### Deploy (Heroku) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luissilva1044894/FlaskPyrezAPI/tree/master "Deploy to Heroku")
 1. Go to [Heroku](https://id.heroku.com/login) and create a new app (eg: `your-app-name`)
-2. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+2. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli "Heroku CLI")
 3. `heroku login`
 4. `git init`
 5. `heroku git:remote -a your-app-name`
 6. Download this repo and copy all files into `your-app-name` folder
-7. Edit [`.env`](./.env) and replace the `PYREZ_AUTH_ID` and `PYREZ_DEV_ID` with the `authId` and `devId` that you receive from [`Hi-Rez Studios`](https://fs12.formsite.com/HiRez/form48/secure_index.html).
+7. Edit [`.env`](./.env) and replace the `PYREZ_AUTH_ID` and `PYREZ_DEV_ID` with the `authId` and `devId` that you receive from [`Hi-Rez Studios`](https://fs12.formsite.com/HiRez/form48/secure_index.html "Form access to Hi-Rez API").
 8. `heroku config:push`
 9. `git add .`
 10. `git commit -m "Going to Heroku"`
