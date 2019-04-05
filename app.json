@@ -26,6 +26,12 @@
             "value": ""
         }
     },
+    "environments": {
+        "test": {
+            "scripts": {
+            }
+        }
+    },
     "image": "heroku/python",
     "keywords": [
         "flask", "flask-api", "flask-backend", "pyrez", "hirez", "hi-rez", "paladins",
