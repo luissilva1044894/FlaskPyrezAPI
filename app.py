@@ -19,7 +19,7 @@ try:
     PYREZ_DEV_ID = config("PYREZ_DEV_ID")
     DATABASE_URL = config("DATABASE_URL")
 except:
-    DEBUG = os.environ["DEBUG"] if os.environ["DEBUG"] else False
+    DEBUG = json.loads(os.environ["DEBUG"].lower()) if os.environ["DEBUG"] else False#https://stackoverflow.com/questions/715417/converting-from-a-string-to-boolean-in-python
     PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
     DATABASE_URL = os.environ("DATABASE_URL")#"sqlite:///{}.db".format(__name__)
@@ -109,14 +109,6 @@ class PlatformsSupported(BaseEnumeration):
 def sessionCreated(session):#print("SESSION: {0}".format(session))
     _session = Session(sessionId=session.sessionId)
     print("New sessionId: {}".format(_session))
-try:
-    lastSession = Session.query.first()
-except (OperationalError, ProgrammingError):
-    lastSession = None
-print("Last sessionId: {}".format(lastSession))
-paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
-paladinsAPI.onSessionCreated += sessionCreated
-
 @app.errorhandler(404)
 def not_found_error(error=None):
     return INTERNAL_ERROR_404_STRINGS[getLanguage(request)], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
@@ -342,4 +334,12 @@ def getWinrate():
         return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
 if __name__ == "__main__":
+    try:
+        lastSession = Session.query.first()
+    except (OperationalError, ProgrammingError):
+        lastSession = None
+    print("Last sessionId: {}".format(lastSession))
+    paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
+    paladinsAPI.onSessionCreated += sessionCreated
+    
     app.run(debug=DEBUG)
