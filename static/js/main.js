@@ -2,24 +2,24 @@ function getTranslatedString(language, msg) {
     var engString = [];
     engString["chatMsg"] = "Copy paste the following command in your chat"
     engString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
-    engString["backendMsg"] = "Or copy-paste the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
+    engString["backendMsg"] = "Or copy-paste the following text in the “message” field at <span id=\"backend-title-bot\">{BOT_NAME}</span>'s backend"
     engString["close"] = "Close"
     engString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
     engString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
     engString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
     engString["copyToClipboardSuccess"] = "Copied!"
-    engString["copyToClipboardMsg"] = "Copy to clipboard"
+    engString["copyToClipboardMsg"] = "Copy to Clipboard"
 
     var esString = [];
     esString["chatMsg"] = "Copy paste the following command in your chat"
     esString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
-    esString["backendMsg"] = "Or copy-paste the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
+    esString["backendMsg"] = "Or copy-paste the following text in the “message” field at <span id=\"backend-title-bot\">{BOT_NAME}</span>'s backend"
     esString["close"] = "Close"
     esString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
     esString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
     esString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
     esString["copyToClipboardSuccess"] = "Copied!"
-    esString["copyToClipboardMsg"] = "Copy to clipboard"
+    esString["copyToClipboardMsg"] = "Copy to Clipboard"
 
     var ptString = [];
     ptString["chatMsg"] = "Copie e cole o código em seu chat"
@@ -35,13 +35,13 @@ function getTranslatedString(language, msg) {
     var plString = [];
     plString["chatMsg"] = "Copy paste the following command in your chat"
     plString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
-    plString["backendMsg"] = "Or copy-paste the following command in <span id=\"backend-title-bot\">{BOT_NAME}</span> backend"
+    plString["backendMsg"] = "Or copy-paste the following text in the “message” field at <span id=\"backend-title-bot\">{BOT_NAME}</span>'s backend"
     plString["close"] = "Close"
     plString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
     plString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
     plString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
     plString["copyToClipboardSuccess"] = "Copied!"
-    plString["copyToClipboardMsg"] = "Copy to clipboard"
+    plString["copyToClipboardMsg"] = "Copy to Clipboard"
 
     var languages = [];
     
@@ -100,6 +100,11 @@ function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; }
 
 function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
     div = defaultFor(div, "#result-warning"), alert_div = $(div), divMsg = "";
+    if (botName === "Nightbot") {
+        botName = "<a href=\"https://beta.nightbot.tv/commands/custom\" target=\"blank\">Nightbot</a>"
+    } else if (botName === "Stream Elements") {
+        botName = "<a href=\"https://streamelements.com/dashboard/bot/commands/custom\" target=\"blank\">Stream Elements</a>"
+    }
 
     divMsg = "<div class=\"alert alert-dismissible alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString(lang, "close"));
     divMsg += "<div id=\"chat-title\" class=\"command-title\"><h4>{CHAT_MSG} <small>{DONT_CHANGE}</small>: ".replace("{CHAT_MSG}", getTranslatedString(lang, "chatMsg")).replace("{DONT_CHANGE}", getTranslatedString(lang, "dontChange"));
