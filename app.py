@@ -146,7 +146,8 @@ def getPlatform(requestArgs):
     aux = str(requestArgs.get("platform", default=str(PlatformsSupported.PC.value))).lower()
     return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("sw") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PC
 def getPlayerName(requestArgs):
-    return str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
+    playerName = requestArgs.get("query").split(' ')[0].lower() if requestArgs.get("query") else requestArgs.get("player").lower()#str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
+    return None if playerName in [ "null", "none", "$(1)", "query=$(querystring)", "[invalid%20variable]" ] else playerName
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
     if PlatformsSupported.PC:
         playerName = playerName.strip()#.strip(',.-')

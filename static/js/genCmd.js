@@ -49,12 +49,12 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 cmdChat += "!command add !{CMD_NAME} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
 
                 if(String(commandType.value).toLowerCase() === commandType["1"].value.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].value.toLowerCase()) {
-                    cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?query=${1:}&champion=${2:}&platform=${3:}&language={LANGUAGE}}" : "${customapi.{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}}";
+                    cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?player=$(queryencode $(1:))&champion=$(queryencode $(2:))&language={LANGUAGE}}" : "${customapi.{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}}";
                 } else {
                     if(String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
                         cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?platform=${1}&language={LANGUAGE}}" : "${customapi.{ENDPOINT_LINK}?platform={PLATFORM}&language={LANGUAGE}}";
                     } else {
-                        cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?query=${1}&platform=${2}&language={LANGUAGE}}" : "${customapi.{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}}";
+                        cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?player=$(queryencode $(1:))&language={LANGUAGE}}" : "${customapi.{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}}";
                     }
                 }
             break;
