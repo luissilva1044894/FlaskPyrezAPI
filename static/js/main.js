@@ -101,9 +101,9 @@ function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; }
 function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
     div = defaultFor(div, "#result-warning"), alert_div = $(div), divMsg = "";
     if (botName === "Nightbot") {
-        botName = "<a href=\"https://beta.nightbot.tv/commands/custom\" target=\"blank\">Nightbot</a>"
+        botName = "<a href=\"https://beta.nightbot.tv/commands/custom\" target=\"blank\" title=\"Nightbot Dashboard\">Nightbot</a>"
     } else if (botName === "Stream Elements") {
-        botName = "<a href=\"https://streamelements.com/dashboard/bot/commands/custom\" target=\"blank\">Stream Elements</a>"
+        botName = "<a href=\"https://streamelements.com/dashboard/bot/commands/custom\" target=\"blank\" title=\"Stream Elements Dashboard\">Stream Elements</a>"
     }
 
     divMsg = "<div class=\"alert alert-dismissible alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString(lang, "close"));
