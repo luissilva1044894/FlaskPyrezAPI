@@ -35,7 +35,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                     default: permLvl = "+a";
                 }
                 cmdChat += "!command add !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
-                cmd += userCanUse.checked ? "$readapi({ENDPOINT_LINK}?query=$dummyormsg&platform={platform}&language={LANGUAGE})" : "$readapi({ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
+                cmd += userCanUse.checked ? "$readapi({ENDPOINT_LINK}?query=$dummyormsg&language={LANGUAGE})" : "$readapi({ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
             break;
             case "4" :
                 switch(userLevel.value) {
