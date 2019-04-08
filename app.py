@@ -152,8 +152,10 @@ def getPlayerName(requestArgs):
         return None
     return None if playerName in [ "null", "none", "$(1)", "query=$(querystring)", "[invalid%20variable]" ] else playerName
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
-    if playerName is None or str(playerName).isnumeric():#playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)":
-        return playerName if str(playerName).isnumeric() and len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
+    if not playerName or playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)":
+        return 0
+    elif str(playerName).isnumeric():
+        return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
     if platform == PlatformsSupported.PC:
         playerName = playerName.strip()#.strip(',.-')
     _player = Player.query.filter_by(name=playerName, platform=str(platform)).first()
