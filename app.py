@@ -152,7 +152,9 @@ def getPlayerName(requestArgs):
     except AttributeError:
         return None
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
-    if not playerName or str(playerName).isnumeric():
+    if not playerName or playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)" or playerName == "[invalid%20variable]":
+        return 0
+    elif str(playerName).isnumeric():
         return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
     if platform == PlatformsSupported.PC:
         playerName = playerName.strip()#.strip(',.-')
