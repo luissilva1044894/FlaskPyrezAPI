@@ -26,7 +26,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 cmdChat += "!addcom !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
                 cmd += userCanUse.checked ? "@customapi@[{ENDPOINT_LINK}?player=@target@[1]&platform=@target@[3]&champion=@target@[2]&language={LANGUAGE})" : "@customapi@[{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
             break;*/
-            case "2": // Botisimo
+            case "1": // Botisimo
                 cmdChat += "!command add !{CMD_NAME} $[cooldown {CD}] ".replace("{CD}", cooldown).replace("{CMD_NAME}", commandName)
                 
                 customAPICode = "$(fetch {ENDPOINT_LINK}?{PARAMS})";
