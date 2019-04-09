@@ -95,7 +95,7 @@ function clearField(divName) {
     alert_div.html('');
 }
 
-function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; }
+function defaultFor(arg, val) { return typeof arg !== "undefined" ? arg : val; }
 
 function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
     div = defaultFor(div, "#result-warning"), alert_div = $(div), divMsg = "", botElement = getElementById("bot_name");
@@ -104,10 +104,7 @@ function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
         case botElement["1"].text.toLowerCase(): botName = "<a href=\"https://beta.nightbot.tv/commands/custom\" target=\"blank\" title=\"Nightbot Dashboard\">Nightbot</a>"; break;
         case botElement["2"].text.toLowerCase(): botName = "<a href=\"https://streamelements.com/dashboard/bot/commands/custom\" target=\"blank\" title=\"Stream Elements Dashboard\">Stream Elements</a>"; break;
     }
-    console.log(botName.toLowerCase())
-    console.log(botElement.value.toLowerCase())
-    console.log(botElement["0"].text.toLowerCase())
-    console.log(botElement[botElement.value - 1].text.toLowerCase())
+    //console.log(botName.toLowerCase()); console.log(botElement.value.toLowerCase()); console.log(botElement["0"].text.toLowerCase()); console.log(botElement[botElement.value - 1].text.toLowerCase());
 
     divMsg = "<div class=\"alert alert-dismissible alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString(lang, "close"));
     divMsg += "<div id=\"chat-title\" class=\"command-title\"><h4>{CHAT_MSG} <small>{DONT_CHANGE}</small>: ".replace("{CHAT_MSG}", getTranslatedString(lang, "chatMsg")).replace("{DONT_CHANGE}", getTranslatedString(lang, "dontChange"));
