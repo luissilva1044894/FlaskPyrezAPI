@@ -26,7 +26,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 cmdChat += "!addcom !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
                 cmd += userCanUse.checked ? "@customapi@[{ENDPOINT_LINK}?player=@target@[1]&platform=@target@[3]&champion=@target@[2]&language={LANGUAGE})" : "@customapi@[{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
             break;*/
-            case botName["1"].value.toLowerCase(): // Botisimo
+            case botName["0"].value.toLowerCase(): // Botisimo
                 cmdChat += "!command add !{CMD_NAME} $[cooldown {CD}] ".replace("{CD}", cooldown).replace("{CMD_NAME}", commandName)
                 
                 customAPICode = "$(fetch {ENDPOINT_LINK}?{PARAMS})";
@@ -49,7 +49,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 }
                 cmd += userCanUse.checked ? cmdUsers : customAPICode;
             break;
-            case botName["3"].value.toLowerCase(): /*case "5"*:*/ //Streamlabs / Ankbot
+            case botName["2"].value.toLowerCase(): /*case "5"*:*/ //Streamlabs / Ankbot
                 switch(userLevel.value) {
                     case "2" : permLvl = "+r"; break;
                     case "3" : permLvl = "+s"; break;
@@ -60,7 +60,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 cmdChat += "!command add !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
                 cmd += userCanUse.checked ? "$readapi({ENDPOINT_LINK}?query=$dummyormsg&language={LANGUAGE})" : "$readapi({ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
             break;
-            case botName["4"].value.toLowerCase():
+            case botName["3"].value.toLowerCase():
                 switch(userLevel.value) {
                     case "2" : permLvl = 300; break;
                     case "3" : permLvl = 250; break;
