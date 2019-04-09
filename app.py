@@ -190,7 +190,7 @@ def getGameVersion():
         hiRezServerStatus = paladinsAPI.getHiRezServerStatus()
         hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[0]
         patchInfo = paladinsAPI.getPatchInfo()
-    except Exception exc:
+    except Exception as exc:
         print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
         return UNABLE_TO_CONNECT_STRINGS[language]
     return GAME_VERSION_STRINGS[language].format("Paladins", "Xbox One" if platform == PlatformsSupported.Xbox else "PS4" if platform == PlatformsSupported.PS4 else "Nintendo Switch" if platform == PlatformsSupported.Switch else "PC",
@@ -209,7 +209,7 @@ def getStalk():
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         playerStalkRequest = paladinsAPI.getPlayerStatus(playerId)
-    except Exception exc:
+    except Exception as exc:
         print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
@@ -227,7 +227,7 @@ def getLastMatch():
         if playerId == -1:
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         lastMatchRequest = paladinsAPI.getMatchHistory(playerId)[0]
-    except Exception exc:
+    except Exception as exc:
         print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     kda = ((lastMatchRequest.assists / 2) + lastMatchRequest.kills) / lastMatchRequest.deaths if lastMatchRequest.deaths > 1 else 1
@@ -248,7 +248,7 @@ def getCurrentMatch():
         if playerId == 0 or playerId == -1:
             return PLAYER_NULL_STRINGS[language] if playerId == 0 else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         playerStatusRequest = paladinsAPI.getPlayerStatus(playerId)
-    except Exception exc:
+    except Exception as exc:
         print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     if playerStatusRequest.status != 3:
@@ -287,7 +287,7 @@ def getRank():
         elif playerId == -1:
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
-    except Exception exc:
+    except Exception as exc:
         print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     r1 = getPlayerRequest.rankedController
@@ -330,7 +330,7 @@ def getWinrate():
             playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
         else:
             return PLAYER_LOW_LEVEL_STRINGS[language]
-    except Exception exc:
+    except Exception as exc:
         print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     if championName:
