@@ -100,7 +100,7 @@ function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; }
 function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
     div = defaultFor(div, "#result-warning"), alert_div = $(div), divMsg = "", botElement = getElementById("bot_name");
 
-    switch(userLevel.value.toLowerCase()) {
+    switch(botName.toLowerCase()) {
         case botElement["1"].value.toLowerCase(): botName = "<a href=\"https://botisimo.com/account/commands\" target=\"blank\" title=\"Botisimo Dashboard\">Botisimo</a>"; break;
         case botElement["2"].value.toLowerCase(): botName = "<a href=\"https://beta.nightbot.tv/commands/custom\" target=\"blank\" title=\"Nightbot Dashboard\">Nightbot</a>"; break;
         case botElement["3"].value.toLowerCase(): botName = "<a href=\"https://streamelements.com/dashboard/bot/commands/custom\" target=\"blank\" title=\"Stream Elements Dashboard\">Stream Elements</a>"; break;
