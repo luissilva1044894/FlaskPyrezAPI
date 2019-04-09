@@ -108,6 +108,8 @@ function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
         botName = "<a href=\"https://streamelements.com/dashboard/bot/commands/custom\" target=\"blank\" title=\"Stream Elements Dashboard\">Stream Elements</a>";
     console.log(botName.toLowerCase())
     console.log(botElement.value.toLowerCase())
+    console.log(botElement["0"].value.toLowerCase())
+    console.log(botElement[botElement.value - 1].value.toLowerCase())
 
 
     divMsg = "<div class=\"alert alert-dismissible alert-success\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString(lang, "close"));
