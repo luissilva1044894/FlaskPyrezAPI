@@ -49,7 +49,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 }
                 cmd += userCanUse.checked ? cmdUsers : customAPICode;
             break;
-            case "3": /*case "5"*/: //Streamlabs / Ankbot
+            case "3": /*case "5"*:*/ //Streamlabs / Ankbot
                 switch(userLevel.value) {
                     case "2" : permLvl = "+r"; break;
                     case "3" : permLvl = "+s"; break;
