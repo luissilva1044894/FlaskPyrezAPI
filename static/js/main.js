@@ -59,6 +59,8 @@ function commandTypeChanged() {
     var commandType = getElementById("command_type"), commandCooldown = getElementById("command_cooldown");
     commandCooldown.min = commandType.value.toLowerCase() === commandType["0"].value.toLowerCase() ? 25 : 5;
     commandCooldown.value = commandCooldown.min;
+    getElementById("cmd_generator_ign_header").hidden = commandType.value.toLowerCase() === commandType["6"].value.toLowerCase();
+    getElementById("player_name").hidden = commandType.value.toLowerCase() === commandType["6"].value.toLowerCase();
 }
 
 function checkButtonPos() {
