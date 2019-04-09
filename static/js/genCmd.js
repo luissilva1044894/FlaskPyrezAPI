@@ -16,7 +16,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
     $("#result-warning").show();
     if (commandName.length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
         var permLvl = "", cmd = "", cmdChat = "";
-        switch(botName.value.toLowerCase()) {
+        switch(botName.value) {
             /*case "2": // Deepbot
                 switch(userLevel.value) {
                     case "2" : default: permLvl = "%1"; break;
@@ -26,7 +26,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 cmdChat += "!addcom !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
                 cmd += userCanUse.checked ? "@customapi@[{ENDPOINT_LINK}?player=@target@[1]&platform=@target@[3]&champion=@target@[2]&language={LANGUAGE})" : "@customapi@[{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
             break;*/
-            case botElement["1"].value.toLowerCase(): // Botisimo
+            case "1": // Botisimo
                 cmdChat += "!command add !{CMD_NAME} $[cooldown {CD}] ".replace("{CD}", cooldown).replace("{CMD_NAME}", commandName)
                 
                 customAPICode = "$(fetch {ENDPOINT_LINK}?{PARAMS})";
@@ -49,7 +49,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 }
                 cmd += userCanUse.checked ? cmdUsers : customAPICode;
             break;
-            case botElement["3"].value.toLowerCase(): /*case "5"*:*/ //Streamlabs / Ankbot
+            case "3": /*case "5"*:*/ //Streamlabs / Ankbot
                 switch(userLevel.value) {
                     case "2" : permLvl = "+r"; break;
                     case "3" : permLvl = "+s"; break;
@@ -60,7 +60,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 cmdChat += "!command add !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
                 cmd += userCanUse.checked ? "$readapi({ENDPOINT_LINK}?query=$dummyormsg&language={LANGUAGE})" : "$readapi({ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
             break;
-            case botElement["4"].value.toLowerCase():
+            case "4" :
                 switch(userLevel.value) {
                     case "2" : permLvl = 300; break;
                     case "3" : permLvl = 250; break;
@@ -113,8 +113,8 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
             break;
         }
         addAlert("{CMD_CREATED}".replace("{CMD_CREATED}", getTranslatedString(lang, "cmdCreated").replace("{CMD_NAME}", commandName)), "alert-success", true, true, "#result-warning", lang);//, 1 * 60);
-        cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{PLAYER_NAME}", encodeURI(playerName.value)).replace("{PLATFORM}", platform.value).replace("{LANGUAGE}", language.value);
-        cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{LANGUAGE}", language.value);
+        cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{PLAYER_NAME}", encodeURI(playerName.value)).replace("{PLATFORM}", platform.value).replace("{LANGUAGE}", language.value).replace("{BOT_NAME}", botName[botName.value - 1].text.replace(" ", ""))
+        cmd = cmd.replace("{ENDPOINT_LINK}", endpointLink).replace("{LANGUAGE}", language.value).replace("{BOT_NAME}", botName[botName.value - 1].text.replace(" ", ""))
         addCommandOutput(cmdChat + cmd, cmd, botName[botName.value - 1].text, lang)
     } else {
         if(commandName.length <= 0) {
