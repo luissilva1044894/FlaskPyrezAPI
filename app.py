@@ -167,8 +167,8 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
         _player = Player(name=playerName, id=temp[0].playerId, platform=str(platform))
     return _player.id if _player else -1
 def getLastSeen(lastSeen, language = LanguagesSupported.English):
-    now = datetime.utcnow()
-    delta = lastSeen - now
+    now = datetime.now()#datetime.utcnow()
+    delta = now - lastSeen
     hours, remainder = divmod(int(delta.total_seconds()), 3600)
     minutes, seconds = divmod(remainder, 60)
     days, hours = divmod(hours, 24)
