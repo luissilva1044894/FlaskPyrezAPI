@@ -17,7 +17,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
     if (commandName.length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
         var permLvl = "", cmd = "", cmdChat = "";
         switch(botName.value) {
-            case "2" :
+            /*case "2": // Deepbot
                 switch(userLevel.value) {
                     case "2" : default: permLvl = "%1"; break;
                     case "3" : permLvl = "%2"; break;
@@ -25,8 +25,31 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 }
                 cmdChat += "!addcom !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
                 cmd += userCanUse.checked ? "@customapi@[{ENDPOINT_LINK}?player=@target@[1]&platform=@target@[3]&champion=@target@[2]&language={LANGUAGE})" : "@customapi@[{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
+            break;*/
+            case "2": // Botisimo
+                cmdChat += "!command add !{CMD_NAME} $[cooldown {CD}] ".replace("{CD}", cooldown).replace("{CMD_NAME}", commandName)
+                
+                customAPICode = "$(fetch {ENDPOINT_LINK}?{PARAMS})";
+                cmdUsers = "$(js `$(querystring)`.trim()==``?`{IF}`:`{ELSE}`; )";
+                if(String(commandType.value).toLowerCase() === commandType["1"].value.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].value.toLowerCase()) {
+                    if(userCanUse.checked) {
+                        cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}"));
+                        cmdUsers = cmdUsers.replace("{ELSE}", customAPICode.replace("{PARAMS}", "query=$(urlencode $(query 1))&champion=$(query 2)&platform=$(query 3)&language={LANGUAGE}"));
+                    } else customAPICode = customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&champion=$(query 1)&language={LANGUAGE}");
+                } else {
+                    if(String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
+                        if(userCanUse.checked) cmdUsers = customAPICode.replace("{PARAMS}", "platform=$(query 1)&language={LANGUAGE}");
+                        else customAPICode = customAPICode.replace("{PARAMS}", "platform={PLATFORM}&language={language}");
+                    } else {
+                        if(userCanUse.checked) {
+                            cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}"));
+                            cmdUsers = cmdUsers.replace("{ELSE}", customAPICode.replace("{PARAMS}", "query=$(urlencode $(query 1))&platform=$(query 2)&language={LANGUAGE}"));
+                        } else customAPICode = customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}");
+                    }
+                }
+                cmd += userCanUse.checked ? cmdUsers : customAPICode;
             break;
-            case "3" : case "5" :
+            case "3": /*case "5"*/: //Streamlabs / Ankbot
                 switch(userLevel.value) {
                     case "2" : permLvl = "+r"; break;
                     case "3" : permLvl = "+s"; break;
