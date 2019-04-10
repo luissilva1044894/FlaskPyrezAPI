@@ -14,10 +14,10 @@ INTERNAL_ERROR_500_STRINGS = {
     "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu. Se o erro persistir, report no server do Discord: https://discord.gg/XkydRPS",
 }
 CURRENT_MATCH_STRINGS = {
-    "en" : "Map: {0} ({1}):{2} | VS |{3}", #`mapName` instead
-    "es" : "Mapa: {0} ({1}):{2} | VS |{3}",
-    "pl" : "Mapa: {0} ({1}):{2} | VS |{3}",
-    "pt" : "Mapa: {0} ({1}):{2} | VS |{3}",
+    "en" : "Current match - {0} ({1}):{2} | VS |{3}", #`mapName` instead
+    "es" : "Current match - {0} ({1}):{2} | VS |{3}",
+    "pl" : "Tryb gry - {0} ({1}):{2} | VS |{3}",
+    "pt" : "Partida atual - {0} ({1}):{2} | VS |{3}",
 }
 CURRENT_MATCH_PLAYER_STRINGS = {
     "en" : " {0} as {1} ({2})",
