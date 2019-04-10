@@ -271,8 +271,7 @@ def getCurrentMatch():
                 team1.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godName, rank))
             else:
                 team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godName, rank))
-        return CURRENT_MATCH_STRINGS[language].format(players[0].mapName.replace("LIVE ", '').replace("Practice ", '').replace(" (Onslaught)", '').replace(" (Onslaught) ", '').replace(" (TDM)", '').replace(" (TDM) ", '').replace("Ranked ", '').replace("'", ''),
-                                                    QUEUE_IDS_STRINGS[language][playerStatusRequest.matchQueueId], ",".join(team1), ",".join(team2))
+        return CURRENT_MATCH_STRINGS[language].format(players[0].getMapName(True), QUEUE_IDS_STRINGS[language][playerStatusRequest.matchQueueId], ",".join(team1), ",".join(team2))
     else:
         return "An unexpected error has occurred!"
 @app.route("/api/rank", methods=["GET"])
