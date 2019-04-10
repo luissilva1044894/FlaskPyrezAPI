@@ -14,10 +14,10 @@ INTERNAL_ERROR_500_STRINGS = {
     "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu. Se o erro persistir, report no server do Discord: https://discord.gg/XkydRPS",
 }
 CURRENT_MATCH_STRINGS = {
-    "en" : "{0} ({1}):{2} | VS |{3}", #`mapName` instead
-    "es" : "{0} ({1}):{2} | VS |{3}",
-    "pl" : "{0} ({1}):{2} | VS |{3}",
-    "pt" : "{0} ({1}):{2} | VS |{3}",
+    "en" : "Map: {0} ({1}):{2} | VS |{3}", #`mapName` instead
+    "es" : "Mapa: {0} ({1}):{2} | VS |{3}",
+    "pl" : "Mapa: {0} ({1}):{2} | VS |{3}",
+    "pt" : "Mapa: {0} ({1}):{2} | VS |{3}",
 }
 CURRENT_MATCH_PLAYER_STRINGS = {
     "en" : " {0} as {1} ({2})",
@@ -136,22 +136,10 @@ PLAYER_REGION_STRINGS = {
     },
 }
 MATCH_STRINGS = {
-    "en" : {
-        "WIN": "Win",
-        "LOSS": "Loss",
-    },
-    "es" : {
-        "WIN": "Victoria",
-        "LOSS": "Derrota",
-    },
-    "pl" : {
-        "WIN": "Win",
-        "LOSS": "Loss",
-    },
-    "pt" : {
-        "WIN": "Vitória",
-        "LOSS": "Derrota",
-    },
+    "en" : { "WIN": "Win", "LOSS": "Loss", },
+    "es" : { "WIN": "Victoria", "LOSS": "Derrota", },
+    "pl" : { "WIN": "Win", "LOSS": "Loss", },
+    "pt" : { "WIN": "Vitória", "LOSS": "Derrota", },
 }
 QUEUE_IDS_STRINGS = {
     "en" : {
