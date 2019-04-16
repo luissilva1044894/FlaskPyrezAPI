@@ -1,4 +1,4 @@
-alembic==1.0.8
+alembic==1.0.9
 Mako==1.0.8
 python-dateutil==2.8.0
 python-editor==1.0.4
