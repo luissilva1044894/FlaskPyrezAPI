@@ -1,12 +1,7 @@
 {
     "name": "FlaskPyrezAPI",
     "version": 2,
-    "builds": [
-        { "src": "*.py", "use": "@now/python@canary" },
-        { "src": "*.html", "use": "@now/static" },
-        { "src": "*.js", "use": "@now/node" },
-        { "src": "*.css", "use": "@now/static" }
-    ],
+    "builds": [ { "src": "*.py", "use": "@now/python@canary" } ],
     "env": {
         "DEBUG": "False",
         "PYREZ_AUTH_ID": "",
