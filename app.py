@@ -304,12 +304,12 @@ def getRank():
                                 "" if r1.currentRank == Tier.Unranked and r1.wins + r1.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r1.wins), formatDecimal(r1.losses)),
                                 " (Win rate Global: {0}%{1})".format(getPlayerRequest.getWinratio(), "" if r1.wins + r1.losses == 0 else " & Ranked: {0}%".format(r1.getWinratio())))
 def checkChampName(championName):
-    championName = "bombking" if "bk" in championName or "bomb" in championName else "maldamba" if "mal" in championName else championName
+    champName = "bombking" if "bk" in championName or "bomb" in championName else "maldamba" if "mal" in championName else championName
     champs = [ "androxus", "atlas", "ash", "barik", "bombking", "buck", "cassie", "dredge", "drogoz", "evie", "fernando", "furia", "grohk", "grover",
     "imani", "inara", "jenos", "khan", "kinessa", "koga", "lex", "lian", "maeve", "makoa", "maldamba", "moji", "pip", "ruckus",
     "seris", "shalin", "skye", "strix", "talus", "terminus", "torvald", "tyra", "viktor", "vivian", "willo", "ying", "zhin" ];
     for champ in champs:
-        if champ == championName.lower().replace(" ", "").replace("'", ""):
+        if champ == champName.lower().replace(" ", "").replace("'", ""):
             return True;
     return False;
 @app.route("/api/kda", methods=["GET"])
