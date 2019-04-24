@@ -19,6 +19,15 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 - [Access](https://fs12.formsite.com/HiRez/form48/secure_index.html "Form access to Hi-Rez API") to Hi-Rez Studios' API.
 
 ## Installation
+### Locally
+1. Clone this repository: `git clone https://github.com/luissilva1044894/FlaskPyrezAPI.git`
+2. ``cd`` into it: `cd FlaskPyrezAPI`
+3. Create a virtualenv: `virtualenv -p python venv`
+4. Activate it.
+5. Install Python Dependencies: `pip install --upgrade pip setuptools wheel` | `pip install -r requirements.txt`
+6. Run server: `python manage.py runserver`
+7. Go to your browser and point it towards `http://127.0.0.1:5000`
+
 ### Deploy (Heroku) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luissilva1044894/FlaskPyrezAPI/tree/master "Deploy to Heroku")
 1. Go to [Heroku](https://id.heroku.com/login) and create a new app (eg: `your-app-name`)
 2. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli "Heroku CLI")
@@ -33,15 +42,6 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 11. `git push heroku master`
 12. `heroku run python manage.py migrate`
 13. `heroku open` and a window will open with your app online
-
-### Locally
-1. Clone this repository: `git clone https://github.com/luissilva1044894/FlaskPyrezAPI.git`
-2. ``cd`` into it: `cd FlaskPyrezAPI`
-3. Create a virtualenv: `virtualenv -p python venv`
-4. Activate it.
-5. Install Python Dependencies: `pip install --upgrade pip setuptools wheel` | `pip install -r requirements.txt`
-6. Run server: `python manage.py runserver`
-7. Go to your browser and point it towards `http://127.0.0.1:5000`
 
 ### Thanks
 * [`Lukash`](https://www.facebook.com/PaladinsPoland/ "Paladins Poland") - Polish translation.
