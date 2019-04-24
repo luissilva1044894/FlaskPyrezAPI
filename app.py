@@ -262,7 +262,7 @@ def getCurrentMatch():
             if playerStatusRequest.queueId.isRanked():
                 rank = PLAYER_RANK_STRINGS[language][player.tier] if player.tier != 0 else PLAYER_RANK_STRINGS[language][0] if player.tierWins + player.tierLosses == 0 else QUALIFYING_STRINGS[language]
             else:
-                if player.accountLevel >= 15:
+                if player.accountLevel >= 15 and player.playerId != 0:
                     getPlayer = paladinsAPI.getPlayer(player.playerId)
                     rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayedRanked() else getPlayer.rankedController.currentRank]
                 else:
