@@ -289,9 +289,15 @@
             //console.log(e.trigger.attributes[3])
             //console.log(e.trigger.attributes["data-clipboard-text"])
             //console.log(e.trigger.id)
+
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            console.info('Trigger:', e.trigger);
+            e.clearSelection();
           });
           clipboard.on("error", function(e) {
-            console.log(e);
+            console.error('Action:', e.action);
+            console.error('Trigger:', e.trigger);
           });
         }
       });
