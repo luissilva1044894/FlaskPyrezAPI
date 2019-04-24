@@ -31,7 +31,26 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 9. `git add .`
 10. `git commit -m "Going to Heroku"`
 11. `git push heroku master`
-12. `heroku open` and a window will open with your app online
+12. `heroku run python manage.py migrate`
+13. `heroku open` and a window will open with your app online
+
+### Locally
+1. Clone this repository: `git clone https://github.com/luissilva1044894/FlaskPyrezAPI.git`
+2. ``cd`` into it: `cd FlaskPyrezAPI`
+3. Create a virtualenv: `virtualenv -p python venv`
+4. Activate it.
+5. Install Python Dependencies: `pip install --upgrade pip setuptools wheel` | `pip install -r requirements.txt`
+6. Run server: `python manage.py runserver`
+7. Go to your browser and point it towards `http://127.0.0.1:5000`
+
+.. code-block:: text
+
+    git clone https://github.com/davidism/flask-rr
+    cd flask-rr
+    python3 -m venv --prompt flask-rr venv
+    . venv/bin/activate
+    pip install -e ".[dev]"
+
 
 ### Thanks
 * [`Lukash`](https://www.facebook.com/PaladinsPoland/ "Paladins Poland") - Polish translation.
