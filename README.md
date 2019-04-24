@@ -43,15 +43,6 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 6. Run server: `python manage.py runserver`
 7. Go to your browser and point it towards `http://127.0.0.1:5000`
 
-.. code-block:: text
-
-    git clone https://github.com/davidism/flask-rr
-    cd flask-rr
-    python3 -m venv --prompt flask-rr venv
-    . venv/bin/activate
-    pip install -e ".[dev]"
-
-
 ### Thanks
 * [`Lukash`](https://www.facebook.com/PaladinsPoland/ "Paladins Poland") - Polish translation.
 
