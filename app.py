@@ -273,9 +273,9 @@ def getCurrentMatch():
                 else:
                     rank = "???"
             if player.taskForce == 1:
-                team1.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if len(player.playerName) != 0 else "???", player.godName, rank))
+                team1.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if player.playerName else "???", player.godName, rank))
             else:
-                team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if len(player.playerName) != 0 else "???", player.godName, rank))
+                team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if player.playerName else "???", player.godName, rank))
         return CURRENT_MATCH_STRINGS[language].format(players[0].getMapName(True), QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId], ",".join(team1), ",".join(team2))
     else:
         return "An unexpected error has occurred!"
