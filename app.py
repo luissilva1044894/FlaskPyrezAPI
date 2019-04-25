@@ -9,7 +9,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError
 
 from pyrez.api import *
-from pyrez.enumerations import *
 
 from langs import *
 import json
@@ -191,7 +190,7 @@ def getGameVersion():
         hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[0]
         patchInfo = paladinsAPI.getPatchInfo()
     except Exception as exc:
-        print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
+        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return UNABLE_TO_CONNECT_STRINGS[language]
     return GAME_VERSION_STRINGS[language].format("Paladins", "Xbox One" if platform == PlatformsSupported.Xbox else "PS4" if platform == PlatformsSupported.PS4 else "Nintendo Switch" if platform == PlatformsSupported.Switch else "PC",
                         PALADINS_UP_STRINGS[language].format(PALADINS_LIMITED_ACCESS_STRINGS[language] if hiRezServerStatus.limitedAccess else "") if hiRezServerStatus.status else PALADINS_DOWN_STRINGS[language],
@@ -209,8 +208,11 @@ def getStalk():
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         playerStalkRequest = paladinsAPI.getPlayerStatus(playerId)
+    except PlayerNotFound as exc:
+        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
     except Exception as exc:
-        print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
+        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                         playerStalkRequest.statusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.status != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStalkRequest.queueId], playerStalkRequest.matchId),
@@ -228,7 +230,7 @@ def getLastMatch():
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         lastMatchRequest = paladinsAPI.getMatchHistory(playerId)[0]
     except Exception as exc:
-        print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
+        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     kda = ((lastMatchRequest.assists / 2) + lastMatchRequest.kills) / lastMatchRequest.deaths if lastMatchRequest.deaths > 1 else 1
     kda = int(kda) if kda % 2 == 0 else round(kda, 2)
@@ -249,7 +251,7 @@ def getCurrentMatch():
             return PLAYER_NULL_STRINGS[language] if playerId == 0 else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         playerStatusRequest = paladinsAPI.getPlayerStatus(playerId)
     except Exception as exc:
-        print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
+        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     if playerStatusRequest.status != 3:
         return PLAYER_NOT_MATCH_STRINGS[language][playerStatusRequest.status].format(playerName)
@@ -262,15 +264,18 @@ def getCurrentMatch():
             if playerStatusRequest.queueId.isRanked():
                 rank = PLAYER_RANK_STRINGS[language][player.tier] if player.tier != 0 else PLAYER_RANK_STRINGS[language][0] if player.tierWins + player.tierLosses == 0 else QUALIFYING_STRINGS[language]
             else:
-                if player.accountLevel >= 15 and player.playerId != 0:
-                    getPlayer = paladinsAPI.getPlayer(player.playerId)
-                    rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayedRanked() else getPlayer.rankedController.currentRank]
+                if player.playerId != 0:
+                    if player.accountLevel >= 15:
+                        getPlayer = paladinsAPI.getPlayer(player.playerId)
+                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayedRanked() else getPlayer.rankedController.currentRank]
+                    else:
+                        rank = PLAYER_RANK_STRINGS[language][0]
                 else:
-                    rank = PLAYER_RANK_STRINGS[language][0]
+                    rank = "???"
             if player.taskForce == 1:
-                team1.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godName, rank))
+                team1.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if len(player.playerName) != 0 else "???", player.godName, rank))
             else:
-                team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName, player.godName, rank))
+                team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if len(player.playerName) != 0 else "???", player.godName, rank))
         return CURRENT_MATCH_STRINGS[language].format(players[0].getMapName(True), QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId], ",".join(team1), ",".join(team2))
     else:
         return "An unexpected error has occurred!"
@@ -286,8 +291,11 @@ def getRank():
         elif playerId == -1:
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
+    except PlayerNotFound as exc:
+        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
     except Exception as exc:
-        print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
+        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     r1 = getPlayerRequest.rankedController
     r2 = getPlayerRequest.rankedKeyboard
@@ -330,8 +338,11 @@ def getWinrate():
             playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
         else:
             return PLAYER_LOW_LEVEL_STRINGS[language]
+    except PlayerNotFound as exc:
+        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
     except Exception as exc:
-        print("{0} : {1} : {2} : {3}".format(type(exc), exc.args, exc, str(exc)))
+        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     if championName:
         if not checkChampName(championName):
