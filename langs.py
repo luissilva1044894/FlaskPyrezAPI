@@ -43,24 +43,28 @@ PLAYER_NOT_MATCH_STRINGS = {
         1: "ERROR: {0} is still in Lobby.",
         2: "ERROR: {0} is still selecting a champion. You need to wait until the match has started.",
         4: "ERROR: {0} is Online, but not in a match.",
+        5: "ERROR: {0} don't exist or it's hidden.",
     },
     "es" : {
         0: "ERROR: {0} está Desconectado.",
         1: "ERROR: {0} is still in Lobby.",
         2: "ERROR: {0} is still selecting a champion. You need to wait until the match has started.",
         4: "ERROR: {0} is Online, but not in a match.",
+        5: "ERROR: {0} don't exist or it's hidden.",
     },
     "pl" : {
         0: "BŁĄD: {0} jest offline.",
         1: "BŁĄD: {0} jest w lobby.",
         2: "BŁĄD: {0} wybiera czempiona. Poczekaj aż rozpocznie się mecz.",
         4: "BŁĄD: {0} jest Online, ale nie rozgrywa meczu.",
+        5: "ERROR: {0} don't exist or it's hidden.",
     },
     "pt" : {
        0: "ERROR: {0} está Offline.",
        1: "ERROR: {0} ainda está no Lobby.",
        2: "ERROR: {0} ainda está escolhendo um campeão. Você precisa esperar a partida começar.",
        4: "ERROR: {0} está Online, mas não em partida.",
+       5: "ERROR: {0} não existe ou tem perfil privado.",
     },
 }
 PLAYER_LEVEL_STRINGS = {
