@@ -2,6 +2,7 @@
 
 from enum import Enum
 from datetime import datetime
+import json
 
 from decouple import config, Csv
 from flask import Flask, jsonify, request, render_template
@@ -9,9 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError
 
 from pyrez.api import *
-
 from langs import *
-import json
 try:
     DEBUG = config("DEBUG", default=False, cast=bool)
     PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
@@ -134,7 +133,7 @@ def formatDecimal(data, form = ",d"):
 #    from urllib.parse import quote as URLEncoder #quote_plus
 #    return URLEncoder(data)
 def getAcceptedLanguages(requestArgs):
-    return str(request.accept_languages).split('-')[0] if len(str(request.accept_languages)) > 0 else LanguagesSupported.English.value
+    return str(request.accept_languages).split('-')[0] if request.accept_languages else LanguagesSupported.English.value
 def getLanguage(requestArgs):
     aux = str(requestArgs.args.get("language", default=getAcceptedLanguages(requestArgs))).lower()
     try:
@@ -153,7 +152,7 @@ def getPlayerName(requestArgs):
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
     if not playerName or playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)" or playerName == "[invalid%20variable]":
         return 0
-    elif str(playerName).isnumeric():
+    if str(playerName).isnumeric():
         return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
     if platform == PlatformsSupported.PC:
         playerName = playerName.strip()#.strip(',.-')
@@ -204,7 +203,7 @@ def getStalk():
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
-        elif playerId == -1:
+        if playerId == -1:
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         playerStalkRequest = paladinsAPI.getPlayerStatus(playerId)
@@ -277,8 +276,7 @@ def getCurrentMatch():
             else:
                 team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if player.playerName else "???", player.godName, rank))
         return CURRENT_MATCH_STRINGS[language].format(players[0].getMapName(True), QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId], ",".join(team1), ",".join(team2))
-    else:
-        return "An unexpected error has occurred!"
+    return "An unexpected error has occurred!"
 @app.route("/api/rank", methods=["GET"])
 def getRank():
     playerName = getPlayerName(request.args)
@@ -288,7 +286,7 @@ def getRank():
     try:
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
-        elif playerId == -1:
+        if playerId == -1:
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
     except PlayerNotFound as exc:
@@ -305,8 +303,7 @@ def getRank():
                                 "" if r2.currentRank == Tier.Unranked or r2.currentTrumpPoints <= 0 else " ({0} TP{1})".format(formatDecimal(r2.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r2.leaderboardIndex) if r2.leaderboardIndex > 0 else ""),
                                 "" if r2.currentRank == Tier.Unranked and r2.wins + r2.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r2.wins), formatDecimal(r2.losses)),
                                 " (Win rate Global: {0}%{1})".format (getPlayerRequest.getWinratio(), "" if r2.wins + r2.losses == 0 else " & Ranked: {0}%".format(r2.getWinratio())))
-    else:
-        return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
+    return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                                 PLAYER_RANK_STRINGS[language][r1.currentRank.value] if r1.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r1.wins + r1.losses == 0 else QUALIFYING_STRINGS[language],
                                 "" if r1.currentRank == Tier.Unranked or r1.currentTrumpPoints <= 0 else " ({0} TP{1})".format(formatDecimal(r1.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r1.leaderboardIndex) if r1.leaderboardIndex > 0 else ""),
                                 "" if r1.currentRank == Tier.Unranked and r1.wins + r1.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r1.wins), formatDecimal(r1.losses)),
@@ -331,7 +328,7 @@ def getWinrate():
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
-        elif playerId == -1:
+        if playerId == -1:
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         if getPlayerRequest.accountLevel > 5:
@@ -352,16 +349,15 @@ def getWinrate():
                 return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(champ.godName.replace("'", " "), champ.godLevel), champ.wins, champ.losses,
                         formatDecimal(champ.kills), formatDecimal(champ.deaths), formatDecimal(champ.assists), champ.getKDA(), champ.getWinratio())
         return CHAMP_NOT_PLAYED_STRINGS[language].format(playerName, championName)
-    else:
-        deaths = 0
-        kills = 0
-        assists = 0
-        for champ in playerGlobalKDA:
-            kills += champ.kills
-            deaths += champ.deaths
-            assists += champ.assists
-        kda = ((assists / 2) + kills) / deaths if deaths > 1 else 1
-        return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
+    deaths = 0
+    kills = 0
+    assists = 0
+    for champ in playerGlobalKDA:
+        kills += champ.kills
+        deaths += champ.deaths
+        assists += champ.assists
+    kda = ((assists / 2) + kills) / deaths if deaths > 1 else 1
+    return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
 if __name__ == "__main__":
     app.run(debug=DEBUG)
