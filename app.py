@@ -189,13 +189,13 @@ def getDecks():
         playerLoadouts = paladinsAPI.getPlayerLoadouts(playerId, languageCode)
         if playerLoadouts is None:
             return "{0} doesn't have any {1} custom loadouts!".format(player, championName)
-        cds = ""
+        cds = None
         for playerLoadout in playerLoadouts:
             if playerLoadout.godName.lower().replace(" ", "").replace("'", "") == championName.lower():
                 cardStr = "{}{}: {}".format (" " if len(cds) == 0 else ", ", playerLoadout.deckName, ["{0} {1}".format(card.itemName, card.points) for card in playerLoadout.cards]).replace("'", "")
                 if len (cds + cardStr) <= 400:
                     cds += cardStr
-        return cds
+        return cds if cds else "ERROR: {0} doesn't habe {1} decks! Maybe you misspelled the champName."
     #except NoResult as exc:
     #    print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
     #    return "Maybe “{}” profile isn't public.".format(playerName)
