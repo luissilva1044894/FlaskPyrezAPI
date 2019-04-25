@@ -315,11 +315,11 @@ def checkChampName(championName):
     champName = "bombking" if "bk" in championName or "bomb" in championName else "maldamba" if "mal" in championName else championName
     champs = [ "androxus", "atlas", "ash", "barik", "bombking", "buck", "cassie", "dredge", "drogoz", "evie", "fernando", "furia", "grohk", "grover",
     "imani", "inara", "jenos", "khan", "kinessa", "koga", "lex", "lian", "maeve", "makoa", "maldamba", "moji", "pip", "ruckus",
-    "seris", "shalin", "skye", "strix", "talus", "terminus", "torvald", "tyra", "viktor", "vivian", "willo", "ying", "zhin" ];
+    "seris", "shalin", "skye", "strix", "talus", "terminus", "torvald", "tyra", "viktor", "vivian", "willo", "ying", "zhin" ]
     for champ in champs:
         if champ == champName.lower().replace(" ", "").replace("'", ""):
-            return True;
-    return False;
+            return True
+    return False
 @app.route("/api/kda", methods=["GET"])
 @app.route("/api/winrate", methods=["GET"])
 def getWinrate():
