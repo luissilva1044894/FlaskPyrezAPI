@@ -196,7 +196,7 @@ def getDecks():
                 if len (cds + cardStr) <= 400:
                     cds += cardStr
         return cds
-    except NoResult as noRes:
+    except NoResult as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return "Maybe “{}” profile isn't public.".format(playerName)
     except Exception as exc:
