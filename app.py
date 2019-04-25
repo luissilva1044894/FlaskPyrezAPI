@@ -179,7 +179,26 @@ def getDecks():
     playerName = getPlayerName(request.args)
     championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
     language = getLanguage(request)
-    return INTERNAL_ERROR_404_STRINGS[language]
+    languageCode = 10 if language == "pt" else 7 if language == "es" else 1
+    try:
+        playerId = getPlayerId(playerName, platform)
+        if playerId == 0:
+            return PLAYER_NULL_STRINGS[language]
+        if playerId == -1:
+            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+        playerLoadouts = paladinsAPI.getPlayerLoadouts(playerId, languageCode)
+        if playerLoadouts is None:
+            return "{0} doesn't have any {1} custom loadouts!".format(player, championName)
+        cds = ""
+        for playerLoadout in playerLoadouts:
+            if playerLoadout.godName.lower().replace(" ", "").replace("'", "") == championName.lower():
+                cardStr = "{}{}: {}".format (" " if len(cds) == 0 else ", ", playerLoadout.deckName, ["{0} {1}".format(card.itemName, card.points) for card in playerLoadout.cards]).replace("'", "")
+                if len (cds + cardStr) <= 400:
+                    cds += cardStr
+        return cds
+    except Exception as exc:
+        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        return INTERNAL_ERROR_500_STRINGS[language]
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
     platform = getPlatform(request.args)
