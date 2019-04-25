@@ -196,9 +196,9 @@ def getDecks():
                 if len (cds + cardStr) <= 400:
                     cds += cardStr
         return cds
-    except NoResult as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
-        return "Maybe “{}” profile isn't public.".format(playerName)
+    #except NoResult as exc:
+    #    print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+    #    return "Maybe “{}” profile isn't public.".format(playerName)
     except Exception as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
