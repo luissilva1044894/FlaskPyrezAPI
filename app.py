@@ -177,10 +177,12 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
 def getDecks():
     platform = getPlatform(request.args)
     playerName = getPlayerName(request.args)
-    championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
+    championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") else None
     language = getLanguage(request)
     languageCode = 10 if language == "pt" else 7 if language == "es" else 1
     try:
+        if championName is None:
+            return "ERROR: ChampName not specified!"
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
