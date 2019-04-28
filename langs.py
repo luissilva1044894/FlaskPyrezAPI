@@ -32,10 +32,10 @@ PLAYER_NULL_STRINGS = {
     "pt" : "ERROR: Player not specified!",
 }
 PLAYER_NOT_FOUND_STRINGS = {
-    "en" : "ERROR: “{0}” not found!",
-    "es" : "ERROR: “{0}” no encontrado!",
-    "pl" : "BŁĄD: Nie znaleziono gracza “{0}”!",
-    "pt" : "ERRO: “{0}” não encontrado!",
+    "en" : "ERROR: “{0}” don't exist or it's hidden!",
+    "es" : "ERROR: “{0}” don't exist or it's hidden!",
+    "pl" : "BŁĄD: Nie znaleziono gracza “{0}”! Make sure that your account is marked as “Public Profile”",
+    "pt" : "ERRO: “{0}” não existe ou tem perfil privado!",
 }
 PLAYER_NOT_MATCH_STRINGS = {
     "en" : {
