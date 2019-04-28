@@ -160,11 +160,11 @@
       <div class="container-fluid" style="padding-top: 25px; padding-right: 50px; padding-bottom: 75px; padding-left: 100px;">
         <div class="form-group">
           <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm">
               <span class="help-block">{% block commands_generator_cmdname %}{% endblock %}</span>
               <input id="command_name" type="text" value="" placeholder="{% block commands_generator_cmdname_placeholder %}{% endblock %}" title="{% block commands_generator_cmdname_title %}{% endblock %}" pattern=".{1,}" required onchange="checkButtonPos()" class="form-control input-md required">
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm">
               <span class="help-block">{% block commands_generator_cmdtype %}{% endblock %}</span>
               <select id="command_type" class="form-control full-width" onchange="commandTypeChanged()">
                 <option value="currentmatch">!{% block commands_generator_cmdtype_cmdcurrentmatch %}{% endblock %}</option>
@@ -181,11 +181,11 @@
 
         <div class="form-group">
           <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm">
               <span class="help-block">{% block commands_generator_paladinsign %}{% endblock %}</span>
               <input id="player_name" type="text" placeholder="{% block commands_generator_player_name_placeholder %}{% endblock %}" class="form-control input-md required" pattern=".{4,}" title="{% block commands_generator_player_name_title %}{% endblock %}" required onchange="checkButtonPos()">
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm">
               <span class="help-block">{% block commands_generator_paladinsplat %}{% endblock %}</span>
               <select id="platform_form" class="form-control full-width" size="1">
                 <option value="PC">PC/Steam</option>
@@ -199,13 +199,13 @@
 
         <div class="form-group">
           <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm">
               <span class="help-block">{% block commands_generator_cmdlang %}{% endblock %}</span>
                   <select id="language_form" class="form-control">
                     {% block commands_generator_langs_order %}{% endblock %}
                   </select>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm">
                   <span class="help-block">Bot</span>
                   <select id="bot_name" name="bot_name" class="form-control">
                     <!-- <option value="1">AnkhBot</option> -->
