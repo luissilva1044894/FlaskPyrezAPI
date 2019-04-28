@@ -294,7 +294,7 @@ def getCurrentMatch():
                             rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayedRanked() else getPlayer.rankedController.currentRank]
                         except PlayerNotFound as exc:
                             print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
-                            rak = "???"
+                            rank = "???"
                     else:
                         rank = PLAYER_RANK_STRINGS[language][0]
                 else:
