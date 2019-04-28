@@ -281,7 +281,7 @@ def getCurrentMatch():
     if not (playerStatusRequest.queueId.isLiveMatch() or playerStatusRequest.queueId.isPraticeMatch()):
         return QUEUE_ID_NOT_SUPPORTED_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId], playerName)
     team1, team2 = [], []
-    players = paladinsAPI.getLiveMatchDetails(playerStatusRequest.matchId)
+    players = paladinsAPI.getLiveMatch(playerStatusRequest.matchId)
     if players:
         for player in players:
             if playerStatusRequest.queueId.isRanked():
