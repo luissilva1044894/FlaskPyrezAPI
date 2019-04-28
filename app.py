@@ -289,8 +289,12 @@ def getCurrentMatch():
             else:
                 if player.playerId != 0:
                     if player.accountLevel >= 15:
-                        getPlayer = paladinsAPI.getPlayer(player.playerId)
-                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayedRanked() else getPlayer.rankedController.currentRank]
+                        try:
+                            getPlayer = paladinsAPI.getPlayer(player.playerId)
+                            rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayedRanked() else getPlayer.rankedController.currentRank]
+                        except PlayerNotFound as exc:
+                            print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+                            rak = "???"
                     else:
                         rank = PLAYER_RANK_STRINGS[language][0]
                 else:
