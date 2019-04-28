@@ -287,14 +287,10 @@ def getCurrentMatch():
             if playerStatusRequest.queueId in [ 428, 486 ]:
                 rank = PLAYER_RANK_STRINGS[language][player.tier] if player.tier != 0 else PLAYER_RANK_STRINGS[language][0] if player.tierWins + player.tierLosses == 0 else QUALIFYING_STRINGS[language]
             else:
-                if player.playerId != 0:
+                if player.playerId != "0": #int(player.playerId) != 0:
                     if player.accountLevel >= 15:
-                        try:
-                            getPlayer = paladinsAPI.getPlayer(player.playerId)
-                            rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayedRanked() else getPlayer.rankedController.currentRank]
-                        except PlayerNotFound as exc:
-                            print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
-                            rank = "???"
+                        getPlayer = paladinsAPI.getPlayer(player.playerId)
+                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayedRanked() else getPlayer.rankedController.currentRank]
                     else:
                         rank = PLAYER_RANK_STRINGS[language][0]
                 else:
