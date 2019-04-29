@@ -159,7 +159,7 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
     _player = Player.query.filter_by(name=playerName, platform=str(platform)).first()
     print("Player readed - Database", _player)
     if _player is None:
-        temp = paladinsAPI.getPlayerIdsByGamerTag(playerName, platform) if str(platform).isnumeric() else paladinsAPI.getPlayerIdByName(playerName)
+        temp = paladinsAPI.getPlayerId(playerName, platform) if str(platform).isnumeric() else paladinsAPI.getPlayerId(playerName)
         if not temp:
             return -1
         _player = Player(name=playerName, id=temp[0].playerId, platform=str(platform))
