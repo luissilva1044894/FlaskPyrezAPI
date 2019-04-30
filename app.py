@@ -148,7 +148,8 @@ def getChampName(requestArgs):
             champName = champName[1]
         except IndexError:
             champName = None
-    return "bombking" if "bk" or "bomb" in champName else "maldamba" if "mal" in champName else champName.lower().replace(" ", "").replace("'", "") if champName else None
+    #return "bombking" if "bk" or "bomb" in champName else "maldamba" if "mal" in champName else champName.lower().replace(" ", "").replace("'", "") if champName else None
+    return champName.lower().replace(" ", "").replace("'", "") if champName else None
 def getPlatform(requestArgs):
     qry = requestArgs.get("query", default=None)
     if qry:
