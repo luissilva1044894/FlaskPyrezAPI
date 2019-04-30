@@ -157,7 +157,7 @@ def getPlatform(requestArgs):
         aux = aux[len(aux) - 1]
     else:
         aux = str(requestArgs.get("platform", default=str(PlatformsSupported.PC.value))).lower()
-    return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("sw") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PC
+    return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("switch") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PC
 def getPlayerName(requestArgs):
     qry = requestArgs.get("query", default=None)
     if qry:
