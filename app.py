@@ -140,15 +140,32 @@ def getLanguage(requestArgs):
         return LanguagesSupported(aux).value
     except ValueError:
         return LanguagesSupported.English.value
+def getChampName(requestArgs):
+    qry = requestArgs.get("query", default=None)
+    if qry:
+        champName = qry[qry.rfind('"')+1:].split(' ') if qry.rfind('"') > 1 else qry.split(' ')
+        try:
+            champName = champName[1]
+        except IndexError:
+            champName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
+    else:
+        champName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
+    return champName
 def getPlatform(requestArgs):
-    aux = str(requestArgs.get("platform", default=str(PlatformsSupported.PC.value))).lower()
+    qry = requestArgs.get("query", default=None)
+    if qry:
+        aux = qry[qry.rfind('"')+1:].split(' ') if qry.rfind('"') > 1 else qry.split(' ')
+        aux = aux[len(aux) - 1]
+    else:
+        aux = str(requestArgs.get("platform", default=str(PlatformsSupported.PC.value))).lower()
     return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("sw") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PC
 def getPlayerName(requestArgs):
-    try:
-        playerName = requestArgs.get("query").split(' ')[0].lower() if requestArgs.get("query") else requestArgs.get("player").lower()#str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
-        return None if playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)" or playerName == "[invalid%20variable]" else playerName
-    except AttributeError:
-        return None
+    qry = requestArgs.get("query", default=None)
+    if qry:
+        playerName = qry[1:qry.rfind('"')] if qry.rfind('"') > 1 else qry.split(' ')[0]
+    else:
+        playerName = requestArgs.get("player", default=None)#str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
+    return None if playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)" or playerName == "[invalid%20variable]" else playerName.lower()
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
     if not playerName or playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)" or playerName == "[invalid%20variable]":
         return 0
@@ -177,7 +194,7 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
 def getDecks():
     platform = getPlatform(request.args)
     playerName = getPlayerName(request.args)
-    championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") else None
+    championName = getChampName(request.args)
     language = getLanguage(request)
     languageCode = 10 if language == "pt" else 7 if language == "es" else 1
     try:
@@ -346,7 +363,7 @@ def checkChampName(championName):
 def getWinrate():
     platform = getPlatform(request.args)
     playerName = getPlayerName(request.args)
-    championName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
+    championName = getChampName(request.args)
     language = getLanguage(request)
     try:
         playerId = getPlayerId(playerName, platform)
