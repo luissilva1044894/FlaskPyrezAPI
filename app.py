@@ -398,4 +398,19 @@ def getWinrate():
     return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
 if __name__ == "__main__":
+    if DEBUG:
+        players = Player.query.all()
+        print("Entries: {}".format(formatDecimal(len(players))))
+        for player in players:
+            try:
+                p = paladinsAPI.getPlayer(player.id)
+                if p.lastLoginDatetime.year < datetime.utcnow().year or p.accountLevel < 15:
+                    player.delete()
+            except PlayerNotFound:
+                player.delete()
+            except AttributeError:
+                input(p)
+            #delete = input("Delete? {}".format(player))
+            #if delete.lower() == 'y':
+            #    player.delete()
     app.run(debug=DEBUG)
