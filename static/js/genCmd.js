@@ -51,7 +51,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 if(userCanUse.checked)
                     params = "query=$(urlencode $(query 1))&" + params;
                 cmd += customAPICode.replace("{PARAMS}", params);
-                cmd += userCanUse.checked ? cmdUsers : customAPICode;
+                //cmd += userCanUse.checked ? cmdUsers : customAPICode;
             break;
             case botName["2"].value.toLowerCase(): /*case "5"*:*/ //Streamlabs / Ankbot
                 switch(userLevel.value) {
