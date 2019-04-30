@@ -30,7 +30,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 cmdChat += "!command add !{CMD_NAME} $[cooldown {CD}] ".replace("{CD}", cooldown).replace("{CMD_NAME}", commandName)
                 
                 customAPICode = "$(fetch {ENDPOINT_LINK}?{PARAMS})";
-                cmdUsers = "$(js `$(querystring)`.trim()==``?`{IF}`:`{ELSE}`; )";
+                /*cmdUsers = "$(js `$(querystring)`.trim()==``?`{IF}`:`{ELSE}`; )";
                 if(String(commandType.value).toLowerCase() === commandType["1"].value.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].value.toLowerCase()) {
                     if(userCanUse.checked) {
                         cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}"));
@@ -46,7 +46,11 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                             cmdUsers = cmdUsers.replace("{ELSE}", customAPICode.replace("{PARAMS}", "query=$(urlencode $(query 1))&platform=$(query 2)&language={LANGUAGE}"));
                         } else customAPICode = customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}");
                     }
-                }
+                }*/
+                params = "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}";
+                if(userCanUse.checked)
+                    params = "query=$(urlencode $(query 1))&" + params;
+                cmd += customAPICode.replace("{PARAMS}", params);
                 cmd += userCanUse.checked ? cmdUsers : customAPICode;
             break;
             case botName["2"].value.toLowerCase(): /*case "5"*:*/ //Streamlabs / Ankbot
@@ -71,7 +75,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 }
                 cmdChat += "!command add !{CMD_NAME} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
 
-                if(String(commandType.value).toLowerCase() === commandType["1"].value.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].value.toLowerCase()) {
+                /*if(String(commandType.value).toLowerCase() === commandType["1"].value.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].value.toLowerCase()) {
                     cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?player=$(queryencode $(1:))&champion=$(queryencode $(2:))&language={LANGUAGE}}" : "${customapi.{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}}";
                 } else {
                     if(String(commandType.value).toLowerCase() === commandType["5"].value.toLowerCase()) {
@@ -79,7 +83,12 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                     } else {
                         cmd += userCanUse.checked ? "${customapi.{ENDPOINT_LINK}?query=$(queryencode $(1:))&language={LANGUAGE}}" : "${customapi.{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}}";
                     }
-                }
+                }*/
+                customAPICode = "${customapi.{ENDPOINT_LINK}?{PARAMS}}";
+                params = "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}";
+                if(userCanUse.checked)
+                    params = "query=$(queryencode $(1:))&" + params;
+                cmd += customAPICode.replace("{PARAMS}", params);
             break;
             default:
                 switch(userLevel.value) {
@@ -92,7 +101,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 cmdChat += "!addcom -cd={CD} -ul={PERM_LVL} !{CMD_NAME} ".replace("{CD}", cooldown).replace("{PERM_LVL}", permLvl).replace("{CMD_NAME}", commandName)
                 
                 customAPICode = "$(customapi {ENDPOINT_LINK}?{PARAMS})";
-                cmdUsers = "$(eval `$(querystring)`.trim()==``?`{IF}`:`{ELSE}`; )";
+                /*cmdUsers = "$(eval `$(querystring)`.trim()==``?`{IF}`:`{ELSE}`; )";
                 if(String(commandType.value).toLowerCase() === commandType["1"].value.toLowerCase() || String(commandType.value).toLowerCase() === commandType["2"].value.toLowerCase()) {
                     if(userCanUse.checked) {
                         cmdUsers = cmdUsers.replace("{IF}", customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}"));
@@ -109,7 +118,11 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                         } else customAPICode = customAPICode.replace("{PARAMS}", "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}");
                     }
                 }
-                cmd += userCanUse.checked ? cmdUsers : customAPICode;
+                cmd += userCanUse.checked ? cmdUsers : customAPICode;*/
+                params = "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}";
+                if(userCanUse.checked)
+                    params = "query=$(querystring)&" + params;
+                cmd += customAPICode.replace("{PARAMS}", params);
             break;
         }
         addAlert("{CMD_CREATED}".replace("{CMD_CREATED}", getTranslatedString(lang, "cmdCreated").replace("{CMD_NAME}", commandName)), "alert-success", true, true, "#result-warning", lang);//, 1 * 60);
