@@ -400,6 +400,10 @@ def getWinrate():
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
 if __name__ == "__main__":
     if DEBUG:
+        #_players = Player.query.filter_by(id="X")
+        #for _player in _players:
+        #    input(_player)
+        #    _player.delete()
         players = Player.query.all()
         print("Entries: {}".format(formatDecimal(len(players))))
         for player in players:
