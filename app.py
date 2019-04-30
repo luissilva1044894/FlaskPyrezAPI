@@ -142,15 +142,13 @@ def getLanguage(requestArgs):
         return LanguagesSupported.English.value
 def getChampName(requestArgs):
     qry = requestArgs.get("query", default=None)
-    if qry:
-        champName = qry[qry.rfind('"')+1:].split(' ') if qry.rfind('"') > 1 else qry.split(' ')
+    champName = request.args.get("champion", None) if qry is None else qry[qry.rfind('"')+1:].split(' ') if qry.rfind('"') > 1 else qry.split(' ')
+    if isinstance(champName, (type(()), type([]))):
         try:
             champName = champName[1]
         except IndexError:
-            champName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
-    else:
-        champName = str(request.args.get("champion")).lower().replace(" ", "").replace("'", "") if request.args.get("champion") and str(request.args.get("champion")).lower() != "null" else None
-    return champName
+            champName = None
+    return champName.lower().replace(" ", "").replace("'", "") if champName else None
 def getPlatform(requestArgs):
     qry = requestArgs.get("query", default=None)
     if qry:
