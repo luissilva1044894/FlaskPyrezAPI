@@ -1,8 +1,0 @@
-{
-	"version": 2,
-	"name": "FlaskPyrezAPI",
-	"builds": [
-		{ "src": "**/*.py","use":"@now/python@canary" },
-		{ "src": "static/**","use":"@now/static" }
-	]
-}
