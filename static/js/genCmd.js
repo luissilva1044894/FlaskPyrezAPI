@@ -27,7 +27,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 cmd += userCanUse.checked ? "@customapi@[{ENDPOINT_LINK}?player=@target@[1]&platform=@target@[3]&champion=@target@[2]&language={LANGUAGE})" : "@customapi@[{ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
             break;*/
             case botName["0"].value.toLowerCase(): // Botisimo
-                cmdChat += "!command add !{CMD_NAME} $[cooldown {CD}] ".replace("{CD}", cooldown).replace("{CMD_NAME}", commandName)
+                cmdChat += "!command add !{CMD_NAME} $[cooldown {CD}] ".replace("{CD}", cooldown).replace("{CMD_NAME}", commandName);
                 
                 customAPICode = "$(fetch {ENDPOINT_LINK}?{PARAMS})";
                 /*cmdUsers = "$(js `$(querystring)`.trim()==``?`{IF}`:`{ELSE}`; )";
@@ -62,7 +62,12 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                     default: permLvl = "+a";
                 }
                 cmdChat += "!command add !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
-                cmd += userCanUse.checked ? "$readapi({ENDPOINT_LINK}?query=$dummyormsg&language={LANGUAGE})" : "$readapi({ENDPOINT_LINK}?player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE})";
+
+                customAPICode = "$readapi({ENDPOINT_LINK}?{PARAMS})";
+                params = "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}";
+                if(userCanUse.checked)
+                    params = "query=$dummyormsg&" + params;
+                cmd += customAPICode.replace("{PARAMS}", params);
             break;
             case botName["3"].value.toLowerCase():
                 switch(userLevel.value) {
