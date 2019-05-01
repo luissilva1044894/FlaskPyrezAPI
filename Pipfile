@@ -4,9 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pip = "==19.1"
+setuptools = "==41.0.1"
 
 [packages]
-alembic = "==1.0.9"
+alembic = "==1.0.10"
 python-dateutil = "==2.8.0"
 python-editor = "==1.0.4"
 six = "==1.12.0"
