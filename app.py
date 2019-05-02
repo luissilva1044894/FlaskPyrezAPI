@@ -252,6 +252,8 @@ def getStalk():
         playerStalkRequest = paladinsAPI.getPlayerStatus(playerId)
     except PlayerNotFound as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        _player = Player.query.filter_by(id=playerId).first()
+        _player.delete()
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
     except Exception as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
@@ -338,6 +340,8 @@ def getRank():
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
     except PlayerNotFound as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        _player = Player.query.filter_by(id=playerId).first()
+        _player.delete()
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
     except Exception as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
