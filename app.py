@@ -78,6 +78,9 @@ class Player(db.Model):
             print("Player stored - Database", self)
         except IntegrityError:
             db.session.rollback()
+            _player = Player.query.filter_by(id=self.id).first()
+            _player.delete()
+            self.save()
             print("Player not stored - Database rolledback", self)
     def update(self, name):
         self.name = name
