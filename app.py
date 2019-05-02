@@ -39,22 +39,22 @@ class Session(db.Model):
         return "<Session {}>".format(self.sessionId)
     def save(self):
         try:
+            print("SessionId store - Database", self)
             for sess in Session.query.all():
                 sess.delete()
             db.session.add(self)
             db.session.commit()
-            print("SessionId store - Database", self)
         except IntegrityError:
-            db.session.rollback()
             print("SessionId not stored - Database rolledback", self)
+            db.session.rollback()
     def update(self, name):
+        print("SessionId updated - Database", self)
         self.name = name
         db.session.commit()
-        print("SessionId updated - Database", self)
     def delete(self):
+        print("SessionId deleted - Database", self)
         db.session.delete(self)
         db.session.commit()
-        print("SessionId deleted - Database", self)
     def json(self):
         return { "session_id": self.sessionId }
 class Player(db.Model):
@@ -73,23 +73,23 @@ class Player(db.Model):
         return "<Player {} (Id: {} - Platform: {})>".format(self.name, self.id, self.platform)
     def save(self):
         try:
+            print("Player stored - Database", self)
             db.session.add(self)
             db.session.commit()
-            print("Player stored - Database", self)
         except IntegrityError:
+            print("Player not stored - Database rolledback", self)
             db.session.rollback()
             _player = Player.query.filter_by(id=self.id).first()
             _player.delete()
             self.save()
-            print("Player not stored - Database rolledback", self)
     def update(self, name):
+        print("Player updated - Database", self)
         self.name = name
         db.session.commit()
-        print("Player updated - Database", self)
     def delete(self):
+        print("Player deleted - Database", self)
         db.session.delete(self)
         db.session.commit()
-        print("Player deleted - Database", self)
     def json(self):
         return { "player_id": self.id, "player_name": self.name, "player_platform": self.platform }
 class BaseEnumeration(Enum):
