@@ -60,17 +60,17 @@ class Session(db.Model):
 class Player(db.Model):
     __tablename__ = "players"
     
-    _id = db.Column("player_id", db.Integer, primary_key=True, unique=True, nullable=False, autoincrement=False)
-    _name = db.Column("player_name", db.String(120), nullable=False)
-    _platform = db.Column("player_platform", db.String(4), nullable=False)
+    id = db.Column("player_id", db.Integer, primary_key=True, unique=True, nullable=False, autoincrement=False)
+    name = db.Column("player_name", db.String(120), nullable=False)
+    platform = db.Column("player_platform", db.String(4), nullable=False)
 
-    def __init__(self, _id, _name, _platform):
-        self._id = _id
-        self._name = _name
-        self._platform = _platform
+    def __init__(self, id, name, platform):
+        self.id = id
+        self.name = name
+        self.platform = platform
         self.save()
     def __repr__(self):
-        return "<Player {} (Id: {} - Platform: {})>".format(self._name, self._id, self._platform)
+        return "<Player {} (Id: {} - Platform: {})>".format(self.name, self.id, self.platform)
     def save(self):
         try:
             print("Player stored - Database", self)
@@ -79,19 +79,19 @@ class Player(db.Model):
         except IntegrityError:
             print("Player not stored - Database rolledback", self)
             db.session.rollback()
-            _player = Player.query.filter_by(_id=self._id).first()
+            _player = Player.query.filter_by(id=self.id).first()
             _player.delete()
             self.save()
-    def update(self, _name):
+    def update(self, name):
         print("Player updated - Database", self)
-        self._name = _name
+        self.name = name
         db.session.commit()
     def delete(self):
         print("Player deleted - Database", self)
         db.session.delete(self)
         db.session.commit()
     def json(self):
-        return { "player_id": self._id, "player_name": self._name, "player_platform": self._platform }
+        return { "player_id": self.id, "player_name": self.name, "player_platform": self.platform }
 class BaseEnumeration(Enum):
     def __str__(self):
         return str(self.value).lower()
@@ -175,14 +175,14 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
         return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
     if platform == PlatformsSupported.PC:
         playerName = playerName.strip()#.strip(',.-')
-    _player = Player.query.filter_by(_name=playerName, _platform=str(platform)).first()
+    _player = Player.query.filter_by(name=playerName, platform=str(platform)).first()
     print("Player readed - Database", _player)
     if _player is None:
         temp = paladinsAPI.getPlayerId(playerName, platform) if str(platform).isnumeric() else paladinsAPI.getPlayerId(playerName)
         if not temp:
             return -1
-        _player = Player(_name=playerName, _id=temp[0].playerId, _platform=str(platform))
-    return _player._id if _player else -1
+        _player = Player(name=playerName, id=temp[0].playerId, platform=str(platform))
+    return _player.id if _player else -1
 def getLastSeen(lastSeen, language = LanguagesSupported.English):
     now = datetime.utcnow()
     delta = now - lastSeen
@@ -407,7 +407,7 @@ def getWinrate():
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
 if __name__ == "__main__":
     if DEBUG:
-        #_players = Player.query.filter_by(_id="X")
+        #_players = Player.query.filter_by(id="X")
         #for _player in _players:
         #    input(_player)
         #    _player.delete()
