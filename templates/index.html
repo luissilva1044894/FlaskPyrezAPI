@@ -275,7 +275,7 @@
           });
         }
       });
-      function getEndpoint() { return "{{ url_for('index', _external=True).replace('index.html', '') + 'api/' }}" }
+      function getEndpoint() { return "{{ url_for('index', _external=True).replace('index.html', '').replace('http://', 'https://') + 'api/' }}" }
     </script>
   </body>
 </html>

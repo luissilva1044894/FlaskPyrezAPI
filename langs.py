@@ -25,6 +25,12 @@ CURRENT_MATCH_PLAYER_STRINGS = {
     "pl" : " {0}: {1} ({2})",
     "pt" : " {0}: {1} ({2})",
 }
+OUTDATED_CMD_STRINGS = {
+    "en" : "ERROR: Command outdated! Go to “{0}” and re-create them!",
+    "es" : "ERROR: ERROR: Command outdated! Go to “{0}” and re-create them!",
+    "pl" : "BŁĄD: ERROR: Command outdated! Go to “{0}” and re-create them!",
+    "pt" : "ERROR: ERROR: Comando desatualizado! Acesse “{0}” para gerar novamente!",
+}
 PLAYER_NULL_STRINGS = {
     "en" : "ERROR: Player not specified!",
     "es" : "ERROR: Player not specified!",

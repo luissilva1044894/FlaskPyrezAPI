@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 
 from decouple import config, Csv
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError
 
@@ -107,6 +107,8 @@ class PlatformsSupported(BaseEnumeration):
     Xbox = "10"
     PS4 = "9"
     Switch = "22"
+class Outdated(Exception):
+    pass
 def sessionCreated(session):#print("SESSION: {0}".format(session))
     _session = Session(sessionId=session.sessionId)
     print("New sessionId: {}".format(_session))
@@ -135,6 +137,12 @@ def formatDecimal(data, form = ",d"):
 #def encodeData(data):#https://www.urlencoder.io/python/
 #    from urllib.parse import quote as URLEncoder #quote_plus
 #    return URLEncoder(data)
+
+def getUrl(endpoint, params=None, _external=True):
+    _url = url_for(endpoint, _external=_external)
+    for param in params:
+        _url = _url.replace(param, '')
+    return _url
 def getAcceptedLanguages(requestArgs):
     return str(request.accept_languages).split('-')[0] if request.accept_languages else LanguagesSupported.English.value
 def getLanguage(requestArgs):
@@ -154,12 +162,18 @@ def getChampName(requestArgs):
     #return "bombking" if "bk" or "bomb" in champName else "maldamba" if "mal" in champName else champName.lower().replace(" ", "").replace("'", "") if champName else None
     return champName.lower().replace(" ", "").replace("'", "") if champName else None
 def getPlatform(requestArgs):
+    _checkOutdated = str(requestArgs.get("platform", default=None)).lower()
+    if str(_checkOutdated) == "platform" or str(_checkOutdated) == "null" or str(_checkOutdated) == "none":
+        raise Outdated(_checkOutdated)
     qry = requestArgs.get("query", default=None)
     if qry:
         aux = qry[qry.rfind('"')+1:].split(' ') if qry.rfind('"') > 1 else qry.split(' ')
-        aux = aux[len(aux) - 1]
+        if isinstance(aux, (type(()), type([]))) and len(aux) > 1:
+            aux = aux[len(aux) - 1]
+        else:
+            aux = str(requestArgs.get("platform", default=None)).lower()
     else:
-        aux = str(requestArgs.get("platform", default=str(PlatformsSupported.PC.value))).lower()
+        aux = str(requestArgs.get("platform", default=None)).lower()
     return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("switch") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PC
 def getPlayerName(requestArgs):
     qry = requestArgs.get("query", default=None)
@@ -194,12 +208,13 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
     return fmt.format(d=days, h=hours, m=minutes, s=seconds)
 @app.route("/api/decks", methods=["GET"])
 def getDecks():
-    platform = getPlatform(request.args)
-    playerName = getPlayerName(request.args)
-    championName = getChampName(request.args)
-    language = getLanguage(request)
-    languageCode = 10 if language == "pt" else 7 if language == "es" else 1
     try:
+        language = getLanguage(request)
+        languageCode = 10 if language == "pt" else 7 if language == "es" else 1
+        championName = getChampName(request.args)
+        playerName = getPlayerName(request.args)
+        platform = getPlatform(request.args)
+        
         if championName is None:
             return "ERROR: ChampName not specified!"
         playerId = getPlayerId(playerName, platform)
@@ -220,17 +235,22 @@ def getDecks():
     #except NoResult as exc:
     #    print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
     #    return "Maybe “{}” profile isn't public.".format(playerName)
+    except Outdated as exc:
+        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except Exception as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
-    platform = getPlatform(request.args)
-    language = getLanguage(request)
     try:
+        language = getLanguage(request)
+        platform = getPlatform(request.args)
+
         hiRezServerStatus = paladinsAPI.getHiRezServerStatus()
         hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[0]
         patchInfo = paladinsAPI.getPatchInfo()
+    except Outdated as exc:
+        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except Exception as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return UNABLE_TO_CONNECT_STRINGS[language]
@@ -239,10 +259,11 @@ def getGameVersion():
                         patchInfo.gameVersion, hiRezServerStatus.version)
 @app.route("/api/stalk", methods=["GET"])
 def getStalk():
-    platform = getPlatform(request.args)
-    playerName = getPlayerName(request.args)
-    language = getLanguage(request)
     try:
+        language = getLanguage(request)
+        playerName = getPlayerName(request.args)
+        platform = getPlatform(request.args)
+
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
@@ -250,6 +271,8 @@ def getStalk():
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         playerStalkRequest = paladinsAPI.getPlayerStatus(playerId)
+    except Outdated as exc:
+        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except PlayerNotFound as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
@@ -261,16 +284,19 @@ def getStalk():
                         getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getLastSeen(getPlayerRequest.lastLoginDatetime, language), formatDecimal(getPlayerRequest.hoursPlayed), getPlayerRequest.platform, PLAYER_REGION_STRINGS[language][str(getPlayerRequest.playerRegion).replace(' ', "_").upper()])
 @app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
-    platform = getPlatform(request.args)
-    playerName = getPlayerName(request.args)
-    language = getLanguage(request)
     try:
+        language = getLanguage(request)
+        playerName = getPlayerName(request.args)
+        platform = getPlatform(request.args)
+
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
         if playerId == -1:
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         lastMatchRequest = paladinsAPI.getMatchHistory(playerId)[0]
+    except Outdated as exc:
+        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except Exception as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
@@ -283,15 +309,17 @@ def getLastMatch():
                         lastMatchRequest.team2Score) if lastMatchRequest.taskForce == 1 else "{0}/{1}".format(lastMatchRequest.team2Score, lastMatchRequest.team1Score))
 @app.route("/api/currentmatch", methods=["GET"])
 def getCurrentMatch():
-    platform = getPlatform(request.args)
-    playerName = getPlayerName(request.args)
-    language = getLanguage(request)
-
     try:
+        language = getLanguage(request)
+        playerName = getPlayerName(request.args)
+        platform = getPlatform(request.args)
+
         playerId = getPlayerId(playerName, platform)
         if playerId == 0 or playerId == -1:
             return PLAYER_NULL_STRINGS[language] if playerId == 0 else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         playerStatusRequest = paladinsAPI.getPlayerStatus(playerId)
+    except Outdated as exc:
+        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except Exception as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
@@ -326,16 +354,19 @@ def getCurrentMatch():
     return "An unexpected error has occurred!"
 @app.route("/api/rank", methods=["GET"])
 def getRank():
-    playerName = getPlayerName(request.args)
-    platform = getPlatform(request.args)
-    language = getLanguage(request)
-    playerId = getPlayerId(playerName, platform)
     try:
+        language = getLanguage(request)
+        playerName = getPlayerName(request.args)
+        platform = getPlatform(request.args)
+
+        playerId = getPlayerId(playerName, platform)
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
         if playerId == -1:
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
+    except Outdated as exc:
+        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except PlayerNotFound as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
@@ -366,11 +397,12 @@ def checkChampName(championName):
 @app.route("/api/kda", methods=["GET"])
 @app.route("/api/winrate", methods=["GET"])
 def getWinrate():
-    platform = getPlatform(request.args)
-    playerName = getPlayerName(request.args)
-    championName = getChampName(request.args)
-    language = getLanguage(request)
     try:
+        language = getLanguage(request)
+        championName = getChampName(request.args)
+        playerName = getPlayerName(request.args)
+        platform = getPlatform(request.args)
+    
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
@@ -381,6 +413,8 @@ def getWinrate():
             playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
         else:
             return PLAYER_LOW_LEVEL_STRINGS[language]
+    except Outdated as exc:
+        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except PlayerNotFound as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)

@@ -57,7 +57,7 @@ function getElementById(elementName) { return document.getElementById(elementNam
 
 function commandTypeChanged() {
     var commandType = getElementById("command_type"), commandCooldown = getElementById("command_cooldown");
-    commandCooldown.min = commandType.value.toLowerCase() === commandType["0"].value.toLowerCase() ? 25 : 5;
+    commandCooldown.min = commandType.value.toLowerCase() === commandType["0"].value.toLowerCase() ? 25 : 10;
     commandCooldown.value = commandCooldown.min;
     // getElementById("cmd_generator_ign_header").style.display = getElementById("player_name").style.display = commandType.value.toLowerCase() === commandType["5"].value.toLowerCase() ? "none" : "block";
     // getElementById("cmd_generator_ign_header").style.visibility = getElementById("player_name").style.visibility = commandType.value.toLowerCase() === commandType["5"].value.toLowerCase() ? "hidden" : "visible";
