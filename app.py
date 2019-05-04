@@ -162,9 +162,9 @@ def getChampName(requestArgs):
     #return "bombking" if "bk" or "bomb" in champName else "maldamba" if "mal" in champName else champName.lower().replace(" ", "").replace("'", "") if champName else None
     return champName.lower().replace(" ", "").replace("'", "") if champName else None
 def getPlatform(requestArgs):
-    _checkOutdated = str(requestArgs.get("platform", default=None)).lower()
-    if str(_checkOutdated) == "platform" or str(_checkOutdated) == "null" or str(_checkOutdated) == "none":
-        raise Outdated(_checkOutdated)
+    #_checkOutdated = str(requestArgs.get("platform", default=None)).lower()
+    #if str(_checkOutdated) == "platform" or str(_checkOutdated) == "null" or str(_checkOutdated) == "none":
+    #    raise Outdated(_checkOutdated)
     qry = requestArgs.get("query", default=None)
     if qry:
         aux = qry[qry.rfind('"')+1:].split(' ') if qry.rfind('"') > 1 else qry.split(' ')
