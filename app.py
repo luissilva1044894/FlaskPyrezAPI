@@ -10,6 +10,8 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError
 
 from pyrez.api import *
+from pyrez.exceptions import PlayerNotFound
+from pyrez.enumerations import Champions, Tier
 from langs import *
 try:
     DEBUG = config("DEBUG", default=False, cast=bool)
@@ -402,7 +404,7 @@ def getWinrate():
         championName = getChampName(request.args)
         playerName = getPlayerName(request.args)
         platform = getPlatform(request.args)
-    
+
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
