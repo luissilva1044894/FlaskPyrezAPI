@@ -9,6 +9,7 @@ from flask import Flask, jsonify, request, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError
 
+import pyrez
 from pyrez.api import *
 from pyrez.exceptions import PlayerNotFound
 from pyrez.enumerations import Champions, Tier
@@ -119,7 +120,7 @@ try:
 except (OperationalError, ProgrammingError):
     lastSession = None
 print("Last sessionId: {}".format(lastSession))
-paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
+paladinsAPI = Paladins(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
 paladinsAPI.onSessionCreated += sessionCreated
 @app.errorhandler(404)
 def not_found_error(error=None):
