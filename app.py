@@ -246,7 +246,7 @@ def getGameVersion():
         language = getLanguage(request)
         platform = getPlatform(request.args)
 
-        hiRezServerStatus = paladinsAPI.getHiRezServerStatus()
+        hiRezServerStatus = paladinsAPI.getServerStatus()
         hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[0]
         patchInfo = paladinsAPI.getPatchInfo()
     except Outdated as exc:
