@@ -40,34 +40,34 @@
       </nav>
     </header>
 
-    <section id="sticky-notifications" class="stick-to-top js-stick-to-top">
-      <!-- Add browser warning. Will show for ie9 and below -->
-      <!--[if IE]>
-        <div class="notification-bar notification-bar-danger">
-          <h3>
-            <span class="notification-bar__icon">
-              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-              <span class="sr-only">{% block warning_unsupported_msg_title %}{% endblock %}:</span>
-            </span>
-            <span class="notification-bar__message">{% block warning_unsupported_msg_bar %}{% endblock %}</span>
-          </h3>
-        </div>
-      <![endif]-->
-      <noscript>
-        <div class="notification-bar notification-bar-danger">
-          <h3>
-            <span class="notification-bar__icon">
-              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-              <span class="sr-only">{% block warning_nojs_msg_title %}{% endblock %}:</span>
-            </span>
-            <span class="notification-bar__message">{% block warning_nojs_msg_bar %}{% endblock %}</span>
-          </h3>
-        </div>
-      </noscript>
-    </section>
-
     <div class="container">
       <br/><br/><br/>
+      <section id="sticky-notifications" class="stick-to-top js-stick-to-top">
+        <!-- Add browser warning. Will show for ie9 and below -->
+        <!--[if IE]>
+          <div class="notification-bar notification-bar-danger">
+            <h3>
+              <span class="notification-bar__icon">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <span class="sr-only">{% block warning_unsupported_msg_title %}{% endblock %}:</span>
+              </span>
+              <span class="notification-bar__message">{% block warning_unsupported_msg_bar %}{% endblock %}</span>
+            </h3>
+          </div>
+        <![endif]-->
+        <noscript>
+          <div class="notification-bar notification-bar-danger">
+            <h3>
+              <span class="notification-bar__icon">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <span class="sr-only">{% block warning_nojs_msg_title %}{% endblock %}:</span>
+              </span>
+              <span class="notification-bar__message">{% block warning_nojs_msg_bar %}{% endblock %}</span>
+            </h3>
+          </div>
+        </noscript>
+      </section>
+
       <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#cmd-tbl"><strong>{% block commands_table_titles_title %}{% endblock %}</strong></button><br/>
       <div id="cmd-tbl" class="collapse">
         <table class="tg">
