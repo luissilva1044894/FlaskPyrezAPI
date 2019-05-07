@@ -94,7 +94,7 @@ function onPageLoaded() {
 }
 function clearField(divName) {
     div = defaultFor(divName, "#alerts"), alert_div = $(div);
-    alert_div.html('');
+    alert_div.html("");
 }
 
 function defaultFor(arg, val) { return typeof arg !== "undefined" ? arg : val; }
