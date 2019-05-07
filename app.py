@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 
 from decouple import config, Csv
-from flask import Flask, jsonify, request, render_template, url_for
+from flask import Flask, jsonify, request, render_template, url_for, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError
 
@@ -25,7 +25,7 @@ except:
     PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
     DATABASE_URL = os.environ("DATABASE_URL")#"sqlite:///{}.db".format(__name__)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", template_folder="templates", static_url_path='/')#https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
@@ -128,6 +128,22 @@ def not_found_error(error=None):
 @app.errorhandler(500)
 def internal_error(error=None):
     return INTERNAL_ERROR_500_STRINGS[getLanguage(request)], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
+
+@app.route("/robots.txt", methods=["GET"])
+@app.route("/sitemap.xml", methods=["GET"])
+def staticFromRoot():
+    return send_from_directory(app.static_folder, request.path[1:])
+"""
+@app.route("/robots.txt")#https://github.com/blampe/template.flask #https://support.google.com/webmasters/answer/93710
+def robotsTxt():
+    Disallow = lambda string: "Disallow: {}".format(string)
+    return Response("User-agent: *\n{}\n".format("\n".join([Disallow("/bin/*"), Disallow("/thank-you"),])))
+@app.route("/sitemap.xml", methods=["GET"])
+    def sitemap():
+      response = make_response(open("sitemap.xml").read())
+      response.headers["Content-type"] = "text/plain"
+      return response
+"""
 @app.route('/', methods=["GET"])
 @app.route("/api", methods=["GET"])
 @app.route("/index", methods=["GET"])
