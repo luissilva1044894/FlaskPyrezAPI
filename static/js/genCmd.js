@@ -1,6 +1,6 @@
 
 function generateCommand(lang) { // !command add duo Estou duo com X e o elo dele é: (_ELO2_)
-    var commandName = String(getElementById("command_name").value).trim().replace(' ', '').replace('!', ''),
+    var commandName = String(getElementById("command_name").value).trim().replace(" ", "").replace("!", ""),
             commandType = getElementById("command_type"),
             cooldown = getElementById("command_cooldown").value > 0 && getElementById("command_cooldown").value >= 5 && getElementById("command_cooldown").value <= 300 ? defaultFor(getElementById("command_cooldown").value, 25) : String(commandType.value).toLowerCase() === "currentmatch" ? 25 : 5;
             playerName = getElementById("player_name"), // Usar o PaladinsGuru para ver se o player existe: https://github.com/Protovision/paladins_scouter/blob/master/paladins_scouter.c
