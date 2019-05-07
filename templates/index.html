@@ -161,7 +161,7 @@
             <div class="col-sm">
               <span class="help-block">{% block commands_generator_cmdtype %}{% endblock %}</span>
               <select id="command_type" class="form-control full-width" onchange="commandTypeChanged()">
-                <option value="currentmatch">!{% block commands_generator_cmdtype_cmdcurrentmatch %}{% endblock %}</option>
+                <option value="currentmatch" selected="selected">!{% block commands_generator_cmdtype_cmdcurrentmatch %}{% endblock %}</option>
                 <option value="decks">!{% block commands_generator_cmdtype_cmddecks %}{% endblock %}</option>
                 <option value="winrate">!{% block commands_generator_cmdtype_cmdwinrate %}{% endblock %}</option>
                 <option value="lastmatch">!{% block commands_generator_cmdtype_cmdlastmatch %}{% endblock %}</option>
@@ -182,7 +182,7 @@
             <div class="col-sm">
               <span class="help-block">{% block commands_generator_paladinsplat %}{% endblock %}</span>
               <select id="platform_form" class="form-control full-width" size="1">
-                <option value="PC">PC/Steam</option>
+                <option value="PC" selected="selected">PC/Steam</option>
                 <option value="XBOX">Xbox One</option>
                 <option value="PS4">PS4</option>
                 <option value="SWITCH">Nintendo Switch</option>
@@ -203,7 +203,7 @@
                   <span class="help-block">Bot</span>
                   <select id="bot_name" name="bot_name" class="form-control">
                     <option value="1">Botisimo</option>
-                    <option value="2">Nightbot</option>
+                    <option value="2" selected="selected">Nightbot</option>
                     <option value="3">Stream Elements</option>
                     <option value="4">StreamLab Chatbot</option>
                   </select>
@@ -226,7 +226,7 @@
                     <div class="col-sm-5">
                       <span class="help-block">{% block commands_generator_chatbotuseraccess %}{% endblock %}</span>
                       <select id="user_access" class="form-control full-width">
-                        <option value="1">{% block commands_generator_userlvl_everybody %}{% endblock %}</option>
+                        <option value="1" selected="selected">{% block commands_generator_userlvl_everybody %}{% endblock %}</option>
                         <option value="2">{% block commands_generator_userlvl_regular %}{% endblock %}</option>
                         <option value="3">{% block commands_generator_userlvl_subscriber %}{% endblock %}</option>
                         <option value="4">{% block commands_generator_userlvl_mod %}{% endblock %}</option>
