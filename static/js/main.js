@@ -1,47 +1,47 @@
 function getTranslatedString(language, msg) {
     var engString = [];
-    engString["chatMsg"] = "Copy paste the following command in your chat"
-    engString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
-    engString["backendMsg"] = "Or copy-paste the following text in the “message” field at <span id=\"backend-title-bot\">{BOT_NAME}</span>'s backend"
-    engString["close"] = "Close"
-    engString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
-    engString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
-    engString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
-    engString["copyToClipboardSuccess"] = "Copied!"
-    engString["copyToClipboardMsg"] = "Copy to Clipboard"
+    engString["chatMsg"] = "Copy paste the following command in your chat";
+    engString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)";
+    engString["backendMsg"] = "Or copy-paste the following text in the “message” field at <span id=\"backend-title-bot\">{BOT_NAME}</span>'s backend";
+    engString["close"] = "Close";
+    engString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!";
+    engString["invalidCmdName"] = "<strong>Invalid command name</strong>!";
+    engString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!";
+    engString["copyToClipboardSuccess"] = "Copied!";
+    engString["copyToClipboardMsg"] = "Copy to Clipboard";
 
     var esString = [];
-    esString["chatMsg"] = "Copy paste the following command in your chat"
-    esString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
-    esString["backendMsg"] = "Or copy-paste the following text in the “message” field at <span id=\"backend-title-bot\">{BOT_NAME}</span>'s backend"
-    esString["close"] = "Close"
-    esString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
-    esString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
-    esString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
-    esString["copyToClipboardSuccess"] = "Copied!"
-    esString["copyToClipboardMsg"] = "Copy to Clipboard"
+    esString["chatMsg"] = "Copy paste the following command in your chat";
+    esString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)";
+    esString["backendMsg"] = "Or copy-paste the following text in the “message” field at <span id=\"backend-title-bot\">{BOT_NAME}</span>'s backend";
+    esString["close"] = "Close";
+    esString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!";
+    esString["invalidCmdName"] = "<strong>Invalid command name</strong>!";
+    esString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!";
+    esString["copyToClipboardSuccess"] = "Copied!";
+    esString["copyToClipboardMsg"] = "Copy to Clipboard";
 
     var ptString = [];
-    ptString["chatMsg"] = "Copie e cole o código em seu chat"
-    ptString["dontChange"] = "(VOCÊ NÃO PRECISA MUDAR NADA)"
-    ptString["backendMsg"] = "Ou adicione diretamente como comando nas configurações do <span id=\"backend-title-bot\">{BOT_NAME}</span>"
-    ptString["close"] = "Fechar"
-    ptString["cmdCreated"] = "Comando !{CMD_NAME} <strong>criado</strong> com sucesso!"
-    ptString["invalidCmdName"] = "<strong>Nome do comando inválido</strong>!"
-    ptString["invalidPlayerName"] = "<strong>Nome do comando inválido</strong>!"
-    ptString["copyToClipboardSuccess"] = "Código copiado!"
-    ptString["copyToClipboardMsg"] = "Copiar comando"
+    ptString["chatMsg"] = "Copie e cole o código em seu chat";
+    ptString["dontChange"] = "(VOCÊ NÃO PRECISA MUDAR NADA)";
+    ptString["backendMsg"] = "Ou adicione diretamente como comando nas configurações do <span id=\"backend-title-bot\">{BOT_NAME}</span>";
+    ptString["close"] = "Fechar";
+    ptString["cmdCreated"] = "Comando !{CMD_NAME} <strong>criado</strong> com sucesso!";
+    ptString["invalidCmdName"] = "<strong>Nome do comando inválido</strong>!";
+    ptString["invalidPlayerName"] = "<strong>Nome do comando inválido</strong>!";
+    ptString["copyToClipboardSuccess"] = "Código copiado!";
+    ptString["copyToClipboardMsg"] = "Copiar comando";
 
     var plString = [];
-    plString["chatMsg"] = "Copy paste the following command in your chat"
-    plString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)"
-    plString["backendMsg"] = "Or copy-paste the following text in the “message” field at <span id=\"backend-title-bot\">{BOT_NAME}</span>'s backend"
-    plString["close"] = "Close"
-    plString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!"
-    plString["invalidCmdName"] = "<strong>Invalid command name</strong>!"
-    plString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!"
-    plString["copyToClipboardSuccess"] = "Copied!"
-    plString["copyToClipboardMsg"] = "Copy to Clipboard"
+    plString["chatMsg"] = "Copy paste the following command in your chat";
+    plString["dontChange"] = "(YOU DON'T NEED TO CHANGE ANYTHING)";
+    plString["backendMsg"] = "Or copy-paste the following text in the “message” field at <span id=\"backend-title-bot\">{BOT_NAME}</span>'s backend";
+    plString["close"] = "Close";
+    plString["cmdCreated"] = "Command !{CMD_NAME} <strong>created</strong> successfully!";
+    plString["invalidCmdName"] = "<strong>Invalid command name</strong>!";
+    plString["invalidPlayerName"] = "<strong>Invalid Player Name</strong>!";
+    plString["copyToClipboardSuccess"] = "Copied!";
+    plString["copyToClipboardMsg"] = "Copy to Clipboard";
 
     var languages = [];
     
@@ -50,10 +50,10 @@ function getTranslatedString(language, msg) {
     languages["pl"] = plString;
     languages["pt"] = ptString;
 
-    return languages[language][msg]
+    return languages[language][msg];
 }
 
-function getElementById(elementName) { return document.getElementById(elementName) }
+function getElementById(elementName) { return document.getElementById(elementName); }
 
 function commandTypeChanged() {
     var commandType = getElementById("command_type"), commandCooldown = getElementById("command_cooldown");
@@ -64,10 +64,10 @@ function commandTypeChanged() {
 }
 
 function checkButtonPos() {
-    getElementById("generate_command").disabled = !(getElementById("command_name").value && getElementById("player_name").value)
+    getElementById("generate_command").disabled = !(getElementById("command_name").value && getElementById("player_name").value);
 }
 function keyCodeTrigger(keyCode, elementId) {
-    if(keyCode == 13) { $(elementId).trigger("click"); }
+    if(keyCode === 13) { $(elementId).trigger("click"); }
 }
 function onPageLoaded() {
     $("#result").html('');
