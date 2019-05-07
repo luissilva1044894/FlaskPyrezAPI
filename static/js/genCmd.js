@@ -13,7 +13,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
     
     var endpointLink = getEndpoint() + String(commandType.value);
     $("#result-warning").show();
-    if (commandName.length > 0 && String(playerName.value).trim().replace(' ', '').length > 3) {
+    if (commandName.length > 0 && String(playerName.value).trim().replace(" ", "").length > 3) {
         var permLvl = "", cmd = "", cmdChat = "";
         switch(botName.value) {
             /*case "2": // Deepbot
