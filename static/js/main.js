@@ -70,7 +70,7 @@ function keyCodeTrigger(keyCode, elementId) {
     if(keyCode === 13) { $(elementId).trigger("click"); }
 }
 function onPageLoaded() {
-    $("#result").html('');
+    $("#result").html("");
     //$("#any-number-of-elements").input(function(event) {
     //    alert(this.value);
         //event.preventDefault();
@@ -93,14 +93,14 @@ function onPageLoaded() {
     });
 }
 function clearField(divName) {
-    div = defaultFor(divName, "#alerts"), alert_div = $(div);
-    alert_div.html("");
+    div = defaultFor(divName, "#alerts"), alertDiv = $(div);
+    alertDiv.html("");
 }
 
 function defaultFor(arg, val) { return typeof arg !== "undefined" ? arg : val; }
 
 function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
-    div = defaultFor(div, "#result-warning"), alert_div = $(div), divMsg = "", botElement = getElementById("bot_name");
+    div = defaultFor(div, "#result-warning"), alertDiv = $(div), divMsg = "", botElement = getElementById("bot_name");
     switch(botName.toLowerCase()) {
         case botElement["0"].text.toLowerCase(): botName = "<a href=\"https://botisimo.com/account/commands\" target=\"blank\" title=\"Botisimo Dashboard\">Botisimo</a>"; break;
         case botElement["1"].text.toLowerCase(): botName = "<a href=\"https://beta.nightbot.tv/commands/custom\" target=\"blank\" title=\"Nightbot Dashboard\">Nightbot</a>"; break;
@@ -115,18 +115,21 @@ function addCommandOutput(codeMsgChat, codeMsgBackend, botName, lang="en") {
     divMsg += "<div id=\"backend-title\" class=\"command-title\"><h4>{BACKEND_MSG} ".replace("{BACKEND_MSG}", getTranslatedString(lang, "backendMsg").replace("{BOT_NAME}", botName));
     divMsg += "<small>{DONT_CHANGE}</small>: <code id=\"code-backend-bot\">{CODE_BACKEND}</code>".replace("{DONT_CHANGE}", getTranslatedString(lang, "dontChange")).replace("{CODE_BACKEND}", codeMsgBackend);
     divMsg += "<div class=\"btn-group\"><span> </span><button id=\"backend-copy-to-clip-button\" class=\"copy-to-clip-button\" title=\"{COPY_TO_CLIPBOARD}\" data-clipboard-text=\"{CODE_BACKEND}\" style=\"font-size: 20px;\"><i class=\"fa fa-copy\" style=\"font-size:20px;line-height: 0;\" aria-hidden=\"true\"></i></button></div></h4></div>".replace("{CODE_BACKEND}", codeMsgBackend).replace("{COPY_TO_CLIPBOARD}", getTranslatedString(lang, "copyToClipboardMsg"));
-    alert_div.append(divMsg);
+    alertDiv.append(divMsg);
 }
 
 function addAlert(message, classes, clear, dismiss, div, lang="en"/*, timer = 1 * 60*/) {
-    var dismiss = defaultFor(dismiss, true), div = defaultFor(div, "#result-warning"), alert = "", alert_div = $(div);
+    var dismiss = defaultFor(dismiss, true), _div = defaultFor(div, "#result-warning"), alert = "", alertDiv = $(_div);
 
-    if(clear) clearField(div);
+    if(clear) {
+        clearField(_div);
+    }
 
-    classe = (classes == "alert-locked" || classes == "alert-unlocked") ? "alert-info" : classes;
+    classe = (classes === "alert-locked" || classes === "alert-unlocked") ? "alert-info" : classes;
     alert = "<div class=\"alert alert-dismissible " + classe + "\" role=\"alert\">";
-    if(dismiss)
+    if(dismiss) {
         alert += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">{CLOSE}</span></button>".replace("{CLOSE}", getTranslatedString(lang, "close"));
+    }
 
     switch(classes) {
         case "alert-danger" : alert += "<span class=\"fa fa-exclamation-circle\" aria-hidden=\"true\"></span> "; break;
@@ -137,7 +140,7 @@ function addAlert(message, classes, clear, dismiss, div, lang="en"/*, timer = 1 
         case "alert-unlocked" : alert += "<span class=\"fa fa-unlock\" aria-hidden=\"true\"></span> "; break;
     }
     alert += message + '</div>';
-    //if(timer != 0) var timeout = setInterval(function() { if(timer == 0) { clearInterval(timeout); alert_div.hide(); } else { console.log(--timer); } }, 1000);
+    //if(timer != 0) var timeout = setInterval(function() { if(timer == 0) { clearInterval(timeout); alertDiv.hide(); } else { console.log(--timer); } }, 1000);
 
-    alert_div.append(alert);
+    alertDiv.append(alert);
 }
