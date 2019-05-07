@@ -174,7 +174,7 @@ QUEUE_IDS_STRINGS = {
         423: "Niestandardowy/Oblężenie", 430: "Niestandardowy/Oblężenie", 431: "Niestandardowy/Oblężenie", 432: "Niestandardowy/Oblężenie", 433: "Niestandardowy/Oblężenie", 438: "Niestandardowy/Oblężenie", 439: "Niestandardowy/Oblężenie", 440: "Niestandardowy/Oblężenie", 458: "Niestandardowy/Oblężenie", 459: "Niestandardowy/Oblężenie", 473: "Niestandardowy/Oblężenie", 485: "Niestandardowy/Oblężenie", 487: "Niestandardowy/Oblężenie",
         454: "Niestandardowy/Szturm", 455: "Niestandardowy/Szturm", 462: "Niestandardowy/Szturm", 464: "Niestandardowy/Szturm", 483: "Niestandardowy/Szturm",
         468: "Niestandardowy/TDM", 471: "Niestandardowy/TDM", 472: "Niestandardowy/TDM", 479: "Niestandardowy/TDM", 480: "Niestandardowy/TDM", 484: "Niestandardowy/TDM",
-        424: "Szybka gra/Oblężenie", 428: "Rankingowy/GamePad", 486: "Rankingowy/Klawiatura", 445: "Szybka gra/Mapy Testowe", 452: "Szybka gra/Szturm", 469: "Szybka gra/TDM", 
+        424: "Szybka gra/Oblężenie", 428: "Rankingowy/GamePad", 486: "Rankingowy/Klawiatura", 445: "Szybka gra/Mapy Testowe", 452: "Szybka gra/Szturm", 469: "Szybka gra/TDM",
         477: "Wydarzenie/Oblężenie Wzgórza Wniebowstąpienia", 478: "Wydarzenie/Bunt Furii", 488: "Wydarzenie/Kres Czasów", 489: "Niestandardowy/Kres Czasów",
         425: "Treningowy/Oblężenie", 453: "Treningowy/Szturm", 470: "Treningowy/TDM", 434: "Treningowy/Strzelnica", 427: "Treningowy/Samouczek",
         465: "Klasyczny/Oblężenie"
