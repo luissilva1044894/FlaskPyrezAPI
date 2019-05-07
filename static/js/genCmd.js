@@ -94,7 +94,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
             $("#command_name").focus();
         } else {
             addAlert("{INVALID_PLAYER_NAME}".replace("{INVALID_PLAYER_NAME}", getTranslatedString(lang, "invalidPlayerName")), "alert-danger", true, true, "#result-warning", lang);
-            //$("#result").html('');
+            //$("#result").html("");
             $("#player_name").focus();
         }
     }
