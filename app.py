@@ -39,10 +39,10 @@ class Session(db.Model):
         self.sessionId = sessionId
         self.save()
     def __repr__(self):
-        return "<Session {}>".format(self.sessionId)
+        return "<Session {0.sessionId}>".format(self)
     def save(self):
         try:
-            print("SessionId store - Database", self)
+            print("SessionId store - ", self)
             for sess in Session.query.all():
                 sess.delete()
             db.session.add(self)
@@ -51,11 +51,11 @@ class Session(db.Model):
             print("SessionId not stored - Database rolledback", self)
             db.session.rollback()
     def update(self, name):
-        print("SessionId updated - Database", self)
+        print("SessionId updated - ", self)
         self.name = name
         db.session.commit()
     def delete(self):
-        print("SessionId deleted - Database", self)
+        print("SessionId deleted - ", self)
         db.session.delete(self)
         db.session.commit()
     def json(self):
@@ -73,10 +73,10 @@ class Player(db.Model):
         self.platform = platform
         self.save()
     def __repr__(self):
-        return "<Player {} (Id: {} - Platform: {})>".format(self.name, self.id, self.platform)
+        return "<Player {0.name} (Id: {0.id} - Platform: {0.platform})>".format(self)
     def save(self):
         try:
-            print("Player stored - Database", self)
+            print("Player stored - ", self)
             db.session.add(self)
             db.session.commit()
         except IntegrityError:
@@ -86,11 +86,11 @@ class Player(db.Model):
             _player.delete()
             self.save()
     def update(self, name):
-        print("Player updated - Database", self)
+        print("Player updated - ", self)
         self.name = name
         db.session.commit()
     def delete(self):
-        print("Player deleted - Database", self)
+        print("Player deleted - ", self)
         db.session.delete(self)
         db.session.commit()
     def json(self):
