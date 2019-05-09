@@ -25,7 +25,7 @@ except:
     PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
     DATABASE_URL = os.environ("DATABASE_URL")#"sqlite:///{}.db".format(__name__)
 
-app = Flask(__name__, static_folder="static", template_folder="templates")#https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
+app = Flask(__name__, static_folder="static", template_folder="templates", static_url_path='')#https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
 #app = Flask(__name__, static_folder="static", template_folder="templates", static_url_path='/')
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
