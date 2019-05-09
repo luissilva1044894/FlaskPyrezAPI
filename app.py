@@ -25,8 +25,7 @@ except:
     PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
     DATABASE_URL = os.environ("DATABASE_URL")#"sqlite:///{}.db".format(__name__)
 
-app = Flask(__name__, static_folder="static", template_folder="templates", static_url_path='')#https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
-#app = Flask(__name__, static_folder="static", template_folder="templates", static_url_path='/')
+app = Flask(__name__, static_folder="static", template_folder="templates", static_url_path='') #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
@@ -230,7 +229,7 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
 def getDecks():
     try:
         language = getLanguage(request)
-        languageCode = 10 if language == "pt" else 7 if language == "es" else 1
+        languageCode = 10 if language == "pt" else 12 if language == "pl" else 7 if language == "es" else 1
         championName, playerName, platform = getChampName(request.args), getPlayerName(request.args), getPlatform(request.args)
         
         if championName is None:
