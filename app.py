@@ -120,7 +120,7 @@ try:
 except (OperationalError, ProgrammingError):
     lastSession = None
 print("Last sessionId: {}".format(lastSession))
-paladinsAPI = Paladins(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
+paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
 paladinsAPI.onSessionCreated += sessionCreated
 @app.errorhandler(404)
 def not_found_error(error=None):
@@ -230,9 +230,7 @@ def getDecks():
     try:
         language = getLanguage(request)
         languageCode = 10 if language == "pt" else 7 if language == "es" else 1
-        championName = getChampName(request.args)
-        playerName = getPlayerName(request.args)
-        platform = getPlatform(request.args)
+        championName, playerName, platform = getChampName(request.args), getPlayerName(request.args), getPlatform(request.args)
         
         if championName is None:
             return "ERROR: ChampName not specified!"
@@ -262,8 +260,7 @@ def getDecks():
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
     try:
-        language = getLanguage(request)
-        platform = getPlatform(request.args)
+        language, platform = getLanguage(request), getPlatform(request.args)
 
         hiRezServerStatus = paladinsAPI.getServerStatus()
         hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[0]
@@ -279,9 +276,7 @@ def getGameVersion():
 @app.route("/api/stalk", methods=["GET"])
 def getStalk():
     try:
-        language = getLanguage(request)
-        playerName = getPlayerName(request.args)
-        platform = getPlatform(request.args)
+        language, playerName, platform = getLanguage(request), getPlayerName(request.args), getPlatform(request.args)
 
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
@@ -304,9 +299,7 @@ def getStalk():
 @app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
     try:
-        language = getLanguage(request)
-        playerName = getPlayerName(request.args)
-        platform = getPlatform(request.args)
+        language, playerName, platform = getLanguage(request), getPlayerName(request.args), getPlatform(request.args)
 
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
@@ -329,9 +322,7 @@ def getLastMatch():
 @app.route("/api/currentmatch", methods=["GET"])
 def getCurrentMatch():
     try:
-        language = getLanguage(request)
-        playerName = getPlayerName(request.args)
-        platform = getPlatform(request.args)
+        language, playerName, platform = getLanguage(request), getPlayerName(request.args), getPlatform(request.args)
 
         playerId = getPlayerId(playerName, platform)
         if playerId == 0 or playerId == -1:
@@ -374,9 +365,7 @@ def getCurrentMatch():
 @app.route("/api/rank", methods=["GET"])
 def getRank():
     try:
-        language = getLanguage(request)
-        playerName = getPlayerName(request.args)
-        platform = getPlatform(request.args)
+        language, playerName, platform = getLanguage(request), getPlayerName(request.args), getPlatform(request.args)
 
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
@@ -392,8 +381,7 @@ def getRank():
     except Exception as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
-    r1 = getPlayerRequest.rankedController
-    r2 = getPlayerRequest.rankedKeyboard
+    r1, r2 = getPlayerRequest.rankedController, getPlayerRequest.rankedKeyboard
     if not r1.hasPlayedRanked() and r2.hasPlayedRanked():
         return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                                 PLAYER_RANK_STRINGS[language][r2.currentRank.value] if r2.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r2.wins + r2.losses == 0 else QUALIFYING_STRINGS[language],
@@ -417,11 +405,8 @@ def checkChampName(championName):
 @app.route("/api/winrate", methods=["GET"])
 def getWinrate():
     try:
-        language = getLanguage(request)
-        championName = getChampName(request.args)
-        playerName = getPlayerName(request.args)
-        platform = getPlatform(request.args)
-
+        language, championName, playerName, platform = getLanguage(request), getChampName(request.args), getPlayerName(request.args), getPlatform(request.args)
+        
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
@@ -448,9 +433,7 @@ def getWinrate():
                 return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(champ.godName.replace("'", " "), champ.godLevel), champ.wins, champ.losses,
                         formatDecimal(champ.kills), formatDecimal(champ.deaths), formatDecimal(champ.assists), champ.getKDA(), champ.getWinratio())
         return CHAMP_NOT_PLAYED_STRINGS[language].format(playerName, championName)
-    deaths = 0
-    kills = 0
-    assists = 0
+    deaths, kills, assists = 0, 0, 0
     for champ in playerGlobalKDA:
         kills += champ.kills
         deaths += champ.deaths
