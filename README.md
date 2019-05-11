@@ -45,7 +45,7 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 13. `heroku open` and a window will open with your app online
 
 ### Thanks
-* [`Lukash`](https://www.facebook.com/PaladinsPoland/ "Paladins Poland") - Polish translation.
+* [`Lukash (Paladins Poland)`](https://www.facebook.com/PaladinsPoland/ "Paladins Poland") - Polish translation.
 
 ### License
 This project is provided under the MIT License, which you can view in [`LICENSE.md`](./LICENSE "FlaskPyrezAPI · License")
