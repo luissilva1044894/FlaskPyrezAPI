@@ -7,7 +7,7 @@
 [![Discord Server](https://img.shields.io/discord/549020573846470659.svg?style=plastic&logo=discord&logoWidth=10)](https://discord.gg/XkydRPS "Support Server · Discord")
 </div>
 
-**FlaskPyrezAPI** is an open-source endpoint for [`Twitch`](https://twitch.tv "Twitch") commands, written in Python, that provides datas about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game"). This API uses [`Pyrez`](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") for handling connections and requests to [`Hi-Rez Studios'`](https://www.hirezstudios.com) API.
+**FlaskPyrezAPI** is an [open-source](http://www.opensource.org "See http://www.opensource.org for the Open Source Definition") endpoint for [`Twitch`](https://twitch.tv "Twitch") commands, written in Python, that provides datas about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game"). This API uses [`Pyrez`](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") for handling connections and requests to [`Hi-Rez Studios`](https://www.hirezstudios.com) API.
 
 ### Support
 For support using Pyrez, please join the official [*support server*](
@@ -15,8 +15,8 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 
 ## Requirements
 * [Python](http://python.org "Python.org") 3.x (3.5 or higher).
-    * The following libraries are required: [`Pyrez`](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository"), [`Requests`](https://pypi.org/project/requests "requests") and `requests-aeaweb`.
-- [Access](https://fs12.formsite.com/HiRez/form48/secure_index.html "Form access to Hi-Rez API") to Hi-Rez Studios' API.
+    * The following libraries are required: [`Pyrez`](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") and [`requests`](https://pypi.org/project/requests "requests").
+- [Access](https://fs12.formsite.com/HiRez/form48/secure_index.html "Form access to Hi-Rez API") to Hi-Rez Studios API.
 
 ## Installation
 ### Locally
