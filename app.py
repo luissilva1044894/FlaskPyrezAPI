@@ -47,7 +47,7 @@ class Session(db.Model):
                 sess.delete()
             db.session.add(self)
             db.session.commit()
-        except IntegrityError:
+        except (IntegrityError, OperationalError, InternalError, ProgrammingError):
             print("SessionId not stored - Database rolledback", self)
             db.session.rollback()
     def update(self, name):
@@ -79,7 +79,7 @@ class Player(db.Model):
             print("Player stored - ", self)
             db.session.add(self)
             db.session.commit()
-        except IntegrityError:
+        except (IntegrityError, OperationalError, InternalError, ProgrammingError):
             print("Player not stored - Database rolledback", self)
             db.session.rollback()
             _player = Player.query.filter_by(id=self.id).first()
