@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 
 from decouple import config, Csv
-from flask import Flask, jsonify, request, render_template, url_for, send_from_directory
+from flask import Flask, jsonify, request, render_template, url_for, send_from_directory, escape
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError
 
@@ -200,7 +200,7 @@ def getPlayerName(requestArgs):
         playerName = qry[1:qry.rfind('"')] if qry.rfind('"') > 1 else qry.split(' ')[0]
     else:
         playerName = requestArgs.get("player", default=None)#str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
-    return None if not playerName or playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)" or playerName == "[invalid%20variable]" else playerName.lower()
+    return None if not playerName or playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)" or playerName == "[invalid%20variable]" else escape(playerName.lower())
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
     if not playerName or playerName == "none" or playerName == "null" or playerName == "$(1)" or playerName == "query=$(querystring)" or playerName == "[invalid%20variable]":
         return 0
@@ -243,6 +243,7 @@ def getDecks():
         if len(playerLoadouts) <= 1: #playerLoadouts is None:
             return "{0} doesn't have any {1} custom loadouts!".format(playerName, championName.capitalize())
         cds = ""
+        #lambda n: []
         loadouts = [playerLoadout for playerLoadout in playerLoadouts if playerLoadout.godName.lower().replace(" ", "").replace("'", "") == championName.lower()]
         for loadout in loadouts:
             cardStr = "{}{}: {}".format (" " if len(cds) == 0 else ", ", loadout.deckName, ["{0} {1}".format(card.itemName, card.points) for card in loadout.cards]).replace("'", "")
