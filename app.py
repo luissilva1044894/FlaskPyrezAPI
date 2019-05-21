@@ -226,6 +226,7 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
     fmt = "{d}d" if days else "{h}h, {m}m" if hours else "{m}m, {s}s"
     return fmt.format(d=days, h=hours, m=minutes, s=seconds)
 @app.route("/api/decks", methods=["GET"])
+@app.route("/api/deck", methods=["GET"])
 def getDecks():
     try:
         language = getLanguage(request)
