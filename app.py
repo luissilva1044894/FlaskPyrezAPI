@@ -11,7 +11,7 @@ from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError
 
 import pyrez
 from pyrez.api import *
-from pyrez.exceptions import PlayerNotFound
+from pyrez.exceptions import PlayerNotFound, MatchException
 from pyrez.enumerations import Champions, Tier
 from langs import *
 try:
@@ -310,6 +310,9 @@ def getLastMatch():
         lastMatchRequest = paladinsAPI.getMatchHistory(playerId)[0]
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
+    except MatchException as exc:
+        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
     except Exception as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
