@@ -470,12 +470,3 @@ if __name__ == "__main__":
             #if delete.lower() == 'y':
             #    player.delete()
     app.run(debug=DEBUG)
-"""
-https://www.programiz.com/python-programming/datetime
-from datetime import date
-timestamp = date.fromtimestamp(1326244364)
-
-<a class="btn btn-default"><i class="fas fa-code" style="font-size:24px" aria-hidden="true"></i>Gerar</a>
-__________________________________________________________________________________________________________________________________
-!rank "that hot thoth" xbox
-"""
