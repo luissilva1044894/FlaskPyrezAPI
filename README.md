@@ -13,7 +13,7 @@
 
 ### Built with
 - [Python](https://www.python.org/ "Requires Python 2.7 or 3.x (3.5 or higher)")
-- [Pyrez](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") - uses [`Pyrez`](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") for handling connections and requests to [`Hi-Rez Studios`](https://www.hirezstudios.com) API.
+- [Pyrez](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") - Used for handling connections and requests to [`Hi-Rez Studios`](https://www.hirezstudios.com) API.
 - [Flask](http://flask.pocoo.org/)
 
 ### Requirements
@@ -53,4 +53,4 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 * [`Lukash (Paladins Poland)`](https://www.facebook.com/PaladinsPoland/ "Paladins Poland") - Polish translation.
 
 ### License
-This project is provided under the MIT License, which you can view in [`LICENSE.md`](./LICENSE "FlaskPyrezAPI · License")
+This project is provided under the MIT License, which you can view in [`LICENSE file`](./LICENSE "FlaskPyrezAPI · License")
