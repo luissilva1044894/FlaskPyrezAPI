@@ -107,6 +107,7 @@ class LanguagesSupported(BaseEnumeration):
     Polish = "pl"
 class PlatformsSupported(BaseEnumeration):
     PC = "pc"
+    PTS = "pts"
     Xbox = "10"
     PS4 = "9"
     Switch = "22"
@@ -245,6 +246,8 @@ def getDecks():
             return "{0} doesn't have any {1} custom loadouts!".format(playerName, championName.capitalize())
         cds = ""
         #lambda n: []
+        #nums = [str(n) for n in range(20)]
+        #print "".join(nums)
         loadouts = [playerLoadout for playerLoadout in playerLoadouts if playerLoadout.godName.lower().replace(" ", "").replace("'", "") == championName.lower()]
         for loadout in loadouts:
             cardStr = "{}{}: {}".format (" " if len(cds) == 0 else ", ", loadout.deckName, ["{0} {1}".format(card.itemName, card.points) for card in loadout.cards]).replace("'", "")
@@ -265,14 +268,14 @@ def getGameVersion():
         language, platform = getLanguage(request), getPlatform(request.args)
 
         hiRezServerStatus = paladinsAPI.getServerStatus()
-        hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[0]
+        hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[3] if platform == PlatformsSupported.PTS else hiRezServerStatus[0]
         patchInfo = paladinsAPI.getPatchInfo()
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except Exception as exc:
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return UNABLE_TO_CONNECT_STRINGS[language]
-    return GAME_VERSION_STRINGS[language].format("Paladins", "Xbox One" if platform == PlatformsSupported.Xbox else "PS4" if platform == PlatformsSupported.PS4 else "Nintendo Switch" if platform == PlatformsSupported.Switch else "PC",
+    return GAME_VERSION_STRINGS[language].format("Paladins", "Xbox One" if platform == PlatformsSupported.Xbox else "PS4" if platform == PlatformsSupported.PS4 else "Nintendo Switch" if platform == PlatformsSupported.Switch else "PTS" if platform == PlatformsSupported.PTS else "PC",
                         PALADINS_UP_STRINGS[language].format(PALADINS_LIMITED_ACCESS_STRINGS[language] if hiRezServerStatus.limitedAccess else "") if hiRezServerStatus.status else PALADINS_DOWN_STRINGS[language],
                         patchInfo.gameVersion, hiRezServerStatus.version)
 @app.route("/api/stalk", methods=["GET"])
