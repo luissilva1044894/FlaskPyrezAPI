@@ -194,7 +194,7 @@ def getPlatform(requestArgs):
             aux = str(requestArgs.get("platform", default=None)).lower()
     else:
         aux = str(requestArgs.get("platform", default=None)).lower()
-    return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("switch") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PC
+    return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("switch") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PTS if aux.startswith("pts") else PlatformsSupported.PC
 def getPlayerName(requestArgs):
     qry = requestArgs.get("query", default=None)
     if qry:
@@ -470,3 +470,12 @@ if __name__ == "__main__":
             #if delete.lower() == 'y':
             #    player.delete()
     app.run(debug=DEBUG)
+"""
+https://www.programiz.com/python-programming/datetime
+from datetime import date
+timestamp = date.fromtimestamp(1326244364)
+
+<a class="btn btn-default"><i class="fas fa-code" style="font-size:24px" aria-hidden="true"></i>Gerar</a>
+__________________________________________________________________________________________________________________________________
+!rank "that hot thoth" xbox
+"""
