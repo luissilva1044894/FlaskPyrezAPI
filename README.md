@@ -9,17 +9,22 @@
 
 **FlaskPyrezAPI** is an [open-source](http://www.opensource.org "See http://www.opensource.org for the Open Source Definition") endpoint for [`Twitch`](https://twitch.tv "Twitch") commands, written in Python, that provides datas about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game"). This API uses [`Pyrez`](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") for handling connections and requests to [`Hi-Rez Studios`](https://www.hirezstudios.com) API.
 
+[Demo](https://nonsocial.herokuapp.com/)
+
+### Built with
+- [Python](https://www.python.org/ "Requires Python 2.7 or 3.x (3.5 or higher)")
+- [Pyrez](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository")
+- [Flask](http://flask.pocoo.org/)
+
 ### Support
 For support using Pyrez, please join the official [*support server*](
 https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://discordapp.com/ "Discord App")
 
-## Requirements
-* [Python](http://python.org "Python.org") 3.x (3.4 or higher).
-    * The following libraries are required: [`Pyrez`](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") and [`requests`](https://pypi.org/project/requests "requests").
-- [Access](https://fs12.formsite.com/HiRez/form48/secure_index.html "Form access to Hi-Rez API") to Hi-Rez Studios API.
+### Requirements
+- [Access](https://pyrez.readthedocs.io/en/stable/gettingstarted.html#registration "Form access to Hi-Rez Studios API") to Hi-Rez Studios API.
 
-## Installation
-### Locally
+### Installation
+#### Locally
 1. Clone this repository: `git clone https://github.com/luissilva1044894/FlaskPyrezAPI.git`
 2. ``cd`` into it: `cd FlaskPyrezAPI`
 3. Create a virtualenv: `virtualenv -p python venv`
@@ -29,7 +34,7 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 7. Run server: `python manage.py runserver`
 8. Go to your browser and point it towards `http://127.0.0.1:5000`
 
-### Deploy (Heroku) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luissilva1044894/FlaskPyrezAPI/tree/master "Deploy to Heroku")
+#### Deploy (Heroku) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luissilva1044894/FlaskPyrezAPI/tree/master "Deploy to Heroku")
 1. Go to [Heroku](https://id.heroku.com/login) and create a new app (eg: `your-app-name`)
 2. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli "Heroku CLI")
 3. `heroku login`
