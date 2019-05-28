@@ -7,13 +7,13 @@
 [![Discord Server](https://img.shields.io/discord/549020573846470659.svg?style=plastic&logo=discord&logoWidth=10)](https://discord.gg/XkydRPS "Support Server · Discord")
 </div>
 
-**FlaskPyrezAPI** is an [open-source](http://www.opensource.org "See http://www.opensource.org for the Open Source Definition") endpoint for [`Twitch`](https://twitch.tv "Twitch") commands, written in Python, that provides datas about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game"). This API uses [`Pyrez`](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") for handling connections and requests to [`Hi-Rez Studios`](https://www.hirezstudios.com) API.
+**FlaskPyrezAPI** is an [open-source](http://www.opensource.org "See http://www.opensource.org for the Open Source Definition") endpoint for [`Twitch`](https://twitch.tv "Twitch") commands, written in Python, that provides datas about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game").
 
 [Demo](https://nonsocial.herokuapp.com/)
 
 ### Built with
 - [Python](https://www.python.org/ "Requires Python 2.7 or 3.x (3.5 or higher)")
-- [Pyrez](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository")
+- [Pyrez](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") - uses [`Pyrez`](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") for handling connections and requests to [`Hi-Rez Studios`](https://www.hirezstudios.com) API.
 - [Flask](http://flask.pocoo.org/)
 
 ### Requirements
