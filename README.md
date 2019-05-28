@@ -16,12 +16,12 @@
 - [Pyrez](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository")
 - [Flask](http://flask.pocoo.org/)
 
+### Requirements
+- [Access](https://pyrez.readthedocs.io/en/stable/gettingstarted.html#registration "Form access to Hi-Rez Studios API") to Hi-Rez Studios API.
+
 ### Support
 For support using Pyrez, please join the official [*support server*](
 https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://discordapp.com/ "Discord App")
-
-### Requirements
-- [Access](https://pyrez.readthedocs.io/en/stable/gettingstarted.html#registration "Form access to Hi-Rez Studios API") to Hi-Rez Studios API.
 
 ### Installation
 #### Locally
