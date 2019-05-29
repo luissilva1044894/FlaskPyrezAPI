@@ -1,6 +1,5 @@
 six==1.12.0
 gunicorn==19.9.0
-beautifulsoup4==4.7.1
 Flask-Migrate==2.5.2
 Flask-Script==2.0.6
 python-decouple==3.1
