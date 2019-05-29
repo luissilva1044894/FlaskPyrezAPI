@@ -130,10 +130,10 @@ def not_found_error(error=None):
 def internal_error(error=None):
     return INTERNAL_ERROR_500_STRINGS[getLanguage(request)], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
 
-@app.route("/robots.txt", methods=["GET"])
-@app.route("/sitemap.xml", methods=["GET"])
-def staticFromRoot():
-    return send_from_directory(app.static_folder, request.path[1:])
+#@app.route("/robots.txt", methods=["GET"])
+#@app.route("/sitemap.xml", methods=["GET"])
+#def staticFromRoot():
+#    return send_from_directory(app.static_folder, request.path[1:])
 """
 @app.route("/robots.txt")#https://github.com/blampe/template.flask #https://support.google.com/webmasters/answer/93710
 def robotsTxt():
