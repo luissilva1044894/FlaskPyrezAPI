@@ -268,7 +268,7 @@ def getGameVersion():
         language, platform = getLanguage(request), getPlatform(request.args)
 
         hiRezServerStatus = paladinsAPI.getServerStatus()
-        hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[3] if platform == PlatformsSupported.PTS else hiRezServerStatus[0]
+        hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[len(hiRezServerStatus) - 2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[len(hiRezServerStatus) - 1] if platform == PlatformsSupported.PTS else hiRezServerStatus[0]
         patchInfo = paladinsAPI.getPatchInfo()
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
