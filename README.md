@@ -21,7 +21,7 @@
 
 ### Support
 For support using Pyrez, please join the official [*support server*](
-https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://discordapp.com/ "Discord App")
+https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://discordapp.com/ "Discord App").
 
 ### Installation
 #### Locally
@@ -46,11 +46,11 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 9. `git add .`
 10. `git commit -m "Going to Heroku"`
 11. `git push heroku master`
-12. `heroku run python manage.py migrate`
+12. `heroku run python manage.py db migrate`
 13. `heroku open` and a window will open with your app online
 
 ### Thanks
 * [`Lukash (Paladins Poland)`](https://www.facebook.com/PaladinsPoland/ "Paladins Poland") - Polish translation.
 
 ### License
-This project is provided under the MIT License, which you can view in [`LICENSE file`](./LICENSE "FlaskPyrezAPI · License")
+This project is provided under the MIT License, which you can view in [`LICENSE file`](./LICENSE "FlaskPyrezAPI · License").
