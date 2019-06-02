@@ -7,7 +7,7 @@ import json
 from decouple import config, Csv
 from flask import Flask, jsonify, request, render_template, url_for, send_from_directory, escape
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError
+from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
 
 import pyrez
 from pyrez.api import *
@@ -47,7 +47,7 @@ class Session(db.Model):
                 sess.delete()
             db.session.add(self)
             db.session.commit()
-        except (IntegrityError, OperationalError, ProgrammingError):#InternalError, 
+        except (IntegrityError, InternalError, OperationalError, ProgrammingError):
             print("SessionId not stored - Database rolledback", self)
             db.session.rollback()
     def update(self, name):
@@ -79,7 +79,7 @@ class Player(db.Model):
             print("Player stored - ", self)
             db.session.add(self)
             db.session.commit()
-        except (IntegrityError, OperationalError, ProgrammingError):#InternalError, 
+        except (IntegrityError, InternalError, OperationalError, ProgrammingError):
             print("Player not stored - Database rolledback", self)
             db.session.rollback()
             _player = Player.query.filter_by(id=self.id).first()
