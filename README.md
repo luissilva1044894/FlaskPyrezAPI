@@ -15,6 +15,8 @@
 - [Python](https://www.python.org/ "Requires Python 2.7 or 3.x (3.5 or higher)")
 - [Pyrez](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository") - Used for handling connections and requests to [`Hi-Rez Studios`](https://www.hirezstudios.com) API.
 - [Flask](http://flask.pocoo.org/)
+- [Bootstrap 4](https://getbootstrap.com/docs/4.3/getting-started/introduction/ "Bootstrap · 4.3.1")
+- [Font Awesome](https://fontawesome.com/changelog/latest/ "Font Awesome · 5.8")
 
 ### Requirements
 - [Access](https://pyrez.readthedocs.io/en/stable/gettingstarted.html#registration "Form access to Hi-Rez Studios API") to Hi-Rez Studios API.
