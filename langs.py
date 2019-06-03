@@ -112,7 +112,8 @@ PLAYER_REGION_STRINGS = {
         "NORTH_AMERICA": "North America",
         "NA": "North America",
         "SOUTHEAST_ASIA": "Southeast Asia",
-        "AUSTRALIA": "Australia"
+        "AUSTRALIA": "Australia",
+        "": "Unknown",
     },
     "es" : {
         "LATIN_AMERICA_NORTH": "Norte América Latina",
@@ -122,7 +123,8 @@ PLAYER_REGION_STRINGS = {
         "NORTH_AMERICA": "Estados Unidos",
         "NA": "Estados Unidos",
         "SOUTHEAST_ASIA": "Sudeste Asiático",
-        "AUSTRALIA": "Australia"
+        "AUSTRALIA": "Australia",
+        "": "???",
     },
     "pl" : {
         "LATIN_AMERICA_NORTH": "Latin America North",
@@ -132,7 +134,8 @@ PLAYER_REGION_STRINGS = {
         "NORTH_AMERICA": "North America",
         "NA": "North America",
         "SOUTHEAST_ASIA": "Southeast Asia",
-        "AUSTRALIA": "Australia"
+        "AUSTRALIA": "Australia",
+        "": "???",
     },
     "pt" : {
         "LATIN_AMERICA_NORTH": "América Latina",
@@ -142,7 +145,8 @@ PLAYER_REGION_STRINGS = {
         "NA": "América do Norte",
         "NORTH_AMERICA": "América do Norte",
         "SOUTHEAST_ASIA": "Sudeste Asiático",
-        "AUSTRALIA": "Austrália"
+        "AUSTRALIA": "Austrália",
+        "": "???",
     },
 }
 MATCH_STRINGS = {
