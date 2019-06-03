@@ -250,8 +250,11 @@
 
     <footer class="footer mt-auto py-3">
       <div class="container text-center">
-        <div>
-          <span class="text-muted">
+        <div class="text-muted">
+          <span class="text-muted" style="font-size: 12px;">
+            {% block footer_github %}{% endblock %}<a href="https://github.com/luissilva1044894/FlaskPyrezAPI" title="FlaskPyrezAPI · GitHub" target="_blank"> GitHub.</a><br/>
+          </span>
+          <span>
             {% block footer_createby %}{% endblock %} <i class="fab fa-discord" style="font-size:15px" aria-hidden="true"></i><a href="https://twitch.tv/nonsocial_" title="{% block header_titles_twitch %}{% endblock %}" target="_blank"> Nonsocial#2731</a>.
           </span>
           <span class="text-muted" style="font-size: 12px;">
