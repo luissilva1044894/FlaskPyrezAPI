@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
     <!-- Material Design Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
@@ -249,11 +250,15 @@
 
     <footer class="footer mt-auto py-3">
       <div class="container text-center">
-        <span class="text-muted">
-          {% block footer_createby %}{% endblock %} <i class="fab fa-discord" style="font-size:15px" aria-hidden="true"></i><a href="https://twitch.tv/nonsocial_" title="{% block header_titles_twitch %}{% endblock %}" target="_blank"> Nonsocial#2731</a>.
-          <br/>{% block footer_github %}{% endblock %}<a href="https://github.com/luissilva1044894/FlaskPyrezAPI" title="FlaskPyrezAPI · GitHub" target="_blank"> GitHub.</a>
-          <br/>{% block footer_hi_rez_copyright %}{% endblock %}
-      </span>
+        <div>
+          <span class="text-muted">
+            {% block footer_createby %}{% endblock %} <i class="fab fa-discord" style="font-size:15px" aria-hidden="true"></i><a href="https://twitch.tv/nonsocial_" title="{% block header_titles_twitch %}{% endblock %}" target="_blank"> Nonsocial#2731</a>.
+          </span>
+          <span class="text-muted" style="font-size: 12px;">
+            <br/>{% block footer_github %}{% endblock %}<a href="https://github.com/luissilva1044894/FlaskPyrezAPI" title="FlaskPyrezAPI · GitHub" target="_blank"> GitHub.</a>
+            <br/>{% block footer_hi_rez_copyright %}{% endblock %}
+          </span>
+        </div>
       </div>
     </footer>
 
