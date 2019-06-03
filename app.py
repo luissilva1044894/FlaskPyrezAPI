@@ -152,9 +152,9 @@ def limit_remote_addr():#ip = request.remote_addr
     print(request.method)
     print(request.headers.keys)
     print("*" * 40)
-    #if request.headers.get("User-Agent").rfind("Nimbostratus-Bot"): #request.headers["User-Agent"]
-    #    print("ABORTED")
-    #    abort(403)
+    if request.headers.get("User-Agent").rfind("Nimbostratus-Bot") != -1: #request.headers["User-Agent"]
+        print("ABORTED")
+        abort(403)
 
 @app.route('/', methods=["GET"])
 @app.route("/api", methods=["GET"])
