@@ -166,6 +166,9 @@ def getUrl(endpoint, params=None, _external=True):
 def getAcceptedLanguages(requestArgs):
     return str(request.accept_languages).split('-')[0] if request.accept_languages else LanguagesSupported.English.value
 def getLanguage(requestArgs):
+    print("*" * 20)
+    print(request.headers.keys)
+    print("*" * 20)
     aux = str(requestArgs.args.get("language", default=getAcceptedLanguages(requestArgs))).lower()
     try:
         return LanguagesSupported(aux).value
