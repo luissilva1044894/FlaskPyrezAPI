@@ -150,7 +150,7 @@ def limit_remote_addr():#ip = request.remote_addr
     print("*" * 40)
     print(request.headers.keys)
     print("*" * 40)
-    if request.headers.keys["User-Agent"].rfind("Nimbostratus-Bot"):
+    if request.headers["User-Agent"].rfind("Nimbostratus-Bot"): #request.headers.get("User-Agent")
         abort(403)
         print("ABORTED")
 
