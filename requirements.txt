@@ -2,5 +2,5 @@ Flask-Migrate==2.5.2
 Flask-Script==2.0.6
 gunicorn==19.9.0
 psycopg2-binary==2.8.2
-pyrez<2
+-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez[dev]
 python-decouple==3.1
