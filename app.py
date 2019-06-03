@@ -147,9 +147,13 @@ def robotsTxt():
 """
 @app.before_request#https://stackoverflow.com/questions/22251038/how-to-limit-flask-dev-server-to-only-one-visiting-ip-address
 def limit_remote_addr():#ip = request.remote_addr
-    print("*" * 20)
+    print("*" * 40)
     print(request.headers.keys)
-    print("*" * 20)
+    print("*" * 40)
+    if request.headers.keys["User-Agent"].rfind("Nimbostratus-Bot"):
+        abort(403)
+        print("ABORTED")
+
 @app.route('/', methods=["GET"])
 @app.route("/api", methods=["GET"])
 @app.route("/index", methods=["GET"])
