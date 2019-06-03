@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 
 from decouple import config, Csv
-from flask import Flask, jsonify, request, render_template, url_for, send_from_directory, escape
+from flask import abort, Flask, jsonify, request, render_template, url_for, send_from_directory, escape
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
 
@@ -145,11 +145,16 @@ def robotsTxt():
       response.headers["Content-type"] = "text/plain"
       return response
 """
+@app.before_request#https://stackoverflow.com/questions/22251038/how-to-limit-flask-dev-server-to-only-one-visiting-ip-address
+def limit_remote_addr():#ip = request.remote_addr
+    print("*" * 20)
+    print(request.headers.keys)
+    print("*" * 20)
 @app.route('/', methods=["GET"])
 @app.route("/api", methods=["GET"])
 @app.route("/index", methods=["GET"])
 @app.route("/index.html", methods=["GET"])
-def index():#ip = request.remote_addr
+def index():
     lang = getLanguage(request)
     return render_template("index-{}.html".format(lang), lang=lang) #redirect(url_for("index"))
 def formatDecimal(data, form = ",d"):
@@ -166,9 +171,6 @@ def getUrl(endpoint, params=None, _external=True):
 def getAcceptedLanguages(requestArgs):
     return str(request.accept_languages).split('-')[0] if request.accept_languages else LanguagesSupported.English.value
 def getLanguage(requestArgs):
-    print("*" * 20)
-    print(request.headers.keys)
-    print("*" * 20)
     aux = str(requestArgs.args.get("language", default=getAcceptedLanguages(requestArgs))).lower()
     try:
         return LanguagesSupported(aux).value
