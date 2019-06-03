@@ -34,23 +34,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                     params = "query=$(urlencode $(query 1))&" + params;
                 cmd += customAPICode.replace("{PARAMS}", params);
             break;
-            case botName["2"].value.toLowerCase(): /*case "5"*:*/ //Streamlabs / Ankbot
-                switch(userLevel.value) {
-                    case "2" : permLvl = "+r"; break;
-                    case "3" : permLvl = "+s"; break;
-                    case "4" : permLvl = "+m"; break;
-                    case "5" : permLvl = botName.value === "7" ? "+e" : "+c"; break;
-                    default: permLvl = "+a";
-                }
-                cmdChat += "!command add !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
-
-                customAPICode = "$readapi({ENDPOINT_LINK}?{PARAMS})";
-                params = "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}";
-                if(userCanUse.checked)
-                    params = "query=$dummyormsg&" + params;
-                cmd += customAPICode.replace("{PARAMS}", params);
-            break;
-            case botName["3"].value.toLowerCase():
+            case botName["2"].value.toLowerCase():
                 switch(userLevel.value) {
                     case "2" : permLvl = 300; break;
                     case "3" : permLvl = 250; break;
@@ -65,6 +49,22 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 params = "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}";
                 if(userCanUse.checked)
                     params = "query=$(queryencode $(1:))&" + params;
+                cmd += customAPICode.replace("{PARAMS}", params);
+            break;
+            case botName["3"].value.toLowerCase(): /*case "5"*:*/ //Streamlabs / Ankbot
+                switch(userLevel.value) {
+                    case "2" : permLvl = "+r"; break;
+                    case "3" : permLvl = "+s"; break;
+                    case "4" : permLvl = "+m"; break;
+                    case "5" : permLvl = botName.value === "7" ? "+e" : "+c"; break;
+                    default: permLvl = "+a";
+                }
+                cmdChat += "!command add !{CMD_NAME} {PERM_LVL} ".replace("{CMD_NAME}", commandName).replace("{PERM_LVL}", permLvl);
+
+                customAPICode = "$readapi({ENDPOINT_LINK}?{PARAMS})";
+                params = "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}";
+                if(userCanUse.checked)
+                    params = "query=$dummyormsg&" + params;
                 cmd += customAPICode.replace("{PARAMS}", params);
             break;
             default:
