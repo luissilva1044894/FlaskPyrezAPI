@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
 .tg  {border-collapse:collapse;border-spacing:0;}
 .tg td{font-size:12px;padding:9px 2px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
 .tg th{font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
