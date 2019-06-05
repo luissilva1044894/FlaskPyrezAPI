@@ -53,7 +53,7 @@ PLAYER_NOT_MATCH_STRINGS = {
     },
     "es" : {
         0: "ERROR: {0} está Desconectado.",
-        1: "ERROR: {0} está en el vestíbulo.",
+        1: "ERROR: {0} está en el Vestíbulo.",
         2: "ERROR: {0} está eligiendo campeón. Necesitas esperar hasta que el partida haya comenzado.",
         4: "ERROR: {0} está Online, pero no en partida.",
         5: "ERROR: {0} don't exist or it's hidden.",
