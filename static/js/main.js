@@ -92,7 +92,8 @@ function onPageLoaded() {
         keyCodeTrigger(e.keyCode, "#generate_command");
     });
     $("#user_can_use").on("change", function()) {
-        var commandType, userCanUse = getElementById("command_type"), getElementById("user_can_use");
+        var commandType = getElementById("command_type"),
+            userCanUse = getElementById("user_can_use");
 
         userCanUse.checked = commandType.value.toLowerCase() === commandType["3"].value.toLowerCase() || commandType.value.toLowerCase() === commandType["4"].value.toLowerCase();
         print(userCanUse.checked)
