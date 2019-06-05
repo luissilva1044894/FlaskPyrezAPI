@@ -212,9 +212,10 @@ def getPlayerName(requestArgs):
         playerName = qry[1:qry.rfind('"')] if qry.rfind('"') > 1 else qry.split(' ')[0]
     else:
         playerName = requestArgs.get("player", default=None)#str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
-    return None if not playerName or (playerName.lower() in ["none", "0", "null", "$(1)", "query=$(querystring)", "[invalid%20variable]", "your_ign"]) else escape(playerName.lower())
+    return None if not playerName or (playerName.lower() in ["none", "0", "null", "$(1)", "query=$(querystring)", "[invalid%20variable]", "your_ign"]) else escape(playerName)
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
-    if not playerName or (playerName.lower() in ["none", "0", "null", "$(1)", "query=$(querystring)", "[invalid%20variable]", "your_ign"]):
+    playerName = playerName.lower()
+    if not playerName or (playerName in ["none", "0", "null", "$(1)", "query=$(querystring)", "[invalid%20variable]", "your_ign"]):
         return 0
     if str(playerName).isnumeric():
         return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
