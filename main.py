@@ -184,7 +184,7 @@ def getLanguage(requestArgs):
         return LanguagesSupported.English.value
 def getChampName(requestArgs):
     qry = requestArgs.get("query", default=None)
-    champName = request.args.get("champion", None) if qry is None else qry[qry.rfind('"')+1:].split(' ') if qry.rfind('"') > 1 else qry.split(' ')
+    champName = request.args.get("champion", None) if not qry else qry[qry.rfind('"')+1:].split(' ') if qry.rfind('"') > 1 else qry.split(' ')
     if isinstance(champName, (type(()), type([]))):
         try:
             champName = champName[1]
@@ -223,7 +223,7 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
         playerName = playerName.strip()#.strip(',.-')
     _player = Player.query.filter_by(name=playerName, platform=str(platform)).first()
     print("Player readed - Database", _player)
-    if _player is None:
+    if not _player:
         temp = paladinsAPI.getPlayerId(playerName, platform) if str(platform).isnumeric() else paladinsAPI.getPlayerId(playerName)
         if not temp:
             return -1
@@ -243,19 +243,19 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
 def getDecks():
     try:
         language = getLanguage(request)
-        languageCode = 10 if language == "pt" else 12 if language == "pl" else 7 if language == "es" else 1
         championName, playerName, platform = getChampName(request.args), getPlayerName(request.args), getPlatform(request.args)
         
-        if championName is None:
-            return "ERROR: ChampName not specified!"
+        if not championName:
+            return CHAMP_NULL_STRINGS[language]
         playerId = getPlayerId(playerName, platform)
         if playerId == 0:
             return PLAYER_NULL_STRINGS[language]
         if playerId == -1:
             return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+        languageCode = 10 if language == "pt" else 12 if language == "pl" else 7 if language == "es" else 1
         playerLoadouts = paladinsAPI.getPlayerLoadouts(playerId, languageCode)
         if len(playerLoadouts) <= 1: #playerLoadouts is None:
-            return "{0} doesn't have any {1} custom loadouts!".format(playerName, championName.capitalize())
+            return DONT_HAVE_DECKS_STRINGS[language].format(playerName, championName.capitalize())
         cds = ""
         #lambda n: []
         #nums = [str(n) for n in range(20)]
@@ -381,7 +381,7 @@ def getCurrentMatch():
             else:
                 team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if player.playerName else "???", player.godName, rank))
         return CURRENT_MATCH_STRINGS[language].format(players[0].getMapName(True), QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId], ",".join(team1), ",".join(team2))
-    return "An unexpected error has occurred!"
+    return INTERNAL_ERROR_500_STRINGS[language]
 @app.route("/api/rank", methods=["GET"])
 def getRank():
     try:
