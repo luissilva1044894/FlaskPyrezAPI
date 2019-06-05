@@ -91,10 +91,11 @@ function onPageLoaded() {
         //checkButtonPos();
         keyCodeTrigger(e.keyCode, "#generate_command");
     });
-    $("#user_access").on("change", function() {
+    $("#user_can_use").on("change", function() {
         var commandType, userCanUse = getElementById("command_type"), getElementById("user_can_use");
 
         userCanUse.checked = commandType.value.toLowerCase() === commandType["3"].value.toLowerCase() || commandType.value.toLowerCase() === commandType["4"].value.toLowerCase();
+        print(userCanUse.checked)
     }
 }
 function clearField(divName) {
