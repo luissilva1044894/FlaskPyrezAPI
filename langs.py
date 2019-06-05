@@ -309,3 +309,15 @@ PLAYER_LOW_LEVEL_STRINGS = {
     "pl" : "BŁĄD: Gracz musi mieć minimalnie 5 poziom konta.",
     "pt" : "ERRO: O jogador precisa ter pelo menos nível 5.",
 }
+CHAMP_NULL_STRINGS = {
+    "en" : "ERROR: ChampName not specified!",
+    "es" : "ERROR: ChampName not specified!",
+    "pl" : "ERROR: ChampName not specified!",
+    "pt" : "ERROR: ChampName not specified!",
+}
+DONT_HAVE_DECKS_STRINGS = {
+    "en" : "“{0}” doesn't have any “{1}” custom loadouts!.",
+    "es" : "“{0}” doesn't have any “{1}” custom loadouts!",
+    "pl" : "“{0}” doesn't have any “{1}” custom loadouts!",
+    "pt" : "“{0}” não tem baralhos para “{1}”!",
+}
