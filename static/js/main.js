@@ -91,13 +91,13 @@ function onPageLoaded() {
         //checkButtonPos();
         keyCodeTrigger(e.keyCode, "#generate_command");
     });
-    $("#user_can_use").on("change", function()) {
+    $("#user_can_use").on("change", function() {
         var commandType = getElementById("command_type"),
             userCanUse = getElementById("user_can_use");
 
         userCanUse.checked = commandType.value.toLowerCase() === commandType["3"].value.toLowerCase() || commandType.value.toLowerCase() === commandType["4"].value.toLowerCase();
         print(userCanUse.checked)
-    }
+    });
 }
 function clearField(divName) {
     div = defaultFor(divName, "#alerts"), alertDiv = $(div);
