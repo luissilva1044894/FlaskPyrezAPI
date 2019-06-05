@@ -265,7 +265,7 @@ def getDecks():
             cardStr = "{}{}: {}".format (" " if len(cds) == 0 else ", ", loadout.deckName, ["{0} {1}".format(card.itemName, card.points) for card in loadout.cards]).replace("'", "")
             if len(cds + cardStr) <= 400:
                 cds += cardStr
-        return cds if cds != "" else "ERROR: {0} doesn't have any {1} custom loadouts! Maybe you misspelled the champName.".format(playerName, championName)
+        return cds if cds != "" else CHAMP_NOT_PLAYED_STRINGS[language].format(playerName, championName)
     #except NoResult as exc:
     #    print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
     #    return "Maybe “{}” profile isn't public.".format(playerName)
