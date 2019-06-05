@@ -47,7 +47,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
                 customAPICode = "${customapi.{ENDPOINT_LINK}?{PARAMS}}";
 
                 params = "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}";
-                if(userCanUse.checked)
+                if(userCanUse.checked && commandType.value !== commandType["0"].value)
                     params = "query=$(queryencode $(1:))&" + params;
                 cmd += customAPICode.replace("{PARAMS}", params);
             break;
@@ -63,7 +63,7 @@ function generateCommand(lang) { // !command add duo Estou duo com X e o elo del
 
                 customAPICode = "$readapi({ENDPOINT_LINK}?{PARAMS})";
                 params = "player={PLAYER_NAME}&platform={PLATFORM}&language={LANGUAGE}";
-                if(userCanUse.checked)
+                if(userCanUse.checked && commandType.value !== commandType["0"].value)
                     params = "query=$dummyormsg&" + params;
                 cmd += customAPICode.replace("{PARAMS}", params);
             break;
