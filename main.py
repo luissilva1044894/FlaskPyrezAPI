@@ -214,9 +214,9 @@ def getPlayerName(requestArgs):
         playerName = requestArgs.get("player", default=None)#str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
     return None if not playerName or (playerName.lower() in ["none", "0", "null", "$(1)", "query=$(querystring)", "[invalid%20variable]", "your_ign"]) else escape(playerName)
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
-    playerName = playerName.lower()
     if not playerName or (playerName in ["none", "0", "null", "$(1)", "query=$(querystring)", "[invalid%20variable]", "your_ign"]):
         return 0
+    playerName = playerName.lower()
     if str(playerName).isnumeric():
         return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
     if platform == PlatformsSupported.PC:
