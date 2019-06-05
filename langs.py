@@ -53,9 +53,9 @@ PLAYER_NOT_MATCH_STRINGS = {
     },
     "es" : {
         0: "ERROR: {0} está Desconectado.",
-        1: "ERROR: {0} is still in Lobby.",
-        2: "ERROR: {0} is still selecting a champion. You need to wait until the match has started.",
-        4: "ERROR: {0} is Online, but not in a match.",
+        1: "ERROR: {0} está en Lobby.",
+        2: "ERROR: {0} está eligiendo campeón. Necesitas esperar hasta que el partida haya comenzado.",
+        4: "ERROR: {0} está Online, pero no en partida.",
         5: "ERROR: {0} don't exist or it's hidden.",
     },
     "pl" : {
