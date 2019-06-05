@@ -299,7 +299,7 @@ PALADINS_LIMITED_ACCESS_STRINGS = {
 }
 CHAMP_NOT_PLAYED_STRINGS = {
     "en" : "ERROR: {0} doesn't played with {1}! Maybe you misspelled the champName.",
-    "es" : "ERROR: {0} doesn't played with {1}! Maybe you misspelled the champName.",
+    "es" : "ERRO: {0} doesn't played with {1}! Maybe you misspelled the champName.",
     "pl" : "BŁAD: {0} nie grał jeszcze tą postacią! Może wpisałeś złą nazwę czempiona?",
     "pt" : "ERRO: {0} não jogou com {1}! Talvez você tenha digitado um campeão incorreto.",
 }
