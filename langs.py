@@ -15,7 +15,7 @@ INTERNAL_ERROR_500_STRINGS = {
 }
 CURRENT_MATCH_STRINGS = {
     "en" : "Current match - {0} ({1}):{2} | VS |{3}", #`mapName` instead
-    "es" : "Current match - {0} ({1}):{2} | VS |{3}",
+    "es" : "Partida - {0} ({1}):{2} | VS |{3}",
     "pl" : "Tryb gry - {0} ({1}):{2} | VS |{3}",
     "pt" : "Partida atual - {0} ({1}):{2} | VS |{3}",
 }
