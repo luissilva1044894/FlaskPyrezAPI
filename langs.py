@@ -3,13 +3,13 @@
 #https://www.w3schools.com/tags/ref_language_codes.asp
 INTERNAL_ERROR_404_STRINGS = {
     "en" : "INTERNAL SERVER ERROR: Page not found.",
-    "es" : "INTERNAL SERVER ERROR: Page not found.",
+    "es" : "INTERNAL SERVER ERROR: Página no encontrada.",
     "pl" : "BŁĄD SERWERA: Nie znaleziono strony",
     "pt" : "INTERNAL SERVER ERROR: Página não encontrada.",
 }
 INTERNAL_ERROR_500_STRINGS = {
     "en" : "INTERNAL SERVER ERROR: An unexpected error has occurred. If something isn't working, report on Discord Server: https://discord.gg/XkydRPS",
-    "es" : "INTERNAL SERVER ERROR: An unexpected error has occurred. If something isn't working, report on Discord Server: https://discord.gg/XkydRPS",
+    "es" : "INTERNAL SERVER ERROR: Un error inesperado ha ocurrido. Si algo no funciona, por favor reporte en Discord: https://discord.gg/XkydRPS",
     "pl" : "BŁĄD SERWERA: Wystąpił nieoczekiwany błąd. If something isn't working, report on Discord Server: https://discord.gg/XkydRPS",
     "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu. Se o erro persistir, report no server do Discord: https://discord.gg/XkydRPS",
 }
@@ -27,19 +27,19 @@ CURRENT_MATCH_PLAYER_STRINGS = {
 }
 OUTDATED_CMD_STRINGS = {
     "en" : "ERROR: Command outdated! Go to “{0}” and re-create them!",
-    "es" : "ERROR: ERROR: Command outdated! Go to “{0}” and re-create them!",
-    "pl" : "BŁĄD: ERROR: Command outdated! Go to “{0}” and re-create them!",
-    "pt" : "ERROR: ERROR: Comando desatualizado! Acesse “{0}” para gerar novamente!",
+    "es" : "ERROR: ¡Comando desactualizado! Go to “{0}” and re-create them!",
+    "pl" : "BŁĄD: Command outdated! Go to “{0}” and re-create them!",
+    "pt" : "ERROR: Comando desatualizado! Acesse “{0}” para gerar novamente!",
 }
 PLAYER_NULL_STRINGS = {
     "en" : "ERROR: Player not specified!",
-    "es" : "ERROR: Player not specified!",
+    "es" : "ERROR: ¡Player no especificado!",
     "pl" : "BŁĄD: Nie podano nazwy gracza!",
     "pt" : "ERROR: Player not specified!",
 }
 PLAYER_NOT_FOUND_STRINGS = {
-    "en" : "ERROR: “{0}” don't exist or it's hidden!",
-    "es" : "ERROR: “{0}” don't exist or it's hidden!",
+    "en" : "ERROR: “{0}” don't exist or it's hidden! Make sure that your account is marked as “Public Profile”",
+    "es" : "ERROR: ¡“{0}” no existe o tienes perfil oculto! Make sure that your account is marked as “Public Profile”",
     "pl" : "BŁĄD: Nie znaleziono gracza “{0}”! Make sure that your account is marked as “Public Profile”",
     "pt" : "ERRO: “{0}” não existe ou tem perfil privado!",
 }
@@ -52,11 +52,11 @@ PLAYER_NOT_MATCH_STRINGS = {
         5: "ERROR: {0} don't exist or it's hidden.",
     },
     "es" : {
-        0: "ERRO: {0} está Desconectado.",
-        1: "ERRO: {0} está en el Vestíbulo.",
-        2: "ERRO: {0} está eligiendo un campeón. Necesitas esperar la partida comenzar.",
-        4: "ERRO: {0} está Online, pero no en partida.",
-        5: "ERRO: {0} don't exist or it's hidden.",
+        0: "ERROR: {0} está Desconectado.",
+        1: "ERROR: {0} está en el Vestíbulo.",
+        2: "ERROR: {0} está eligiendo un campeón. Necesitas esperar la partida comenzar.",
+        4: "ERROR: {0} está Online, pero no en partida.",
+        5: "ERROR: ¡{0} no existe o tienes perfil oculto.",
     },
     "pl" : {
         0: "BŁĄD: {0} jest offline.",
@@ -80,14 +80,14 @@ PLAYER_LEVEL_STRINGS = {
     "pt" : "{0} (Nível {1})",
 }
 UNABLE_TO_CONNECT_STRINGS = {
-    "en" : "ERROR: Unable to connect to Hi-Rez Studios' API!",
-    "es" : "ERROR: Unable to connect to Hi-Rez Studios' API!",
+    "en" : "ERROR: Unable to connect to Hi-Rez Studios API!",
+    "es" : "ERROR: Unable to connect to Hi-Rez Studios API!",
     "pl" : "BŁĄD: Nie można połączyć się z API Hi-Rez Studio!",
     "pt" : "ERRO: Não foi possível conectar à API da Hi-Rez Studios!",
 }
 QUEUE_ID_NOT_SUPPORTED_STRINGS = {
     "en" : "ERROR: “{0}” isn't supported! “{1}” isn't playing casual or ranked, so you can't get details about their match.",
-    "es" : "ERROR: “{0}” isn't supported! “{1}” isn't playing casual or ranked, so you can't get details about their match.",
+    "es" : "ERROR: ¡“{0}” no es compatible! “{1}” no está jugando casual o ranked, usted no puedes obtener detalles sobre su partida.",
     "pl" : "BŁĄD: Tryb “{0}” nie jest obsługiwany! Gracz “{1}” nie jest w trakcie szybkiej gry lub gry rankingowej, więc nie możesz sprawdzić szczegółów dotyczących tego meczu.",
     "pt" : "ERRO: “{0}” não é suportado! “{1}” não está jogando casual ou ranked, você não pode ver detalhes sobre a partida.",
 }
@@ -269,7 +269,7 @@ LAST_MATCH_STRINGS = {
 }
 CURRENTLY_MATCH_STRINGS = {
     "en" : "currently in a match (Queue: {0} | Match ID: {1})",
-    "es" : "currently in a match (Queue: {0} | Match ID: {1})",
+    "es" : "en una partida (Queue: {0} | Match ID: {1})",
     "pl" : "aktualnie jest w meczu (Tryb gry: {0} | ID Meczu: {1})",
     "pt" : "em partida (Fila: {0} | ID da partida: {1})",
 }
@@ -293,19 +293,19 @@ PALADINS_DOWN_STRINGS = {
 }
 PALADINS_LIMITED_ACCESS_STRINGS = {
     "en" : " but it's in maintenance (Limited Access)",
-    "es" : " but it's in maintenance (Limited Access)",
+    "es" : " pero esta en mantenimiento (acceso limitado)",
     "pl" : " ,ale z limitowanym dostępem",
     "pt" : " mas está em manutenção (Acesso limitado)",
 }
 CHAMP_NOT_PLAYED_STRINGS = {
     "en" : "ERROR: {0} doesn't played with {1}! Maybe you misspelled the champName.",
-    "es" : "ERRO: {0} doesn't played with {1}! Maybe you misspelled the champName.",
+    "es" : "ERROR: ¡{0} no jugó con {1}! Tal vez usted escribió mal el nombre del campeón.",
     "pl" : "BŁAD: {0} nie grał jeszcze tą postacią! Może wpisałeś złą nazwę czempiona?",
     "pt" : "ERRO: {0} não jogou com {1}! Talvez você tenha digitado um campeão incorreto.",
 }
 PLAYER_LOW_LEVEL_STRINGS = {
     "en" : "ERROR: Player must be at least level 5.",
-    "es" : "ERROR: Player must be at least level 5.",
+    "es" : "ERROR: El jugador debe tener al menos nivel 5.",
     "pl" : "BŁĄD: Gracz musi mieć minimalnie 5 poziom konta.",
     "pt" : "ERRO: O jogador precisa ter pelo menos nível 5.",
 }
