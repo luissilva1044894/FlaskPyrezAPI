@@ -117,6 +117,10 @@ def sessionCreated(session):#print("SESSION: {0}".format(session))
     _session = Session(sessionId=session.sessionId)
     print("New sessionId: {}".format(_session))
     print("Lastest sessionId: {}".format(Session.query.first()))
+    try:
+        print("Pyrez sessionId: {}".format(paladinsAPI.sessionId))
+    except Exception:
+        pass
 try:
     lastSession = Session.query.first()
 except (OperationalError, ProgrammingError):
