@@ -116,7 +116,8 @@ class Outdated(Exception):
 def sessionCreated(session):#print("SESSION: {0}".format(session))
     _session = Session(sessionId=session.sessionId)
     print("New sessionId: {}".format(_session))
-    print("Lastest sessionId: {}".format(Session.query.first()))
+    lastSession = Session.query.first()
+    print("Lastest sessionId: {}".format(lastSession))
     try:
         print("Pyrez sessionId: {}".format(paladinsAPI.sessionId))
     except Exception:
