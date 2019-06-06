@@ -116,6 +116,7 @@ class Outdated(Exception):
 def sessionCreated(session):#print("SESSION: {0}".format(session))
     _session = Session(sessionId=session.sessionId)
     print("New sessionId: {}".format(_session))
+    print("Lastest sessionId: {}".format(Session.query.first()))
 try:
     lastSession = Session.query.first()
 except (OperationalError, ProgrammingError):
