@@ -254,10 +254,8 @@ def getDecks():
         if not championName:
             return CHAMP_NULL_STRINGS[language]
         playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        if playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+        if not playerId or playerId == -1:
+            return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         languageCode = 10 if language == "pt" else 12 if language == "pl" else 7 if language == "es" else 1
         playerLoadouts = paladinsAPI.getPlayerLoadouts(playerId, languageCode)
         if len(playerLoadouts) <= 1: #playerLoadouts is None:
@@ -302,10 +300,8 @@ def getStalk():
         language, playerName, platform = getLanguage(request), getPlayerName(request.args), getPlatform(request.args)
 
         playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        if playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+        if not playerId or playerId == -1:
+            return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         playerStalkRequest = paladinsAPI.getPlayerStatus(playerId)
     except Outdated as exc:
@@ -325,10 +321,8 @@ def getLastMatch():
         language, playerName, platform = getLanguage(request), getPlayerName(request.args), getPlatform(request.args)
 
         playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        if playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+        if not playerId or playerId == -1:
+            return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         lastMatchRequest = paladinsAPI.getMatchHistory(playerId)[0]
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
@@ -351,8 +345,8 @@ def getCurrentMatch():
         language, playerName, platform = getLanguage(request), getPlayerName(request.args), getPlatform(request.args)
 
         playerId = getPlayerId(playerName, platform)
-        if playerId == 0 or playerId == -1:
-            return PLAYER_NULL_STRINGS[language] if playerId == 0 else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+        if not playerId or playerId == -1:
+            return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         playerStatusRequest = paladinsAPI.getPlayerStatus(playerId)
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
@@ -394,10 +388,8 @@ def getRank():
         language, playerName, platform = getLanguage(request), getPlayerName(request.args), getPlatform(request.args)
 
         playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        if playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+        if not playerId or playerId == -1:
+            return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
@@ -434,10 +426,8 @@ def getWinrate():
         language, championName, playerName, platform = getLanguage(request), getChampName(request.args), getPlayerName(request.args), getPlatform(request.args)
         
         playerId = getPlayerId(playerName, platform)
-        if playerId == 0:
-            return PLAYER_NULL_STRINGS[language]
-        if playerId == -1:
-            return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+        if not playerId or playerId == -1:
+            return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         if getPlayerRequest.accountLevel > 5:
             playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
