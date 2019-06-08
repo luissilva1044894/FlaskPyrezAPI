@@ -1,0 +1,4 @@
+-r common.txt
+gunicorn==19.9.0
+python-decouple==3.1
+python-dotenv==0.10.3
