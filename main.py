@@ -355,7 +355,7 @@ def getCurrentMatch():
         return INTERNAL_ERROR_500_STRINGS[language]
     if playerStatusRequest.status != 3:
         return PLAYER_NOT_MATCH_STRINGS[language][playerStatusRequest.status].format(playerName)
-    if not playerStatusRequest.queueId.isLiveMatch():#not (playerStatusRequest.queueId.isLiveMatch() or playerStatusRequest.queueId.isPraticeMatch()):
+    if not playerStatusRequest.queueId.isLiveMatch:#not (playerStatusRequest.queueId.isLiveMatch() or playerStatusRequest.queueId.isPraticeMatch()):
         return QUEUE_ID_NOT_SUPPORTED_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId], playerName)
     team1, team2 = [], []
     try:
@@ -371,7 +371,7 @@ def getCurrentMatch():
                 if player.playerId != "0": #int(player.playerId) != 0:
                     if player.accountLevel >= 15:
                         getPlayer = paladinsAPI.getPlayer(player.playerId)
-                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayedRanked() else getPlayer.rankedController.currentRank]
+                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayedRanked else getPlayer.rankedController.currentRank]
                     else:
                         rank = PLAYER_RANK_STRINGS[language][0]
                 else:
@@ -400,17 +400,17 @@ def getRank():
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     r1, r2 = getPlayerRequest.rankedController, getPlayerRequest.rankedKeyboard
-    if not r1.hasPlayedRanked() and r2.hasPlayedRanked():
+    if not r1.hasPlayedRanked and r2.hasPlayedRanked:
         return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                                 PLAYER_RANK_STRINGS[language][r2.currentRank.value] if r2.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r2.wins + r2.losses == 0 else QUALIFYING_STRINGS[language],
                                 "" if r2.currentRank == Tier.Unranked or r2.currentTrumpPoints <= 0 else " ({0} TP{1})".format(formatDecimal(r2.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r2.leaderboardIndex) if r2.leaderboardIndex > 0 else ""),
                                 "" if r2.currentRank == Tier.Unranked and r2.wins + r2.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r2.wins), formatDecimal(r2.losses)),
-                                " (Win rate Global: {0}%{1})".format (getPlayerRequest.getWinratio(), "" if r2.wins + r2.losses == 0 else " & Ranked: {0}%".format(r2.getWinratio())))
+                                " (Win rate Global: {0}%{1})".format (getPlayerRequest.winratio, "" if r2.wins + r2.losses == 0 else " & Ranked: {0}%".format(r2.winratio)))
     return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                                 PLAYER_RANK_STRINGS[language][r1.currentRank.value] if r1.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r1.wins + r1.losses == 0 else QUALIFYING_STRINGS[language],
                                 "" if r1.currentRank == Tier.Unranked or r1.currentTrumpPoints <= 0 else " ({0} TP{1})".format(formatDecimal(r1.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r1.leaderboardIndex) if r1.leaderboardIndex > 0 else ""),
                                 "" if r1.currentRank == Tier.Unranked and r1.wins + r1.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r1.wins), formatDecimal(r1.losses)),
-                                " (Win rate Global: {0}%{1})".format(getPlayerRequest.getWinratio(), "" if r1.wins + r1.losses == 0 else " & Ranked: {0}%".format(r1.getWinratio())))
+                                " (Win rate Global: {0}%{1})".format(getPlayerRequest.winratio, "" if r1.wins + r1.losses == 0 else " & Ranked: {0}%".format(r1.winratio)))
 def checkChampName(championName):
     champs = [ "androxus", "atlas", "ash", "barik", "bombking", "buck", "cassie", "dredge", "drogoz", "evie", "fernando", "furia", "grohk", "grover",
     "imani", "inara", "jenos", "khan", "kinessa", "koga", "lex", "lian", "maeve", "makoa", "maldamba", "moji", "pip", "ruckus",
@@ -447,7 +447,7 @@ def getWinrate():
         for champ in playerGlobalKDA:
             if champ.godName.lower().replace(" ", "").replace("'", "") == championName:
                 return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(champ.godName.replace("'", " "), champ.godLevel), champ.wins, champ.losses,
-                        formatDecimal(champ.kills), formatDecimal(champ.deaths), formatDecimal(champ.assists), champ.getKDA(), champ.getWinratio())
+                        formatDecimal(champ.kills), formatDecimal(champ.deaths), formatDecimal(champ.assists), champ.kda, champ.winratio)
         return CHAMP_NOT_PLAYED_STRINGS[language].format(playerName, championName)
     deaths, kills, assists = 0, 0, 0
     for champ in playerGlobalKDA:
@@ -456,7 +456,7 @@ def getWinrate():
         assists += champ.assists
     kda = ((assists / 2) + kills) / deaths if deaths > 1 else 1
     return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
-                        formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
+                        formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.winratio)
 if __name__ == "__main__":
     if DEBUG:
         #_players = Player.query.filter_by(id="X")
