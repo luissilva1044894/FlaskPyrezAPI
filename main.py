@@ -180,16 +180,16 @@ def getUrl(endpoint, params=None, _external=True):
     for param in params:
         _url = _url.replace(param, '')
     return _url
-def getAcceptedLanguages(requestArgs):
-    return str(request.accept_languages).split('-')[0] if request.accept_languages else LanguagesSupported.English.value
-def getLanguage(requestArgs):
-    aux = str(requestArgs.args.get("language", default=getAcceptedLanguages(requestArgs))).lower()
+def getAcceptedLanguages(request_args):
+    return str(request_args.accept_languages).split('-')[0] if request_args.accept_languages else LanguagesSupported.English.value
+def getLanguage(request_args):
+    aux = str(request_args.args.get("language", default=getAcceptedLanguages(request_args))).lower()
     try:
         return LanguagesSupported(aux).value
     except ValueError:
         return LanguagesSupported.English.value
-def getChampName(requestArgs):
-    qry = requestArgs.get("query", default=None)
+def getChampName(request_args):
+    qry = request_args.get("query", default=None)
     champName = request.args.get("champion", None) if not qry else qry[qry.rfind('"')+1:].split(' ') if qry.rfind('"') > 1 else qry.split(' ')
     if isinstance(champName, (type(()), type([]))):
         try:
@@ -198,26 +198,26 @@ def getChampName(requestArgs):
             champName = None
     #return "bombking" if "bk" or "bomb" in champName else "maldamba" if "mal" in champName else champName.lower().replace(" ", "").replace("'", "") if champName else None
     return champName.lower().replace(" ", "").replace("'", "") if champName else None
-def getPlatform(requestArgs):
-    #_checkOutdated = str(requestArgs.get("platform", default=None)).lower()
+def getPlatform(request_args):
+    #_checkOutdated = str(request_args.get("platform", default=None)).lower()
     #if str(_checkOutdated) == "platform" or str(_checkOutdated) == "null" or str(_checkOutdated) == "none":
     #    raise Outdated(_checkOutdated)
-    qry = requestArgs.get("query", default=None)
+    qry = request_args.get("query", default=None)
     if qry:
         aux = qry[qry.rfind('"')+1:].split(' ') if qry.rfind('"') > 1 else qry.split(' ')
         if isinstance(aux, (type(()), type([]))) and len(aux) > 1:
             aux = aux[len(aux) - 1]
         else:
-            aux = str(requestArgs.get("platform", default=None)).lower()
+            aux = str(request_args.get("platform", default=None)).lower()
     else:
-        aux = str(requestArgs.get("platform", default=None)).lower()
+        aux = str(request_args.get("platform", default=None)).lower()
     return PlatformsSupported.Xbox if aux.startswith("xb") else PlatformsSupported.Switch if aux.startswith("switch") else PlatformsSupported.PS4 if aux.startswith("ps") else PlatformsSupported.PTS if aux.startswith("pts") else PlatformsSupported.PC
-def getPlayerName(requestArgs):
-    qry = requestArgs.get("query", default=None)
+def getPlayerName(request_args):
+    qry = request_args.get("query", default=None)
     if qry:
         playerName = qry[1:qry.rfind('"')] if qry.rfind('"') > 1 else qry.split(' ')[0]
     else:
-        playerName = requestArgs.get("player", default=None)#str(requestArgs.get("query", default=str(requestArgs.get("player", default=None)).lower()).split(' ')[0]).lower()
+        playerName = request_args.get("player", default=None)#str(request_args.get("query", default=str(request_args.get("player", default=None)).lower()).split(' ')[0]).lower()
     return None if not playerName or (playerName.lower() in ["none", "0", "null", "$(1)", "query=$(querystring)", "[invalid%20variable]", "your_ign"]) else escape(playerName)
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
     if not playerName or (playerName in ["none", "0", "null", "$(1)", "query=$(querystring)", "[invalid%20variable]", "your_ign"]):
@@ -314,7 +314,7 @@ def getStalk():
         return INTERNAL_ERROR_500_STRINGS[language]
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                         playerStalkRequest.statusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.status != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStalkRequest.queueId], playerStalkRequest.matchId),
-                        getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getLastSeen(getPlayerRequest.lastLoginDatetime, language), formatDecimal(getPlayerRequest.hoursPlayed), getPlayerRequest.platform, PLAYER_REGION_STRINGS[language][str(getPlayerRequest.playerRegion).replace(' ', "_").upper()])
+                        getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getPlayerRequest.last_login, formatDecimal(getPlayerRequest.hoursPlayed), getPlayerRequest.platform, PLAYER_REGION_STRINGS[language][str(getPlayerRequest.playerRegion).replace(' ', "_").upper()])
 @app.route("/api/lastmatch", methods=["GET"])
 def getLastMatch():
     try:
@@ -355,7 +355,7 @@ def getCurrentMatch():
         return INTERNAL_ERROR_500_STRINGS[language]
     if playerStatusRequest.status != 3:
         return PLAYER_NOT_MATCH_STRINGS[language][playerStatusRequest.status].format(playerName)
-    if not playerStatusRequest.queueId.isLiveMatch():#not (playerStatusRequest.queueId.isLiveMatch() or playerStatusRequest.queueId.isPraticeMatch()):
+    if not playerStatusRequest.queueId.isLiveMatch:#not (playerStatusRequest.queueId.isLiveMatch() or playerStatusRequest.queueId.isPraticeMatch()):
         return QUEUE_ID_NOT_SUPPORTED_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId], playerName)
     team1, team2 = [], []
     try:
@@ -371,7 +371,7 @@ def getCurrentMatch():
                 if player.playerId != "0": #int(player.playerId) != 0:
                     if player.accountLevel >= 15:
                         getPlayer = paladinsAPI.getPlayer(player.playerId)
-                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayedRanked() else getPlayer.rankedController.currentRank]
+                        rank = PLAYER_RANK_STRINGS[language][getPlayer.rankedKeyboard.currentRank if getPlayer.rankedKeyboard.hasPlayed else getPlayer.rankedController.currentRank]
                     else:
                         rank = PLAYER_RANK_STRINGS[language][0]
                 else:
@@ -400,17 +400,17 @@ def getRank():
         print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
         return INTERNAL_ERROR_500_STRINGS[language]
     r1, r2 = getPlayerRequest.rankedController, getPlayerRequest.rankedKeyboard
-    if not r1.hasPlayedRanked() and r2.hasPlayedRanked():
+    if not r1.hasPlayed and r2.hasPlayed:
         return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                                 PLAYER_RANK_STRINGS[language][r2.currentRank.value] if r2.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r2.wins + r2.losses == 0 else QUALIFYING_STRINGS[language],
                                 "" if r2.currentRank == Tier.Unranked or r2.currentTrumpPoints <= 0 else " ({0} TP{1})".format(formatDecimal(r2.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r2.leaderboardIndex) if r2.leaderboardIndex > 0 else ""),
                                 "" if r2.currentRank == Tier.Unranked and r2.wins + r2.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r2.wins), formatDecimal(r2.losses)),
-                                " (Win rate Global: {0}%{1})".format (getPlayerRequest.getWinratio(), "" if r2.wins + r2.losses == 0 else " & Ranked: {0}%".format(r2.getWinratio())))
+                                " (Win rate Global: {0}%{1})".format (getPlayerRequest.winratio, "" if r2.wins + r2.losses == 0 else " & Ranked: {0}%".format(r2.winratio)))
     return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                                 PLAYER_RANK_STRINGS[language][r1.currentRank.value] if r1.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r1.wins + r1.losses == 0 else QUALIFYING_STRINGS[language],
                                 "" if r1.currentRank == Tier.Unranked or r1.currentTrumpPoints <= 0 else " ({0} TP{1})".format(formatDecimal(r1.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r1.leaderboardIndex) if r1.leaderboardIndex > 0 else ""),
                                 "" if r1.currentRank == Tier.Unranked and r1.wins + r1.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r1.wins), formatDecimal(r1.losses)),
-                                " (Win rate Global: {0}%{1})".format(getPlayerRequest.getWinratio(), "" if r1.wins + r1.losses == 0 else " & Ranked: {0}%".format(r1.getWinratio())))
+                                " (Win rate Global: {0}%{1})".format(getPlayerRequest.winratio, "" if r1.wins + r1.losses == 0 else " & Ranked: {0}%".format(r1.winratio)))
 def checkChampName(championName):
     champs = [ "androxus", "atlas", "ash", "barik", "bombking", "buck", "cassie", "dredge", "drogoz", "evie", "fernando", "furia", "grohk", "grover",
     "imani", "inara", "jenos", "khan", "kinessa", "koga", "lex", "lian", "maeve", "makoa", "maldamba", "moji", "pip", "ruckus",
@@ -447,7 +447,7 @@ def getWinrate():
         for champ in playerGlobalKDA:
             if champ.godName.lower().replace(" ", "").replace("'", "") == championName:
                 return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(champ.godName.replace("'", " "), champ.godLevel), champ.wins, champ.losses,
-                        formatDecimal(champ.kills), formatDecimal(champ.deaths), formatDecimal(champ.assists), champ.getKDA(), champ.getWinratio())
+                        formatDecimal(champ.kills), formatDecimal(champ.deaths), formatDecimal(champ.assists), champ.kda, champ.winratio)
         return CHAMP_NOT_PLAYED_STRINGS[language].format(playerName, championName)
     deaths, kills, assists = 0, 0, 0
     for champ in playerGlobalKDA:
@@ -456,7 +456,7 @@ def getWinrate():
         assists += champ.assists
     kda = ((assists / 2) + kills) / deaths if deaths > 1 else 1
     return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
-                        formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.getWinratio())
+                        formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.winratio)
 if __name__ == "__main__":
     if DEBUG:
         #_players = Player.query.filter_by(id="X")
