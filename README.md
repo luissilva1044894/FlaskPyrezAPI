@@ -56,3 +56,5 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 
 ### License
 This project is provided under the MIT License, which you can view in [`LICENSE file`](./LICENSE "FlaskPyrezAPI · License").
+
+> Raw data provided by Hi-Rez Studios API and is thus their property. © 2019 Hi-Rez Studios, Inc. All rights reserved.
