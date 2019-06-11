@@ -478,3 +478,6 @@ if __name__ == "__main__":
             #if delete.lower() == 'y':
             #    player.delete()
     app.run(debug=DEBUG)
+    #port = int(os.getenv('PORT', 5000))
+    #print('Starting app on port %d' % port)
+    #app.run(debug=DEBUG, port=port, host='0.0.0.0')
