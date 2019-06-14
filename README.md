@@ -9,7 +9,7 @@
 
 **FlaskPyrezAPI** is an [open-source](http://www.opensource.org "See http://www.opensource.org for the Open Source Definition") endpoint for [`Twitch`](https://twitch.tv "Twitch") commands, that provides datas about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game").
 
-[Demo](https://nonsocial.herokuapp.com/)
+[![Demo](https://img.shields.io/website/https/nonsocial.herokuapp.com.svg)](https://nonsocial.herokuapp.com/)
 
 ### Built with
 - [Python](https://www.python.org/ "Requires Python 2.7 or 3.x (3.5 or higher)")
