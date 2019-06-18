@@ -5,18 +5,19 @@
 [![License](https://img.shields.io/github/license/luissilva1044894/FlaskPyrezAPI.svg?style=plastic&logoWidth=10)](./LICENSE "FlaskPyrezAPI · LICENSE")
 [![Runtime Version](https://img.shields.io/pypi/pyversions/flask.svg?style=plastic&logo=python&logoWidth=10)](https://pypi.org/project/pyrez "Python Runtime Versions")
 [![Discord Server](https://img.shields.io/discord/549020573846470659.svg?style=plastic&logo=discord&logoWidth=10)](https://discord.gg/XkydRPS "Support Server · Discord")
+
+
+Built with: [![Python](https://img.shields.io/badge/Python-3.7.3-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html#python-3-7-3-final "Python 3.7.3")
+[![Pyrez](https://img.shields.io/badge/Pyrez-1.1.0.1-00bb88.svg?style=plastic)](https://pypi.org/project/pyrez/1.1.0.1/ "Pyrez · 1.1.0.1")
+[![Flask](https://img.shields.io/badge/Flask-1.0.3-orange.svg?style=plastic)](https://pypi.org/project/Flask/ "Flask · 1.0.3 · PyPI")
+[![Bootstrap 4](https://img.shields.io/badge/Bootstrap-4.3.1-orange.svg?style=plastic)](https://getbootstrap.com/docs/4.3/getting-started/introduction/ "Bootstrap · 4.3.1")
+[![Font Awesome](https://img.shields.io/badge/FontAwesome-5.9-orange.svg?style=plastic)](https://fontawesome.com/changelog/latest/ "Font Awesome · 5.9")
+
 </div>
 
 **FlaskPyrezAPI** is an [open-source](http://www.opensource.org "See http://www.opensource.org for the Open Source Definition") endpoint for [`Twitch`](https://twitch.tv "Twitch") commands, that provides datas about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game").
 
 [Demo ![Website](https://img.shields.io/website/https/nonsocial.herokuapp.com.svg)](https://nonsocial.herokuapp.com/)
-
-### Built with
-- [Python](https://www.python.org/ "Requires Python 2.7 or 3.x (3.5 or higher)")
-- [Pyrez](https://pypi.org/project/pyrez/ "Pyrez · v1.1.0.0 · PyPI") - Used for handling connections and requests to [`Hi-Rez Studios`](https://www.hirezstudios.com) API.
-- [Flask](https://pypi.org/project/Flask/ "Flask · v1.0.3 · PyPI")
-- [Bootstrap 4](https://getbootstrap.com/docs/4.3/getting-started/introduction/ "Bootstrap · v4.3.1")
-- [Font Awesome](https://fontawesome.com/changelog/latest/ "Font Awesome · v5.9")
 
 ### Requirements
 - [Access](https://pyrez.readthedocs.io/en/stable/gettingstarted.html#registration "Form access to Hi-Rez Studios API") to Hi-Rez Studios API.
