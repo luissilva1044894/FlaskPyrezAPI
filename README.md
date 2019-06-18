@@ -15,7 +15,7 @@ Built with: [![Python](https://img.shields.io/badge/Python-3.7.3-blue.svg?style=
 
 </div>
 
-**FlaskPyrezAPI** is an [open-source](http://www.opensource.org "See http://www.opensource.org for the Open Source Definition") endpoint for [`Twitch`](https://twitch.tv "Twitch") commands, that provides datas about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game").
+FlaskPyrezAPI is an endpoint for [`Twitch`](https://twitch.tv "Twitch") commands, that provides datas about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game").
 
 [Demo ![Website](https://img.shields.io/website/https/nonsocial.herokuapp.com.svg)](https://nonsocial.herokuapp.com/)
 
@@ -56,6 +56,6 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 * [`Lukash (Paladins Poland)`](https://www.facebook.com/PaladinsPoland/ "Paladins Poland") - Polish translation.
 
 ### License
-This project is provided under the MIT License, which you can view in [`LICENSE file`](./LICENSE "FlaskPyrezAPI · License").
+This is an open source [![Open Source](https://raw.githubusercontent.com/abhishekbanthia/Public-APIs/master/opensource.png)](https://www.opensource.org "See http://www.opensource.org for the Open Source Definition") project provided under the MIT License, which you can view in [`LICENSE file`](./LICENSE "FlaskPyrezAPI · License").
 
 > Raw data provided by Hi-Rez Studios API and is thus their property. © 2019 Hi-Rez Studios, Inc. All rights reserved.
