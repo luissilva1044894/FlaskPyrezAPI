@@ -2,9 +2,9 @@
 <a href="https://github.com/luissilva1044894/FlaskPyrezAPI" title="FlaskPyrezAPI - Github repository" alt="FlaskPyrezAPI · Github repository"><img src="./static/img/pyrez.png" height="96" width="96"></a>
 
 ## FlaskPyrezAPI
-[![License](https://img.shields.io/github/license/luissilva1044894/FlaskPyrezAPI.svg?logo=github&logoColor=white&&logoWidth=10style=plastic)](./LICENSE "FlaskPyrezAPI · LICENSE")
-[![Runtime Version](https://img.shields.io/pypi/pyversions/flask.svg?style=plastic&logo=python&logoWidth=10)](https://pypi.org/project/pyrez "Python Runtime Versions")
-[![Discord Server](https://img.shields.io/discord/549020573846470659.svg?logo=discord&logoWidth=10&style=plastic)](https://discord.gg/XkydRPS "Support Server · Discord")
+[![License](https://img.shields.io/github/license/luissilva1044894/FlaskPyrezAPI.svg?logo=github&logoColor=white&logoWidth=10style=plastic)](./LICENSE "FlaskPyrezAPI · LICENSE")
+[![Runtime Version](https://img.shields.io/pypi/pyversions/flask.svg?style=plastic&logo=python&logoColor=white&logoWidth=10)](https://pypi.org/project/pyrez "Python Runtime Versions")
+[![Discord Server](https://img.shields.io/discord/549020573846470659.svg?logo=discord&logoColor=white&logoWidth=10&style=plastic)](https://discord.gg/XkydRPS "Support Server · Discord")
 
 
 Built with: [![Python](https://img.shields.io/badge/Python-3.7.3-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html#python-3-7-3-final "Python 3.7.3")
