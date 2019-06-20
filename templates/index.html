@@ -43,7 +43,20 @@
     <header>
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary" style="line-height: 0;">
         <a class="navbar-brand" href="#"><strong>{% block navbard_title %}{% endblock %}</strong></a>
-        <div class="collapse navbar-collapse" id="basicExampleNav"></div>
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+          <!-- Rectangular switch -->
+          <label aria-hidden="true" title="Toggle dark/light mode" class="switch">
+            <input type="checkbox" id="dark_light" name="dark_light"  onchange="toggleDarkLight()">
+            <span class="slider"></span>
+          </label>
+
+          <!-- Rounded switch
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          -->
+        </div>
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
             <a href="https://github.com/luissilva1044894/FlaskPyrezAPI" class="nav-link waves-effect" title="{% block header_titles_github %}{% endblock %}" target="_blank"><i class="fab fa-github" style="font-size:24px" aria-hidden="true"></i></a>
@@ -53,20 +66,6 @@
           </li>
           <li class="nav-item">
             <a href="https://pastebin.com/KreHef36" class="nav-link waves-effect" title="{% block header_titles_pastebin %}{% endblock %}" target="_blank"><i class="fas fa-file-code" style="font-size:24px" aria-hidden="true"></i></a>
-          </li>
-          <li class="nav-item">
-            <!-- Rectangular switch -->
-            <label aria-hidden="true" title="Toggle dark/light mode" class="switch">
-              <input type="checkbox" id="dark_light" name="dark_light"  onchange="toggleDarkLight()">
-              <span class="slider"></span>
-            </label>
-
-            <!-- Rounded switch
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-            -->
           </li>
         </ul>
       </nav>
