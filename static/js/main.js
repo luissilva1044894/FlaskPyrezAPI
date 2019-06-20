@@ -83,6 +83,12 @@ function onPageLoaded() {
         var commandCooldown = getElementById("command_cooldown");
         commandCooldown.value = commandCooldown.value % commandCooldown.max;
     });
+    /*
+    var input = getElementById("command_cooldown");
+    input.addEventListener("keyup", function(event) {
+        keyCodeTrigger(event.keyCode, "#generate_command");//event.preventDefault();
+    });*/
+
     $("#player_name").on("keypress", function(e) {
         //checkButtonPos();
         keyCodeTrigger(e.keyCode, "#generate_command");
@@ -95,8 +101,8 @@ function onPageLoaded() {
         var commandType = getElementById("command_type"),
             userCanUse = getElementById("user_can_use");
 
-        userCanUse.checked = commandType.value.toLowerCase() === commandType["3"].value.toLowerCase() || commandType.value.toLowerCase() === commandType["4"].value.toLowerCase();
-        print(userCanUse.checked)
+        //userCanUse.checked = commandType.value.toLowerCase() === commandType["3"].value.toLowerCase() || commandType.value.toLowerCase() === commandType["4"].value.toLowerCase();
+        console.log(userCanUse.checked)
     });
 }
 function clearField(divName) {
