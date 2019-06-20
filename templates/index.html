@@ -11,7 +11,12 @@
     <meta name="defaultLanguage" content="en">
     <meta name="availableLanguages" content="en, pt, pt-br, es, pl">
     <meta name="google-site-verification" content="NgYrl_P8ImE9DjF3xkyH9Wiz1X2yh0EXJw9ubqCcb6U"/>
-    
+
+    <meta name="theme-color" content="black">
+    <meta name="msapplication-navbutton-color" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/pyrez_server.png') }}" sizes="1024x1024">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/pyrez_server.png') }}" sizes="180x180">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/pyrez_server.png') }}" sizes="32x32">
@@ -33,7 +38,7 @@
     -->
 
   </head>
-  <body onload="onPageLoaded()">
+  <body id="body" class="light-mode" onload="onPageLoaded()">
     <header>
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary" style="line-height: 0;">
         <a class="navbar-brand" href="#"><strong>{% block navbard_title %}{% endblock %}</strong></a>
@@ -47,6 +52,20 @@
           </li>
           <li class="nav-item">
             <a href="https://pastebin.com/KreHef36" class="nav-link waves-effect" title="{% block header_titles_pastebin %}{% endblock %}" target="_blank"><i class="fas fa-file-code" style="font-size:24px" aria-hidden="true"></i></a>
+          </li>
+          <li class="nav-item">
+            <!-- Rectangular switch -->
+            <label aria-hidden="true" title="Toggle dark/light mode" class="switch">
+              <input type="checkbox" id="dark_light" name="dark_light"  onchange="toggleDarkLight()">
+              <span class="slider"></span>
+            </label>
+
+            <!-- Rounded switch
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            -->
           </li>
         </ul>
       </nav>
@@ -207,7 +226,7 @@
           <div class="row">
             <div class="col-sm">
               <span class="help-block">{% block commands_generator_cmdlang %}{% endblock %}</span>
-                  <select id="language_form" class="form-control">
+                  <select id="language_form" class="custom-select form-control">
                     {% block commands_generator_langs_order %}{% endblock %}
                   </select>
                 </div>
@@ -233,11 +252,16 @@
                       <input type="number" name="command_cooldown" class="form-control" id="command_cooldown" value="25" min="25" max="100"><br/>
                     </div>
                     <div class="col-sm-6">
-                      <input type="checkbox" name="user_can_use" id="user_can_use" checked>{% block commands_generator_usercanuse %}{% endblock %}
+                      <div class="col-auto my-1">
+                        <div class="custom-control custom-checkbox mr-sm-2">
+                          <input type="checkbox" class="custom-control-input" name="user_can_use" id="user_can_use" checked>
+                          <label class="custom-control-label" for="user_can_use">{% block commands_generator_usercanuse %}{% endblock %}</label>
+                        </div>
+                      </div>
                     </div>
                     <div class="col-sm-5">
                       <span class="help-block">{% block commands_generator_chatbotuseraccess %}{% endblock %}</span>
-                      <select id="user_access" class="form-control full-width">
+                      <select id="user_access" class="custom-select form-control full-width">
                         <option value="1" selected="selected">{% block commands_generator_userlvl_everybody %}{% endblock %}</option>
                         <option value="2">{% block commands_generator_userlvl_regular %}{% endblock %}</option>
                         <option value="3">{% block commands_generator_userlvl_subscriber %}{% endblock %}</option>
@@ -285,23 +309,28 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/genCmd.js') }}"></script>
   <script>
+    function toggleDarkLight() {
+      // https://codepen.io/HarlemSquirrel/pen/NdMebZ
+      var body = getElementById("body");
+      body.className = body.className == "dark-mode" ? "light-mode" : "dark-mode";
+    }
     $(document).ready(function() {
-        if(ClipboardJS.isSupported()) {
-          var clipboard = new ClipboardJS(".copy-to-clip-button");
-          clipboard.on("success", function(e) {
-            addAlert(getTranslatedString("{{ lang }}", "copyToClipboardSuccess"), "alert-success", true, true, "#result-warning", "{{ lang }}");
-            console.info('Action:', e.action);
-            console.info('Text:', e.text);
-            console.info('Trigger:', e.trigger);
-            e.clearSelection();
-          });
-          clipboard.on("error", function(e) {
-            console.error('Action:', e.action);
-            console.error('Trigger:', e.trigger);
-          });
-        }
-      });
-      function getEndpoint() { return "{{ url_for('index', _external=True).replace('index.html', '').replace('http://', 'https://') + 'api/' }}" }
-    </script>
+      if(ClipboardJS.isSupported()) {
+        var clipboard = new ClipboardJS(".copy-to-clip-button");
+        clipboard.on("success", function(e) {
+          addAlert(getTranslatedString("{{ lang }}", "copyToClipboardSuccess"), "alert-success", true, true, "#result-warning", "{{ lang }}");
+          console.info('Action:', e.action);
+          console.info('Text:', e.text);
+          console.info('Trigger:', e.trigger);
+          e.clearSelection();
+        });
+        clipboard.on("error", function(e) {
+          console.error('Action:', e.action);
+          console.error('Trigger:', e.trigger);
+        });
+      }
+    });
+    function getEndpoint() { return "{{ url_for('index', _external=True).replace('index.html', '').replace('http://', 'https://') + 'api/' }}" }
+  </script>
   </body>
 </html>
