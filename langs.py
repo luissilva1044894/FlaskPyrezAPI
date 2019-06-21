@@ -14,7 +14,7 @@ INTERNAL_ERROR_500_STRINGS = {
     "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu. Se o erro persistir, report no server do Discord: https://discord.gg/XkydRPS",
 }
 CURRENT_MATCH_STRINGS = {
-    "en" : "{0} ({4} - {1}):{2} | VS |{3}",
+    "en" : "Current match - {0} ({1}):{2} | VS |{3}",#"{0} ({4} - {1}):{2} | VS |{3}",
     "es" : "Partida - {0} ({1}):{2} | VS |{3}",
     "pl" : "Tryb gry - {0} ({1}):{2} | VS |{3}",
     "pt" : "Partida atual - {0} ({1}):{2} | VS |{3}",
