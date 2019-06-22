@@ -165,13 +165,11 @@ def limit_remote_addr():#ip = request.remote_addr
     #print("*" * 40)
     if request.headers.get('User-Agent', '') in FORBIDDEN_USER_AGENTS: #request.headers["User-Agent"]
         abort(403)
+    print("*" * 40)
+    print(' '.join(['nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS, request.headers.get('User-Agent', '').lower(), request.headers.get('Nightbot-Channel', '').lower()]))
+    print("*" * 40)
     if 'nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel').lower() in FORBIDDEN_CHANNELS:
-        print("*" * 40)
-        print('nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS)
-        print('nightbot' in request.headers.get('User-Agent', '').lower())
-        print(request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS)
-        print("*" * 40)
-        # print('All cool')
+        print('All cool')
         #return ASSHOLE_STRINGS['en']
     #if str(request.args.get('platform', '')).upper() == 'PLATFORM':
     #    return OUTDATED_CMD_STRINGS[getLanguage(request)].format(getUrl('index', params=["index.html", "http://", '/']))
