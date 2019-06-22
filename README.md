@@ -15,7 +15,7 @@ Built with: [![Python](https://img.shields.io/badge/Python-3.7.3-blue.svg?style=
 
 </div>
 
-FlaskPyrezAPI is an endpoint for custom commands ([`Twitch`](https://twitch.tv "Twitch")), that provides data about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game").
+FlaskPyrezAPI is an endpoint for custom commands ([`Twitch`](https://twitch.tv "Twitch")), that provides data about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game"). It uses [Pyrez](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository"), my Python wrapper for Hi-Rez Studios API.
 
 [Demo ![Website](https://img.shields.io/website/https/nonsocial.herokuapp.com.svg?logo=heroku&logoColor=white&)](https://nonsocial.herokuapp.com/)
 
