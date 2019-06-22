@@ -218,7 +218,7 @@ def getPlayerName(request_args):
         playerName = qry[1:qry.rfind('"')] if qry.rfind('"') > 1 else qry.split(' ')[0]
     else:
         playerName = request_args.get("player", default=None)#str(request_args.get("query", default=str(request_args.get("player", default=None)).lower()).split(' ')[0]).lower()
-    return None if not playerName or (playerName.lower() in ["none", "0", "null", "$(1)", "query=$(querystring)", "[invalid%20variable]", "your_ign"]) else escape(playerName)
+    return None if not playerName or len(playerName) < 4 or (playerName.lower() in ["none", "0", "null", "$(1)", "query=$(querystring)", "[invalid%20variable]", "your_ign"]) else escape(playerName)
 def getPlayerId(playerName, platform = PlatformsSupported.PC):
     if not playerName or (playerName in ["none", "0", "null", "$(1)", "query=$(querystring)", "[invalid%20variable]", "your_ign"]):
         return 0
