@@ -163,7 +163,7 @@ def limit_remote_addr():#ip = request.remote_addr
     #if request.headers.get('User-Agent').rfind('Nightbot') != -1 and request.headers.get('Nightbot-Channel').rfind('helvian') != -1:
     print(request.headers.get('User-Agent', '').rfind('Nightbot') != -1 and request.headers.get('Nightbot-Channel', '').rfind('helvian') != -1)
     print(request.headers.get('User-Agent', '').rfind('Nightbot'))
-    print(request.headers.get('Nightbot-Channel', '').rfind('helvian') != -1)
+    print(request.headers.get('Nightbot-Channel', '').rfind('helvian'))
     #    print('All cool')
     #    return 'Your viewers are stupid, so its blocked! :)'
     if str(request.args.get('platform', '')).upper() == 'PLATFORM':
