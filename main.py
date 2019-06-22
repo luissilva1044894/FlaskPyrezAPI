@@ -9,11 +9,16 @@ from flask import abort, Flask, jsonify, request, render_template, url_for, send
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
 import pyrez
 from pyrez.api import *
 from pyrez.exceptions import PlayerNotFound, MatchException
 from pyrez.enumerations import Champions, Tier
 from langs import *
+
+MIN_LIMIT_PER_SECOND = '4'
 try:
     DEBUG = config("DEBUG", default=False, cast=bool)
     FORBIDDEN_CHANNELS = config("FORBIDDEN_CHANNELS").split(',')
@@ -21,9 +26,11 @@ try:
     PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = config("PYREZ_DEV_ID")
     DATABASE_URL = config("DATABASE_URL")
+    LIMIT_PER_SECOND = config("LIMIT_PER_SECOND")
 except:
     import os
     DEBUG = json.loads(os.environ["DEBUG"].lower()) if os.environ["DEBUG"] else False#https://stackoverflow.com/questions/715417/converting-from-a-string-to-boolean-in-python
+    LIMIT_PER_SECOND = os.environ("LIMIT_PER_SECOND") or MIN_LIMIT_PER_SECOND
     FORBIDDEN_CHANNELS = os.environ("FORBIDDEN_CHANNELS").split(',') or []
     FORBIDDEN_USER_AGENTS = os.environ("FORBIDDEN_USER_AGENTS").split(',') or []
     PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
@@ -34,6 +41,8 @@ app = Flask(__name__, static_folder="static", template_folder="templates", stati
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
+
+limiter = Limiter(app, key_func=get_remote_address, default_limits=["{} per minute".format(MIN_LIMIT_PER_SECOND), "1 per second"],)
 
 class Session(db.Model):
     __tablename__ = "session"
@@ -137,10 +146,12 @@ paladinsAPI.onSessionCreated += sessionCreated
 @app.errorhandler(404)
 def not_found_error(error=None):
     return INTERNAL_ERROR_404_STRINGS[getLanguage(request)], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
+@app.errorhandler(429)
+def too_many_requests(error=None):
+    return ASSHOLE_STRINGS['en'].format(LIMIT_PER_SECOND or MIN_LIMIT_PER_SECOND), 200#getLanguage(request)
 @app.errorhandler(500)
 def internal_error(error=None):
     return INTERNAL_ERROR_500_STRINGS[getLanguage(request)], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
-
 #@app.route("/robots.txt", methods=["GET"])
 #@app.route("/sitemap.xml", methods=["GET"])
 #def staticFromRoot():
@@ -156,6 +167,7 @@ def robotsTxt():
       response.headers["Content-type"] = "text/plain"
       return response
 """
+@limiter.limit('{}/minute'.format(LIMIT_PER_SECOND or MIN_LIMIT_PER_SECOND))
 @app.before_request#https://stackoverflow.com/questions/22251038/how-to-limit-flask-dev-server-to-only-one-visiting-ip-address
 def limit_remote_addr():#ip = request.remote_addr
     #print("*" * 40)
@@ -163,11 +175,9 @@ def limit_remote_addr():#ip = request.remote_addr
     #print(request.method)
     #print(request.headers.keys)
     #print("*" * 40)
+    print(' '.join(["*" * 40, str('nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS), request.headers.get('User-Agent', '').lower(), request.headers.get('Nightbot-Channel', '').lower(), "*" * 40]))
     if request.headers.get('User-Agent', '') in FORBIDDEN_USER_AGENTS: #request.headers["User-Agent"]
         abort(403)
-    print("*" * 40)
-    print(' '.join([str('nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS), request.headers.get('User-Agent', '').lower(), request.headers.get('Nightbot-Channel', '').lower()]))
-    print("*" * 40)
     if 'nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel').lower() in FORBIDDEN_CHANNELS:
         print('All cool')
         #return ASSHOLE_STRINGS['en']
