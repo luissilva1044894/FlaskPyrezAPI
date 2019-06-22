@@ -158,8 +158,13 @@ def limit_remote_addr():#ip = request.remote_addr
     #print(request.method)
     print(request.headers.keys)
     #print("*" * 40)
-    if request.headers.get("User-Agent").rfind("Nimbostratus-Bot") != -1: #request.headers["User-Agent"]
+    if request.headers.get('User-Agent').rfind('Nimbostratus-Bot') != -1: #request.headers["User-Agent"]
         abort(403)
+    if request.headers.get('User-Agent').rfind('Nightbot') != -1 and request.headers.get('Nightbot-Channel').rfind('helvian'):
+        print('All cool')
+        return 'Your viewers are stupid, so its blocked! :)'
+    if str(request.args.get('platform', '')).upper() == 'PLATFORM':
+        return OUTDATED_CMD_STRINGS[getLanguage(request)].format(getUrl('index', params=["index.html", "http://", '/']))
 
 @app.route('/', methods=["GET"])
 @app.route("/api", methods=["GET"])
