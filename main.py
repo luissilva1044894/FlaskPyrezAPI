@@ -16,11 +16,16 @@ from pyrez.enumerations import Champions, Tier
 from langs import *
 try:
     DEBUG = config("DEBUG", default=False, cast=bool)
+    FORBIDDEN_CHANNELS = config("FORBIDDEN_CHANNELS")
+    FORBIDDEN_USER_AGENTS = config("FORBIDDEN_USER_AGENTS")
     PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = config("PYREZ_DEV_ID")
     DATABASE_URL = config("DATABASE_URL")
 except:
+    import os
     DEBUG = json.loads(os.environ["DEBUG"].lower()) if os.environ["DEBUG"] else False#https://stackoverflow.com/questions/715417/converting-from-a-string-to-boolean-in-python
+    FORBIDDEN_CHANNELS = os.environ("FORBIDDEN_CHANNELS").split(',') or []
+    FORBIDDEN_USER_AGENTS = os.environ("FORBIDDEN_USER_AGENTS").split(',') or []
     PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
     DATABASE_URL = os.environ("DATABASE_URL")#"sqlite:///{}.db".format(__name__)
@@ -158,14 +163,16 @@ def limit_remote_addr():#ip = request.remote_addr
     #print(request.method)
     #print(request.headers.keys)
     #print("*" * 40)
-    if request.headers.get('User-Agent').rfind('Nimbostratus-Bot') != -1: #request.headers["User-Agent"]
+    if request.headers.get('User-Agent', '') in FORBIDDEN_USER_AGENTS: #request.headers["User-Agent"]
         abort(403)
-    #if request.headers.get('User-Agent').rfind('Nightbot') != -1 and request.headers.get('Nightbot-Channel').rfind('helvian') != -1:
-    print(request.headers.get('User-Agent', '').rfind('Nightbot') != -1 and request.headers.get('Nightbot-Channel', '').rfind('helvian') != -1)
-    print(request.headers.get('User-Agent', '').rfind('Nightbot'))
-    print(request.headers.get('Nightbot-Channel', '').rfind('helvian'))
-    #    print('All cool')
-    #    return 'Your viewers are stupid, so its blocked! :)'
+    if 'nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel').lower() in FORBIDDEN_CHANNELS:
+        print("*" * 40)
+        print('nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS)
+        print('nightbot' in request.headers.get('User-Agent', '').lower())
+        print(request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS)
+        print("*" * 40)
+        # print('All cool')
+        #return ASSHOLE_STRINGS['en']
     if str(request.args.get('platform', '')).upper() == 'PLATFORM':
         return OUTDATED_CMD_STRINGS[getLanguage(request)].format(getUrl('index', params=["index.html", "http://", '/']))
 
