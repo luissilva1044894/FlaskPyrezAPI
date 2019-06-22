@@ -14,7 +14,7 @@ INTERNAL_ERROR_500_STRINGS = {
     "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu. Se o erro persistir, report no server do Discord: https://discord.gg/XkydRPS",
 }
 ASSHOLE_STRINGS = {
-    "en" : "IMPORTANT: Stop being an asshole. It was supposed to be free and unlimited, Y'all are paying nothing and it's online 24/7 almost 1 year (8/2018). But because some shitty viewers are spamming stupid invalid inputs such as !rank Kappa, !rank Nightbot, !rank SadMartini all endpoints are limited to 4 calls per minute.",
+    "en" : "IMPORTANT: Stop being an asshole. It was supposed to be free and unlimited, Y'all are paying nothing and it's online 24/7 almost 1 year (8/2018). But because some shitty viewers are spamming stupid invalid inputs such as !rank Kappa, !rank Nightbot, !rank SadMartini all endpoints are limited to {0} calls per minute.",
 }
 CURRENT_MATCH_STRINGS = {
     "en" : "Current match - {0} ({1}):{2} | VS |{3}",#"{0} ({4} - {1}):{2} | VS |{3}",
