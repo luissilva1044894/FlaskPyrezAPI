@@ -16,8 +16,8 @@ from pyrez.enumerations import Champions, Tier
 from langs import *
 try:
     DEBUG = config("DEBUG", default=False, cast=bool)
-    FORBIDDEN_CHANNELS = config("FORBIDDEN_CHANNELS")
-    FORBIDDEN_USER_AGENTS = config("FORBIDDEN_USER_AGENTS")
+    FORBIDDEN_CHANNELS = config("FORBIDDEN_CHANNELS").split(',')
+    FORBIDDEN_USER_AGENTS = config("FORBIDDEN_USER_AGENTS").split(',')
     PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = config("PYREZ_DEV_ID")
     DATABASE_URL = config("DATABASE_URL")
