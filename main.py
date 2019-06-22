@@ -173,8 +173,8 @@ def limit_remote_addr():#ip = request.remote_addr
         print("*" * 40)
         # print('All cool')
         #return ASSHOLE_STRINGS['en']
-    if str(request.args.get('platform', '')).upper() == 'PLATFORM':
-        return OUTDATED_CMD_STRINGS[getLanguage(request)].format(getUrl('index', params=["index.html", "http://", '/']))
+    #if str(request.args.get('platform', '')).upper() == 'PLATFORM':
+    #    return OUTDATED_CMD_STRINGS[getLanguage(request)].format(getUrl('index', params=["index.html", "http://", '/']))
 
 @app.route('/', methods=["GET"])
 @app.route("/api", methods=["GET"])
