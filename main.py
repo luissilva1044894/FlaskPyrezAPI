@@ -19,6 +19,7 @@ from pyrez.enumerations import Champions, Tier
 from langs import *
 
 MIN_LIMIT_PER_SECOND = '4'
+LIMIT_PER_SECOND = MIN_LIMIT_PER_SECOND
 try:
     DEBUG = config("DEBUG", default=False, cast=bool)
     FORBIDDEN_CHANNELS = config("FORBIDDEN_CHANNELS").split(',')
@@ -175,11 +176,12 @@ def limit_remote_addr():#ip = request.remote_addr
     #print(request.method)
     #print(request.headers.keys)
     #print("*" * 40)
-    print(' '.join(["*" * 40, str('nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS), request.headers.get('User-Agent', '').lower(), request.headers.get('Nightbot-Channel', '').lower(), "*" * 40]))
-    if request.headers.get('User-Agent', '') in FORBIDDEN_USER_AGENTS: #request.headers["User-Agent"]
+    #print(' '.join(["*" * 40, str('nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS), request.headers.get('User-Agent', '').lower(), request.headers.get('Nightbot-Channel', '').lower(), "*" * 40]))
+    if request.headers.get("User-Agent").rfind("Nimbostratus-Bot") != -1:#request.headers["User-Agent"]
+        #request.headers.get('User-Agent', '') in FORBIDDEN_USER_AGENTS
         abort(403)
-    if 'nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel').lower() in FORBIDDEN_CHANNELS:
-        print('All cool')
+    #if 'nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel').lower() in FORBIDDEN_CHANNELS:
+    #    print('All cool')
         #return ASSHOLE_STRINGS['en']
     #if str(request.args.get('platform', '')).upper() == 'PLATFORM':
     #    return OUTDATED_CMD_STRINGS[getLanguage(request)].format(getUrl('index', params=["index.html", "http://", '/']))
