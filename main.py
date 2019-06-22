@@ -166,7 +166,7 @@ def limit_remote_addr():#ip = request.remote_addr
     if request.headers.get('User-Agent', '') in FORBIDDEN_USER_AGENTS: #request.headers["User-Agent"]
         abort(403)
     print("*" * 40)
-    print(' '.join(['nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS, request.headers.get('User-Agent', '').lower(), request.headers.get('Nightbot-Channel', '').lower()]))
+    print(' '.join([str('nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS), request.headers.get('User-Agent', '').lower(), request.headers.get('Nightbot-Channel', '').lower()]))
     print("*" * 40)
     if 'nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel').lower() in FORBIDDEN_CHANNELS:
         print('All cool')
