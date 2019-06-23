@@ -149,7 +149,7 @@ def not_found_error(error=None):
     return INTERNAL_ERROR_404_STRINGS[getLanguage(request)], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
 @app.errorhandler(429)
 def too_many_requests(error=None):
-    return ASSHOLE_STRINGS['en'].format(LIMIT_PER_SECOND or MIN_LIMIT_PER_SECOND), 200#getLanguage(request)
+    return ASSHOLE_STRINGS[getLanguage(request)].format(LIMIT_PER_SECOND or MIN_LIMIT_PER_SECOND), 200
 @app.errorhandler(500)
 def internal_error(error=None):
     return INTERNAL_ERROR_500_STRINGS[getLanguage(request)], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
@@ -174,7 +174,8 @@ def limit_remote_addr():#ip = request.remote_addr
     #print("*" * 40)
     #print(request.endpoint)
     #print(request.method)
-    #print(request.headers.keys)
+    print(request.headers.keys)
+    print(request.headers)
     #print("*" * 40)
     #print(' '.join(["*" * 40, str('nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS), request.headers.get('User-Agent', '').lower(), request.headers.get('Nightbot-Channel', '').lower(), "*" * 40]))
     print('IP: {}'.format(request.remote_addr))
