@@ -1,4 +1,0 @@
--r common.txt
-gunicorn<20
-python-decouple<4
-python-dotenv<1
