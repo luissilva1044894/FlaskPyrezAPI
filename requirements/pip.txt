@@ -7,3 +7,9 @@ Flask-Script<2.1
 psycopg2-binary<2.9
 
 pyrez[dev]>=1.1,<2
+
+alembic==1.0.11
+certifi==2019.6.16
+Pygments==2.4.2
+tqdm==4.32.2
+virtualenv==16.6.1
