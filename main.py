@@ -57,20 +57,20 @@ class Session(db.Model):
         return "<Session {0.sessionId}>".format(self)
     def save(self):
         try:
-            print("SessionId store - ", self)
+            #print("SessionId store - ", self)
             for sess in Session.query.all():
                 sess.delete()
             db.session.add(self)
             db.session.commit()
         except (IntegrityError, InternalError, OperationalError, ProgrammingError):
-            print("SessionId not stored - Database rolledback", self)
+            #print("SessionId not stored - Database rolledback", self)
             db.session.rollback()
     def update(self, name):
-        print("SessionId updated - ", self)
+        #print("SessionId updated - ", self)
         self.name = name
         db.session.commit()
     def delete(self):
-        print("SessionId deleted - ", self)
+        #print("SessionId deleted - ", self)
         db.session.delete(self)
         db.session.commit()
     def json(self):
@@ -91,7 +91,7 @@ class Player(db.Model):
         return "<Player {0.name} (Id: {0.id} - Platform: {0.platform})>".format(self)
     def save(self):
         try:
-            print("Player stored - ", self)
+            #print("Player stored - ", self)
             db.session.add(self)
             db.session.commit()
         except (IntegrityError, InternalError, OperationalError, ProgrammingError):
@@ -101,11 +101,11 @@ class Player(db.Model):
             _player.delete()
             self.save()
     def update(self, name):
-        print("Player updated - ", self)
+        #print("Player updated - ", self)
         self.name = name
         db.session.commit()
     def delete(self):
-        print("Player deleted - ", self)
+        #print("Player deleted - ", self)
         db.session.delete(self)
         db.session.commit()
     def json(self):
@@ -130,18 +130,18 @@ class Outdated(Exception):
     pass
 def sessionCreated(session):#print("SESSION: {0}".format(session))
     _session = Session(sessionId=session.sessionId)
-    print("New sessionId: {}".format(_session))
-    lastSession = Session.query.first()
-    print("Lastest sessionId: {}".format(lastSession))
-    try:
-        print("Pyrez sessionId: {}".format(paladinsAPI.sessionId))
-    except Exception:
-        pass
+    #print("New sessionId: {}".format(_session))
+    #lastSession = Session.query.first()
+    #print("Lastest sessionId: {}".format(lastSession))
+    #try:
+    #    print("Pyrez sessionId: {}".format(paladinsAPI.sessionId))
+    #except Exception:
+    #    pass
 try:
     lastSession = Session.query.first()
 except (OperationalError, ProgrammingError):
     lastSession = None
-print("Last sessionId: {}".format(lastSession))
+#print("Last sessionId: {}".format(lastSession))
 paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
 paladinsAPI.onSessionCreated += sessionCreated
 @app.errorhandler(404)
@@ -255,7 +255,7 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
     if platform == PlatformsSupported.PC:
         playerName = playerName.strip()#.strip(',.-')
     _player = Player.query.filter_by(name=playerName, platform=str(platform)).first()
-    print("Player readed - Database", _player)
+    #print("Player readed - Database", _player)
     if not _player:
         temp = paladinsAPI.getPlayerId(playerName, platform) if str(platform).isnumeric() else paladinsAPI.getPlayerId(playerName)
         if not temp:
@@ -265,7 +265,7 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
 def getLastSeen(lastSeen, language = LanguagesSupported.English):
     now = datetime.utcnow()
     delta = now - lastSeen
-    print("Now: {} | Last Seen: {} | Delta: {} | ???: {}".format(now, lastSeen, delta, datetime.now() - lastSeen))
+    #print("Now: {} | Last Seen: {} | Delta: {} | ???: {}".format(now, lastSeen, delta, datetime.now() - lastSeen))
     hours, remainder = divmod(int(delta.total_seconds()), 3600)
     minutes, seconds = divmod(remainder, 60)
     days, hours = divmod(hours, 24)
