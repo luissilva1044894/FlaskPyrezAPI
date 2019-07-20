@@ -44,7 +44,7 @@ PLAYER_NULL_STRINGS = {
     "pt" : "ERROR: Player not specified!",
 }
 PLAYER_NOT_FOUND_STRINGS = {
-    "en" : "ERROR: “{0}” don't exist or it's hidden! Make sure that your account is marked as “Public Profile”",
+    "en" : "ERROR: “{0}” doesn't exist or it's hidden! Make sure that your account is marked as “Public Profile”",
     "es" : "ERROR: ¡“{0}” no existe o tienes perfil oculto! Make sure that your account is marked as “Public Profile”",
     "pl" : "BŁĄD: Nie znaleziono gracza “{0}”! Make sure that your account is marked as “Public Profile”",
     "pt" : "ERRO: “{0}” não existe ou tem perfil privado!",
@@ -55,7 +55,7 @@ PLAYER_NOT_MATCH_STRINGS = {
         1: "ERROR: “{0}” is still in Lobby.",
         2: "ERROR: “{0}” is still selecting a champion. You need to wait until the match has started.",
         4: "ERROR: “{0}” is Online, but not in a match.",
-        5: "ERROR: “{0}” don't exist or it's hidden.",
+        5: "ERROR: “{0}” doesn't exist or it's hidden.",
     },
     "es" : {
         0: "ERROR: “{0}” está Desconectado.",
@@ -69,7 +69,7 @@ PLAYER_NOT_MATCH_STRINGS = {
         1: "BŁĄD: “{0}” jest w lobby.",
         2: "BŁĄD: “{0}” wybiera czempiona. Poczekaj aż rozpocznie się mecz.",
         4: "BŁĄD: “{0}” jest Online, ale nie rozgrywa meczu.",
-        5: "ERROR: “{0}” don't exist or it's hidden.",
+        5: "ERROR: “{0}” doesn't exist or it's hidden.",
     },
     "pt" : {
        0: "ERROR: “{0}” está Offline.",
