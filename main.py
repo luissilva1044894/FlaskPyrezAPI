@@ -225,6 +225,8 @@ def getChampName(request_args):
             champName = None
     #return "bombking" if "bk" or "bomb" in champName else "maldamba" if "mal" in champName else champName.lower().replace(" ", "").replace("'", "") if champName else None
     return champName.lower().replace(" ", "").replace("'", "") if champName else None
+def printException(exc):
+    print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
 def getPlatform(request_args):
     #_checkOutdated = str(request_args.get("platform", default=None)).lower()
     #if str(_checkOutdated) == "platform" or str(_checkOutdated) == "null" or str(_checkOutdated) == "none":
@@ -303,7 +305,7 @@ def getDecks():
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except Exception as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return INTERNAL_ERROR_500_STRINGS[language]
 @app.route("/api/version", methods=["GET"])
 def getGameVersion():
@@ -316,7 +318,7 @@ def getGameVersion():
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except Exception as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return UNABLE_TO_CONNECT_STRINGS[language]
     return GAME_VERSION_STRINGS[language].format("Paladins", "Xbox One" if platform == PlatformsSupported.Xbox else "PS4" if platform == PlatformsSupported.PS4 else "Nintendo Switch" if platform == PlatformsSupported.Switch else "PTS" if platform == PlatformsSupported.PTS else "PC",
                         PALADINS_UP_STRINGS[language].format(PALADINS_LIMITED_ACCESS_STRINGS[language] if hiRezServerStatus.limitedAccess else "") if hiRezServerStatus.status else PALADINS_DOWN_STRINGS[language],
@@ -334,10 +336,10 @@ def getStalk():
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except PlayerNotFound as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
     except Exception as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return INTERNAL_ERROR_500_STRINGS[language]
     return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
                         playerStalkRequest.statusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.status != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStalkRequest.queueId], playerStalkRequest.matchId),
@@ -354,10 +356,10 @@ def getLastMatch():
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except MatchException as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
     except Exception as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return INTERNAL_ERROR_500_STRINGS[language]
     kda = ((lastMatchRequest.assists / 2) + lastMatchRequest.kills) / lastMatchRequest.deaths if lastMatchRequest.deaths > 1 else 1
     kda = int(kda) if kda % 2 == 0 else round(kda, 2)
@@ -378,7 +380,7 @@ def getCurrentMatch():
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except Exception as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return INTERNAL_ERROR_500_STRINGS[language]
     if playerStatusRequest.status != 3:
         return PLAYER_NOT_MATCH_STRINGS[language][playerStatusRequest.status].format(playerName)
@@ -388,7 +390,7 @@ def getCurrentMatch():
     try:
         players = paladinsAPI.getMatch(playerStatusRequest.matchId, True)
     except LiveMatchException as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return QUEUE_ID_NOT_SUPPORTED_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId], playerName)
     if players:
         for player in players:
@@ -421,10 +423,10 @@ def getRank():
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except PlayerNotFound as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
     except Exception as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return INTERNAL_ERROR_500_STRINGS[language]
     r1, r2 = getPlayerRequest.rankedController, getPlayerRequest.rankedKeyboard
     if not r1.hasPlayed and r2.hasPlayed:
@@ -456,17 +458,16 @@ def getWinrate():
         if not playerId or playerId == -1:
             return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
-        if getPlayerRequest.accountLevel > 5:
-            playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
-        else:
+        if getPlayerRequest.accountLevel <= 5:
             return PLAYER_LOW_LEVEL_STRINGS[language]
+        playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
     except Outdated as exc:
         return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except PlayerNotFound as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
     except Exception as exc:
-        print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
+        printException(exc)
         return INTERNAL_ERROR_500_STRINGS[language]
     if championName:
         if not checkChampName(championName):
