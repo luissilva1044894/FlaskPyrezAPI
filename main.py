@@ -264,6 +264,12 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
             return -1
         _player = Player(name=playerName, id=temp[0].playerId, platform=str(platform))
     return _player.id if _player else -1
+def getInName(player):
+    #return player.hzPlayerName or player.playerName
+    try:
+        return player.hzPlayerName
+    except Exception:
+        return player.playerName
 def getLastSeen(lastSeen, language = LanguagesSupported.English):
     now = datetime.utcnow()
     delta = now - lastSeen
@@ -341,7 +347,7 @@ def getStalk():
     except Exception as exc:
         printException(exc)
         return INTERNAL_ERROR_500_STRINGS[language]
-    return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel),
+    return PLAYER_STALK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getInName(getPlayerRequest), getPlayerRequest.accountLevel),
                         playerStalkRequest.statusString.replace("God", "Champion").replace("_", " ") if playerStalkRequest.status != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStalkRequest.queueId], playerStalkRequest.matchId),
                         getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getPlayerRequest.last_login, formatDecimal(getPlayerRequest.hoursPlayed), getPlayerRequest.platform, PLAYER_REGION_STRINGS[language][str(getPlayerRequest.playerRegion).replace(' ', "_").upper()])
 @app.route("/api/lastmatch", methods=["GET"])
@@ -483,7 +489,7 @@ def getWinrate():
         deaths += champ.deaths
         assists += champ.assists
     kda = ((assists / 2) + kills) / deaths if deaths > 1 else 1
-    return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getPlayerRequest.playerName, getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
+    return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getInName(getPlayerRequest), getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.winratio)
 if __name__ == "__main__":
     if DEBUG:
