@@ -265,9 +265,8 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
         _player = Player(name=playerName, id=temp[0].playerId, platform=str(platform))
     return _player.id if _player else -1
 def getInName(player):
-    #return player.hzPlayerName or player.playerName
     try:
-        return player.hzPlayerName
+        return player.hzPlayerName or player.playerName
     except Exception:
         return player.playerName
 def getLastSeen(lastSeen, language = LanguagesSupported.English):
