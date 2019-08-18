@@ -266,13 +266,12 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
     return _player.id if _player else -1
 def getInName(player):
     try:
-        return player.hzPlayerName or player.playerName
+        return (player.hzPlayerName or player.hzGamerTag) or player.playerName
     except Exception:
-        return player.playerName
+        pass
+    return player.playerName
 def getLastSeen(lastSeen, language = LanguagesSupported.English):
-    now = datetime.utcnow()
-    delta = now - lastSeen
-    #print("Now: {} | Last Seen: {} | Delta: {} | ???: {}".format(now, lastSeen, delta, datetime.now() - lastSeen))
+    delta = datetime.utcnow() - lastSeen
     hours, remainder = divmod(int(delta.total_seconds()), 3600)
     minutes, seconds = divmod(remainder, 60)
     days, hours = divmod(hours, 24)
