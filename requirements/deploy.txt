@@ -1,4 +1,4 @@
 -r pip.txt
-gunicorn<20
-python-decouple<4
-python-dotenv<1
+gunicorn==19.9.0
+python-decouple==3.1
+python-dotenv==0.10.3
