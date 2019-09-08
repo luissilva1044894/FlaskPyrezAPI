@@ -19,6 +19,9 @@ FlaskPyrezAPI is an endpoint for custom commands ([`Twitch`](https://twitch.tv "
 
 [Demo ![Website](https://img.shields.io/website/https/nonsocial.herokuapp.com.svg?logo=heroku&logoColor=white&)](https://nonsocial.herokuapp.com/)
 
+### Key Features
+ * English, Polish, Portuguese and Spanish language support.
+
 ### Requirements
 - [Access](https://pyrez.readthedocs.io/en/stable/gettingstarted.html#registration "Form access to Hi-Rez Studios API") to Hi-Rez Studios API.
 
