@@ -275,8 +275,10 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
     hours, remainder = divmod(int(delta.total_seconds()), 3600)
     minutes, seconds = divmod(remainder, 60)
     days, hours = divmod(hours, 24)
-    fmt = "{d}d" if days else "{h}h, {m}m" if hours else "{m}m, {s}s"
-    return fmt.format(d=days, h=hours, m=minutes, s=seconds)
+    years, days = divmod(days, 365)
+    fmt = '{y}y, {d}d' if years else "{d}d, {h}h" if days else "{h}h, {m}m" if hours else "{m}m, {s}s"
+    return fmt.format(y=years, d=days, h=hours, m=minutes, s=seconds)
+
 @app.route("/api/decks", methods=["GET"])
 @app.route("/api/deck", methods=["GET"])
 def getDecks():
