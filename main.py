@@ -9,31 +9,20 @@ from flask import abort, Flask, jsonify, request, render_template, url_for, send
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
 
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
-
 import pyrez
 from pyrez.api import *
 from pyrez.exceptions import PlayerNotFound, MatchException
 from pyrez.enumerations import Champions, Tier
 from langs import *
 
-MIN_LIMIT_PER_SECOND = '4'
-LIMIT_PER_SECOND = MIN_LIMIT_PER_SECOND
 try:
     DEBUG = config("DEBUG", default=False, cast=bool)
-    FORBIDDEN_CHANNELS = config("FORBIDDEN_CHANNELS").split(',')
-    FORBIDDEN_USER_AGENTS = config("FORBIDDEN_USER_AGENTS").split(',')
     PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = config("PYREZ_DEV_ID")
     DATABASE_URL = config("DATABASE_URL")
-    LIMIT_PER_SECOND = config("LIMIT_PER_SECOND")
 except:
     import os
     DEBUG = json.loads(os.environ["DEBUG"].lower()) if os.environ["DEBUG"] else False#https://stackoverflow.com/questions/715417/converting-from-a-string-to-boolean-in-python
-    LIMIT_PER_SECOND = os.environ("LIMIT_PER_SECOND") or MIN_LIMIT_PER_SECOND
-    FORBIDDEN_CHANNELS = os.environ("FORBIDDEN_CHANNELS").split(',') or []
-    FORBIDDEN_USER_AGENTS = os.environ("FORBIDDEN_USER_AGENTS").split(',') or []
     PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
     DATABASE_URL = os.environ("DATABASE_URL")#"sqlite:///{}.db".format(__name__)
@@ -42,8 +31,6 @@ app = Flask(__name__, static_folder="static", template_folder="templates", stati
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
-
-limiter = Limiter(app, key_func=get_remote_address, default_limits=["{} per minute".format(MIN_LIMIT_PER_SECOND), "1 per second"],)
 
 class Session(db.Model):
     __tablename__ = "session"
@@ -126,8 +113,6 @@ class PlatformsSupported(BaseEnumeration):
     Xbox = "10"
     PS4 = "9"
     Switch = "22"
-class Outdated(Exception):
-    pass
 def sessionCreated(session):#print("SESSION: {0}".format(session))
     _session = Session(sessionId=session.sessionId)
     #print("New sessionId: {}".format(_session))
@@ -141,53 +126,15 @@ try:
     lastSession = Session.query.first()
 except (OperationalError, ProgrammingError):
     lastSession = None
-#print("Last sessionId: {}".format(lastSession))
 paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
 paladinsAPI.onSessionCreated += sessionCreated
+
 @app.errorhandler(404)
 def not_found_error(error=None):
     return INTERNAL_ERROR_404_STRINGS[getLanguage(request)], 200 #return render_template("404.html"), 404 #return INTERNAL_ERROR_404_STRINGS[language], 404
-@app.errorhandler(429)
-def too_many_requests(error=None):
-    return ASSHOLE_STRINGS[getLanguage(request)].format(LIMIT_PER_SECOND or MIN_LIMIT_PER_SECOND), 200
 @app.errorhandler(500)
 def internal_error(error=None):
     return INTERNAL_ERROR_500_STRINGS[getLanguage(request)], 200 #return render_template("500.html"), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
-#@app.route("/robots.txt", methods=["GET"])
-#@app.route("/sitemap.xml", methods=["GET"])
-#def staticFromRoot():
-#    return send_from_directory(app.static_folder, request.path[1:])
-"""
-@app.route("/robots.txt")#https://github.com/blampe/template.flask #https://support.google.com/webmasters/answer/93710
-def robotsTxt():
-    Disallow = lambda string: "Disallow: {}".format(string)
-    return Response("User-agent: *\n{}\n".format("\n".join([Disallow("/bin/*"), Disallow("/thank-you"),])))
-@app.route("/sitemap.xml", methods=["GET"])
-    def sitemap():
-      response = make_response(open("sitemap.xml").read())
-      response.headers["Content-type"] = "text/plain"
-      return response
-"""
-
-@limiter.limit('{}/minute'.format(LIMIT_PER_SECOND or MIN_LIMIT_PER_SECOND))
-@app.before_request#https://stackoverflow.com/questions/22251038/how-to-limit-flask-dev-server-to-only-one-visiting-ip-address
-def limit_remote_addr():#ip = request.remote_addr
-    #print("*" * 40)
-    #print(request.endpoint)
-    #print(request.method)
-    #print(request.headers.keys)
-    #print(request.headers)
-    #print("*" * 40)
-    #print(' '.join(["*" * 40, str('nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel', '').lower() in FORBIDDEN_CHANNELS), request.headers.get('User-Agent', '').lower(), request.headers.get('Nightbot-Channel', '').lower(), "*" * 40]))
-    #print('IP: {}'.format(request.remote_addr))
-    if request.headers.get("User-Agent").rfind("Nimbostratus-Bot") != -1:#request.headers["User-Agent"]
-        #request.headers.get('User-Agent', '') in FORBIDDEN_USER_AGENTS
-        abort(403)
-    #if 'nightbot' in request.headers.get('User-Agent', '').lower() and request.headers.get('Nightbot-Channel').lower() in FORBIDDEN_CHANNELS:
-    #    print('All cool')
-        #return ASSHOLE_STRINGS['en']
-    #if str(request.args.get('platform', '')).upper() == 'PLATFORM':
-    #    return OUTDATED_CMD_STRINGS[getLanguage(request)].format(getUrl('index', params=["index.html", "http://", '/']))
 
 @app.route('/', methods=["GET"])
 @app.route("/api", methods=["GET"])
@@ -228,9 +175,6 @@ def getChampName(request_args):
 def printException(exc):
     print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
 def getPlatform(request_args):
-    #_checkOutdated = str(request_args.get("platform", default=None)).lower()
-    #if str(_checkOutdated) == "platform" or str(_checkOutdated) == "null" or str(_checkOutdated) == "none":
-    #    raise Outdated(_checkOutdated)
     qry = request_args.get("query", default=None)
     if qry:
         aux = qry[qry.rfind('"')+1:].split(' ') if qry.rfind('"') > 1 else qry.split(' ')
@@ -257,7 +201,6 @@ def getPlayerId(playerName, platform = PlatformsSupported.PC):
     if platform == PlatformsSupported.PC:
         playerName = playerName.strip()#.strip(',.-')
     _player = Player.query.filter_by(name=playerName, platform=str(platform)).first()
-    #print("Player readed - Database", _player)
     if not _player:
         temp = paladinsAPI.getPlayerId(playerName, platform) if str(platform).isnumeric() else paladinsAPI.getPlayerId(playerName)
         if not temp:
@@ -308,8 +251,6 @@ def getDecks():
     #except NoResult as exc:
     #    print("{} : {} : {} : {}".format(type(exc), exc.args, exc, str(exc)))
     #    return "Maybe “{}” profile isn't public.".format(playerName)
-    except Outdated as exc:
-        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except Exception as exc:
         printException(exc)
         return INTERNAL_ERROR_500_STRINGS[language]
@@ -321,8 +262,6 @@ def getGameVersion():
         hiRezServerStatus = paladinsAPI.getServerStatus()
         hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[len(hiRezServerStatus) - 2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[len(hiRezServerStatus) - 1] if platform == PlatformsSupported.PTS else hiRezServerStatus[0]
         patchInfo = paladinsAPI.getPatchInfo()
-    except Outdated as exc:
-        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except Exception as exc:
         printException(exc)
         return UNABLE_TO_CONNECT_STRINGS[language]
@@ -339,8 +278,6 @@ def getStalk():
             return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
         playerStalkRequest = paladinsAPI.getPlayerStatus(playerId)
-    except Outdated as exc:
-        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except PlayerNotFound as exc:
         printException(exc)
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
@@ -359,8 +296,6 @@ def getLastMatch():
         if not playerId or playerId == -1:
             return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         lastMatchRequest = paladinsAPI.getMatchHistory(playerId)[0]
-    except Outdated as exc:
-        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except MatchException as exc:
         printException(exc)
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
@@ -383,8 +318,6 @@ def getCurrentMatch():
         if not playerId or playerId == -1:
             return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         playerStatusRequest = paladinsAPI.getPlayerStatus(playerId)
-    except Outdated as exc:
-        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except Exception as exc:
         printException(exc)
         return INTERNAL_ERROR_500_STRINGS[language]
@@ -433,8 +366,6 @@ def getRank():
         if not playerId or playerId == -1:
             return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
         getPlayerRequest = paladinsAPI.getPlayer(playerId)
-    except Outdated as exc:
-        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except PlayerNotFound as exc:
         printException(exc)
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
@@ -479,8 +410,6 @@ def getWinrate():
         if getPlayerRequest.accountLevel <= 5:
             return PLAYER_LOW_LEVEL_STRINGS[language]
         playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
-    except Outdated as exc:
-        return OUTDATED_CMD_STRINGS[language].format(getUrl('index', params=["index.html", "http://", '/']))
     except PlayerNotFound as exc:
         printException(exc)
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)

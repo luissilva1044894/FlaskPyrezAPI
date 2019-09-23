@@ -13,12 +13,6 @@ INTERNAL_ERROR_500_STRINGS = {
     "pl" : "BŁĄD SERWERA: Wystąpił nieoczekiwany błąd. If something isn't working, report on Discord Server: https://discord.gg/XkydRPS",
     "pt" : "INTERNAL SERVER ERROR: Um erro inesperado ocorreu. Se o erro persistir, report no server do Discord: https://discord.gg/XkydRPS",
 }
-ASSHOLE_STRINGS = {
-    "en" : "IMPORTANT: Stop being an asshole. It was supposed to be free and unlimited, Y'all are paying nothing and it's online 24/7 almost 1 year (8/2018). But because some shitty viewers are spamming stupid invalid inputs such as !rank Nightbot, !rank SadMartini all endpoints are limited to {0} calls per minute.",
-    "es" : "IMPORTANT: Stop being an asshole. It was supposed to be free and unlimited, Y'all are paying nothing and it's online 24/7 almost 1 year (8/2018). But because some shitty viewers are spamming stupid invalid inputs such as !rank Nightbot, !rank SadMartini all endpoints are limited to {0} calls per minute.",
-    "pl" : "IMPORTANT: Stop being an asshole. It was supposed to be free and unlimited, Y'all are paying nothing and it's online 24/7 almost 1 year (8/2018). But because some shitty viewers are spamming stupid invalid inputs such as !rank Nightbot, !rank SadMartini all endpoints are limited to {0} calls per minute.",
-    "pt" : "IMPORTANT: Stop being an asshole. It was supposed to be free and unlimited, Y'all are paying nothing and it's online 24/7 almost 1 year (8/2018). But because some shitty viewers are spamming stupid invalid inputs such as !rank Nightbot, !rank SadMartini all endpoints are limited to {0} calls per minute.",
-}
 CURRENT_MATCH_STRINGS = {
     "en" : "Current match - {0} ({1}):{2} | VS |{3}",#"{0} ({4} - {1}):{2} | VS |{3}",
     "es" : "Partida - {0} ({1}):{2} | VS |{3}",
@@ -30,12 +24,6 @@ CURRENT_MATCH_PLAYER_STRINGS = {
     "es" : " {0}: {1} ({2})",
     "pl" : " {0}: {1} ({2})",
     "pt" : " {0}: {1} ({2})",
-}
-OUTDATED_CMD_STRINGS = {
-    "en" : "ERROR: Command outdated! Go to “{0}” and re-create them!",
-    "es" : "ERROR: ¡Comando desactualizado! Go to “{0}” and re-create them!",
-    "pl" : "BŁĄD: Command outdated! Go to “{0}” and re-create them!",
-    "pt" : "ERROR: Comando desatualizado! Acesse “{0}” para gerar novamente!",
 }
 PLAYER_NULL_STRINGS = {
     "en" : "ERROR: Player not specified!",
