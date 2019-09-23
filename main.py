@@ -460,7 +460,7 @@ def getRank():
         " (Win rate Global: {0}%{1})".format(getPlayerRequest.winratio, "" if r1.wins + r1.losses == 0 else " & Ranked: {0}%".format(r1.winratio)))
 def checkChampName(championName):
     champs = [ "androxus", "atlas", "ash", "barik", "bombking", "buck", "cassie", "dredge", "drogoz", "evie", "fernando", "furia", "grohk", "grover",
-    "imani", "inara", "jenos", "khan", "kinessa", "koga", "lex", "lian", "maeve", "makoa", "maldamba", "moji", "pip", "ruckus",
+    "imani", "inara", "io", "jenos", "khan", "kinessa", "koga", "lex", "lian", "maeve", "makoa", "maldamba", "moji", "pip", "ruckus",
     "seris", "shalin", "skye", "strix", "talus", "terminus", "torvald", "tyra", "viktor", "vivian", "willo", "ying", "zhin" ]
     for champ in champs:
         if champ == championName.lower().replace(" ", "").replace("'", ""):
