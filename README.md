@@ -11,7 +11,7 @@ Built with: [![Python](https://img.shields.io/badge/Python-3.7.4-blue.svg?style=
 [![Pyrez](https://img.shields.io/badge/Pyrez-1.1.0.1-00bb88.svg?logo=github&logoColor=white&style=plastic)](https://github.com/luissilva1044894/Pyrez/tree/1.1.x "Pyrez · 1.1.0.1")
 [![Flask](https://img.shields.io/badge/Flask-1.1.1-orange.svg?logo=flask&logoColor=white&style=plastic)](https://pypi.org/project/Flask/1.1.1/ "Flask · 1.1.1")
 [![Bootstrap 4](https://img.shields.io/badge/Bootstrap-4.3.1-orange.svg?logo=bootstrap&logoColor=white&style=plastic)](https://getbootstrap.com/docs/4.3/getting-started/introduction/ "Bootstrap · 4.3.1")
-[![Font Awesome](https://img.shields.io/badge/Font_Awesome-5.11.1-orange.svg?style=plastic)](https://github.com/FortAwesome/Font-Awesome/blob/master/CHANGELOG.md#5111---2019-09-18 "Font Awesome · 5.11.1")
+[![Font Awesome](https://img.shields.io/badge/Font_Awesome-5.11.2-orange.svg?style=plastic)](https://github.com/FortAwesome/Font-Awesome/blob/master/CHANGELOG.md#5112---2019-09-23 "Font Awesome · 5.11.2")
 
 </div>
 
