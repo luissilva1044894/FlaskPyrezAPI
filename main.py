@@ -44,20 +44,16 @@ class Session(db.Model):
         return "<Session {0.sessionId}>".format(self)
     def save(self):
         try:
-            #print("SessionId store - ", self)
             for sess in Session.query.all():
                 sess.delete()
             db.session.add(self)
             db.session.commit()
         except (IntegrityError, InternalError, OperationalError, ProgrammingError):
-            #print("SessionId not stored - Database rolledback", self)
             db.session.rollback()
     def update(self, name):
-        #print("SessionId updated - ", self)
         self.name = name
         db.session.commit()
     def delete(self):
-        #print("SessionId deleted - ", self)
         db.session.delete(self)
         db.session.commit()
     def json(self):
@@ -78,7 +74,6 @@ class Player(db.Model):
         return "<Player {0.name} (Id: {0.id} - Platform: {0.platform})>".format(self)
     def save(self):
         try:
-            #print("Player stored - ", self)
             db.session.add(self)
             db.session.commit()
         except (IntegrityError, InternalError, OperationalError, ProgrammingError):
@@ -88,11 +83,9 @@ class Player(db.Model):
             _player.delete()
             self.save()
     def update(self, name):
-        #print("Player updated - ", self)
         self.name = name
         db.session.commit()
     def delete(self):
-        #print("Player deleted - ", self)
         db.session.delete(self)
         db.session.commit()
     def json(self):
@@ -113,15 +106,8 @@ class PlatformsSupported(BaseEnumeration):
     Xbox = "10"
     PS4 = "9"
     Switch = "22"
-def sessionCreated(session):#print("SESSION: {0}".format(session))
+def sessionCreated(session):
     _session = Session(sessionId=session.sessionId)
-    #print("New sessionId: {}".format(_session))
-    #lastSession = Session.query.first()
-    #print("Lastest sessionId: {}".format(lastSession))
-    #try:
-    #    print("Pyrez sessionId: {}".format(paladinsAPI.sessionId))
-    #except Exception:
-    #    pass
 try:
     lastSession = Session.query.first()
 except (OperationalError, ProgrammingError):
@@ -417,10 +403,10 @@ def getWinrate():
         printException(exc)
         return INTERNAL_ERROR_500_STRINGS[language]
     if championName:
-        if not checkChampName(championName):
-            return CHAMP_NOT_PLAYED_STRINGS[language].format(playerName, championName)
+        #if not checkChampName(championName):
+        #    return CHAMP_NOT_PLAYED_STRINGS[language].format(playerName, championName)
         for champ in playerGlobalKDA:
-            if champ.godName.lower().replace(" ", "").replace("'", "") == championName:
+            if champ.godName.lower().replace(" ", "").replace("'", "") == championName.lower():
                 return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(champ.godName.replace("'", " "), champ.godLevel), champ.wins, champ.losses,
                         formatDecimal(champ.kills), formatDecimal(champ.deaths), formatDecimal(champ.assists), champ.kda, champ.winratio)
         return CHAMP_NOT_PLAYED_STRINGS[language].format(playerName, championName)
