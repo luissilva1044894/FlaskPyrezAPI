@@ -230,7 +230,7 @@ def getDecks():
         #print "".join(nums)
         loadouts = [playerLoadout for playerLoadout in playerLoadouts if playerLoadout.godName.lower().replace(" ", "").replace("'", "") == championName.lower()]
         for loadout in loadouts:
-            cardStr = "{}{}: {}".format (" " if len(cds) == 0 else ", ", loadout.deckName, ["{0} {1}".format(card.itemName, card.points) for card in loadout.cards]).replace("'", "")
+            cardStr = "{}{}: {}".format (" " if len(cds) == 0 else " · ", loadout.deckName, ["{0} {1}".format(card.itemName, card.points) for card in loadout.cards]).replace("'", "")
             if len(cds + cardStr) <= 400:
                 cds += cardStr
         return cds if cds != "" else CHAMP_NOT_PLAYED_STRINGS[language].format(playerName, championName)
