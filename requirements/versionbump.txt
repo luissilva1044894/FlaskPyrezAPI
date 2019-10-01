@@ -2,7 +2,7 @@ aiohttp==3.6.1
 alembic==1.2.1
 async-timeout==3.0.1
 asyncio==3.4.3
-attrs==19.1.0
+attrs==19.2.0
 Babel==2.7.0
 beautifulsoup4==4.8.0
 bleach==3.1.0
