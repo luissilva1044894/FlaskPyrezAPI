@@ -298,7 +298,7 @@ def getLastMatch():
 @app.route("/api/currentmatch", methods=["GET"])
 def getCurrentMatch():
     try:
-        language, playerName, platform = getLanguage(request), getPlayerName(request.args), getPlatform(request.args)
+        language, playerName, platform, reg = getLanguage(request), getPlayerName(request.args), getPlatform(request.args), request.args.get('region', None)
 
         playerId = getPlayerId(playerName, platform)
         if not playerId or playerId == -1:
@@ -334,7 +334,8 @@ def getCurrentMatch():
                 team1.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if player.playerName else "???", player.godName, rank))
             else:
                 team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if player.playerName else "???", player.godName, rank))
-        return CURRENT_MATCH_STRINGS[language].format(players[0].getMapName(True), QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId], ",".join(team1), ",".join(team2), players[0].playerRegion)
+        x_ = '{} - {}'.format(players[0].playerRegion, QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId]) if reg else QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId]
+        return CURRENT_MATCH_STRINGS[language].format(players[0].getMapName(True), x_, ",".join(team1), ",".join(team2))
     return INTERNAL_ERROR_500_STRINGS[language]
 def genRank(rank, lang, rankOnly=False):
     if rankOnly:
