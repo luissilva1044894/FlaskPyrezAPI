@@ -19,13 +19,13 @@ try:
     DEBUG = config("DEBUG", default=False, cast=bool)
     PYREZ_AUTH_ID = config("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = config("PYREZ_DEV_ID")
-    DATABASE_URL = config("DATABASE_URL")
+    DATABASE_URL = config("DATABASE")
 except:
     import os
     DEBUG = json.loads(os.environ["DEBUG"].lower()) if os.environ["DEBUG"] else False#https://stackoverflow.com/questions/715417/converting-from-a-string-to-boolean-in-python
     PYREZ_AUTH_ID = os.environ("PYREZ_AUTH_ID")
     PYREZ_DEV_ID = os.environ("PYREZ_DEV_ID")
-    DATABASE_URL = os.environ("DATABASE_URL")#"sqlite:///{}.db".format(__name__)
+    DATABASE_URL = os.environ("DATABASE")#"sqlite:///{}.db".format(__name__)
 
 app = Flask(__name__, static_folder="static", template_folder="templates", static_url_path='') #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
