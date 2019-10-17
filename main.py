@@ -281,7 +281,10 @@ def getLastMatch():
         playerId = getPlayerId(playerName, platform)
         if not playerId or playerId == -1:
             return PLAYER_NULL_STRINGS[language] if not playerId else PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
-        lastMatchRequest = paladinsAPI.getMatchHistory(playerId)[0]
+        lastMatchRequest = paladinsAPI.getMatchHistory(playerId)
+        if not lastMatchRequest or not len(lastMatchRequest) > 0:
+            raise MatchException
+        lastMatchRequest = lastMatchRequest[0]    
     except MatchException as exc:
         printException(exc)
         return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
