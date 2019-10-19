@@ -1,1 +1,1 @@
--r requirements/deploy.txt
+-r requirements/bump.txt
