@@ -5,6 +5,6 @@ Flask-SQLAlchemy==2.4.1
 
 # http://initd.org/psycopg/docs/install.html#binary-install-from-pypi
 #psycopg2==2.8.3 --no-binary psycopg2
-psycopg2-binary==2.8.3
+psycopg2-binary==2.8.4
 
 pyrez==1.1.0.1
