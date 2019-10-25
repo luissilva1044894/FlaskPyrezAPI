@@ -32,7 +32,7 @@ PLAYER_NULL_STRINGS = {
     'pt' : 'ERROR: Player not specified!',
 }
 PLAYER_NOT_FOUND_STRINGS = {
-    'en' : 'ERROR: “{0}” doesn't exist or it's hidden! Make sure that your account is marked as “Public Profile”',
+    'en' : "ERROR: “{0}” doesn't exist or it's hidden! Make sure that your account is marked as “Public Profile”'",
     'es' : 'ERROR: ¡“{0}” no existe o tienes perfil oculto! Make sure that your account is marked as “Public Profile”',
     'pl' : 'BŁĄD: Nie znaleziono gracza “{0}”! Make sure that your account is marked as “Public Profile”',
     'pt' : 'ERRO: “{0}” não existe ou tem perfil privado!',
@@ -169,7 +169,7 @@ QUEUE_IDS_STRINGS = {
         465: 'Classic/Asedio'
     },
     'pl' : {
-        423: 'Niestandardowy/Oblężenie', 430: 'Niestandardowy/Oblężenie", 431: 'Niestandardowy/Oblężenie", 432: 'Niestandardowy/Oblężenie', 433: 'Niestandardowy/Oblężenie", 438: 'Niestandardowy/Oblężenie', 439: 'Niestandardowy/Oblężenie', 440: 'Niestandardowy/Oblężenie', 458: 'Niestandardowy/Oblężenie', 459: 'Niestandardowy/Oblężenie', 473: 'Niestandardowy/Oblężenie', 485: 'Niestandardowy/Oblężenie', 487: 'Niestandardowy/Oblężenie',
+        423: 'Niestandardowy/Oblężenie', 430: 'Niestandardowy/Oblężenie', 431: 'Niestandardowy/Oblężenie', 432: 'Niestandardowy/Oblężenie', 433: 'Niestandardowy/Oblężenie', 438: 'Niestandardowy/Oblężenie', 439: 'Niestandardowy/Oblężenie', 440: 'Niestandardowy/Oblężenie', 458: 'Niestandardowy/Oblężenie', 459: 'Niestandardowy/Oblężenie', 473: 'Niestandardowy/Oblężenie', 485: 'Niestandardowy/Oblężenie', 487: 'Niestandardowy/Oblężenie',
         454: 'Niestandardowy/Szturm', 455: 'Niestandardowy/Szturm', 462: 'Niestandardowy/Szturm', 464: 'Niestandardowy/Szturm', 483: 'Niestandardowy/Szturm',
         468: 'Niestandardowy/TDM', 471: 'Niestandardowy/TDM', 472: 'Niestandardowy/TDM', 479: 'Niestandardowy/TDM', 480: 'Niestandardowy/TDM', 484: 'Niestandardowy/TDM',
         424: 'Szybka gra/Oblężenie', 428: 'Rankingowy/GamePad', 486: 'Rankingowy/Klawiatura', 445: 'Szybka gra/Mapy Testowe', 452: 'Szybka gra/Szturm', 469: 'Szybka gra/TDM',
