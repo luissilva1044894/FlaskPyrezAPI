@@ -4,7 +4,7 @@
 def register_app(app):
 	from .views import paladins
 
-	app.register_blueprint(paladins, url_prefix="/paladins")
-	app.register_blueprint(paladins, url_prefix="/api")
+	app.register_blueprint(paladins, url_prefix='/paladins')
+	app.register_blueprint(paladins, url_prefix='/api')
 
 	return app
