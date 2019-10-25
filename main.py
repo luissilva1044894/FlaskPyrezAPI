@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from enum import Enum
@@ -15,22 +16,28 @@ from pyrez.exceptions import PlayerNotFound, MatchException
 from pyrez.enumerations import Champions, Tier
 from langs import *
 
+import os
 try:
     DEBUG = config('DEBUG', default=False, cast=bool)
     PYREZ_AUTH_ID = config('PYREZ_AUTH_ID')
     PYREZ_DEV_ID = config('PYREZ_DEV_ID')
     DATABASE_URL = config('DATABASE_URL')
 except:
-    import os
     DEBUG = json.loads(os.environ['DEBUG'].lower()) if os.environ['DEBUG'] else False#https://stackoverflow.com/questions/715417/converting-from-a-string-to-boolean-in-python
     PYREZ_AUTH_ID = os.environ('PYREZ_AUTH_ID')
     PYREZ_DEV_ID = os.environ('PYREZ_DEV_ID')
     DATABASE_URL = os.environ('DATABASE_URL') or 'sqlite:///{}.db'.format(__name__)
 
-app = Flask(__name__, static_folder='static', template_folder='templates', static_url_path='') #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
+app = Flask(__name__, static_folder='static', template_folder='templates', static_url_path='', instance_relative_config=True) #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
+app.config.from_object(os.getenv('FLASK_ENV', 'config.DevelopementConfig'))
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+with app.app_context():
+    from app.overwatch import register as ov_reg
+    from app.paladins import register as pal_reg
+    ov_reg(app)
+    pal_reg(app)
 
 class Session(db.Model):
     __tablename__ = 'session'

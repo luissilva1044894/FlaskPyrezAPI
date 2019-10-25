@@ -5,6 +5,5 @@ def register(app):
 	from .views import blueprint
 
 	app.register_blueprint(blueprint, url_prefix='/{}'.format(__name__.replace('app.', 'api/')))
-	#app.register_blueprint(blueprint, url_prefix='/api')
 
 	#return app
