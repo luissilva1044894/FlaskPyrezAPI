@@ -9,7 +9,7 @@ blueprint = Blueprint(replace(__name__, 'app.', 'api/', '.', replace_or_split=Tr
 
 @blueprint.route('/rank', methods=['GET'])
 def rank():
-	from ..utils import getPlatform, getPlayerName
+	from ..utils import getPlatform, getPlayerName, get_query
 	from .controllers import rank_function
 
-	return rank_function(getPlayerName(request.args), getPlatform(request.args), request.args.get('wr', False), request.args.get('average_sr', False))
+	return rank_function(getPlayerName(request.args), getPlatform(request.args), get_query(request.args, 'wr', False), get_query(request.args, 'average_sr', False))
