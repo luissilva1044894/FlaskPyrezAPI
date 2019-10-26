@@ -8,7 +8,7 @@ def random_viewer_function(_channel, _exclude, _ignore):
 			_exclude += 'twitchprimereminder,commanderroot,anotherttvviewer,electricallongboard'.split(',')
 		try:
 			_json['chatters'].pop(x)
-		except KeyError: #ValueError = _json['bots']
+		except (KeyError, TypeError): #ValueError = _json['bots']
 			pass
 	_final_list = []
 	for x in _json['chatters']:
@@ -17,7 +17,7 @@ def random_viewer_function(_channel, _exclude, _ignore):
 				if str(y).lower() == z.lower():
 					try:
 						_json['chatters'][x].remove(y)
-					except ValueError:
+					except (KeyError, TypeError):
 						pass
 		if len(_json['chatters'][x]) != 0:
 			_final_list += _json['chatters'][x]
