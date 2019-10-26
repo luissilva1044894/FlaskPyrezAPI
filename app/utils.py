@@ -19,6 +19,22 @@ class PlatformsSupported(BaseEnumeration):
     Xbox = '10'
     PS4 = '9'
     Switch = '22'
+
+def get_url(url, as_json=True):
+    import requests
+    _request = requests.get(url)
+    if as_json:
+        from json.decoder import JSONDecodeError
+        try:
+            return _request.json()
+        except (JSONDecodeError, ValueError):
+            pass
+    return _request.text
+def get_query(request_args, key, default_value=None, default_key=None):
+    _x = request_args.get(key, default_key or None)
+    if not _x:
+        return default_value
+    return _x
 def getPlayerName(request_args):
     qry = request_args.get('query', default=None)
     if qry:

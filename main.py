@@ -36,8 +36,10 @@ db = SQLAlchemy(app)
 with app.app_context():
     from app.overwatch import register as ov_reg
     from app.paladins import register as pal_reg
+    from app.twitch import register as tw_reg
     ov_reg(app)
     pal_reg(app)
+    tw_reg(app)
 
 class Session(db.Model):
     __tablename__ = 'session'
