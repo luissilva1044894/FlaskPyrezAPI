@@ -24,4 +24,4 @@ def random_viewer_function(_channel, _exclude, _ignore):
 	if _final_list:
 		from ..utils import random
 		return _final_list[random(0, len(_final_list) - 1)]
-	return "Error: No viewers"
+	return "Error: No chatters"#https://community.nightdev.com/t/custom-api-random-viewer/17450/3
