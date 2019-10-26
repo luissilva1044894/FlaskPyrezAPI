@@ -9,6 +9,7 @@ blueprint = Blueprint(__name__.split('.')[1] or __name__.replace('app.', ''), __
 from ..utils import get_query, get_url
 
 @blueprint.route('/random_viewer', methods=['GET'])
+@blueprint.route('/random_user', methods=['GET'])
 def _randon_viewer_route():
 	_channel, _exclude, _ignore = get_query(request.args, 'channel'), str(get_query(request.args, 'exclude')).split(','), get_query(request.args, 'ignore')
 	_json = get_url('http://tmi.twitch.tv/group/user/{}/chatters'.format(_channel))
