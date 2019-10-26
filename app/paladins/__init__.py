@@ -4,7 +4,8 @@
 def register(app):
 	from .views import blueprint
 
-	app.register_blueprint(blueprint, url_prefix='/{}'.format(__name__.replace('app.', 'api/')))
+	from ..utils import replace
+	app.register_blueprint(blueprint, url_prefix='/{}'.format(replace(__name__, 'app.', 'api/')))
 	#app.register_blueprint(blueprint, url_prefix='/api')
 
 	#return app
