@@ -16,11 +16,10 @@ def _randon_viewer_route():
 		if x.lower() == 'bots':
 			_exclude += 'nightbot,priestbot,streamelements,streamlabs,botisimo,moobot'.split(',')
 			_exclude += 'twitchprimereminder,commanderroot,anotherttvviewer,electricallongboard'.split(',')
-		else:
-			try:
-				_json['chatters'].pop(x)
-			except KeyError: #ValueError = _json['bots']
-				pass
+		try:
+			_json['chatters'].pop(x)
+		except KeyError: #ValueError = _json['bots']
+			pass
 	_final_list = []
 	for x in _json['chatters']:
 		for y in _json['chatters'][x]:
