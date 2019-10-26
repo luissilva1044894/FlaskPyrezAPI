@@ -30,7 +30,6 @@ def randon_number_route():
 		return _[random(0, len(_) - 1)]
 	return str(random(min, max))
 
-
 @blueprint.route('/timestamp')
 def server_timestamp_route():
 	"""This endpoint returns the current server and UTC time."""
