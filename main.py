@@ -34,12 +34,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 with app.app_context():
-    from app.overwatch import register as ov_reg
-    from app.paladins import register as pal_reg
-    from app.twitch import register as tw_reg
-    ov_reg(app)
-    pal_reg(app)
-    tw_reg(app)
+    from app import register
+    register(app)
 
 class Session(db.Model):
     __tablename__ = 'session'

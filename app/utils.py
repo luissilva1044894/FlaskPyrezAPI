@@ -25,10 +25,17 @@ def replace(_input, _old, _new='', _split='', replace_or_split=False, _index=1):
         return _input.split(_split)[_index] or _input.replace(_old, _new)
     return _input.replace(_old, _new)
 
+def try_int(value, default):
+    try:
+        return int(value)
+    except ValueError:
+        return default
+
 def random(min, max, as_int=True):
     import random
     if as_int:
         return random.randint(min, max)
+    return random.randrange(min, max)
 
 def get_url(url, as_json=True):
     import requests
