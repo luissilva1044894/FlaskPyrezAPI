@@ -11,6 +11,8 @@ def random_viewer_function(_channel, _exclude, _ignore):
 		except (KeyError, TypeError): #ValueError = _json['bots']
 			pass
 	_final_list = []
+	if len(_json) < 1:
+		return "Error: No chatters"
 	for x in _json['chatters']:
 		for y in _json['chatters'][x]:
 			for z in _exclude:
