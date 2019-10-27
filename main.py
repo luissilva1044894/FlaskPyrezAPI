@@ -343,7 +343,11 @@ def getCurrentMatch():
                 team1.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if player.playerName else '???', player.godName, rank))
             else:
                 team2.append(CURRENT_MATCH_PLAYER_STRINGS[language].format(player.playerName if player.playerName else '???', player.godName, rank))
-        x_ = '{} - {}'.format(players[0].playerRegion, QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId]) if reg else QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId]
+        try:
+            __region = PLAYER_REGION_STRINGS[language][str(players[0].playerRegion).replace(' ', '_').upper()]
+        except:
+            __region = players[0].playerRegion
+        x_ = '{} - {}'.format(__region, QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId]) if reg else QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId]
         return CURRENT_MATCH_STRINGS[language].format(players[0].getMapName(True), x_, ','.join(team1), ','.join(team2))
     return INTERNAL_ERROR_500_STRINGS[language]
 def genRank(rank, lang, rankOnly=False):
