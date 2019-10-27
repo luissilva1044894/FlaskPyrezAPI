@@ -1,7 +1,7 @@
-def getBattleNet(battle_net):
+def get_battle_net(battle_net):
 	return battle_net.replace('#', '-', 1)
 
-def getRankName(skill_rating):
+def get_rank_name(skill_rating):
 	if skill_rating >= 1 and skill_rating <= 1499:
 		return 'Bronze'
 	elif skill_rating >= 1500 and skill_rating <= 1999:
@@ -18,10 +18,10 @@ def getRankName(skill_rating):
 		'Grandmaster'
 	return '???'
 
-def rank_func(player_name, platform, paladins_like, format_average_sr):
+def rank_func(battle_net, platform, paladins_like=False, format_average_sr=False):
 	from ..utils import winratio, get_url
 
-	_json = get_url('https://ow-api.com/v1/stats/{}/{}/{}/profile'.format(platform, 'us', getBattleNet(player_name)))
+	_json = get_url('https://ow-api.com/v1/stats/{}/{}/{}/profile'.format(platform, 'us', get_battle_net(battle_net)))
 	if isinstance(_json, dict):
 		_ratings = []
 		if _json['private']:
@@ -34,8 +34,8 @@ def rank_func(player_name, platform, paladins_like, format_average_sr):
 		_rat = ' | '.join(_ratings)
 		_rank = _json['rating'] if format_average_sr else high_sr
 		if paladins_like:
-			return "{} is {} ({} SR{}) with {} wins and {} losses. (Win rate: {}%)".format(_json['name'].split('#')[0], getRankName(_rank), _rank, ' - {}'.format(_rat) if _rat else '', _json['competitiveStats']['games']['won'], _json['competitiveStats']['games']['played'] - _json['competitiveStats']['games']['won'], winratio(_json['competitiveStats']['games']['won'], _json['competitiveStats']['games']['played']))
-		return "{} is {} ({} SR){}".format(_json['name'].split('#')[0], getRankName(_rank), _rank, ' - {}'.format(_rat) if _rat else '')
+			return "{} is {} ({} SR{}) with {} wins and {} losses. (Win rate: {}%)".format(_json['name'].split('#')[0], get_rank_name(_rank), _rank, ' - {}'.format(_rat) if _rat else '', _json['competitiveStats']['games']['won'], _json['competitiveStats']['games']['played'] - _json['competitiveStats']['games']['won'], winratio(_json['competitiveStats']['games']['won'], _json['competitiveStats']['games']['played']))
+		return "{} is {} ({} SR){}".format(_json['name'].split('#')[0], get_rank_name(_rank), _rank, ' - {}'.format(_rat) if _rat else '')
 	return "🚫 ERROR"
 #valid_regions = ['en-us', 'en-gb', 'es-es', 'es-mx', 'pt-br', 'pl-pl']
 #valid_platforms = ['pc', 'psn', 'xbl']
