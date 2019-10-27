@@ -10,9 +10,13 @@ def register(app):
 	from .utils import replace
 	app.register_blueprint(blueprint, url_prefix='/{}'.format(replace(__name__, 'app', 'api')))
 
-	from .overwatch import register as overwatch_reg
-	from .paladins import register as paladins_reg
-	from .twitch import register as twitch_reg
-	overwatch_reg(app)
-	paladins_reg(app)
-	twitch_reg(app)
+	import os
+	os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+	import importlib
+	for _mod in [_ for _ in os.listdir('.') if os.path.isdir(_) and not _.startswith('_')]:
+		try:
+			_lib = importlib.import_module('.'.join([__name__, _mod]))
+		except ModuleNotFoundError:
+			pass
+		else:
+			_lib.register(app)
