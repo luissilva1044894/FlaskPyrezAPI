@@ -25,7 +25,7 @@ def rank_func(player_name, platform, paladins_like, format_average_sr):
 	if isinstance(_json, dict):
 		_ratings = []
 		if _json['private']:
-			return "Error: Private account!"
+			return "🚫 ERROR: Private account!"
 		high_sr = -1
 		for x in _json['ratings']:
 			if x['level'] > high_sr:
@@ -36,7 +36,7 @@ def rank_func(player_name, platform, paladins_like, format_average_sr):
 		if paladins_like:
 			return "{} is {} ({} SR{}) with {} wins and {} losses. (Win rate: {}%)".format(_json['name'].split('#')[0], getRankName(_rank), _rank, ' - {}'.format(_rat) if _rat else '', _json['competitiveStats']['games']['won'], _json['competitiveStats']['games']['played'] - _json['competitiveStats']['games']['won'], winratio(_json['competitiveStats']['games']['won'], _json['competitiveStats']['games']['played']))
 		return "{} is {} ({} SR){}".format(_json['name'].split('#')[0], getRankName(_rank), _rank, ' - {}'.format(_rat) if _rat else '')
-	return "ERROR"
+	return "🚫 ERROR"
 #valid_regions = ['en-us', 'en-gb', 'es-es', 'es-mx', 'pt-br', 'pl-pl']
 #valid_platforms = ['pc', 'psn', 'xbl']
 
