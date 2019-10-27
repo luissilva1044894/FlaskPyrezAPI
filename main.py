@@ -370,10 +370,10 @@ def getRank():
         return INTERNAL_ERROR_500_STRINGS[language]
     r1, r2 = getPlayerRequest.rankedController, getPlayerRequest.rankedKeyboard
     if r1.hasPlayed and r2.hasPlayed:
-        return '{} is {}, and {}. (Win rate Global: {}%, Ranked KBM: {}% & Ranked Gamepad: {}%).'.format(PLAYER_LEVEL_STRINGS['en'].format(getInName(getPlayerRequest), getPlayerRequest.accountLevel),
-            genRank(r2, 'en'),#genRank(r2, language),
+        return '{} is {}. (Ranked KBM: {}%) | {}. (Win rate Global: {}% & Ranked Gamepad: {}%)'.format(PLAYER_LEVEL_STRINGS['en'].format(getInName(getPlayerRequest), getPlayerRequest.accountLevel),
+            genRank(r2, 'en'), r2.winratio,#genRank(r2, language),
             genRank(r1, 'en'),#genRank(r1, language),
-            getPlayerRequest.winratio, r2.winratio,  r1.winratio)
+            getPlayerRequest.winratio,  r1.winratio)
     if r2.hasPlayed:
         return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getInName(getPlayerRequest), getPlayerRequest.accountLevel),
             PLAYER_RANK_STRINGS[language][r2.currentRank.value] if r2.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r2.wins + r2.losses == 0 else QUALIFYING_STRINGS[language],
