@@ -18,10 +18,10 @@ def getRankName(skill_rating):
 		'Grandmaster'
 	return '???'
 
-def rank_function(playerName, platform, paladins_like, format_average_sr):
+def rank_func(player_name, platform, paladins_like, format_average_sr):
 	from ..utils import winratio, get_url
 
-	_json = get_url('https://ow-api.com/v1/stats/{}/{}/{}/profile'.format(platform, 'us', getBattleNet(playerName)))
+	_json = get_url('https://ow-api.com/v1/stats/{}/{}/{}/profile'.format(platform, 'us', getBattleNet(player_name)))
 	if isinstance(_json, dict):
 		_ratings = []
 		if _json['private']:
