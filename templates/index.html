@@ -347,7 +347,7 @@
         });
       }
     });
-    function getEndpoint() { return "{{ url_for('index', _external=True).replace('index.html', '').replace('http://', 'https://') + 'api/' }}" }
+    function getEndpoint() { return "{{ url_for('root', _external=True).replace('index.html', '').replace('http://', 'https://') + 'api/' }}" }
   </script>
   </body>
 </html>
