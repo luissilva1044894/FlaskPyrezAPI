@@ -20,7 +20,8 @@ def get_rank_name(skill_rating):
 
 def rank_func(battle_net, platform, paladins_like=False, format_average_sr=False):
 	from ..utils import winratio, get_url
-
+	if not battle_net:
+		return '🚫 ERROR: Player not specified!'
 	_json = get_url('https://ow-api.com/v1/stats/{}/{}/{}/profile'.format(platform, 'us', get_battle_net(battle_net)))
 	if isinstance(_json, dict):
 		_ratings = []
