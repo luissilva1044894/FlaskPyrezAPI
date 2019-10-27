@@ -239,7 +239,7 @@ def getDecks():
             cardStr = '{}{}: {}'.format (' ' if len(cds) == 0 else ' · ', loadout.deckName, ['{0} {1}'.format(card.itemName, card.points) for card in loadout.cards]).replace("'", "")
             if len(cds + cardStr) <= 400:
                 cds += cardStr
-        return cds if cds != '' else CHAMP_NOT_PLAYED_STRINGS[language].format(playerName, championName)
+        return cds if cds != '' else DONT_HAVE_DECKS_STRINGS[language].format(playerName, championName)
     #except NoResult as exc:
     #    print('{} : {} : {} : {}'.format(type(exc), exc.args, exc, str(exc)))
     #    return 'Maybe “{}” profile isn't public.'.format(playerName)
@@ -370,21 +370,21 @@ def getRank():
         return INTERNAL_ERROR_500_STRINGS[language]
     r1, r2 = getPlayerRequest.rankedController, getPlayerRequest.rankedKeyboard
     if r1.hasPlayed and r2.hasPlayed:
-        return '{} is {}. (Ranked KBM: {}%) | {}. (Win rate Global: {}% & Ranked Gamepad: {}%)'.format(PLAYER_LEVEL_STRINGS['en'].format(getInName(getPlayerRequest), getPlayerRequest.accountLevel),
-            genRank(r2, 'en'), r2.winratio,#genRank(r2, language),
+        return '{} is {}. | {}. (Win rate Global: {}%, 🖥 Ranked: {}% & 🎮 Ranked: {}%)'.format(PLAYER_LEVEL_STRINGS['en'].format(getInName(getPlayerRequest), getPlayerRequest.accountLevel),
+            genRank(r2, 'en'), #genRank(r2, language),
             genRank(r1, 'en'),#genRank(r1, language),
-            getPlayerRequest.winratio,  r1.winratio)
+            getPlayerRequest.winratio, r2.winratio, r1.winratio)
     if r2.hasPlayed:
         return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getInName(getPlayerRequest), getPlayerRequest.accountLevel),
             PLAYER_RANK_STRINGS[language][r2.currentRank.value] if r2.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r2.wins + r2.losses == 0 else QUALIFYING_STRINGS[language],
             '' if r2.currentRank == Tier.Unranked or r2.currentTrumpPoints <= 0 else ' ({0} TP{1})'.format(formatDecimal(r2.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r2.leaderboardIndex) if r2.leaderboardIndex > 0 else ''),
             '' if r2.currentRank == Tier.Unranked and r2.wins + r2.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r2.wins), formatDecimal(r2.losses)),
-            ' (Win rate Global: {0}%{1})'.format (getPlayerRequest.winratio, '' if r2.wins + r2.losses == 0 else ' & Ranked: {0}%'.format(r2.winratio)))
+            ' (Win rate Global: {0}%{1})'.format (getPlayerRequest.winratio, '' if r2.wins + r2.losses == 0 else ' & 🖥 Ranked: {0}%'.format(r2.winratio)))
     return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getInName(getPlayerRequest), getPlayerRequest.accountLevel),
         PLAYER_RANK_STRINGS[language][r1.currentRank.value] if r1.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r1.wins + r1.losses == 0 else QUALIFYING_STRINGS[language],
         '' if r1.currentRank == Tier.Unranked or r1.currentTrumpPoints <= 0 else ' ({0} TP{1})'.format(formatDecimal(r1.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r1.leaderboardIndex) if r1.leaderboardIndex > 0 else ''),
         '' if r1.currentRank == Tier.Unranked and r1.wins + r1.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r1.wins), formatDecimal(r1.losses)),
-        ' (Win rate Global: {0}%{1})'.format(getPlayerRequest.winratio, '' if r1.wins + r1.losses == 0 else ' & Ranked: {0}%'.format(r1.winratio)))
+        ' (Win rate Global: {0}%{1})'.format(getPlayerRequest.winratio, '' if r1.wins + r1.losses == 0 else ' & 🎮 Ranked: {0}%'.format(r1.winratio)))
 def checkChampName(championName):
     champs = [ 'androxus', 'atlas', 'ash', 'barik', 'bombking', 'buck', 'cassie', 'dredge', 'drogoz', 'evie', 'fernando', 'furia', 'grohk', 'grover',
     'imani', 'inara', 'io', 'jenos', 'khan', 'kinessa', 'koga', 'lex', 'lian', 'maeve', 'makoa', 'maldamba', 'moji', 'pip', 'ruckus',
