@@ -29,3 +29,11 @@ def random_viewer_function(_channel, _exclude, _ignore):
 		from ..utils import random
 		return _final_list[random(0, len(_final_list) - 1)]
 	return "Error: No chatters"#https://community.nightdev.com/t/custom-api-random-viewer/17450/3
+
+#!csgorank	Matchmaking: DMG Faceit: Level 10	everyone
+#!csrank	MM: DMG Faceit: 10
+#Tank: 5-0 4309 Support: 3-2 4363 Damage: 3-1-1 4430
+#https://cai.tools.sap/blog/twitch-case-study-ai-bots/
+#electric scateboard and commanderroot
+#https://www.reddit.com/r/Twitch/comments/4qcsfq/an_updated_twitch_bot_list/
+#Cole's current ranks: 2v2: Unranked (1438) | Solo 3v3: Unranked (1166) | 3v3: Champion III (1469) | Dropshot: Unranked (1133)
