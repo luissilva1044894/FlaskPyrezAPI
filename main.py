@@ -350,8 +350,8 @@ def getCurrentMatch():
         x_ = '{} - {}'.format(__region, QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId]) if reg else QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId]
         return CURRENT_MATCH_STRINGS[language].format(players[0].getMapName(True), x_, ','.join(team1), ','.join(team2))
     return INTERNAL_ERROR_500_STRINGS[language]
-def genRank(rank, lang, rankOnly=False):
-    if rankOnly:
+def genRank(rank, lang, rank_only=False):
+    if rank_only:
         PLAYER_RANK_STRINGS[lang][rank.currentRank.value] if rank.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[lang][0] if rank.wins + rank.losses == 0 else QUALIFYING_STRINGS[lang]
     return '{}{} {}'.format(PLAYER_RANK_STRINGS[lang][rank.currentRank.value] if rank.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[lang][0] if rank.wins + rank.losses == 0 else QUALIFYING_STRINGS[lang],
         '' if rank.currentRank == Tier.Unranked or rank.currentTrumpPoints <= 0 else ' ({0} TP{1})'.format(formatDecimal(rank.currentTrumpPoints), ON_LEADERBOARD_STRINGS[lang].format(rank.leaderboardIndex) if rank.leaderboardIndex > 0 else ''),
