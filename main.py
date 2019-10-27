@@ -280,6 +280,7 @@ def getStalk():
                         playerStalkRequest.statusString.replace('God', 'Champion').replace('_', ' ') if playerStalkRequest.status != 3 else CURRENTLY_MATCH_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStalkRequest.queueId], playerStalkRequest.matchId),
                         getPlayerRequest.createdDatetime.strftime(HOUR_FORMAT_STRINGS[language]), getPlayerRequest.last_login, formatDecimal(getPlayerRequest.hoursPlayed), getPlayerRequest.platform, PLAYER_REGION_STRINGS[language][str(getPlayerRequest.playerRegion).replace(' ', '_').upper()])
 @app.route('/api/lastmatch', methods=['GET'])
+@app.route('/api/last_match', methods=['GET'])
 def getLastMatch():
     try:
         language, playerName, platform = getLanguage(request), getPlayerName(request.args), getPlatform(request.args)
@@ -305,6 +306,9 @@ def getLastMatch():
                         PLAYER_REGION_STRINGS[language][str(lastMatchRequest.matchRegion).replace(' ', '_').upper()], MATCH_STRINGS[language][str(lastMatchRequest.winStatus).upper()], '{0}/{1}'.format(lastMatchRequest.team1Score,
                         lastMatchRequest.team2Score) if lastMatchRequest.taskForce == 1 else "{0}/{1}".format(lastMatchRequest.team2Score, lastMatchRequest.team1Score))
 @app.route('/api/currentmatch', methods=['GET'])
+@app.route('/api/current_match', methods=['GET'])
+@app.route('/api/livematch', methods=['GET'])
+@app.route('/api/live_match', methods=['GET'])
 def getCurrentMatch():
     try:
         language, playerName, platform, reg = getLanguage(request), getPlayerName(request.args), getPlatform(request.args), request.args.get('region', None)
