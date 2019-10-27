@@ -19,6 +19,18 @@ class PlatformsSupported(BaseEnumeration):
     Xbox = '10'
     PS4 = '9'
     Switch = '22'
+def print_exception(exc):
+    print(' : '.join([str(_) for _ in [type(exc), exc.args, exc]]))
+
+def get_last_seen(last_seen, language=LanguagesSupported.English):
+    from datetime import datetime
+    delta = datetime.utcnow() - last_seen
+    hours, remainder = divmod(int(delta.total_seconds()), 3600)
+    minutes, seconds = divmod(remainder, 60)
+    days, hours = divmod(hours, 24)
+    years, days = divmod(days, 365)
+    fmt = '{y}y, {d}d' if years else '{d}d, {h}h' if days else '{h}h, {m}m' if hours else '{m}m, {s}s'
+    return fmt.format(y=years, d=days, h=hours, m=minutes, s=seconds)
 
 def replace(_input, _old, _new='', _split='', replace_or_split=False, _index=1):
     if replace_or_split:
