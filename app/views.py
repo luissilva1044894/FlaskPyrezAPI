@@ -23,6 +23,6 @@ def randon_number_route():
 @blueprint.route('/timestamp')
 def server_timestamp_route():
 	"""This endpoint returns the current server and UTC time."""
-	import arrow
+	from arrow import now, utcnow
 	from flask import jsonify
-	return jsonify({ 'local': arrow.now().format('DD-MMM-YYYY HH:mm:SS ZZ'), 'unix': arrow.now().timestamp, 'utc': arrow.utcnow().format('DD-MMM-YYYY HH:mm:SS ZZ') })
+	return jsonify({ 'local': now().format('DD-MMM-YYYY HH:mm:SS ZZ'), 'unix': now().timestamp, 'utc': utcnow().format('DD-MMM-YYYY HH:mm:SS ZZ') })
