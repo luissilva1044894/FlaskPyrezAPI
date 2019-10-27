@@ -113,11 +113,10 @@ class PlatformsSupported(BaseEnumeration):
 def sessionCreated(session):
     _session = Session(sessionId=session.sessionId)
 try:
-    lastSession = Session.query.first()
+    last_session = Session.query.first()
 except (OperationalError, ProgrammingError):
-    lastSession = None
-paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=lastSession.sessionId if lastSession else None)
-paladinsAPI.onSessionCreated += sessionCreated
+    last_session = None
+paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=last_session.sessionId if last_session else None)
 
 @app.errorhandler(404)
 def not_found_error(error=None):
@@ -125,7 +124,9 @@ def not_found_error(error=None):
 @app.errorhandler(500)
 def internal_error(error=None):
     return INTERNAL_ERROR_500_STRINGS[getLanguage(request)], 200 #return render_template('500.html'), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
-
+@app.before_first_request
+def before_first_request_func():
+    paladinsAPI.onSessionCreated += sessionCreated
 @app.route('/', methods=['GET'])
 @app.route('/api', methods=['GET'])
 @app.route('/index', methods=['GET'])
@@ -134,10 +135,6 @@ def root():
     """Homepage route."""
     lang = getLanguage(request)
     return render_template('index-{}.html'.format(lang), lang=lang) #redirect(url_for('index'))
-
-@app.before_first_request
-def before_first_request_func():
-    print('This function will run once')
 def formatDecimal(data, form = ',d'):
     return format(data, form) if data else 0
 #def encodeData(data):#https://www.urlencoder.io/python/
