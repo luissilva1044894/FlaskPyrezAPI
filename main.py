@@ -130,9 +130,14 @@ def internal_error(error=None):
 @app.route('/api', methods=['GET'])
 @app.route('/index', methods=['GET'])
 @app.route('/index.html', methods=['GET'])
-def index():
+def root():
+    """Homepage route."""
     lang = getLanguage(request)
     return render_template('index-{}.html'.format(lang), lang=lang) #redirect(url_for('index'))
+
+@app.before_first_request
+def before_first_request_func():
+    print('This function will run once')
 def formatDecimal(data, form = ',d'):
     return format(data, form) if data else 0
 #def encodeData(data):#https://www.urlencoder.io/python/
