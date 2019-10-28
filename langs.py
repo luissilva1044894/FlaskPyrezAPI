@@ -165,7 +165,7 @@ QUEUE_IDS_STRINGS = {
         424: 'Casual/Siege', 428: 'Ranked/Gamepad', 486: 'Ranked/Keyboard', 445: 'Casual/Test Maps', 452: 'Casual/Onslaught', 469: 'Casual/TDM',
         477: 'Event/Ascension Peak', 478: 'Event/Rise of Furia', 488: 'Event/End Times', 489: 'Custom/End Times',
         425: 'Training/Siege', 453: 'Training/Onslaught', 470: 'Training/TDM', 434: 'Training/Shooting Range', 427: 'Training/Tutorial',
-        465: 'Classic/Siege'
+        465: 'Classic/Siege', 10200: 'Custom/KOTH', 10201: 'Custom/KOTH', 10202: 'Custom/KOTH', 10203: 'Custom/KOTH'
     },
     'es' : {
         423: 'Custom/Asedio', 430: 'Custom/Asedio', 431: 'Custom/Asedio', 432: 'Custom/Asedio', 433: 'Custom/Asedio', 438: 'Custom/Asedio', 439: 'Custom/Asedio', 440: 'Custom/Asedio', 458: 'Custom/Asedio', 459: 'Custom/Asedio', 473: 'Custom/Asedio', 485: 'Custom/Asedio', 487: 'Custom/Asedio',
@@ -174,7 +174,7 @@ QUEUE_IDS_STRINGS = {
         424: 'Casual/Asedio', 428: 'Ranked/Gamepad', 486: 'Ranked/Keyboard', 445: 'Casual/Test Maps', 452: 'Casual/Matanza', 469: 'Casual/Batalla a muerte',
         477: 'Evento/Asedio del Pico Ascensión', 478: 'Evento/El Ascenso de Furia', 488: 'Evento/Fin de los Tiempos', 489: 'Custom/Fin de los Tiempos',
         425: 'Entrenamiento/Asedio', 453: 'Entrenamiento/Matanza', 470: 'Entrenamiento/Batalla a muerte', 434: 'Entrenamiento/Campo de Tiro', 427: 'Entrenamiento/Tutorial',
-        465: 'Classic/Asedio'
+        465: 'Classic/Asedio', 10200: 'Custom/KOTH', 10201: 'Custom/KOTH', 10202: 'Custom/KOTH', 10203: 'Custom/KOTH'
     },
     'pl' : {
         423: 'Niestandardowy/Oblężenie', 430: 'Niestandardowy/Oblężenie', 431: 'Niestandardowy/Oblężenie', 432: 'Niestandardowy/Oblężenie', 433: 'Niestandardowy/Oblężenie', 438: 'Niestandardowy/Oblężenie', 439: 'Niestandardowy/Oblężenie', 440: 'Niestandardowy/Oblężenie', 458: 'Niestandardowy/Oblężenie', 459: 'Niestandardowy/Oblężenie', 473: 'Niestandardowy/Oblężenie', 485: 'Niestandardowy/Oblężenie', 487: 'Niestandardowy/Oblężenie',
@@ -183,7 +183,7 @@ QUEUE_IDS_STRINGS = {
         424: 'Szybka gra/Oblężenie', 428: 'Rankingowy/GamePad', 486: 'Rankingowy/Klawiatura', 445: 'Szybka gra/Mapy Testowe', 452: 'Szybka gra/Szturm', 469: 'Szybka gra/TDM',
         477: 'Wydarzenie/Oblężenie Wzgórza Wniebowstąpienia', 478: 'Wydarzenie/Bunt Furii', 488: 'Wydarzenie/Kres Czasów', 489: 'Niestandardowy/Kres Czasów',
         425: 'Treningowy/Oblężenie', 453: 'Treningowy/Szturm', 470: 'Treningowy/TDM', 434: 'Treningowy/Strzelnica', 427: 'Treningowy/Samouczek',
-        465: 'Klasyczny/Oblężenie'
+        465: 'Klasyczny/Oblężenie', 10200: 'Custom/KOTH', 10201: 'Custom/KOTH', 10202: 'Custom/KOTH', 10203: 'Custom/KOTH'
     },
     'pt' : {
        423: 'Custom/Cerco', 430: 'Custom/Cerco', 431: 'Custom/Cerco', 432: 'Custom/Cerco', 433: 'Custom/Cerco', 438: 'Custom/Cerco', 439: 'Custom/Cerco', 440: 'Custom/Cerco', 458: 'Custom/Cerco', 459: 'Custom/Cerco', 473: 'Custom/Cerco', 485: 'Custom/Cerco', 487: 'Custom/Cerco',
@@ -192,7 +192,7 @@ QUEUE_IDS_STRINGS = {
        424: 'Casual/Cerco', 428: 'Ranked/Gamepad', 486: 'Ranked/Keyboard', 445: 'Casual/Mapa de teste', 452: 'Casual/Chacina', 469: 'Casual/Cerco',
        477: 'Evento/Cerco ao Pico da Ascensão', 478: 'Evento/O surgimento de Furia', 488: 'Evento/Fim dos Tempos', 489: 'Custom/Fim dos Tempos',
        425: 'Treinamento/Cerco', 453: 'Treinamento/Chacina', 470: 'Treinamento/Mata mata', 434: 'Treinamento/Galeria de tiro', 427: 'Treinamento/Tutorial',
-       465: 'Classic/Siege'
+       465: 'Classic/Siege', 10200: 'Custom/KOTH', 10201: 'Custom/KOTH', 10202: 'Custom/KOTH', 10203: 'Custom/KOTH'
     },
 }
 QUALIFYING_STRINGS = {
