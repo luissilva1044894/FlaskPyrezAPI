@@ -7,7 +7,7 @@
 [![Discord Server](https://img.shields.io/discord/549020573846470659.svg?logo=discord&logoColor=white&logoWidth=10&style=plastic)](https://discord.gg/XkydRPS "Support Server · Discord")
 
 
-Built with: [![Python](https://img.shields.io/badge/Python-3.8.0-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.8/whatsnew/3.8.html#what-s-new-in-python-3-8 "Python 3.8.0")
+Built with: [![Python](https://img.shields.io/badge/Python-3.7.5-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html#python-3-7-5-final "Python 3.7.5")
 [![Pyrez](https://img.shields.io/badge/Pyrez-1.1.0.1-00bb88.svg?logo=github&logoColor=white&style=plastic)](https://github.com/luissilva1044894/Pyrez/tree/1.1.x "Pyrez · 1.1.0.1")
 [![Flask](https://img.shields.io/badge/Flask-1.1.1-orange.svg?logo=flask&logoColor=white&style=plastic)](https://pypi.org/project/Flask/1.1.1/ "Flask · 1.1.1")
 [![Bootstrap 4](https://img.shields.io/badge/Bootstrap-4.3.1-orange.svg?logo=bootstrap&logoColor=white&style=plastic)](https://getbootstrap.com/docs/4.3/getting-started/introduction/ "Bootstrap · 4.3.1")
