@@ -421,7 +421,7 @@ def getWinrate():
     except Exception as exc:
         printException(exc)
         return INTERNAL_ERROR_500_STRINGS[language]
-    if championName:
+    if not platform == championName and championName:
         #if not checkChampName(championName):
         #    return CHAMP_NOT_PLAYED_STRINGS[language].format(playerName, championName)
         for champ in playerGlobalKDA:
