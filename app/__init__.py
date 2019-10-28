@@ -19,4 +19,7 @@ def register(app):
 		except ModuleNotFoundError:
 			pass
 		else:
-			_lib.register(app)
+			try:
+				_lib.register(app)
+			except AttributeError:
+				pass
