@@ -24,7 +24,7 @@ def register(app):
 	#		except AttributeError:
 	#			pass
 	from .utils.lib import import_from
-	for _mod in [_ for _ in os.listdir('.') if os.path.isdir(_) and not _.startswith('_')]:
+	for _mod in [_ for _ in os.listdir('.') if os.path.isdir(_) and not _ in ['utils', 'migrations'] and not _.startswith('_')]:
 		try:
 			_lib = import_from('.'.join([__name__, _mod]))
 		except ModuleNotFoundError:
