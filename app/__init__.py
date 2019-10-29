@@ -11,11 +11,22 @@ def register(app):
 	app.register_blueprint(blueprint, url_prefix='/{}'.format(replace(__name__, 'app', 'api')))
 
 	import os
-	os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
-	import importlib
+	#os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+	#import importlib
+	#for _mod in [_ for _ in os.listdir('.') if os.path.isdir(_) and not _.startswith('_')]:
+	#	try:
+	#		_lib = importlib.import_module('.'.join([__name__, _mod]))
+	#	except ModuleNotFoundError:
+	#		pass
+	#	else:
+	#		try:
+	#			_lib.register(app)
+	#		except AttributeError:
+	#			pass
+	from .utils.lib import import_from
 	for _mod in [_ for _ in os.listdir('.') if os.path.isdir(_) and not _.startswith('_')]:
 		try:
-			_lib = importlib.import_module('.'.join([__name__, _mod]))
+			_lib = import_from('.'.join([__name__, _mod]))
 		except ModuleNotFoundError:
 			pass
 		else:
@@ -23,3 +34,4 @@ def register(app):
 				_lib.register(app)
 			except AttributeError:
 				pass
+
