@@ -5,7 +5,7 @@ def random_viewer_function(_channel, _exclude, _ignore):
 	for x in str(_ignore).split(','):
 		if x.lower() == 'bots':
 			_exclude += 'nightbot,priestbot,streamelements,streamlabs,botisimo,moobot'.split(',')
-			_exclude += 'twitchprimereminder,commanderroot,anotherttvviewer,electricallongboard'.split(',')
+			_exclude += 'twitchprimereminder,commanderroot,anotherttvviewer,electricallongboard,lurxx'.split(',')
 		elif x.lower() == 'mods':
 			x = 'moderators'
 		try:
