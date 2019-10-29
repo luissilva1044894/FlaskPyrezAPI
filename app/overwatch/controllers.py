@@ -22,11 +22,46 @@ def rank_func(battle_net, platform, paladins_like=False, format_average_sr=False
 	from ..utils import winratio, get_url
 	if not battle_net:
 		return '🚫 ERROR: Player not specified!'
+	
+	try:
+		#https://github.com/Addonexus/OverwatchWebscraper/blob/master/scraper.py
+		from bs4 import BeautifulSoup
+		import requests
+		import time
+		rank = {}
+		last_time = time.time()
+		for item in BeautifulSoup(requests.get('https://playoverwatch.com/{}/career/{}/{}'.format('en-us', platform, get_battle_net(battle_net))).text, 'html.parser').findAll('div', {'class': 'competitive-rank-role'}):
+			rank[str(item.findAll('div', {'class': 'competitive-rank-tier-tooltip'})[0]['data-ow-tooltip-text'].split()[0]).lower()] = int(item.findAll('div', {'class': 'competitive-rank-level'})[0].text)
+		curr_time = time.time() - last_time
+		print(f'That took {curr_time} seconds')
+		print(rank)
+	except:
+		pass
+	else:
+		try:
+			_ratings, high_sr, __x__, __y__ = [], -1, 0, 0
+			for x in rank:
+				if format_average_sr:
+					__x__ += 1
+					__y__ += rank[x]
+				if rank[x] > high_sr:
+					high_sr = rank[x]
+				_ratings.append('{} {} SR'.format(x.title(), rank[x]))
+			_rat = ' | '.join(_ratings)
+			_rank = __x__ / __y__ if format_average_sr else high_sr
+		except:
+			pass
+		else:
+			if rank:
+				return '{} is {} ({} SR){}'.format(battle_net.split('-')[0], get_rank_name(_rank), _rank, ' - {}'.format(_rat) if _rat else '')
+
 	_json = get_url('https://ow-api.com/v1/stats/{}/{}/{}/profile'.format(platform, 'us', get_battle_net(battle_net)))
 	if isinstance(_json, dict):
-		_ratings = []
+		if _json['error']:
+			return "🚫 ERROR: " + _json['error']
 		if _json['private']:
 			return "🚫 ERROR: Private account!"
+		_ratings = []
 		high_sr = -1
 		for x in _json['ratings']:
 			if x['level'] > high_sr:
