@@ -11,7 +11,7 @@ def register(app):
 	app.register_blueprint(blueprint, url_prefix='/{}'.format(replace(__name__, 'app', 'api')))
 
 	import os
-	#os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+	os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 	#import importlib
 	#for _mod in [_ for _ in os.listdir('.') if os.path.isdir(_) and not _.startswith('_')]:
 	#	try:
