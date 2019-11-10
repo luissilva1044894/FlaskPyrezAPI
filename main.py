@@ -29,11 +29,13 @@ except:
     DATABASE_URL = os.environ('DATABASE_URL') or 'sqlite:///{}.db'.format(__name__)
 
 app = Flask(__name__, static_folder='static', template_folder='templates', static_url_path='', instance_relative_config=True) #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
-app.config.from_object(os.getenv('FLASK_ENV', 'config.DevelopementConfig'))
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 with app.app_context():
+    #init_db()
+    app.secret_key = os.getenv('SECRET_TOKEN', '3k1j3pnQad4r3rH7sfsi')
+    app.config.from_object(os.getenv('FLASK_ENV', 'config.DevelopementConfig'))
+    app.config['SQLALCHEMY_DATABASE_URI'], app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = DATABASE_URL, False
+    db = SQLAlchemy(app)
+
     from app import register
     register(app)
 
@@ -124,6 +126,12 @@ def not_found_error(error=None):
 @app.errorhandler(500)
 def internal_error(error=None):
     return INTERNAL_ERROR_500_STRINGS[getLanguage(request)], 200 #return render_template('500.html'), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
+def get_json(filename='langs'):
+    from flask import g
+    if '_json' not in g:
+        from app.utils.file import read_json
+        g._json = read_json(filename + '.json')
+    return g._json
 @app.before_first_request
 def before_first_request_func():
     paladinsAPI.onSessionCreated += sessionCreated
@@ -457,7 +465,7 @@ if __name__ == '__main__':
             #delete = input('Delete? {}'.format(player))
             #if delete.lower() == 'y':
             #    player.delete()
-    app.run(debug=DEBUG)
+    app.run(debug=DEBUG, use_reloader=DEBUG)
     #port = int(os.getenv('PORT', 5000))
     #print('Starting app on port %d' % port)
     #app.run(debug=DEBUG, port=port, host='0.0.0.0')
