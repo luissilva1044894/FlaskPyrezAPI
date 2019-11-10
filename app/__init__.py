@@ -5,6 +5,7 @@
 #https://flask.palletsprojects.com/en/1.1.x/patterns/urlprocessors/#internationalized-blueprint-urls
 #https://flask.palletsprojects.com/en/1.1.x/patterns/favicon/
 
+#app = Flask(__name__.split('.')[0])
 def register(app):
 	from .views import blueprint
 	from .utils import replace
