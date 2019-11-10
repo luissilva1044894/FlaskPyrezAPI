@@ -24,6 +24,10 @@
             "description": "Used for authentication. This is the developer ID that you receive from Hi-Rez Studios.",
             "required": "true",
             "value": ""
+        },
+        "SECRET_TOKEN": {
+            "description": "A secret key for verifying the integrity of signed cookies.",
+            "generator": "secret"
         }
     },
     "environments": {
