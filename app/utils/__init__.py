@@ -37,6 +37,11 @@ def replace(_input, _old, _new='', _split='', replace_or_split=False, _index=1):
         return _input.split(_split)[_index] or _input.replace(_old, _new)
     return _input.replace(_old, _new)
 
+def random_string(length=32, source=None):
+    import string
+    import random
+    return ''.join(random.choice(source or (string.ascii_letters + string.digits)) for x in range(length))
+
 def try_int(value, default):
     try:
         return int(value)

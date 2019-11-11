@@ -31,7 +31,8 @@ except:
 app = Flask(__name__, static_folder='static', template_folder='templates', static_url_path='', instance_relative_config=True) #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
 with app.app_context():
     #init_db()
-    app.secret_key = os.getenv('SECRET_TOKEN', '3k1j3pnQad4r3rH7sfsi')
+    from app.utils import random_string
+    app.secret_key = os.getenv('SECRET_KEY', random_string())
     app.config.from_object(os.getenv('FLASK_ENV', 'config.DevelopementConfig'))
     app.config['SQLALCHEMY_DATABASE_URI'], app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = DATABASE_URL, False
     db = SQLAlchemy(app)
@@ -126,12 +127,6 @@ def not_found_error(error=None):
 @app.errorhandler(500)
 def internal_error(error=None):
     return INTERNAL_ERROR_500_STRINGS[getLanguage(request)], 200 #return render_template('500.html'), 500 #return INTERNAL_ERROR_500_STRINGS[language], 500
-def get_json(filename='langs'):
-    from flask import g
-    if '_json' not in g:
-        from app.utils.file import read_json
-        g._json = read_json(filename + '.json')
-    return g._json
 @app.before_first_request
 def before_first_request_func():
     paladinsAPI.onSessionCreated += sessionCreated
@@ -222,8 +217,8 @@ def getLastSeen(lastSeen, language = LanguagesSupported.English):
     fmt = '{y}y, {d}d' if years else '{d}d, {h}h' if days else '{h}h, {m}m' if hours else '{m}m, {s}s'
     return fmt.format(y=years, d=days, h=hours, m=minutes, s=seconds)
 
-@app.route('/api/decks', methods=['GET'])
 @app.route('/api/deck', methods=['GET'])
+@app.route('/api/decks', methods=['GET'])
 def getDecks():
     try:
         language = getLanguage(request)
@@ -410,8 +405,8 @@ def checkChampName(championName):
         if champ == championName.lower().replace(' ', '').replace("'", ""):
             return True
     return False
-@app.route('/api/kda', methods=['GET'])
 @app.route('/api/winrate', methods=['GET'])
+@app.route('/api/kda', methods=['GET'])
 def getWinrate():
     try:
         language, championName, playerName, platform = getLanguage(request), getChampName(request.args), getPlayerName(request.args), getPlatform(request.args)
@@ -465,7 +460,7 @@ if __name__ == '__main__':
             #delete = input('Delete? {}'.format(player))
             #if delete.lower() == 'y':
             #    player.delete()
-    app.run(debug=DEBUG, use_reloader=DEBUG)
+    app.run(debug=DEBUG, use_reloader=DEBUG)#app.config['DEBUG']
     #port = int(os.getenv('PORT', 5000))
     #print('Starting app on port %d' % port)
     #app.run(debug=DEBUG, port=port, host='0.0.0.0')
