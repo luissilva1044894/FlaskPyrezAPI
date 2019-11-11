@@ -25,7 +25,7 @@
             "required": "true",
             "value": ""
         },
-        "SECRET_TOKEN": {
+        "SECRET_KEY": {
             "description": "A secret key for verifying the integrity of signed cookies.",
             "generator": "secret"
         }
