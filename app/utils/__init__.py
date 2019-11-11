@@ -37,19 +37,17 @@ def replace(_input, _old, _new='', _split='', replace_or_split=False, _index=1):
         return _input.split(_split)[_index] or _input.replace(_old, _new)
     return _input.replace(_old, _new)
 
-def random_string(length=32, source=None):
-    import string
-    import random
-    return ''.join(random.choice(source or (string.ascii_letters + string.digits)) for x in range(length))
-
 def try_int(value, default):
     try:
         return int(value)
     except ValueError:
         return default
 
-def random(min, max, as_int=True):
+def random(min=0, max=100, as_int=True, *, as_string=False, chars=None, size=32):
     import random
+    if as_string:
+        import string
+        return ''.join(random.choice(chars or (string.ascii_letters + string.digits)) for x in range(size))
     if as_int:
         return random.randint(min, max)
     return random.randrange(min, max)

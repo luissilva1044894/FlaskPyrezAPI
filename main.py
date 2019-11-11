@@ -31,8 +31,8 @@ except:
 app = Flask(__name__, static_folder='static', template_folder='templates', static_url_path='', instance_relative_config=True) #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
 with app.app_context():
     #init_db()
-    from app.utils import random_string
-    app.secret_key = os.getenv('SECRET_KEY', random_string())
+    from app.utils import random
+    app.secret_key = os.getenv('SECRET_KEY', random(as_string=True))
     app.config.from_object(os.getenv('FLASK_ENV', 'config.DevelopementConfig'))
     app.config['SQLALCHEMY_DATABASE_URI'], app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = DATABASE_URL, False
     db = SQLAlchemy(app)
