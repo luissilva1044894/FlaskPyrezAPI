@@ -98,11 +98,11 @@ def winratio(wins, matches_played):
 #        from app.utils.file import read_json
 #        g._json = read_json(filename + '.json')
 #    return g._json
-def get_json(lang='en', *, key=None, force=False):
+def get_json(lang='en', *, key=None, force=False, folder='lang/'):
     from flask import g
     if force or '_json' not in g:
         from app.utils.file import read_json
-        g._json = read_json('langs/{}.json'.format(lang))
+        g._json = read_json('{}{}.json'.format(folder, lang))
     if key:
         return g._json[key]
     return g._json
