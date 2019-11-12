@@ -35,7 +35,7 @@ class Config(object):
 	def DATABASE_URI(self):
 		return SQLALCHEMY_DATABASE_URI
 class DevelopementConfig(Config):
-	DEVELOPMENT = True#DEBUG = 
+	DEVELOPMENT = True
 	ENV = 'development'#dev
 
 class TestingConfig(Config):#StagingConfig
@@ -43,5 +43,5 @@ class TestingConfig(Config):#StagingConfig
 	DEBUG = False
 
 class ProductionConfig(Config):
-	TESTING = DEVELOPMENT = False
+	TESTING = DEVELOPMENT = DEBUG = False
 	ENV = 'production'
