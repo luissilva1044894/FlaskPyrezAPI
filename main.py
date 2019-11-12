@@ -4,8 +4,8 @@
 from enum import Enum
 from datetime import datetime
 import json
+import os
 
-from decouple import config, Csv
 from flask import abort, Flask, jsonify, request, render_template, url_for, send_from_directory, escape
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
@@ -16,19 +16,20 @@ from pyrez.exceptions import PlayerNotFound, MatchException
 from pyrez.enumerations import Champions, Tier
 from langs import *
 
-import os
-try:
-    PYREZ_AUTH_ID = config('PYREZ_AUTH_ID')
-    PYREZ_DEV_ID = config('PYREZ_DEV_ID')
-except:
-    PYREZ_AUTH_ID = os.environ('PYREZ_AUTH_ID')
-    PYREZ_DEV_ID = os.environ('PYREZ_DEV_ID')
-
 app = Flask(__name__, static_folder='static', template_folder='templates', static_url_path='', instance_relative_config=True) #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
 with app.app_context():
+    def get_config(x=None):
+        return {
+            'development': 'config.DevelopementConfig',
+            'dev': 'config.DevelopementConfig',
+            'testing': 'config.TestingConfig',
+            'default': 'config.ProductionConfig',
+            'production': 'config.ProductionConfig',
+            'prod': 'config.ProductionConfig'
+        }.get(str(x).lower(), 'config.ProductionConfig')
     #init_db()
-    import os
-    app.config.from_object(os.getenv('FLASK_ENV', 'config.DevelopementConfig' if os.sys.platform == 'win32' else 'config.ProductionConfig'))
+    app.config.from_object(os.getenv('FLASK_ENV', get_config('dev' if os.sys.platform == 'win32' else 'prod')))
+    app.config.from_pyfile('config.cfg', silent=True)#https://flask.palletsprojects.com/en/1.1.x/config/
     print(app.secret_key)
     db = SQLAlchemy(app)
 
@@ -114,7 +115,8 @@ try:
     last_session = Session.query.first()
 except (OperationalError, ProgrammingError):
     last_session = None
-paladinsAPI = PaladinsAPI(devId=PYREZ_DEV_ID, authKey=PYREZ_AUTH_ID, sessionId=last_session.sessionId if last_session else None)
+from app.utils import get_env
+paladinsAPI = PaladinsAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=last_session.sessionId if last_session else None)
 
 @app.errorhandler(404)
 def not_found_error(error=None):

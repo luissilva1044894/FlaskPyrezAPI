@@ -47,6 +47,7 @@ def random(min=0, max=100, as_int=True, *, as_string=False, chars=None, size=32)
     import random
     if as_string:
         import string
+        #string.punctuation
         return ''.join(random.choice(chars or (string.ascii_letters + string.digits)) for x in range(size))
     if as_int:
         return random.randint(min, max)
@@ -89,3 +90,53 @@ def getPlatform(request_args):
 def winratio(wins, matches_played):
         _w = wins /((matches_played) if matches_played > 1 else 1) * 100.0
         return int(_w) if _w % 2 == 0 else round(_w, 2)
+
+
+#def get_json(filename='langs'):
+#    from flask import g
+#    if '_json' not in g:
+#        from app.utils.file import read_json
+#        g._json = read_json(filename + '.json')
+#    return g._json
+def get_json(lang='en', *, key=None, force=False):
+    from flask import g
+    if force or '_json' not in g:
+        from app.utils.file import read_json
+        g._json = read_json('langs/{}.json'.format(lang))
+    if key:
+        return g._json[key]
+    return g._json
+def fix_url_for(_json, blueprint_name):
+    from flask import url_for
+    for _ in range(len(_json['HTML']['CMD_TABLE'][blueprint_name.upper()])):
+        for __ in range(len(_json['HTML']['CMD_TABLE'][blueprint_name.upper()][_])):
+            #input(_json['HTML']['CMD_TABLE'][blueprint_name.upper()][_][__])
+            if _json['HTML']['CMD_TABLE'][blueprint_name.upper()][_][__]:
+                if _json['HTML']['CMD_TABLE'][blueprint_name.upper()][_][__].startswith('url_for'):
+                    _json['HTML']['CMD_TABLE'][blueprint_name.upper()][_][__] = url_for('{}.{}'.format(blueprint_name, _json['HTML']['CMD_TABLE'][blueprint_name.upper()][_][__].split(':')[1]), _external=True)
+    return _json
+
+def get_env(name, default=None, verbose=False):#, cast=None
+    import os
+    try:
+        #from decouple import config, Csv #python-decouple==3.1
+        from dotenv import load_dotenv
+    except ImportError:
+        pass
+        #try:
+        #    return os.environ[name] or default
+        #except KeyError:
+        #    return default
+    else:
+        #from pathlib import Path  # python3 only
+        load_dotenv(verbose=verbose)#,dotenv_path=Path('.') / '.env'
+    finally:
+        return os.getenv(name) or default#return config(name, cast=cast) if cast is not None else config(name)
+
+def to_bool(value=None):
+    if isinstance(value, bool):
+        return value
+    return { #if lower_value in valid: return valid[lower_value]
+        'true': True, 't': True, 'on': True, '1': True,
+        'false': False, 'f': False, 'off': False, '0': False,
+    }.get(str(value).lower(), False)#if not isinstance(value, basestring):

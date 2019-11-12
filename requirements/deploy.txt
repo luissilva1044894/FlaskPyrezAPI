@@ -1,3 +1,2 @@
 -r pip.txt
 gunicorn==20.0.0
-python-decouple==3.1
