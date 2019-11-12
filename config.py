@@ -2,7 +2,7 @@ import os
 
 app_dir = os.path.abspath(os.path.dirname(__file__))
 
-class BaseConfig(object):
+class Config(object):
 	from app.utils import random, get_env, to_bool
 
 	SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}.db'.format('app' or __name__))#'sqlite:///:memory:'
@@ -34,13 +34,14 @@ class BaseConfig(object):
 	@property
 	def DATABASE_URI(self):
 		return SQLALCHEMY_DATABASE_URI
-class DevelopementConfig(BaseConfig):
+class DevelopementConfig(Config):
 	DEVELOPMENT = True#DEBUG = 
 	ENV = 'development'#dev
 
-class TestingConfig(BaseConfig):#StagingConfig
-	TESTING = DEVELOPMENT = DEBUG = True
+class TestingConfig(Config):#StagingConfig
+	TESTING = DEVELOPMENT = True
+	DEBUG = False
 
-class ProductionConfig(BaseConfig):
+class ProductionConfig(Config):
 	TESTING = DEVELOPMENT = False
 	ENV = 'production'

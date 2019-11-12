@@ -15,6 +15,7 @@ from pyrez.api import *
 from pyrez.exceptions import PlayerNotFound, MatchException
 from pyrez.enumerations import Champions, Tier
 from langs import *
+from app.utils import get_env
 
 app = Flask(__name__, static_folder='static', template_folder='templates', static_url_path='', instance_relative_config=True) #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
 with app.app_context():
@@ -28,7 +29,8 @@ with app.app_context():
             'prod': 'config.ProductionConfig'
         }.get(str(x).lower(), 'config.ProductionConfig')
     #init_db()
-    app.config.from_object(os.getenv('FLASK_ENV', get_config('dev' if os.sys.platform == 'win32' else 'prod')))# object-based default configuration
+    #'FLASK_CONFIGURATION'
+    app.config.from_object(get_env('FLASK_ENV', default=get_config('dev' if os.sys.platform == 'win32' else 'prod')))# object-based default configuration
     app.config.from_pyfile('config.cfg', silent=True)#https://flask.palletsprojects.com/en/1.1.x/config/
     print(app.secret_key)
     db = SQLAlchemy(app)
@@ -115,7 +117,6 @@ try:
     last_session = Session.query.first()
 except (OperationalError, ProgrammingError):
     last_session = None
-from app.utils import get_env
 paladinsAPI = PaladinsAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=last_session.sessionId if last_session else None)
 
 @app.errorhandler(404)
