@@ -8,7 +8,9 @@ def open_if_exists(filename, mode='rb', encoding='utf-8'):
 
 def read_json(filename, mode='rb', encoding='utf-8'):
 	import json
-	with open_if_exists(filename, mode, encoding) as f:
+	__x = open_if_exists(filename, mode, encoding)
+	print(__x)
+	with __x as f:
 		return json.load(f)
 	#from json.decoder import JSONDecodeError
 	#try:
