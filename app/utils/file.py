@@ -5,6 +5,7 @@ def open_if_exists(filename, mode='rb', encoding='utf-8'):
 
     #os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir))) # allow setup.py to be run from any path
     import glob
+    print(os.path.join(os.path.abspath(os.path.dirname(__file__)).replace('app\\utils', ''), filename))
     print([f for f in glob.glob("**/", recursive=True)])
 
     app_dir = os.path.abspath(os.path.dirname(__file__))
@@ -16,7 +17,7 @@ def open_if_exists(filename, mode='rb', encoding='utf-8'):
     #print(app_dir.replace('app\\utils', '') + filename)
     #print('EXIST: {} '.format(os.path.isfile(filename)))
     #print('EXIST: {} '.format(os.path.isfile(''.join([app_dir.replace('app\\utils', ''), filename]))))
-    if not os.path.isfile(''.join([app_dir.replace('app\\utils', ''), filename])):#os.path.isfile(filename):
+    if not os.path.isfile(filename):
     	return None
     return open(filename, mode=mode)#, encoding=encoding)
 
