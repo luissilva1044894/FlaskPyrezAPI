@@ -28,7 +28,7 @@ with app.app_context():
             'prod': 'config.ProductionConfig'
         }.get(str(x).lower(), 'config.ProductionConfig')
     #init_db()
-    app.config.from_object(os.getenv('FLASK_ENV', get_config('dev' if os.sys.platform == 'win32' else 'prod')))
+    app.config.from_object(os.getenv('FLASK_ENV', get_config('dev' if os.sys.platform == 'win32' else 'prod')))# object-based default configuration
     app.config.from_pyfile('config.cfg', silent=True)#https://flask.palletsprojects.com/en/1.1.x/config/
     print(app.secret_key)
     db = SQLAlchemy(app)
