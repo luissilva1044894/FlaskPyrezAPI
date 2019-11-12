@@ -18,23 +18,18 @@ from langs import *
 
 import os
 try:
-    DEBUG = config('DEBUG', default=False, cast=bool)
     PYREZ_AUTH_ID = config('PYREZ_AUTH_ID')
     PYREZ_DEV_ID = config('PYREZ_DEV_ID')
-    DATABASE_URL = config('DATABASE_URL')
 except:
-    DEBUG = json.loads(os.environ['DEBUG'].lower()) if os.environ['DEBUG'] else False#https://stackoverflow.com/questions/715417/converting-from-a-string-to-boolean-in-python
     PYREZ_AUTH_ID = os.environ('PYREZ_AUTH_ID')
     PYREZ_DEV_ID = os.environ('PYREZ_DEV_ID')
-    DATABASE_URL = os.environ('DATABASE_URL') or 'sqlite:///{}.db'.format(__name__)
 
 app = Flask(__name__, static_folder='static', template_folder='templates', static_url_path='', instance_relative_config=True) #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
 with app.app_context():
     #init_db()
-    from app.utils import random
-    app.secret_key = os.getenv('SECRET_KEY', random(as_string=True))
-    app.config.from_object(os.getenv('FLASK_ENV', 'config.DevelopementConfig'))
-    app.config['SQLALCHEMY_DATABASE_URI'], app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = DATABASE_URL, False
+    import os
+    app.config.from_object(os.getenv('FLASK_ENV', 'config.DevelopementConfig' if os.sys.platform == 'win32' else 'config.ProductionConfig'))
+    print(app.secret_key)
     db = SQLAlchemy(app)
 
     from app import register
@@ -441,26 +436,7 @@ def getWinrate():
     return CHAMP_WINRATE_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getInName(getPlayerRequest), getPlayerRequest.accountLevel), getPlayerRequest.wins, getPlayerRequest.losses,
                         formatDecimal(kills), formatDecimal(deaths), formatDecimal(assists), int(kda) if kda % 2 == 0 else round(kda, 2), getPlayerRequest.winratio)
 if __name__ == '__main__':
-    if DEBUG:
-        #_players = Player.query.filter_by(id='X')
-        #for _player in _players:
-        #    input(_player)
-        #    _player.delete()
-        players = Player.query.all()
-        print('Entries: {}'.format(formatDecimal(len(players))))
-        for player in players:
-            try:
-                p = paladinsAPI.getPlayer(player.id)
-                if p.lastLoginDatetime.year < datetime.utcnow().year or p.accountLevel < 15:
-                    player.delete()
-            except PlayerNotFound:
-                player.delete()
-            except AttributeError:
-                input(p)
-            #delete = input('Delete? {}'.format(player))
-            #if delete.lower() == 'y':
-            #    player.delete()
-    app.run(debug=DEBUG, use_reloader=DEBUG)#app.config['DEBUG']
+    app.run(debug=app.config['DEBUG'], use_reloader=app.config['DEBUG'])
     #port = int(os.getenv('PORT', 5000))
     #print('Starting app on port %d' % port)
     #app.run(debug=DEBUG, port=port, host='0.0.0.0')
