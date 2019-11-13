@@ -29,8 +29,9 @@ blueprint = Blueprint('paladins', __name__, static_folder='static', template_fol
 @blueprint.route('/', methods=['GET'])
 def root(error=None):
 	"""Homepage route."""
-	from ..utils import fix_url_for, get_json
-	return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json('pt'), blueprint.name), lang='pt', my_name=blueprint.name.upper())
+	from ..utils import fix_url_for, get_json, get_language
+    lang = get_language(request)
+	return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(lang), blueprint.name), lang=lang, my_name=blueprint.name.upper())
 
 from pyrez.exceptions import MatchException, PlayerNotFound
 @blueprint.errorhandler(MatchException)
