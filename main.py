@@ -34,8 +34,15 @@ with app.app_context():
     print(app.secret_key)
     db = SQLAlchemy(app)
 
-    from app import register
-    register(app)
+    #from app import register
+    #register(app)
+    from app.overwatch import register as overwatch_register
+    from app.twitch import register as twitch_register
+    from app.views import blueprint
+    overwatch_register(app)
+    twitch_register(app)
+    app.register_blueprint(blueprint, url_prefix='/api')
+    
 
 class Session(db.Model):
     __tablename__ = 'session'
