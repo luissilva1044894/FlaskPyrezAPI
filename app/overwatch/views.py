@@ -13,7 +13,7 @@ def root(error=None):
 	"""Homepage route."""
 	print(blueprint.root_path)
 	from ..utils import fix_url_for, get_json, get_language
-    lang = get_language(request)
+	lang = get_language(request)
 	return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(lang), blueprint.name), lang=lang, my_name=blueprint.name.upper())
 
 @blueprint.route('/rank', methods=['GET'])
