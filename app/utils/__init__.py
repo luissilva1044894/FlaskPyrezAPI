@@ -22,6 +22,15 @@ class PlatformsSupported(BaseEnumeration):
 def print_exception(exc):
     print(' : '.join([str(_) for _ in [type(exc), exc.args, exc]]))
 
+def get_accepted_languages(request_args):
+    return str(request_args.accept_languages).split('-')[0] if request_args.accept_languages else LanguagesSupported.English.value
+def get_language(request_args):
+    aux = str(request_args.args.get('language', default=get_accepted_languages(request_args))).lower()
+    try:
+        return LanguagesSupported(aux).value
+    except ValueError:
+        return LanguagesSupported.English.value
+
 def get_last_seen(last_seen, language=LanguagesSupported.English):
     from datetime import datetime
     delta = datetime.utcnow() - last_seen
