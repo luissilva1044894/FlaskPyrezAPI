@@ -9,7 +9,7 @@ blueprint = Blueprint(replace(__name__, 'app.', 'api/', '.', replace_or_split=Tr
 
 @blueprint.route('/random_viewer', methods=['GET'])
 @blueprint.route('/random_user', methods=['GET'])
-def _randon_viewer_route():
+def _random_viewer_route():
 	from .controllers import random_viewer_function
 	from ..utils import get_query
 
