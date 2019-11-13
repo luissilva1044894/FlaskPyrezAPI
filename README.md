@@ -36,7 +36,7 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 3. Create a virtualenv: `virtualenv -p python venv`
 4. Activate it.
 5. Install Python Dependencies: `pip install --upgrade pip setuptools wheel` | `pip install -r requirements.txt`
-6. Edit [`.env`](./.env) and replace the `PYREZ_AUTH_ID` and `PYREZ_DEV_ID` with the `authId` and `devId` that you receive from [`Hi-Rez Studios`](https://luissilva1044894.github.io/Pyrez/docs#registration "Form access to Hi-Rez Studios API").
+6. Edit [`.env`](./.env.example) and replace the `PYREZ_AUTH_ID` and `PYREZ_DEV_ID` with the `authId` and `devId` that you receive from [`Hi-Rez Studios`](https://luissilva1044894.github.io/Pyrez/docs#registration "Form access to Hi-Rez Studios API").
 7. Run: ` python manage.py db migrate`
 8. Run server: `python main.py runserver`
 9. Go to your browser and point it towards `http://127.0.0.1:5000`
@@ -48,7 +48,7 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 4. `git init`
 5. `heroku git:remote -a your-app-name`
 6. Download this repo and copy all files into `your-app-name` folder
-7. Edit [`.env`](./.env) and replace the `PYREZ_AUTH_ID` and `PYREZ_DEV_ID` with the `authId` and `devId` that you receive from [`Hi-Rez Studios`](https://luissilva1044894.github.io/Pyrez/docs#registration "Form access to Hi-Rez Studios API").
+7. Edit [`.env`](./.env.example) and replace the `PYREZ_AUTH_ID` and `PYREZ_DEV_ID` with the `authId` and `devId` that you receive from [`Hi-Rez Studios`](https://luissilva1044894.github.io/Pyrez/docs#registration "Form access to Hi-Rez Studios API").
 8. `heroku config:push`
 9. `git add .`
 10. `git commit -m "Going to Heroku"`
