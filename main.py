@@ -127,10 +127,10 @@ def internal_error(error=None):
 @app.before_first_request
 def before_first_request_func():
     paladinsAPI.onSessionCreated += sessionCreated
-@app.route('/', methods=['GET'])
 @app.route('/api', methods=['GET'])
 @app.route('/index', methods=['GET'])
 @app.route('/index.html', methods=['GET'])
+@app.route('/', methods=['GET'])
 def root():
     """Homepage route."""
     lang = getLanguage(request)
