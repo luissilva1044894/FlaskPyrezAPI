@@ -8,7 +8,7 @@ from ..utils import replace
 blueprint = Blueprint(replace(__name__, 'app.', 'api/', '.', replace_or_split=True), __name__, static_folder='static', template_folder='templates', static_url_path='')
 
 @blueprint.route('/rank', methods=['GET'])
-def _randon_viewer_route():
+def _rank_viewer_route():
 	return '!'
 
 #https://github.com/iforvard/SmiteLiveMatchCheck/blob/master/SLMChek.py

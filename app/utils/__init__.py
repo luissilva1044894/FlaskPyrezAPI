@@ -98,11 +98,11 @@ def winratio(wins, matches_played):
 #        from app.utils.file import read_json
 #        g._json = read_json(filename + '.json')
 #    return g._json
-def get_json(lang='en', *, key=None, force=False):
+def get_json(lang='en', *, key=None, force=False, folder='lang/'):
     from flask import g
     if force or '_json' not in g:
         from app.utils.file import read_json
-        g._json = read_json('langs/{}.json'.format(lang))
+        g._json = read_json('{}{}.json'.format(folder, lang))
     if key:
         return g._json[key]
     return g._json
@@ -116,10 +116,9 @@ def fix_url_for(_json, blueprint_name):
                     _json['HTML']['CMD_TABLE'][blueprint_name.upper()][_][__] = url_for('{}.{}'.format(blueprint_name, _json['HTML']['CMD_TABLE'][blueprint_name.upper()][_][__].split(':')[1]), _external=True)
     return _json
 
-def get_env(name, default=None, verbose=False):#, cast=None
+def get_env(name, default=None, verbose=False):
     import os
     try:
-        #from decouple import config, Csv #python-decouple==3.1
         from dotenv import load_dotenv
     except ImportError:
         pass
@@ -131,12 +130,21 @@ def get_env(name, default=None, verbose=False):#, cast=None
         #from pathlib import Path  # python3 only
         load_dotenv(verbose=verbose)#,dotenv_path=Path('.') / '.env'
     finally:
-        return os.getenv(name) or default#return config(name, cast=cast) if cast is not None else config(name)
+        return os.getenv(name) or default
 
 def to_bool(value=None):
+    """
+    https://stackoverflow.com/questions/715417/converting-from-a-string-to-boolean-in-python
+
+    >>> import json
+    >>> json.loads("false".lower())
+    False
+    >>> json.loads("True".lower())
+    True
+    """
     if isinstance(value, bool):
         return value
     return { #if lower_value in valid: return valid[lower_value]
-        'true': True, 't': True, 'on': True, '1': True,
-        'false': False, 'f': False, 'off': False, '0': False,
+        '1': True, 'true': True, 't': True, 'on': True, 'yes': True,
+        '0': False, 'false': False, 'f': False, 'off': False, 'no': False,
     }.get(str(value).lower(), False)#if not isinstance(value, basestring):

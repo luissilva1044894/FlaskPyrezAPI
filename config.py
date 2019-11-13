@@ -2,7 +2,7 @@ import os
 
 app_dir = os.path.abspath(os.path.dirname(__file__))
 
-class BaseConfig(object):
+class Config(object):
 	from app.utils import random, get_env, to_bool
 
 	SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}.db'.format('app' or __name__))#'sqlite:///:memory:'
@@ -10,6 +10,7 @@ class BaseConfig(object):
 
 	_binds = get_env('SQLALCHEMY_BINDS', default=None)
 	if _binds:
+		#https://docs.sqlalchemy.org/en/13/core/exceptions.html
 		#https://flask-sqlalchemy.palletsprojects.com/en/2.x/binds/
 		#https://flask-migrate.readthedocs.io/en/latest/
 		SQLALCHEMY_BINDS = {}
@@ -22,20 +23,20 @@ class BaseConfig(object):
 	DEBUG = to_bool(get_env('DEBUG', default=os.sys.platform == 'win32'))
 
 	# SECURITY WARNING: keep the secret key used in production secret!
-	SECRET_KEY = get_env('SECRET_KEY', default=random(as_string=True, size=50))
+	SECRET_KEY = get_env('SECRET_KEY', default=random(as_string=True, size=65))
 
 	DEVELOPMENT = TESTING = False
 
 	@property
 	def DATABASE_URI(self):
 		return SQLALCHEMY_DATABASE_URI
-class DevelopementConfig(BaseConfig):
-	DEVELOPMENT = True#DEBUG = 
+class DevelopementConfig(Config):
+	DEVELOPMENT = True
 	ENV = 'development'#dev
 
-class TestingConfig(BaseConfig):#StagingConfig
+class TestingConfig(Config):#StagingConfig
 	TESTING = DEVELOPMENT = DEBUG = True
 
-class ProductionConfig(BaseConfig):
-	TESTING = DEVELOPMENT = False
+class ProductionConfig(Config):
+	TESTING = DEVELOPMENT = DEBUG = False
 	ENV = 'production'
