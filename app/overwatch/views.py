@@ -11,6 +11,7 @@ blueprint = Blueprint(replace(__name__, 'app.', 'api/', '.', replace_or_split=Tr
 @blueprint.route('/', methods=['GET'])
 def root(error=None):
 	"""Homepage route."""
+	print(blueprint.root_path)
 	from ..utils import fix_url_for, get_json
 	return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json('pt'), blueprint.name), lang='pt', my_name=blueprint.name.upper())
 
