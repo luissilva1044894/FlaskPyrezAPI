@@ -20,7 +20,7 @@ class Config(object):
 		print(SQLALCHEMY_BINDS)
 	# SECURITY WARNING: don't run with debug turned on in production!
 	#Default: True if ENV is 'development', or False otherwise.
-	DEBUG = to_bool(get_env('DEBUG', default=os.sys.platform == 'win32'))
+	DEBUG = to_bool(get_env('DEBUG', default=os.sys.platform == 'win32' or os.name == 'nt'))
 
 	# SECURITY WARNING: keep the secret key used in production secret!
 	SECRET_KEY = get_env('SECRET_KEY', default=random(as_string=True, size=65))
