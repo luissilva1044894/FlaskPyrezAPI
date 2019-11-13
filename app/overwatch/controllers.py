@@ -4,18 +4,24 @@ def get_battle_net(battle_net):
 def get_rank_name(skill_rating):
 	if skill_rating >= 1 and skill_rating <= 1499:
 		return 'Bronze'
-	elif skill_rating >= 1500 and skill_rating <= 1999:
+	if skill_rating >= 1500 and skill_rating <= 1999:
 		return 'Silver'
-	elif skill_rating >= 2000 and skill_rating <= 2499:
+	if skill_rating >= 2000 and skill_rating <= 2499:
 		return 'Gold'
-	elif skill_rating >= 2500 and skill_rating <= 2999:
+	if skill_rating >= 2500 and skill_rating <= 2999:
 		return 'Platinum'
-	elif skill_rating >= 3000 and skill_rating <= 3499:
+	if skill_rating >= 3000 and skill_rating <= 3499:
 		return 'Diamond'
-	elif skill_rating >= 3500 and skill_rating <= 3999:
+	if skill_rating >= 3500 and skill_rating <= 3999:
 		return 'Master'
-	elif skill_rating >= 4000:
-		'Grandmaster'
+	if skill_rating >= 4000:
+		return 'Grandmaster'
+	#_ranks = { 'bronze': { 'min': 1, 'max': 1499}, 'silver': { 'min': 1500, 'max': 1999},
+	#'gold': { 'min': 2000, 'max': 2499}, 'platinum': { 'min': 2500, 'max': 2999},
+	#'diamond': { 'min': 3000, 'max': 3499}, 'master': { 'min': 3500, 'max': 3999}, 'grandmaster': { 'min': 4000, 'max': 999999} }
+	#for _ in _ranks:
+	#	if skill_rating >= _ranks[_]['min'] and skill_rating <= _ranks[_]['max']:
+	#		return _.title()
 	return '???'
 
 def rank_func(battle_net, platform, paladins_like=False, format_average_sr=False):
