@@ -8,6 +8,7 @@ obj
 __pycache__
 obj
 env
+.env
 
 # Windows image file caches
 Thumbs.db
