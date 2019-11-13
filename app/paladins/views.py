@@ -30,7 +30,7 @@ blueprint = Blueprint('paladins', __name__, static_folder='static', template_fol
 def root(error=None):
 	"""Homepage route."""
 	from ..utils import fix_url_for, get_json, get_language
-    lang = get_language(request)
+	lang = get_language(request)
 	return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(lang), blueprint.name), lang=lang, my_name=blueprint.name.upper())
 
 from pyrez.exceptions import MatchException, PlayerNotFound
