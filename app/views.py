@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, request
+from flask import Blueprint, request, render_template
 
 from .utils import replace
-blueprint = Blueprint(replace(__name__, 'app.', 'api'), __name__, static_folder='static', template_folder='templates', static_url_path='')
+blueprint = Blueprint(replace(__name__, 'app.', 'api').replace('views', ''), __name__, static_folder='static', template_folder='templates', static_url_path='')
 
 #https://danidee10.github.io/2016/11/20/flask-by-example-8.html
 #https://exploreflask.com/en/latest/blueprints.html
 #https://flask.palletsprojects.com/en/1.1.x/patterns/urlprocessors/#internationalized-blueprint-urls
 #https://flask.palletsprojects.com/en/1.1.x/patterns/favicon/
+
+@blueprint.route('/', methods=['GET'])
+def root():
+    """Homepage route."""
+    from .utils import fix_url_for, get_json, get_language
+    lang = get_language(request)
+    return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(lang), 'paladins'), lang=lang, my_name='PALADINS')
 
 @blueprint.route('/random')
 def randon_number_route():
