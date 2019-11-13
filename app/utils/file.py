@@ -10,7 +10,6 @@ def open_if_exists(filename, mode='rb', encoding='utf-8'):
 
     app_dir = os.path.abspath(os.path.dirname(__file__))
 
-    import os
     #print(os.listdir())
     print(['{}'.format(f) for f in os.listdir() if not f.startswith('__')])
     #print(os.path.join(os.path.abspath(os.path.dirname(__file__)).replace('app\\utils', ''), filename))
