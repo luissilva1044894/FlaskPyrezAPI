@@ -27,8 +27,12 @@ User-Agent: ScoutJet
 
 User-Agent: Yandex
 
+User-agent: AhrefsBot
+
 User-Agent: *
+
+Disallow: /
 Disallow: /api
-NoIndex: /api
+NoIndex: /
 
 Sitemap: https://nonsocial.herokuapp.com/sitemap.xml
