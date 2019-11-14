@@ -46,7 +46,7 @@ def create_app():
 	@app.after_request
 	def jsonify_request(response):
 		"""JSONify the response. https://github.com/Fuyukai/OWAPI/blob/master/owapi/app.py#L208"""
-		if response.headers['Content-Type'].lower().rfind('application/json') != -1:
+		if response.headers.get('Content-Type', None):
 			from flask import request
 			import json
 			if request.args.get('format', 'json') in ['json_pretty', 'pretty']:
