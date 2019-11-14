@@ -32,7 +32,6 @@ User-agent: AhrefsBot
 User-Agent: *
 
 Disallow: /
-Disallow: /api
 NoIndex: /
 
 Sitemap: https://nonsocial.herokuapp.com/sitemap.xml
