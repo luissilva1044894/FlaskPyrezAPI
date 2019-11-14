@@ -46,14 +46,13 @@ def create_app():
 	@app.after_request
 	def jsonify_request(response):
 		"""JSONify the response. https://github.com/Fuyukai/OWAPI/blob/master/owapi/app.py#L208"""
-		if response.headers.get('Content-Type', None):
+		if response.headers.get('Content-Type', '').lower() == app.config['JSONIFY_MIMETYPE'].lower():
 			from flask import request
 			import json
-			if request.args.get('format', 'json') in ['json_pretty', 'pretty']:
+			if request.args.get('format', 'json') in ['json_pretty', 'pretty'] or app.config['JSONIFY_PRETTYPRINT_REGULAR']:
 				from datetime import datetime, timedelta, timezone
 				from email.utils import format_datetime
-				
-				response.set_data(json.dumps(response.get_json(), sort_keys=True, indent=4, separators=(',', ': ')))
+				response.set_data(json.dumps(response.get_json(), sort_keys=app.config['JSON_SORT_KEYS'], ensure_ascii=app.config['JSON_AS_ASCII'], indent=4, separators=(',', ': ')))
 				response.headers['Cache-Control'] = 'public, max-age=300'
 				response.headers['Expires'] = format_datetime((datetime.utcnow() + timedelta(seconds=300)).replace(tzinfo=timezone.utc), usegmt=True)
 		return response
@@ -91,7 +90,8 @@ def create_app():
 			return handle_http_exception(error)
 		return ret_val
 	# Override the HTTP exception handler.
-	#app.config['TRAP_HTTP_EXCEPTIONS'] = True
+	app.config['TRAP_HTTP_EXCEPTIONS'] = True
+	#TRAP_BAD_REQUEST_ERRORS = PROPAGATE_EXCEPTIONS = True
 	app.handle_http_exception = get_http_exception_handler(app)
 
 	from werkzeug.exceptions import default_exceptions #werkzeug import HTTP_STATUS_CODES
