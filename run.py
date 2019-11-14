@@ -43,6 +43,20 @@ def create_app():
 	def _root(error=None):
 		from flask import redirect, url_for
 		return redirect(url_for('api.root'))
+	@app.after_request
+	def jsonify_request(response):
+		"""JSONify the response. https://github.com/Fuyukai/OWAPI/blob/master/owapi/app.py#L208"""
+		if response.headers['Content-Type'].lower().rfind('application/json') != -1:
+			from flask import request
+			import json
+			if request.args.get('format', 'json') in ['json_pretty', 'pretty']:
+				from datetime import datetime, timedelta, timezone
+				from email.utils import format_datetime
+				
+				response.set_data(json.dumps(response.get_json(), sort_keys=True, indent=4, separators=(',', ': ')))
+				response.headers['Cache-Control'] = 'public, max-age=300'
+				response.headers['Expires'] = format_datetime((datetime.utcnow() + timedelta(seconds=300)).replace(tzinfo=timezone.utc), usegmt=True)
+		return response
 	def get_http_exception_handler(app):
 		"""Overrides the default http exception handler to return JSON."""
 		from functools import wraps
