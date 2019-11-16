@@ -4,7 +4,8 @@
             "plan": "heroku-postgresql:hobby-dev",
             "options": {
                 "version": "11"
-            }
+            },
+            "as": "PALADINS_DB"
         }
     ],
     "buildpacks": [ { "url": "https://github.com/heroku/heroku-buildpack-python" } ],
