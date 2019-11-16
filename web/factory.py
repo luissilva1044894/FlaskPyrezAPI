@@ -22,8 +22,8 @@ def configure_logging(app=None):
 		import os
 		#logs_folder = os.path.join(app.root_path, os.pardir, app.config['LOG_PATH'])
 		logs_folder = os.path.join(app.static_folder, app.config['LOG_PATH'])
-		#from utils.file import create_folder
-		#create_folder(logs_folder)
+		from utils.file import create_folder
+		create_folder(logs_folder)
 		#https://github.com/nullcc/flask_api/blob/master/src/app.py#L265
 		if not app.config.get('TESTING', None):
 			if not app.config['DEBUG']:
@@ -125,7 +125,7 @@ def create_app(app_name=None, *, static_folder=None, template_folder=None, stati
 	app = Flask(app_name, static_folder=static_folder or get_path(root_path, 'static'), template_folder=template_folder or get_path(root_path, 'templates'), static_url_path=static_url_path or '', instance_relative_config=instance_relative_config)
 	#app = Flask(app_name, static_folder=static_folder or 'static', template_folder=template_folder or g'templates', static_url_path=static_url_path or '', instance_relative_config=instance_relative_config)
 	load_config(app)
-	configure_logging(app)
+	#configure_logging(app)
 	register_blueprints(app, app.name)
 	#regiter_context_processor(app)
 	print(app.root_path, app.name, app.blueprints)
