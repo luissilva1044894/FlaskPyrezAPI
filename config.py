@@ -52,6 +52,8 @@ class Config(object):
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	#SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
+	import os
+	print(os.environ)
 	_binds = get_env('SQLALCHEMY_BINDS', default=None)
 	if _binds:
 		#https://docs.sqlalchemy.org/en/13/core/exceptions.html
