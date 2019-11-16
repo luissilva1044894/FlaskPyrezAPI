@@ -3,6 +3,7 @@ class Config(object):
 	from boolify import boolify
 	import os
 
+	# SQLAlchemy
 	SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}.db'.format('app' or __name__))#'sqlite:///:memory:'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	#SQLALCHEMY_COMMIT_ON_TEARDOWN = True
@@ -20,6 +21,7 @@ class Config(object):
 			if _.upper().rfind('DB') != -1 and _.upper().endswith('_URL'):#if 'DB_URL' in _.upper():
 				SQLALCHEMY_BINDS.update({_.split('_', 1)[0].lower() : get_env(_)})
 	print(SQLALCHEMY_BINDS)
+	
 	# SECURITY WARNING: don't run with debug turned on in production!
 	#Default: True if ENV is 'development', or False otherwise.
 	DEBUG = boolify(get_env('DEBUG', default=not 'heroku' in get_env('PYTHONHOME', '').lower() and os.sys.platform == 'win32' or os.name == 'nt'))
