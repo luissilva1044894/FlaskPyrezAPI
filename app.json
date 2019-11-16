@@ -28,7 +28,7 @@
             "value": "False"
         },
         "DISCORD_BOT_TOKEN": {
-            "description": "The TOKEN used by Discord.py connecting to Discord. This is the bot’s token that you receive from Discord.",
+            "description": "Used by Discord.py connecting to Discord. This is the bot’s token that you receive from Discord.",
             "required": "true",
             "value": "CHANGE_ME"
         },
