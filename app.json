@@ -1,8 +1,7 @@
 {
     "addons": [
         {
-            "plan": "scheduler:standard",
-            "as": "SCHEDULER"
+            "plan": "scheduler:standard"
         },
         {
             "plan": "heroku-postgresql:hobby-dev",
