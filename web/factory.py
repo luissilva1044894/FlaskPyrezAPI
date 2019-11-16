@@ -41,6 +41,7 @@ def register_blueprints(app, _root=None, recursive=True, include_packages=False)
 	for _ in [ _ for _ in listdir('.') if not _.startswith('_') and not _.startswith('.')]:
 		for path, subdirs, files in os.walk(_):
 			for __ in [ _[:-3] for _ in files if not _.startswith('_') and not _.startswith('.') and _.endswith('.py')]:
+				print(__)
 				try:
 					mod = importlib.import_module(os.path.join(path, __).replace('\\', '.'))
 				except (ModuleNotFoundError, ImportError):
