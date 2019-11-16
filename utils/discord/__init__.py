@@ -1,6 +1,51 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+class DiscordConfig(object):
+	"""
+	docstring for DiscordConfig
+
+	from config import DiscordConfig
+	x = DiscordConfig()
+	print(x['token'])
+	print(x.get('token'))
+	print(x.token)
+	print(x)
+	"""
+	def __init__(self, *, _config='data/config.json'):
+		#./../config/config.json
+		self.load(_config)
+	def load(self, path):
+		import os
+		if not os.path.isfile(path):#os.path.isdir(path)
+			path = join(path, 'config.json')
+		from utils.file import read_file
+		self.__kwargs__ = read_file(path, is_json=True)
+	def get(self, key, default=None):
+		return self.__getitem__(key) or default
+	def __getitem__(self, key):
+		try:
+			return self.__kwargs__[key]
+		except KeyError:
+			return None
+	def __contains__(self, key):
+		return key in self.__kwargs__
+	def __dir__(self):
+		if isinstance(self.__kwargs__, dict):
+			return self.__kwargs__.keys()
+		return {}
+	def __len__(self):
+		return len(self.__kwargs__)
+	def __iter__(self):
+		return (key for key in self.__kwargs__) #return (self.__kwargs__[key] for key in self.__kwargs__)
+	def __repr__(self):
+		return self.__str__()
+	def __str__(self):
+		if self.__kwargs__:
+			import json
+			return json.dumps(self.__kwargs__, ensure_ascii=True, sort_keys=True, indent=2)
+		return ''
+
 def load_cogs(bot, cogs_dir='cogs'):
 	"""Automagically register all cogs packages inside a 'cogs' folder."""
 	from os import listdir, getcwd
