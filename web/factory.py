@@ -22,8 +22,8 @@ def configure_logging(app=None):
 		import os
 		#logs_folder = os.path.join(app.root_path, os.pardir, app.config['LOG_PATH'])
 		logs_folder = os.path.join(app.static_folder, app.config['LOG_PATH'])
-		from utils.file import create_folder
-		create_folder(logs_folder)
+		#from utils.file import create_folder
+		#create_folder(logs_folder)
 		#https://github.com/nullcc/flask_api/blob/master/src/app.py#L265
 		if not app.config.get('TESTING', None):
 			if not app.config['DEBUG']:
@@ -40,7 +40,6 @@ def register_blueprints(app, _root=None, recursive=True, include_packages=False)
 	import os
 	for _ in [ _ for _ in listdir('.') if not _.startswith('_') and not _.startswith('.')]:
 		for path, subdirs, files in os.walk(_):
-			print(path, files)
 			for __ in [ _[:-3] for _ in files if not _.startswith('_') and not _.startswith('.') and _.endswith('.py')]:
 				try:
 					mod = importlib.import_module(os.path.join(path, __).replace('\\', '.'))
@@ -129,6 +128,7 @@ def create_app(app_name=None, *, static_folder=None, template_folder=None, stati
 	configure_logging(app)
 	register_blueprints(app, app.name)
 	#regiter_context_processor(app)
+	print(app.root_path, app.name, app.blueprints)
 	register_jsonify(app)
 	#configure_extensions(app)
 	return app
