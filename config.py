@@ -1,52 +1,7 @@
-import os
-
-app_dir = os.path.abspath(os.path.dirname(__file__))
-class DiscordConfig(object):
-	"""
-	docstring for DiscordConfig
-
-	from config import DiscordConfig
-	x = DiscordConfig()
-	print(x['token'])
-	print(x.get('token'))
-	print(x.token)
-	print(x)
-	"""
-	def __init__(self, *, _config='data/config.json'):
-		#./../config/config.json
-		self.load(_config)
-	def load(self, path):
-		if not os.path.isfile(path):#os.path.isdir(path)
-			path = join(path, 'config.json')
-		from utils.file import read_file
-		self.__kwargs__ = read_file(path, is_json=True)
-	def get(self, key, default=None):
-		return self.__getitem__(key) or default
-	def __getitem__(self, key):
-		try:
-			return self.__kwargs__[key]
-		except KeyError:
-			return None
-	def __contains__(self, key):
-		return key in self.__kwargs__
-	def __dir__(self):
-		if isinstance(self.__kwargs__, dict):
-			return self.__kwargs__.keys()
-		return {}
-	def __len__(self):
-		return len(self.__kwargs__)
-	def __iter__(self):
-		return (key for key in self.__kwargs__) #return (self.__kwargs__[key] for key in self.__kwargs__)
-	def __repr__(self):
-		return self.__str__()
-	def __str__(self):
-		if self.__kwargs__:
-			import json
-			return json.dumps(self.__kwargs__, ensure_ascii=True, sort_keys=True, indent=2)
-		return ''
 class Config(object):
 	from utils import random, get_env
 	from boolify import boolify
+	import os
 
 	SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}.db'.format('app' or __name__))#'sqlite:///:memory:'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -61,10 +16,9 @@ class Config(object):
 			__ = _.split(':', 1)
 			SQLALCHEMY_BINDS.update({__[0].lower() : __[1] if __[1].rfind('://') != -1 else get_env(__[1])})
 	else:
-		import os
 		print('heroku' in os.environ)
 		for _ in os.environ:
-			if 'DB_URL' in _.upper():
+			if _.upper().rfind('DB') != -1 and _.upper().endswith('_URL'):#if 'DB_URL' in _.upper():
 				SQLALCHEMY_BINDS.update({_.split('_', 1)[0] : get_env(_)})
 	print(SQLALCHEMY_BINDS)
 	# SECURITY WARNING: don't run with debug turned on in production!
