@@ -57,6 +57,9 @@ def livematch_handler():
 
 @blueprint.route('/rank/', methods=['GET'])
 def rank_handler():
+	#from flask import url_for
+	#print(url_for('api.paladins.views.rank_handler', external=True)) > /api/paladins/rank/?external=True
+	#print(url_for('api.paladins.views.rank_handler', external=True, _external=True))
 	return get_page()
 
 @blueprint.route('/stalk', methods=['GET'])

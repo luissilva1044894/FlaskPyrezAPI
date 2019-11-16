@@ -18,15 +18,24 @@
     "buildpacks": [ { "url": "https://github.com/heroku/heroku-buildpack-python" } ],
     "description": "FlaskPyrezAPI is an open-source endpoint for Twitch commands that provides datas about players, matches and others stats of Paladins game.",
     "env": {
-        "BOT_TOKEN": {
-            "description": "",
-            "required": "true",
-            "value": ""
-        },
         "DEBUG": {
             "description": "",
             "required": "true",
             "value": "False"
+        },
+        "DISCORD_BOT_TOKEN": {
+            "description": "The TOKEN used by Discord.py connecting to Discord. This is the bot’s token that you receive from Discord.",
+            "required": "true",
+            "value": "CHANGE_ME"
+        },
+        "FACEBOOK_ACCESS_TOKEN": {
+            "description": "The ACCESS_TOKEN used to post messages on FB messenger",
+            "required": "true",
+            "value": "CHANGE_ME"
+        },
+        "FACEBOOK_VERIFY_TOKEN": {
+            "description": "The VERIFY_TOKEN used by FB messenger.",
+            "generator": "secret"
         },
         "PYREZ_AUTH_ID": {
             "description": "Used for authentication. This is the authentication key that you receive from Hi-Rez Studios.",
