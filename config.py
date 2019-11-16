@@ -16,26 +16,23 @@ class Config(object):
 			__ = _.split(':', 1)
 			SQLALCHEMY_BINDS.update({__[0].lower() : __[1] if __[1].rfind('://') != -1 else get_env(__[1])})
 	else:
-		print('heroku' in os.environ, 'heroku' in get_env('PYTHONHOME', ''))
-		print(os.environ)
+		print(not 'heroku' in get_env('PYTHONHOME', '').lower(), get_env('PYTHONHOME', ''))
 		for _ in os.environ:
 			if _.upper().rfind('DB') != -1 and _.upper().endswith('_URL'):#if 'DB_URL' in _.upper():
-				SQLALCHEMY_BINDS.update({_.split('_', 1)[0] : get_env(_)})
+				SQLALCHEMY_BINDS.update({_.split('_', 1)[0].lower() : get_env(_)})
 	print(SQLALCHEMY_BINDS)
 	# SECURITY WARNING: don't run with debug turned on in production!
 	#Default: True if ENV is 'development', or False otherwise.
-	DEBUG = boolify(get_env('DEBUG', default=os.sys.platform == 'win32' or os.name == 'nt'))
+	DEBUG = boolify(get_env('DEBUG', default=not 'heroku' in get_env('PYTHONHOME', '').lower() and os.sys.platform == 'win32' or os.name == 'nt'))
 
 	# SECURITY WARNING: keep the secret key used in production secret!
 	SECRET_KEY = get_env('SECRET_KEY', default=random(as_string=True, size=65))
 
 	PORT, HOST = get_env('PORT', default=5000), get_env('HOST', default='0.0.0.0')
 
-	DEVELOPMENT = TESTING = False
+	DEVELOPMENT = TESTING = not 'heroku' in get_env('PYTHONHOME', '').lower()
 
-	LOG_PATH = get_env('LOG_PATH', 'logs')
-	LOG_FILENAME = get_env('LOG_FILENAME', 'flask.log')
-	LOG_LEVEL = get_env('LOG_LEVEL', 'info')
+	LOG_PATH, LOG_FILENAME, LOG_LEVEL = get_env('LOG_PATH', 'logs'), get_env('LOG_FILENAME', 'flask.log'), get_env('LOG_LEVEL', 'info')
 
 	@property
 	def DATABASE_URI(self):
