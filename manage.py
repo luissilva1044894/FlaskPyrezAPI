@@ -8,12 +8,29 @@ from utils import get_env
 #from flask_sqlalchemy import SQLAlchemy
 #from flask_migrate import Migrate, MigrateCommand
 
-#from web.factory import create_app
+#from web.factory import create_app, db
 #app = create_app()
 
 manager = Manager(app)
 _debug_mod = get_env('DEBUG', default=not 'heroku' in get_env('PYTHONHOME', '').lower())
 manager.add_command('debug', Server(host=get_env('HOST', default='0.0.0.0'), port=get_env('PORT', default=5000), use_debugger=_debug_mod))
+
+@manager.command
+def createdb():
+	db.create_all()
+@manager.command
+def dropdb():
+	db.drop_all()
+@manager.command
+def resetdb():
+	db.drop_all()
+	db.create_all()
+
+@manager.command
+def schedule_task():
+	t = 'i am a scheduled action, yeah'
+	print(t)
+	app.logger.debug(t)
 
 @app.shell_context_processor
 def make_shell_context():
