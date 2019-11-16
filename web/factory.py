@@ -40,6 +40,7 @@ def register_blueprints(app, _root=None, recursive=True, include_packages=False)
 	import os
 	for _ in [ _ for _ in listdir('.') if not _.startswith('_') and not _.startswith('.')]:
 		for path, subdirs, files in os.walk(_):
+			print(path, files)
 			for __ in [ _[:-3] for _ in files if not _.startswith('_') and not _.startswith('.') and _.endswith('.py')]:
 				try:
 					mod = importlib.import_module(os.path.join(path, __).replace('\\', '.'))
@@ -124,7 +125,6 @@ def create_app(app_name=None, *, static_folder=None, template_folder=None, stati
 	root_path = __file__[:__file__.rfind(app_name)]
 	app = Flask(app_name, static_folder=static_folder or get_path(root_path, 'static'), template_folder=template_folder or get_path(root_path, 'templates'), static_url_path=static_url_path or '', instance_relative_config=instance_relative_config)
 	#app = Flask(app_name, static_folder=static_folder or 'static', template_folder=template_folder or g'templates', static_url_path=static_url_path or '', instance_relative_config=instance_relative_config)
-	print(app.root_path, app.name, app.blueprints)
 	load_config(app)
 	configure_logging(app)
 	register_blueprints(app, app.name)
