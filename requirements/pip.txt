@@ -9,4 +9,9 @@ Flask-SQLAlchemy==2.4.1
 #psycopg2==2.8.3 --no-binary psycopg2
 psycopg2-binary==2.8.4
 
-pyrez==1.1.0.1
+-e git+https://github.com/luissilva1044894/boolify.git@master#egg=boolify
+
+discord.py[voice]==1.2.4;python_version>='3.5.3'
+Pillow==6.2.1
+#pyrez==1.1.0.1
+-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez[dev]

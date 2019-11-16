@@ -1,2 +1,0 @@
--r pip.txt
-gunicorn==20.0.0;python_version>='3.4'
