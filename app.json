@@ -13,34 +13,6 @@
                 "version": "11"
             },
             "as": "SMITE_DB"
-        },
-        {
-            "plan": "heroku-postgresql:hobby-dev",
-            "options": {
-                "version": "11"
-            },
-            "as": "SMITE_DB1"
-        },
-        {
-            "plan": "heroku-postgresql:hobby-dev",
-            "options": {
-                "version": "11"
-            },
-            "as": "SMITE_DB2"
-        },
-        {
-            "plan": "heroku-postgresql:hobby-dev",
-            "options": {
-                "version": "11"
-            },
-            "as": "SMITE_DB3"
-        },
-        {
-            "plan": "heroku-postgresql:hobby-dev",
-            "options": {
-                "version": "11"
-            },
-            "as": "SMITE_DB4"
         }
     ],
     "buildpacks": [ { "url": "https://github.com/heroku/heroku-buildpack-python" } ],
