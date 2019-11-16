@@ -5,6 +5,7 @@ from utils import replace
 blueprint = Blueprint(__name__.split('.', 1)[1], __name__, static_url_path='', url_prefix='')#'/'
 
 @blueprint.route('/', methods=['GET'])
+@blueprint.route('/index/', methods=['GET'])
 def root(error=None):
 	"""Homepage route."""
 	#from flask import redirect, url_for
