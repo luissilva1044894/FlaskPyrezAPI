@@ -44,8 +44,6 @@ def register_blueprints(app, _root=None, recursive=True, include_packages=False)
 				try:
 					mod = importlib.import_module(os.path.join(path, __).replace('\\', '.').replace('/', '.'))
 				except (ModuleNotFoundError, ImportError) as exc:
-					print(exc)
-					print(os.path.join(path, __).replace('\\', '.'))
 					pass
 				else:
 					if hasattr(mod, 'blueprint'):
@@ -130,7 +128,6 @@ def create_app(app_name=None, *, static_folder=None, template_folder=None, stati
 	#configure_logging(app)
 	register_blueprints(app, app.name)
 	#regiter_context_processor(app)
-	print(app.root_path, app.name, app.blueprints)
 	register_jsonify(app)
 	#configure_extensions(app)
 	return app
