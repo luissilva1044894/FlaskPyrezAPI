@@ -15,8 +15,7 @@ class Config(object):
 		for _ in _binds.split(','):
 			__ = _.split(':', 1)
 			SQLALCHEMY_BINDS.update({__[0].lower() : __[1] if __[1].rfind('://') != -1 else get_env(__[1])})
-	else:
-		print(not 'heroku' in get_env('PYTHONHOME', '').lower(), get_env('PYTHONHOME', ''))
+	if 'heroku' in get_env('PYTHONHOME', '').lower():
 		for _ in os.environ:
 			if _.upper().rfind('DB') != -1 and _.upper().endswith('_URL'):#if 'DB_URL' in _.upper():
 				SQLALCHEMY_BINDS.update({_.split('_', 1)[0].lower() : get_env(_)})
