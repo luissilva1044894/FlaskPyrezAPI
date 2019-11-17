@@ -13,5 +13,5 @@ psycopg2-binary==2.8.4
 
 discord.py[voice]==1.2.4;python_version>='3.5.3'
 Pillow==6.2.1
-pyrez==1.1.0.1
-#-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez[dev]
+#pyrez==1.1.0.1
+-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez[dev]
