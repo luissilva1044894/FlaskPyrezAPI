@@ -19,6 +19,9 @@
         },
         {
             "plan": "heroku-postgresql:hobby-dev",
+            "options": {
+                "version": "11"
+            },
             "as": "DISCORD_DB"
         }
     ],
