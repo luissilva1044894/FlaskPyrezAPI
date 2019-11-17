@@ -33,7 +33,7 @@
         "DISCORD_BOT_TOKEN": {
             "description": "Used by Discord.py connecting to Discord. This is the bot’s token that you receive from Discord.",
             "required": "true",
-            "value": "CHANGE_ME"
+            "value": ""
         },
         "FACEBOOK_ACCESS_TOKEN": {
             "description": "The ACCESS_TOKEN used to post messages on FB messenger",
