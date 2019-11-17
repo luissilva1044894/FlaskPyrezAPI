@@ -42,6 +42,9 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 9. Go to your browser and point it towards `http://127.0.0.1:5000`
 
 #### Deploy (Heroku) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luissilva1044894/FlaskPyrezAPI/tree/master "Deploy to Heroku")
+
+> Heroku is a container based cloud platform that offers free plans to host web applications.
+
 1. Go to [Heroku](https://id.heroku.com/login) and create a new app (eg: `your-app-name`)
 2. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli "Heroku CLI")
 3. `heroku login`
