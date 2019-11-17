@@ -33,25 +33,25 @@ def root_handler():
 	"""Homepage route."""
 	return str(blueprint.paladins_api.ping())
 
-@blueprint.route('/deck', methods=['GET'])
-@blueprint.route('/decks', methods=['GET'])
+@blueprint.route('/deck/', methods=['GET'])
+@blueprint.route('/decks/', methods=['GET'])
 def decks_handler():
 	return get_page()
 
-@blueprint.route('/winrate', methods=['GET'])
-@blueprint.route('/kda', methods=['GET'])
+@blueprint.route('/winrate/', methods=['GET'])
+@blueprint.route('/kda/', methods=['GET'])
 def kda_handler():
 	return get_page()
 
-@blueprint.route('/lastmatch', methods=['GET'])
-@blueprint.route('/last_match', methods=['GET'])
+@blueprint.route('/lastmatch/', methods=['GET'])
+@blueprint.route('/last_match/', methods=['GET'])
 def lastmatch_handler():
 	return get_page()
 
-@blueprint.route('/currentmatch', methods=['GET'])
-@blueprint.route('/current_match', methods=['GET'])
-@blueprint.route('/livematch', methods=['GET'])
-@blueprint.route('/live_match', methods=['GET'])
+@blueprint.route('/currentmatch/', methods=['GET'])
+@blueprint.route('/current_match/', methods=['GET'])
+@blueprint.route('/livematch/', methods=['GET'])
+@blueprint.route('/live_match/', methods=['GET'])
 def livematch_handler():
 	return get_page()
 
@@ -62,10 +62,10 @@ def rank_handler():
 	#print(url_for('api.paladins.views.rank_handler', external=True, _external=True))
 	return get_page()
 
-@blueprint.route('/stalk', methods=['GET'])
+@blueprint.route('/stalk/', methods=['GET'])
 def stalk_handler():
 	return get_page()
 
-@blueprint.route('/version', methods=['GET'])
+@blueprint.route('/version/', methods=['GET'])
 def version_handler():
 	return get_page()
