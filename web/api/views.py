@@ -15,7 +15,7 @@ def root_handler(error=None):
 	"""Homepage route."""
 	return get_page()
 
-@blueprint.route('/random')
+@blueprint.route('/random/')
 def random_handler():
 	from flask import request
 	from utils import get, random
@@ -23,7 +23,7 @@ def random_handler():
 	_max, _min = try_int(get(request, 'max'), 100), try_int(get(request, 'min'))
 	return str(random(_min, _max, args=[_ for _ in get(request, 'query', '').split(',') if _]))
 
-@blueprint.route('/timestamp')
+@blueprint.route('/timestamp/')
 def server_timestamp_handler():
 	"""This endpoint returns the current server and UTC time."""
 	from arrow import now, utcnow
