@@ -2,6 +2,18 @@ def codeblock(s, lang=None):
     if lang:
         return "```{}\n{}```".format(lang, s)
     return "```{}```".format(s)
+#https://github.com/Harmon758/Harmonbot
+def get_prefix(bot, message):
+    with open(data_path + "/prefixes.json", 'r') as prefixes_file:
+        all_prefixes = json.load(prefixes_file)
+    if isinstance(message.channel, discord.DMChannel):
+        prefixes = all_prefixes.get(str(message.channel.id), None)
+    else:
+        prefixes = all_prefixes.get(str(message.guild.id), None)
+    return prefixes if prefixes else '!'
+
+#utils.file.create_file('prefixes')
+
 def get_prefix(bot, message):
     guild_id = message.guild.id
     try:

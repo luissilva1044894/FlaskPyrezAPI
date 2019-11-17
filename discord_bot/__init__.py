@@ -10,6 +10,8 @@ class Bot(commands.Bot):
 		self.config = config
 		from utils.discord import load_cogs
 		load_cogs(self)
+	async def on_connect(self):
+		pass
 	async def on_ready(self):
 		from discord import Activity
 		#await self.change_presence(activity=Activity(name="my meat", type=3))
@@ -24,12 +26,17 @@ class Bot(commands.Bot):
 		print(f'\nCreated by {self.appinfo.owner}', end='\n')
 		#self.loop.create_task(change_bot_presence_task())
 		from datetime import datetime
-		self.uptime = datetime.utcnow()
+		self.start_time = datetime.utcnow()
 		#from utils.discord import load_cogs
 		#load_cogs(self)
 		#Here we load our extensions(cogs) listed above in [initial_extensions]
 		print(f'Successfully logged in and booted...!')
 		return await self.change_presence(activity=discord.Game(name='Paladins'), status=discord.Status('dnd')) #This is buggy, let us know if it doesn't work.
+	@property
+	def uptime(self):
+		from datetime import datetime
+		return datetime.now() - self.start_time
+		#return int(datetime.now().timestamp()) - self.db.get('start_time')
 	async def on_message(self, message):
 		# don't respond to ourselves
 		if message.author == self.user:

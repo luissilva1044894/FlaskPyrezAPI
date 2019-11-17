@@ -1,9 +1,10 @@
 
-def try_int(value, default):
+def try_int(value, default=0):
     try:
         return int(value)
-    except ValueError:
-        return default
+    except (ValueError, TypeError):
+        pass
+    return default
 
 def random(min, max, as_int=True):
     import random

@@ -1,6 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+async def get_background(self, url, session):
+	from io import BytesIO
+	from PIL import Image
+	async with session.get(url) as f:
+		return Image.open(BytesIO(await f.read()))
+
+async def get_avatar(self, user, session, *, format='png', size=1024):
+	from io import BytesIO
+	try:
+		res = BytesIO()
+		await user.avatar_url_as(format=format, size=size).save(res, seek_begin=True)
+		return res
+	except:
+		async with session.get(user.avatar_url_as(format=format, size=size)) as r:
+			return BytesIO(await r.content.read())
+
 class DiscordConfig(object):
 	"""
 	docstring for DiscordConfig

@@ -35,16 +35,20 @@ def replace(_input, _old, _new='', _split='', replace_or_split=False, _index=1):
         return _input.split(_split)[_index] or _input.replace(_old, _new)
     return _input.replace(_old, _new)
 
-def random(min=0, max=100, *, as_int=True, as_string=False, chars=None, size=32):
+def random(min=0, max=100, *, as_int=True, args=None):
     import random
-    if as_string:
-        import string
-        if not chars:
-            chars = string.ascii_letters + string.digits # + string.punctuation
-        return ''.join(random.choice(chars) for x in range(size))
+    if args:
+        return random.choice(args)#if isinstance(args, list) and len(args) > 0:
     if as_int:
         return random.randint(min, max)
     return random.randrange(min, max)
+
+def random_string(chars=None, size=32):
+    from random import choice
+    if not chars:
+        import string
+        chars = string.ascii_letters + string.digits # + string.punctuation
+    return ''.join(choice(chars) for _ in range(size))
 
 def get_url(url, as_json=True):
     import requests
@@ -56,11 +60,14 @@ def get_url(url, as_json=True):
         except (JSONDecodeError, ValueError):
             pass
     return _request.text
-def get_query(request_args, key, default_value=None, default_key=None):
-    _x = request_args.get(key, default_key or None)
-    if not _x:
-        return default_value
-    return _x
+def get(args, key, default=None, *, def_key=None, _attr='args'):
+    if isinstance(args, dict):
+        _x = args.get(key, def_key or None)
+        if _x:
+            return _x
+    if hasattr(args, _attr):
+        return get(getattr(args, _attr), key=key, default=default, def_key=def_key, _attr=_attr)
+    return default
 
 def get_env(name, default=None, verbose=False):
     import os

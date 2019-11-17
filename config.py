@@ -1,5 +1,5 @@
 class Config(object):
-	from utils import random, get_env
+	from utils import random_string, get_env
 	from boolify import boolify
 	import os
 
@@ -27,7 +27,7 @@ class Config(object):
 	DEBUG = boolify(get_env('DEBUG', default=not 'heroku' in get_env('PYTHONHOME', '').lower() and os.sys.platform == 'win32' or os.name == 'nt'))
 
 	# SECURITY WARNING: keep the secret key used in production secret!
-	SECRET_KEY = get_env('SECRET_KEY', default=random(as_string=True, size=65))
+	SECRET_KEY = get_env('SECRET_KEY', default=random_string(size=65))
 
 	PORT, HOST = get_env('PORT', default=5000), get_env('HOST', default='0.0.0.0')
 
