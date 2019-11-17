@@ -19,20 +19,20 @@ def root_handler(error=None):
 	"""Homepage route."""
 	return str(blueprint.smite_api.ping())
 
-@blueprint.route('/winrate', methods=['GET'])
-@blueprint.route('/kda', methods=['GET'])
+@blueprint.route('/winrate/', methods=['GET'])
+@blueprint.route('/kda/', methods=['GET'])
 def kda_handler():
 	return get_page()
 
-@blueprint.route('/lastmatch', methods=['GET'])
-@blueprint.route('/last_match', methods=['GET'])
+@blueprint.route('/lastmatch/', methods=['GET'])
+@blueprint.route('/last_match/', methods=['GET'])
 def lastmatch_handler():
 	return get_page()
 
-@blueprint.route('/currentmatch', methods=['GET'])
-@blueprint.route('/current_match', methods=['GET'])
-@blueprint.route('/livematch', methods=['GET'])
-@blueprint.route('/live_match', methods=['GET'])
+@blueprint.route('/currentmatch/', methods=['GET'])
+@blueprint.route('/current_match/', methods=['GET'])
+@blueprint.route('/livematch/', methods=['GET'])
+@blueprint.route('/live_match/', methods=['GET'])
 def livematch_handler():
 	return get_page()
 
@@ -40,10 +40,10 @@ def livematch_handler():
 def rank_handler():
 	return get_page()
 
-@blueprint.route('/stalk', methods=['GET'])
+@blueprint.route('/stalk/', methods=['GET'])
 def stalk_handler():
 	return get_page()
 
-@blueprint.route('/version', methods=['GET'])
+@blueprint.route('/version/', methods=['GET'])
 def version_handler():
 	return get_page()
