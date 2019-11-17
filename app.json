@@ -20,8 +20,8 @@
     ],
     "buildpacks": [
         { "url": "https://github.com/heroku/heroku-buildpack-python" },
-        { "url": "https://github.com/xrisk/heroku-opus.git" },
         { "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git" }
+        { "url": "https://github.com/xrisk/heroku-opus.git" },
     ],
     "description": "FlaskPyrezAPI is an open-source endpoint for Twitch commands that provides datas about players, matches and others stats of Paladins game.",
     "env": {
