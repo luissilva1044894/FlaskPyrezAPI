@@ -16,6 +16,10 @@
                 "version": "11"
             },
             "as": "SMITE_DB"
+        },
+        {
+            "plan": "heroku-postgresql:hobby-dev",
+            "as": "DISCORD_DB"
         }
     ],
     "buildpacks": [
