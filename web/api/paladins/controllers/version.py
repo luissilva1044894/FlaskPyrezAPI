@@ -8,7 +8,7 @@ def create_platform_dict(arg):
 
 def format_patch_notes(args):
   if args:
-    return {'author': args.get('author'), 'content': args.get('content'), 'timestamp': args.get('timestamp'), 'title': args.get('title'), 'image': args.get('featured_image')}
+    return {'author': args.get('author'), 'content': args.get('content'), 'image': { 'thumb': args.get('image'), 'header': args.get('featured_image') }, 'timestamp': args.get('timestamp'), 'title': args.get('title')}
   return None
 
 def jsonify_func(args):
@@ -28,7 +28,9 @@ def func(_api, as_json=False, lang='1'):
     _title = get_url('https://cms.paladins.com/wp-json/api/get-posts/1?&search=update%20notes')[0].get('title')
     _patch_notes, _patch_note = get_url('https://cms.paladins.com/wp-json/api/get-posts/1?&search={}'.format(_title[:_title.rfind('update') - 1])), []
     for i in range(len(_patch_notes)):
-      _patch_note.append(get_url('https://cms.paladins.com/wp-json/api/get-post/{}?&slug={}'.format(lang, _patch_notes[i].get('slug'))))
+      x = get_url('https://cms.paladins.com/wp-json/api/get-post/{}?&slug={}'.format(lang, _patch_notes[i].get('slug')))
+      x.update({'image': _patch_notes[i].get('featured_image')})
+      _patch_note.append(x)
     print(_patch_notes)
 
     from flask import jsonify
