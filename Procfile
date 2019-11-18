@@ -1,5 +1,5 @@
 web: gunicorn -b 0.0.0.0:$PORT wsgi:app --env FLASK_ENV=default --preload
-worker: python bot_worker.py
+bot: python bot_worker.py
 #release: python manage.py db migrate
 
 init: python manage.py db init
