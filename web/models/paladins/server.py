@@ -6,12 +6,12 @@ class PatchNote(db.Model):
 	__bind_key__ = 'database'
 
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-	author = db.Column(db.String(80), nullable=True)
+	author = db.Column(db.String(20), nullable=True)
 	content = db.Column(db.Text, nullable=True)
-	image_header = db.Column(db.String(120), nullable=True)
-	image_thumb = db.Column(db.String(120), nullable=True)
+	image_header = db.Column(db.Text, nullable=True)
+	image_thumb = db.Column(db.Text, nullable=True)
 	timestamp = db.Column(db.String(20), nullable=True)
-	title = db.Column(db.String(80), nullable=True)
+	title = db.Column(db.Text, nullable=True)
 
 	def __init__(self, author, content, image_header, image_thumb, timestamp, title):
 		from utils import format_timestamp

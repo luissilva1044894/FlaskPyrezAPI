@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ef179d42b0ec
+Revision ID: d2eecb719be3
 Revises: 
-Create Date: 2019-11-18 18:08:56.903304
+Create Date: 2019-11-18 18:19:12.788530
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ef179d42b0ec'
+revision = 'd2eecb719be3'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -52,12 +52,12 @@ def upgrade():
     )
     op.create_table('patch_note',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('author', sa.String(length=80), nullable=True),
+    sa.Column('author', sa.String(length=20), nullable=True),
     sa.Column('content', sa.Text(), nullable=True),
-    sa.Column('image_header', sa.String(length=120), nullable=True),
-    sa.Column('image_thumb', sa.String(length=120), nullable=True),
+    sa.Column('image_header', sa.Text(), nullable=True),
+    sa.Column('image_thumb', sa.Text(), nullable=True),
     sa.Column('timestamp', sa.String(length=20), nullable=True),
-    sa.Column('title', sa.String(length=80), nullable=True),
+    sa.Column('title', sa.Text(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('platform',
