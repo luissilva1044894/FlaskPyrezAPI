@@ -6,3 +6,4 @@ db = SQLAlchemy()
 
 from .player import Paladins, Smite
 from .session import Session
+from .paladins.server import Platform, Server, PatchNote

@@ -8,7 +8,7 @@ def create_platform_dict(arg):
 
 def format_patch_notes(args):
   if args:
-    _timestamp = args.get('timestamp')
+    _timestamp = format_timestamp(args.get('timestamp'))
     try:
       import arrow
       try:
@@ -33,8 +33,31 @@ def jsonify_func(args):
     'platform': [create_platform_dict(_) for _ in args['status']],
     'latest_patch_notes': [format_patch_notes(_) for _ in args['patch_notes']],
   }
-def func(_api, as_json=False, lang='1'):
+def get_server_status(_api, lang=''):
+  from web.models.paladins.server import Platform, Server, PatchNote
+  _server = Server.query.first()
+  if _server and _server.updated:
+    return _server#.to_json()
+  [ _.delete() for _ in Platform.query.all()]
+  [ _.delete() for _ in PatchNote.query.all()]
   _server_status, _ping = _api.getServerStatus(), _api.ping()
+  for _ in _server_status:
+    Platform(name=_.platform if _.environment.lower() != 'pts' else _.environment, limited_access=_.limitedAccess, online=_.status, version=_.version)
+  from utils import get_url
+  _title = get_url('https://cms.paladins.com/wp-json/api/get-posts/1?&search=update%20notes')[0].get('title')
+  _patch_notes, _patch_note = get_url('https://cms.paladins.com/wp-json/api/get-posts/1?&search={}'.format(_title[:_title.rfind('update') - 1])), []
+  for i in range(len(_patch_notes)):
+    x = get_url('https://cms.paladins.com/wp-json/api/get-post/{}?&slug={}'.format(lang, _patch_notes[i].get('slug')))
+    PatchNote(author=x.get('author'), content=x.get('content'), image_header=x.get('featured_image'), image_thumb=_patch_notes[i].get('featured_image'), timestamp=x.get('timestamp'), title=x.get('title'))
+  print('>>> Server status updated!')
+  return Server(game=_ping.apiName[:-3].lower(), version=_ping.gamePatch, api_version=_ping.apiVersion)
+def func(_api, as_json=False, lang='1'):
+  _server = get_server_status(_api, lang)
+  if as_json:
+    return _server.to_json()
+  return 'api.paladins.views /api/paladins/version/;;'
+  
+  '''
   if as_json:
     from utils import get_url
     _title = get_url('https://cms.paladins.com/wp-json/api/get-posts/1?&search=update%20notes')[0].get('title')
@@ -47,7 +70,8 @@ def func(_api, as_json=False, lang='1'):
 
     from flask import jsonify
     return jsonify(jsonify_func({'status': _server_status, 'ping': _ping, 'patch_notes': _patch_note}))
-  return 'api.paladins.views /api/paladins/version/;;'
+  '''
+
 """
 @app.route('/api/version', methods=['GET'])
 def getGameVersion():

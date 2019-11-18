@@ -77,6 +77,19 @@ def get_env(name, default=None, verbose=False):
     finally:
         return os.getenv(name) or default
 
+def format_timestamp(timestamp, _format='MMMM D, YYYY'):
+  try:
+    import arrow
+    try:
+      _timestamp = arrow.get(timestamp, _format)
+    except (arrow.parser.ParserMatchError, arrow.parser.ParserError):
+      pass
+    else:
+      return _timestamp.isoformat()#_timestamp.format('DD-MMM-YYYY HH:mm:SS ZZ')
+      # 2019-11-12T23:31Z | 2019-11-18T18:36:32+00:00
+  except importError:
+    pass
+
 def last_seen(locale, date):
     try:
         import arrow
