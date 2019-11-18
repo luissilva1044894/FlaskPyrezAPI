@@ -10,8 +10,9 @@ from utils import get_env
 #from flask_migrate import Migrate, MigrateCommand
 
 #from web.factory import create_app, db
-from web import create_app
-app = create_app()
+#from web import create_app
+#app = create_app()
+from wsgi import app
 
 from web.models import db
 
@@ -29,11 +30,8 @@ def drop_db():
 	db.drop_all()
 @manager.command
 def reset_db():
-	try:
-		db.drop_all()
-		db.create_all()
-	except Exception as exc:
-		print(exc)
+	db.drop_all()
+	db.create_all()
 
 @manager.command
 def schedule_task():
