@@ -47,14 +47,20 @@ def load_locate_json(lang, folder='lang'):
 
 def get_url(url, as_json=True):
     import requests
-    _request = requests.get(url)
-    if as_json:
-        from json.decoder import JSONDecodeError
+    for _ in range(5):
         try:
-            return _request.json()
-        except (JSONDecodeError, ValueError):
-            pass
-    return _request.text
+            _request = requests.get(url)
+            if as_json:
+                from json.decoder import JSONDecodeError
+                try:
+                    return _request.json()
+                except (JSONDecodeError, ValueError):
+                    pass
+            return _request.text
+        except requests.exceptions.ConnectionError:
+            import time
+            time.sleep(1)
+    return None
 def get_env(name, default=None, verbose=False):
     import os
     try:
