@@ -1,5 +1,5 @@
 <div  align="center">
-<a href="https://github.com/luissilva1044894/FlaskPyrezAPI" title="FlaskPyrezAPI - Github repository" alt="FlaskPyrezAPI · Github repository"><img src="./static/img/pyrez.png" height="96" width="96"></a>
+<a href="https://github.com/luissilva1044894/FlaskPyrezAPI" title="FlaskPyrezAPI - Github repository" alt="FlaskPyrezAPI · Github repository"><img src="./data/static/img/pyrez.png" height="96" width="96"></a>
 
 ## FlaskPyrezAPI
 [![License](https://img.shields.io/github/license/luissilva1044894/FlaskPyrezAPI.svg?logo=github&logoColor=white&logoWidth=10style=plastic)](./LICENSE "FlaskPyrezAPI · LICENSE")
