@@ -26,7 +26,7 @@ def utility_processor():
 		return load_locate_json(message=message, lang=lang, force=force, folder=folder)
 	return { 'translate': translate }#return dict(translate=translate)
 
-@blueprint.route('/html/', methods=['GET'])
+@blueprint.route('/html', methods=['GET'], strict_slashes=False)
 def html_handler():
 	from flask import render_template
 	return render_template('base.html')

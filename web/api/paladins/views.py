@@ -37,39 +37,39 @@ def root_handler():
 	"""Homepage route."""
 	return str(blueprint.paladins_api.ping())
 
-@blueprint.route('/deck/', methods=['GET'])
-@blueprint.route('/decks/', methods=['GET'])
+@blueprint.route('/deck', methods=['GET'], strict_slashes=False)
+@blueprint.route('/decks', methods=['GET'], strict_slashes=False)
 def decks_handler():
 	return get_page()
 
-@blueprint.route('/winrate/', methods=['GET'])
-@blueprint.route('/kda/', methods=['GET'])
+@blueprint.route('/winrate', methods=['GET'], strict_slashes=False)
+@blueprint.route('/kda', methods=['GET'], strict_slashes=False)
 def kda_handler():
 	return get_page()
 
-@blueprint.route('/lastmatch/', methods=['GET'])
-@blueprint.route('/last_match/', methods=['GET'])
+@blueprint.route('/lastmatch', methods=['GET'], strict_slashes=False)
+@blueprint.route('/last_match', methods=['GET'], strict_slashes=False)
 def lastmatch_handler():
 	return get_page()
 
-@blueprint.route('/currentmatch/', methods=['GET'])
-@blueprint.route('/current_match/', methods=['GET'])
-@blueprint.route('/livematch/', methods=['GET'])
-@blueprint.route('/live_match/', methods=['GET'])
+@blueprint.route('/currentmatch', methods=['GET'], strict_slashes=False)
+@blueprint.route('/current_match', methods=['GET'], strict_slashes=False)
+@blueprint.route('/livematch', methods=['GET'], strict_slashes=False)
+@blueprint.route('/live_match', methods=['GET'], strict_slashes=False)
 def livematch_handler():
 	return get_page()
 
-@blueprint.route('/rank', methods=['GET'])
+@blueprint.route('/rank', methods=['GET'], strict_slashes=False)
 def rank_handler():
 	#from flask import url_for
 	#print(url_for('api.paladins.views.rank_handler', external=True)) > /api/paladins/rank/?external=True
 	#print(url_for('api.paladins.views.rank_handler', external=True, _external=True))
 	return str(get_player_id(player_name=get('player'), _db_model=Paladins, _api=blueprint.paladins_api, platform=get('platform', 'pc')))
-@blueprint.route('/stalk/', methods=['GET'])
+@blueprint.route('/stalk', methods=['GET'], strict_slashes=False)
 def stalk_handler():
 	return get_page()
 
-@blueprint.route('/version/', methods=['GET'])
+@blueprint.route('/version', methods=['GET'], strict_slashes=False)
 def version_handler():
 	from .controllers.version import func
 	return func(as_json='json' in get('format', '') or get('json'), _api=blueprint.paladins_api)

@@ -19,31 +19,31 @@ def root_handler(error=None):
 	"""Homepage route."""
 	return str(blueprint.smite_api.ping())
 
-@blueprint.route('/winrate/', methods=['GET'])
-@blueprint.route('/kda/', methods=['GET'])
+@blueprint.route('/winrate', methods=['GET'], strict_slashes=False)
+@blueprint.route('/kda', methods=['GET'], strict_slashes=False)
 def kda_handler():
 	return get_page()
 
-@blueprint.route('/lastmatch/', methods=['GET'])
-@blueprint.route('/last_match/', methods=['GET'])
+@blueprint.route('/lastmatch', methods=['GET'], strict_slashes=False)
+@blueprint.route('/last_match', methods=['GET'], strict_slashes=False)
 def lastmatch_handler():
 	return get_page()
 
-@blueprint.route('/currentmatch/', methods=['GET'])
-@blueprint.route('/current_match/', methods=['GET'])
-@blueprint.route('/livematch/', methods=['GET'])
-@blueprint.route('/live_match/', methods=['GET'])
+@blueprint.route('/currentmatch', methods=['GET'], strict_slashes=False)
+@blueprint.route('/current_match', methods=['GET'], strict_slashes=False)
+@blueprint.route('/livematch', methods=['GET'], strict_slashes=False)
+@blueprint.route('/live_match', methods=['GET'], strict_slashes=False)
 def livematch_handler():
 	return get_page()
 
-@blueprint.route('/rank/', methods=['GET'])
+@blueprint.route('/rank', methods=['GET'], strict_slashes=False)
 def rank_handler():
 	return get_page()
 
-@blueprint.route('/stalk/', methods=['GET'])
+@blueprint.route('/stalk', methods=['GET'], strict_slashes=False)
 def stalk_handler():
 	return get_page()
 
-@blueprint.route('/version/', methods=['GET'])
+@blueprint.route('/version', methods=['GET'], strict_slashes=False)
 def version_handler():
 	return get_page()

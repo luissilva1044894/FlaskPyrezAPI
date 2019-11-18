@@ -15,6 +15,6 @@ def root_handler(error=None):
 	"""Homepage route."""
 	return get_page()
 
-@blueprint.route('/rank/', methods=['GET'])
+@blueprint.route('/rank', methods=['GET'], strict_slashes=False)
 def rank_handler():
 	return get_page()

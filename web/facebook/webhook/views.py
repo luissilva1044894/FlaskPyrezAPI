@@ -46,7 +46,7 @@ def webhook_action():
         handle_message(entry['messaging'][0]['sender']['id'], user_id, entry['messaging'][0]['message']['text'])
     return Response(response='EVENT RECEIVED', status=200)
 
-@blueprint.route('/dev/', methods=['POST'])
+@blueprint.route('/dev', methods=['POST'], strict_slashes=False)
 def webhook_dev():
     # custom route for local development
     import requests, json
