@@ -7,9 +7,9 @@ class PaladinsPlayer(db.Model):
     __tablename__ = 'paladins_players'
     __bind_key__ = 'paladins'
 
-    _index = db.Column('index', db.Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
+    _index = db.Column('index', db.Integer, primary_key=True, autoincrement=True)
 
-    id = db.Column(db.Integer, primary_key=False, nullable=False, autoincrement=False)#unique=True, 
+    id = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(120), nullable=False)
     platform = db.Column(db.String(4), nullable=False)
     #_game = db.Column(db.String(8), primary_key=False, unique=False, nullable=True, autoincrement=False)
@@ -44,9 +44,9 @@ class SmitePlayer(db.Model):
 
     __tablename__ = 'smite_players'
 
-    _index = db.Column('index', db.Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
+    _index = db.Column('index', db.Integer, primary_key=True, autoincrement=True)
 
-    id = db.Column(db.Integer, primary_key=False, nullable=False, autoincrement=False)#unique=True, 
+    id = db.Column(db.Integer, nullable=False)#unique=True, 
     name = db.Column(db.String(120), nullable=False)
     platform = db.Column(db.String(4), nullable=False)
     #_game = db.Column(db.String(8), primary_key=False, unique=False, nullable=True, autoincrement=False)

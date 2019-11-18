@@ -1,10 +1,10 @@
 
-from . import db, BaseModel
+from . import db
 
 class Session(db.Model):
     __tablename__ = 'session'
 
-    id = db.Column(db.String(50), primary_key=True, unique=True, nullable=False)
+    id = db.Column(db.String(50), primary_key=True, nullable=False)
 
     def __init__(self, session_id):
         self.id = session_id
