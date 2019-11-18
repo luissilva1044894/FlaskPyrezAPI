@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from . import db, BaseModel
+from web.models import db, BaseModel
 
 class Player(BaseModel):
     """Model for player accounts."""
