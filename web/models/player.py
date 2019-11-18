@@ -7,15 +7,17 @@ class Paladins(db.Model):
     __tablename__ = 'paladins_player'
     __bind_key__ = 'paladins'
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=False, nullable=False)
     name = db.Column(db.String(120), nullable=False)
     platform = db.Column(db.String(4), nullable=False)
+    discord_id = db.Column(db.Integer, nullable=True)
     #_game = db.Column(db.String(8), primary_key=False, unique=False, nullable=True, autoincrement=False)
 
-    def __init__(self, id, name, platform):
+    def __init__(self, id, name, platform, discord_id=None):
         self.id = id
         self.name = name
         self.platform = platform
+        self.discord_id = discord_id
         self.save()
 
     def save(self):
@@ -41,9 +43,10 @@ class Smite(db.Model):
     __tablename__ = 'smite_player'
     __bind_key__ = 'smite'
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=False, nullable=False)
     name = db.Column(db.String(120), nullable=False)
     platform = db.Column(db.String(4), nullable=False)
+    discord_id = db.Column(db.Integer, nullable=True)
 
     def __init__(self, id, name, platform):
         self.id = id

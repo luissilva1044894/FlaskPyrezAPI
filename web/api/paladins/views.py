@@ -64,11 +64,13 @@ def rank_handler():
 	#from flask import url_for
 	#print(url_for('api.paladins.views.rank_handler', external=True)) > /api/paladins/rank/?external=True
 	#print(url_for('api.paladins.views.rank_handler', external=True, _external=True))
-	return str(get_player_id(player_name=get('player'), _db_model=PaladinsPlayer, _api=blueprint.paladins_api, platform=get('platform', 'pc')))
+	return str(get_player_id(player_name=get('player'), _db_model=Paladins, _api=blueprint.paladins_api, platform=get('platform', 'pc')))
 @blueprint.route('/stalk/', methods=['GET'])
 def stalk_handler():
 	return get_page()
 
 @blueprint.route('/version/', methods=['GET'])
 def version_handler():
+	from .controllers.version import func
+	return func(as_json='json' in get('format', '') or get('json'), _api=blueprint.paladins_api)
 	return get_page()
