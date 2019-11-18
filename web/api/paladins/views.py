@@ -72,5 +72,6 @@ def stalk_handler():
 @blueprint.route('/version', methods=['GET'], strict_slashes=False)
 def version_handler():
 	from .controllers.version import func
-	return func(as_json='json' in get('format', '') or get('json'), _api=blueprint.paladins_api)
-	return get_page()
+	from utils.flask import get_lang_id
+	return func(as_json='json' in get('format', '') or get('json'), _api=blueprint.paladins_api, lang=get_lang_id())
+	#return get_page()

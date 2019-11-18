@@ -21,6 +21,18 @@ def get_player_id(player_name, _api, _db_model, platform='pc'):
             return -1
         _player = _db_model(name=player_name, id=temp[0].playerId, platform=str(platform))
     return _player.id if _player else -1
+def get_lang_id(lang=None):
+    if not lang:
+        lang = get_accepted_languages()
+    return {
+        'de': 2, #https://www.paladins.com/news/?lng=de_DE
+        'fr': 3, #https://www.paladins.com/news/?lng=fr_FR
+        'es': 9, #https://www.paladins.com/news/?lng=es_LA
+        'pt': 10, #https://www.paladins.com/news/?lng=pt_BR
+        'ru': 11, #https://www.paladins.com/news/?lng=ru_RU
+        'pl': 12, #https://www.paladins.com/news/?lng=pl_PL | Polski
+        'tr': 13 #https://www.paladins.com/news/?lng=tr_TR
+    }.get(lang, 1) #https://www.paladins.com/news/?lng=en_US#5, 7,
 def get_accepted_languages():
     from flask import request
     from utils import LanguagesSupported
