@@ -9,14 +9,14 @@ def create_platform_dict(arg):
 def jsonify_func(args):
   print(args['ping'])
   return {
-    "game": args['ping'].apiName[:-3].lower(),
-    "version": args['ping'].gamePatch,
-    "api_version":args['ping'].apiVersion,
+    'game': args['ping'].apiName[:-3].lower(),
+    'version': args['ping'].gamePatch,
+    'api_version':args['ping'].apiVersion,
     #"platform": [{_: create_platform_dict(_)} for _ in args['status']], recursão infinita
-    "platform": [create_platform_dict(_) for _ in args['status']],
-    "patch_notes": args['patch_notes'].get('content'),
-    "patch_notes_pts": args['patch_notes_pts'],
-    "ret_msg": None
+    'platform': [create_platform_dict(_) for _ in args['status']],
+    'latest_patch_notes': args['patch_notes'].get('content'),
+    'latest_patch_notes_pts': args['patch_notes_pts'],
+    'ret_msg': None
   }
 def func(_api, as_json=False, lang='1'):
   _server_status, _ping = _api.getServerStatus(), _api.ping()
