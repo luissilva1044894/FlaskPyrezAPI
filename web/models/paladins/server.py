@@ -7,7 +7,7 @@ class PatchNote(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
 	author = db.Column(db.String(40), nullable=True)
-	content = db.Column(db.String(40), nullable=True)
+	content = db.Column(db.Text, nullable=True)
 	image_header = db.Column(db.Text, nullable=True)
 	image_thumb = db.Column(db.Text, nullable=True)
 	timestamp = db.Column(db.String(40), nullable=True)
