@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 6ef4edaece5a
+Revision ID: 299c8e2b363c
 Revises: 
-Create Date: 2019-11-18 09:16:28.755496
+Create Date: 2019-11-18 09:20:51.448522
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6ef4edaece5a'
+revision = '299c8e2b363c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -44,7 +44,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('paladins_player',
-    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=False, nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('platform', sa.String(length=4), nullable=False),
     sa.Column('discord_id', sa.Integer(), nullable=True),
@@ -55,7 +55,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('smite_player',
-    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=False, nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('platform', sa.String(length=4), nullable=False),
     sa.Column('discord_id', sa.Integer(), nullable=True),
