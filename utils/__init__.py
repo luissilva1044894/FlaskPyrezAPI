@@ -41,6 +41,10 @@ def random_string(chars=None, size=32):
         chars = string.ascii_letters + string.digits # + string.punctuation
     return ''.join(choice(chars) for _ in range(size))
 
+def load_locate_json(lang, folder='lang'):
+    from utils.file import read_file, join_path
+    return read_file(join_path(['data', folder, '{}.json'.format(lang)]), is_json=True)
+
 def get_url(url, as_json=True):
     import requests
     _request = requests.get(url)

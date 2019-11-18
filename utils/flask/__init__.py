@@ -36,7 +36,6 @@ def get_config(x=None, y='config.'):
         'prod': 'Production'
     }.get(str(x).lower(), 'Production')
 
-
 def get_language():
     from utils import LanguagesSupported
     aux = str(get('language', default=get_accepted_languages())).lower()
@@ -44,8 +43,12 @@ def get_language():
         return LanguagesSupported(aux).value
     except ValueError:
         return LanguagesSupported.English.value
-
-
+def load_locate_json(message, lang=None, *, force=False, folder='lang'):
+    from flask import g
+    if force or '_json' not in g:
+        from utils import load_locate_json as _load
+        g._json = _load(lang=lang or get_language(), folder=folder)
+    return g._json.get(str(message).upper(), message)# or message
 def create_blueprint(name, *, static_url_path='', url_prefix='', split_index=1):
     from flask import Blueprint
     return Blueprint(name.split('.', 1)[split_index], name, static_url_path=static_url_path, url_prefix=static_url_path)

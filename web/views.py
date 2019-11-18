@@ -18,16 +18,12 @@ def root(error=None):
 #	if request.url_rule.rule:
 #		print(request.url_rule.rule)
 #	return send_from_directory('js', path)
+
 @blueprint.context_processor
 def utility_processor():
 	def translate(message, lang=None, *, force=False, folder='lang'):
-		from flask import g
-		if force or '_json' not in g:
-			from utils.flask import get_language
-			from utils.file import read_file, join_path
-			import os
-			g._json = read_file(join_path(['data', folder, '{}.json'.format(lang or get_language())]), is_json=True)
-		return g._json.get(str(message).upper(), message)# or message
+		from utils.flask import load_locate_json
+		return load_locate_json(message=message, lang=lang, force=force, folder=folder)
 	return { 'translate': translate }#return dict(translate=translate)
 
 @blueprint.route('/html/', methods=['GET'])
