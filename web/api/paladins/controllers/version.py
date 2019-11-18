@@ -8,7 +8,19 @@ def create_platform_dict(arg):
 
 def format_patch_notes(args):
   if args:
-    return {'author': args.get('author'), 'content': args.get('content'), 'image': { 'thumb': args.get('image'), 'header': args.get('featured_image') }, 'timestamp': args.get('timestamp'), 'title': args.get('title')}
+    _timestamp = args.get('timestamp')
+    try:
+      import arrow
+      try:
+        _timestamp = arrow.get(_timestamp, 'MMMM D, YYYY')
+      except (arrow.parser.ParserMatchError, arrow.parser.ParserError):
+        pass
+      else:
+        _timestamp = _timestamp.isoformat()#_timestamp.format('DD-MMM-YYYY HH:mm:SS ZZ')
+        # 2019-11-12T23:31Z | 2019-11-18T18:36:32+00:00
+    except importError:
+      pass
+    return {'author': args.get('author'), 'content': args.get('content'), 'image': { 'thumb': args.get('image'), 'header': args.get('featured_image') }, 'timestamp': _timestamp, 'title': args.get('title')}
   return None
 
 def jsonify_func(args):
