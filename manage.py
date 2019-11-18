@@ -29,8 +29,11 @@ def drop_db():
 	db.drop_all()
 @manager.command
 def reset_db():
-	db.drop_all()
-	db.create_all()
+	try:
+		db.drop_all()
+		db.create_all()
+	except Exception as exc:
+		print(exc)
 
 @manager.command
 def schedule_task():
