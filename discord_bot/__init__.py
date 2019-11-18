@@ -4,9 +4,14 @@ import os
 from discord.ext import commands
 import json
 
+from web.models import Paladins
+
 class Bot(commands.Bot):
 	def __init__(self, *, config=None, command_prefix=('!', '?')):
 		super().__init__(command_prefix=command_prefix)
+		#from wsgi import app
+		#Paladins(id=123, name='Nonsocial', platform='PC')
+		#input(Paladins.query.all())
 		self.config = config
 		from utils.discord import load_cogs
 		load_cogs(self)
