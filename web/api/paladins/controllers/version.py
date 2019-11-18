@@ -4,7 +4,7 @@ def create_platform_dict(arg):
   #_data [arg.platform if arg.platform.lower() != 'pts' else 'pts'] = {'limited_access': arg.limitedAccess, 'status': arg.status, 'version': arg.version}
   #return _data
   #print(arg.platform if arg.platform.lower() != 'pts' else 'pts', arg.platform)
-  return {'name': arg.platform if arg.environment.lower() != 'pts' else arg.environment, 'limited_access': arg.limitedAccess, 'status': arg.status, 'version': arg.version}
+  return {'name': arg.platform if arg.environment.lower() != 'pts' else arg.environment, 'limited_access': arg.limitedAccess, 'online': arg.status, 'version': arg.version}
 
 def jsonify_func(args):
   print(args['ping'])
