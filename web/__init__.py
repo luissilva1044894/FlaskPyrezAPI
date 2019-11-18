@@ -97,8 +97,11 @@ def initialize_plugins(app):
 			#session = Session('alsalsajkas')
 	except (IntegrityError, InternalError, OperationalError, ProgrammingError) as exc:
 		print('>>> Creating Database')
-		db.drop_all()
-		db.create_all()
+		try:
+			db.drop_all()
+			db.create_all()
+		except Exception as exc:
+			print(exc)
 	else:
 		for _ in Paladins.query.all():
 			print(_)
