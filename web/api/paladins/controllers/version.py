@@ -15,6 +15,7 @@ def jsonify_func(args):
     #"platform": [{_: create_platform_dict(_)} for _ in args['status']], recursão infinita
     "platform": [create_platform_dict(_) for _ in args['status']],
     "patch_notes": args['patch_notes'].get('content'),
+    "patch_notes_pts": args['patch_notes_pts'],
     "ret_msg": None
   }
 def func(_api, as_json=False, lang='1'):
@@ -23,11 +24,13 @@ def func(_api, as_json=False, lang='1'):
     from utils import get_url
     _title = get_url('https://cms.paladins.com/wp-json/api/get-posts/1?&search=update%20notes')[0].get('title')
     _patch_notes = get_url('https://cms.paladins.com/wp-json/api/get-posts/1?&search={}'.format(_title[:_title.rfind('update') - 1]))
-    _patch_note = get_url('https://cms.paladins.com/wp-json/api/get-post/{}?&slug={}'.format(lang, _patch_notes[0].get('slug')))
+    _patch_note, _patch_notes_pts = get_url('https://cms.paladins.com/wp-json/api/get-post/{}?&slug={}'.format(lang, _patch_notes[0].get('slug'))), None
+    if len(_patch_notes) > 1:
+      patch_notes_pts = get_url('https://cms.paladins.com/wp-json/api/get-post/{}?&slug={}'.format(lang, _patch_notes[1].get('slug'))).get('content')
     print(_patch_notes)
 
     from flask import jsonify
-    return jsonify(jsonify_func({'status': _server_status, 'ping': _ping, 'patch_notes': _patch_note}))
+    return jsonify(jsonify_func({'status': _server_status, 'ping': _ping, 'patch_notes': _patch_note, 'patch_notes_pts': patch_notes_pts}))
   return 'api.paladins.views /api/paladins/version/;;'
 """
 @app.route('/api/version', methods=['GET'])
