@@ -13,7 +13,7 @@ class Config(object):
 	#SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 	_binds = get_env('SQLALCHEMY_BINDS', default=None)
 	SQLALCHEMY_BINDS = {}
-	SQLALCHEMY_BINDS.update('database': SQLALCHEMY_DATABASE_URI)
+	SQLALCHEMY_BINDS.update({'database': SQLALCHEMY_DATABASE_URI})
 	if _binds:
 		#https://docs.sqlalchemy.org/en/13/core/exceptions.html
 		#https://flask-sqlalchemy.palletsprojects.com/en/2.x/binds/
