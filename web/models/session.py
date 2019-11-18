@@ -4,6 +4,8 @@ from . import db
 class Session(db.Model):
     __tablename__ = 'session'
 
+    #__bind_key__ = 'database'
+
     id = db.Column(db.String(50), primary_key=True, nullable=False)
 
     def __init__(self, session_id):
