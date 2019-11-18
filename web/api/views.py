@@ -17,7 +17,7 @@ def root_handler(error=None):
 
 @blueprint.route('/random/')
 def random_handler():
-	from utils import get, random
+	from utils import random
 	from utils.flask import get
 	from utils.num import try_int
 	_max, _min = try_int(get('max'), 100), try_int('min')
