@@ -23,7 +23,7 @@ def app_errorhandler(error=None):
 		return error
 	return '?'
 '''
-from ...models.player import PaladinsPlayer
+from ...models.player import Paladins
 from utils.flask import get_player_id, get
 
 #from flask import request

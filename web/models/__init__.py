@@ -4,5 +4,5 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
-from .player import PaladinsPlayer, SmitePlayer
+from .player import Paladins, Smite
 from .session import Session

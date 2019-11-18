@@ -87,20 +87,20 @@ def initialize_plugins(app):
 		#db.drop_all()
 		#db.create_all()
 	try:
-		from .models import PaladinsPlayer
+		from .models import Paladins
 		from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
-		#input(getattr(PaladinsPlayer, 'query').all())
+		#input(getattr(Paladins, 'query').all())
 
-		if not PaladinsPlayer.query.all():
+		if not Paladins.query.all():
 			pass
-			#new_user = PaladinsPlayer(id=123, name='Nonsocial', platform='PC')
+			#new_user = Paladins(id=123, name='Nonsocial', platform='PC')
 			#session = Session('alsalsajkas')
 	except (IntegrityError, InternalError, OperationalError, ProgrammingError) as exc:
 		print('>>> Creating Database')
 		db.drop_all()
 		db.create_all()
 	else:
-		for _ in PaladinsPlayer.query.all():
+		for _ in Paladins.query.all():
 			print(_)
 	
 def create_app(app_name=None, *, static_folder=None, template_folder=None, static_url_path=None, instance_relative_config=True):

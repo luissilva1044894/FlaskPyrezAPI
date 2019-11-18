@@ -3,13 +3,11 @@
 
 from web.models import db
 
-class PaladinsPlayer(db.Model):
-    __tablename__ = 'paladins_players'
+class Paladins(db.Model):
+    __tablename__ = 'paladins_player'
     __bind_key__ = 'paladins'
 
-    _index = db.Column('index', db.Integer, primary_key=True, autoincrement=True)
-
-    id = db.Column(db.Integer, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(120), nullable=False)
     platform = db.Column(db.String(4), nullable=False)
     #_game = db.Column(db.String(8), primary_key=False, unique=False, nullable=True, autoincrement=False)
@@ -39,17 +37,13 @@ class PaladinsPlayer(db.Model):
     def to_json(self):
         return {f'{_}: {self.__dict__[_]}' for _ in self.__dict__ if not _.startswith('_')}
 
-class SmitePlayer(db.Model):
+class Smite(db.Model):
+    __tablename__ = 'smite_player'
     __bind_key__ = 'smite'
 
-    __tablename__ = 'smite_players'
-
-    _index = db.Column('index', db.Integer, primary_key=True, autoincrement=True)
-
-    id = db.Column(db.Integer, nullable=False)#unique=True, 
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(120), nullable=False)
     platform = db.Column(db.String(4), nullable=False)
-    #_game = db.Column(db.String(8), primary_key=False, unique=False, nullable=True, autoincrement=False)
 
     def __init__(self, id, name, platform):
         self.id = id

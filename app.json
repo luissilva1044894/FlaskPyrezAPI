@@ -20,6 +20,10 @@
         {
             "plan": "heroku-postgresql:hobby-dev",
             "as": "DISCORD_DB"
+        },
+        {
+            "plan": "heroku-postgresql:hobby-dev",
+            "as": "DATABASE"
         }
     ],
     "buildpacks": [
@@ -38,12 +42,12 @@
             "required": "true",
             "value": ""
         },
-        "FACEBOOK_ACCESS_TOKEN": {
+        "FB_ACCESS_TOKEN": {
             "description": "The ACCESS_TOKEN used to post messages on FB messenger",
             "required": "true",
             "value": "CHANGE_ME"
         },
-        "FACEBOOK_VERIFY_TOKEN": {
+        "FB_VERIFY_TOKEN": {
             "description": "The VERIFY_TOKEN used by FB messenger to verify that this bot is yours.",
             "generator": "secret"
         },
