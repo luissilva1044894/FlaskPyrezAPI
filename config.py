@@ -24,7 +24,8 @@ class Config(object):
 		for _ in os.environ:
 			if _.upper().rfind('DB') != -1 and _.upper().endswith('_URL'):#if 'DB_URL' in _.upper():
 				SQLALCHEMY_BINDS.update({_.split('_', 1)[0].lower() : get_env(_)})
-		SQLALCHEMY_DATABASE_URI = SQLALCHEMY_BINDS['database']
+		#SQLALCHEMY_DATABASE_URI = SQLALCHEMY_BINDS['database']
+		SQLALCHEMY_BINDS['database'] = SQLALCHEMY_DATABASE_URI
 	print(SQLALCHEMY_BINDS)
 	
 	# SECURITY WARNING: don't run with debug turned on in production!
