@@ -3,3 +3,6 @@ worker: python bot_worker.py
 init: python manage.py db init
 migrate: python manage.py db migrate
 upgrade: python manage.py db upgrade
+create_db: python manage.py create_db
+drop_db: python manage.py drop_db
+reset_db: python manage.py reset_db
