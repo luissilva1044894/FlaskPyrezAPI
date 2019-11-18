@@ -2,27 +2,33 @@
 # -*- coding: utf-8 -*-
 
 from flask_script import Manager, Server
-from web import app
+from flask_migrate import Migrate, MigrateCommand
+#from web import app
 from utils import get_env
 
 #from flask_sqlalchemy import SQLAlchemy
 #from flask_migrate import Migrate, MigrateCommand
 
 #from web.factory import create_app, db
-#app = create_app()
+from web import create_app
+app = create_app()
 
+from web.models import db
+
+migrate = Migrate(app, db)
 manager = Manager(app)
 _debug_mod = get_env('DEBUG', default=not 'heroku' in get_env('PYTHONHOME', '').lower())
+manager.add_command('db', MigrateCommand)
 manager.add_command('debug', Server(host=get_env('HOST', default='0.0.0.0'), port=get_env('PORT', default=5000), use_debugger=_debug_mod))
 
 @manager.command
-def createdb():
+def create_db():
 	db.create_all()
 @manager.command
-def dropdb():
+def drop_db():
 	db.drop_all()
 @manager.command
-def resetdb():
+def reset_db():
 	db.drop_all()
 	db.create_all()
 

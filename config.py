@@ -1,10 +1,14 @@
+
+"""Flask config class."""
 class Config(object):
+	"""Set Flask configuration vars."""
+	#  General Config
 	from utils import random_string, get_env
 	from boolify import boolify
 	import os
 
 	# SQLAlchemy
-	SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}.db'.format('app' or __name__))#'sqlite:///:memory:'
+	SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}'.format(get_env('DATABASE_FILE') or __name__))#'sqlite:///:memory:'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	#SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 	_binds = get_env('SQLALCHEMY_BINDS', default=None)
@@ -20,6 +24,7 @@ class Config(object):
 		for _ in os.environ:
 			if _.upper().rfind('DB') != -1 and _.upper().endswith('_URL'):#if 'DB_URL' in _.upper():
 				SQLALCHEMY_BINDS.update({_.split('_', 1)[0].lower() : get_env(_)})
+		SQLALCHEMY_DATABASE_URI = SQLALCHEMY_BINDS['paladins']
 	print(SQLALCHEMY_BINDS)
 	
 	# SECURITY WARNING: don't run with debug turned on in production!

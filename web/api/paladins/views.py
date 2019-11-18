@@ -23,6 +23,10 @@ def app_errorhandler(error=None):
 		return error
 	return '?'
 '''
+from ...models.player import PaladinsPlayer
+from utils.flask import get_player_id, get
+
+#from flask import request
 
 def get_page():
 	from flask import request
@@ -55,13 +59,12 @@ def lastmatch_handler():
 def livematch_handler():
 	return get_page()
 
-@blueprint.route('/rank/', methods=['GET'])
+@blueprint.route('/rank', methods=['GET'])
 def rank_handler():
 	#from flask import url_for
 	#print(url_for('api.paladins.views.rank_handler', external=True)) > /api/paladins/rank/?external=True
 	#print(url_for('api.paladins.views.rank_handler', external=True, _external=True))
-	return get_page()
-
+	return str(get_player_id(player_name=get('player'), _db_model=PaladinsPlayer, _api=blueprint.paladins_api, platform=get('platform', 'pc')))
 @blueprint.route('/stalk/', methods=['GET'])
 def stalk_handler():
 	return get_page()

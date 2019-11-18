@@ -23,11 +23,10 @@ def utility_processor():
 	def translate(message, lang=None, *, force=False, folder='lang'):
 		from flask import g
 		if force or '_json' not in g:
-			from flask import request
-			from utils import get_language
+			from utils.flask import get_language
 			from utils.file import read_file, join_path
 			import os
-			g._json = read_file(join_path(['data', folder, '{}.json'.format(lang or get_language(request))]), is_json=True)
+			g._json = read_file(join_path(['data', folder, '{}.json'.format(lang or get_language())]), is_json=True)
 		return g._json.get(str(message).upper(), message)# or message
 	return { 'translate': translate }#return dict(translate=translate)
 

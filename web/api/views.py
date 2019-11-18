@@ -17,11 +17,11 @@ def root_handler(error=None):
 
 @blueprint.route('/random/')
 def random_handler():
-	from flask import request
 	from utils import get, random
+	from utils.flask import get
 	from utils.num import try_int
-	_max, _min = try_int(get(request, 'max'), 100), try_int(get(request, 'min'))
-	return str(random(_min, _max, args=[_ for _ in get(request, 'query', '').split(',') if _]))
+	_max, _min = try_int(get('max'), 100), try_int('min')
+	return str(random(_min, _max, args=[_ for _ in get('query', '').split(',') if _]))
 
 @blueprint.route('/timestamp/')
 def server_timestamp_handler():

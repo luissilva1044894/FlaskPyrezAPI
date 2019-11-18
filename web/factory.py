@@ -44,6 +44,7 @@ def register_blueprints(app, _root=None, recursive=True, include_packages=False)
 				try:
 					mod = importlib.import_module(os.path.join(path, __).replace('\\', '.').replace('/', '.'))
 				except (ModuleNotFoundError, ImportError) as exc:
+					print(exc)
 					pass
 				else:
 					if hasattr(mod, 'blueprint'):
@@ -71,7 +72,8 @@ def register_blueprints(app, _root=None, recursive=True, include_packages=False)
 		pass
 	"""
 def load_config(app, _env_name='FLASK_ENV', _config_filename='config.cfg'):
-	from utils import get_env, get_config
+	from utils import get_env
+	from flask.utils.flask import get_config
 	import os
 	app.config.from_object(get_config(get_env(_env_name, default='dev' if os.sys.platform == 'win32' or os.name == 'nt' else 'prod')))
 	app.config.from_pyfile(_config_filename, silent=True)
