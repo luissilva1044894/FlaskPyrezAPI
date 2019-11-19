@@ -7,19 +7,16 @@
 [![Discord Server](https://img.shields.io/discord/549020573846470659.svg?logo=discord&logoColor=white&logoWidth=10&style=plastic)](https://discord.gg/XkydRPS "Support Server · Discord")
 
 
-Built with: 
-
-[![Python](https://img.shields.io/badge/Python-3.7.5-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html#python-3-7-5-final "Python 3.7.5")
+Built with:  [![Python](https://img.shields.io/badge/Python-3.7.5-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html#python-3-7-5-final "Python 3.7.5")
 
 
-[![Bootstrap 4](https://img.shields.io/badge/Bootstrap-4.3.1-orange.svg?logo=bootstrap&logoColor=white&style=plastic)](https://getbootstrap.com/docs/4.3/getting-started/introduction/ "Bootstrap · 4.3.1")
+[![Pyrez](https://img.shields.io/badge/Pyrez-1.1.0.1-00bb88.svg?logo=github&logoColor=white&style=plastic)](https://github.com/luissilva1044894/Pyrez/tree/1.1.x "Pyrez · 1.1.0.1")
 [![Discord.py][badge-discord-py]][discord-py]
 [![Flask](https://img.shields.io/badge/Flask-1.1.1-orange.svg?logo=flask&logoColor=white&style=plastic)](https://pypi.org/project/Flask/1.1.1/ "Flask · 1.1.1")
 
+[![Bootstrap 4](https://img.shields.io/badge/Bootstrap-4.3.1-orange.svg?logo=bootstrap&logoColor=white&style=plastic)](https://getbootstrap.com/docs/4.3/getting-started/introduction/ "Bootstrap · 4.3.1")
 [![Font Awesome](https://img.shields.io/badge/Font_Awesome-5.11.2-orange.svg?style=plastic)](https://github.com/FortAwesome/Font-Awesome/blob/master/CHANGELOG.md#5112---2019-09-23 "Font Awesome · 5.11.2")
 [![Pillow][badge-pillow]][pillow]
-[![Pyrez](https://img.shields.io/badge/Pyrez-1.1.0.1-00bb88.svg?logo=github&logoColor=white&style=plastic)](https://github.com/luissilva1044894/Pyrez/tree/1.1.x "Pyrez · 1.1.0.1")
-
 </div>
 
 FlaskPyrezAPI is an endpoint for custom commands ([`Twitch`](https://twitch.tv "Twitch")), that provides data about players, matches and others stats of the game [`Paladins`](https://paladins.com "Paladins Game"). It uses [Pyrez](https://github.com/luissilva1044894/Pyrez "Pyrez · Github repository"), my Python wrapper for Hi-Rez Studios API.
@@ -74,8 +71,8 @@ This is an open source [![Open Source](https://raw.githubusercontent.com/abhishe
 
 > Raw data provided by Hi-Rez Studios API and is thus their property. © 2019 Hi-Rez Studios, Inc. All rights reserved.
 
-[badge-discord-py]: https://img.shields.io/badge/Discord.py-1.2.4-orange.svg?logo=discord&logoColor=white&style=plastic
+[badge-discord-py]: https://img.shields.io/badge/Discord.py-1.2.5-orange.svg?logo=discord&logoColor=white&style=plastic
 [badge-pillow]: https://img.shields.io/badge/Pillow-6.2.1-orange.svg?logoColor=white&style=plastic
 
-[discord-py]: https://discordpy.readthedocs.io/en/v1.2.4/ "Discord.py 1.2.4"
+[discord-py]: https://discordpy.readthedocs.io/en/v1.2.5/ "Discord.py 1.2.5"
 [pillow]: https://pillow.readthedocs.io/en/stable/releasenotes/6.2.1.html "Pillow 6.2.1"
