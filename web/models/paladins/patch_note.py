@@ -43,7 +43,7 @@ class PatchNote(db.Model):
 		return {
 			'author': self.author,
 			'content': self.content,
-			'image': { 'thumb': self.image_thumb, 'header': self.image_header },
+			'images': { 'thumb': self.image_thumb, 'header': self.image_header },
 			'timestamp': self.timestamp,
 			'title': self.title
 		}
