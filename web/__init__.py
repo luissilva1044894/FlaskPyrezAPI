@@ -86,7 +86,6 @@ def initialize_plugins(app):
 	#	from .models import db
 		#db.drop_all()
 		#db.create_all()
-	"""
 	try:
 		from .models import Paladins
 		from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
@@ -106,7 +105,7 @@ def initialize_plugins(app):
 	else:
 		for _ in Paladins.query.all():
 			print(_)
-	"""
+	
 def create_app(app_name=None, *, static_folder=None, template_folder=None, static_url_path=None, instance_relative_config=True):
 	from flask import Flask
 	app_name = app_name or __name__.split('.')[0]
