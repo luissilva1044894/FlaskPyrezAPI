@@ -1,4 +1,10 @@
 
+
+def requested_json(arg):
+    from flask import current_app as app
+    if hasattr(arg, 'args'):
+        return arg.headers.get('Content-Type', '').lower() == app.config.get('JSONIFY_MIMETYPE', '').lower() or 'json' in get('json', get('format', '', args=arg.args), args=arg.args).lower()
+    return arg.headers.get('Content-Type', '').lower() == app.config.get('JSONIFY_MIMETYPE', '').lower()
 def get(key, default=None, args=None, *, def_key=None, _attr='args'):
     if not args:
         from flask import request

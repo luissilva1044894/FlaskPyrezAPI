@@ -52,13 +52,14 @@ def register_jsonify(app):
 	def jsonify_func(response):
 		"""JSONify the response. https://github.com/Fuyukai/OWAPI/blob/master/owapi/app.py#L208"""
 		#if flask.request.headers.get('Content-Type', '').lower() == 'application/json': print(flask.request.get_data().decode('utf-8'))#request.data
-		if response.headers.get('Content-Type', '').lower() == app.config['JSONIFY_MIMETYPE'].lower():
+		from utils.flask import requested_json
+		if requested_json(response):#response.headers.get('Content-Type', '').lower() == app.config['JSONIFY_MIMETYPE'].lower():
 			from flask import request
 			if request.args.get('format', 'json') in ['json_pretty', 'pretty'] or app.config['JSONIFY_PRETTYPRINT_REGULAR']:
 				import json
 				from datetime import datetime, timedelta, timezone
 				from email.utils import format_datetime
-				response.set_data(json.dumps(response.get_json(), sort_keys=app.config['JSON_SORT_KEYS'], ensure_ascii=app.config['JSON_AS_ASCII'], indent=4, separators=(',', ': ')))
+				response.set_data(json.dumps(response.get_json(), sort_keys=app.config['JSON_SORT_KEYS'], ensure_ascii=app.config['JSON_AS_ASCII'], indent=2, separators=(',', ': ')))
 				response.headers['Cache-Control'] = 'public, max-age=300'
 				response.headers['Expires'] = format_datetime((datetime.utcnow() + timedelta(seconds=300)).replace(tzinfo=timezone.utc), usegmt=True)
 		return response

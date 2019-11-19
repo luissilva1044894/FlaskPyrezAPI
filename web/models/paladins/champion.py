@@ -12,6 +12,7 @@ class Champion(db.Model):
     lore = db.Column(db.Text)
     title = db.Column(db.String(20))
     is_latest = db.Column(db.Boolean)
+    #name_english
 
     @property
     def abilitys(self):
