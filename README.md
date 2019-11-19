@@ -28,6 +28,7 @@ FlaskPyrezAPI is an endpoint for custom commands ([`Twitch`](https://twitch.tv "
 
 ### Requirements
 - [Access](https://pyrez.readthedocs.io/en/stable/gettingstarted.html#registration "Form access to Hi-Rez Studios API") to Hi-Rez Studios API.
+- [Bot Token - Discord](https://discordapp.com/developers/applications/me) - In order to run the bot, you'll have to provide your own token, provided by Discord.
 
 ### Support
 For support using Pyrez, please join the official [*support server*](
