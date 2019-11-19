@@ -1,0 +1,41 @@
+{
+	"paladins": {
+		"game-store": {
+			"steam": "https://store.steampowered.com/app/444090/",
+			"xbox-one": "https://www.microsoft.com/en-us/store/p/paladins/c4pz0v39gxn2",
+			"ps4": "https://store.playstation.com/#!/en-us/games/paladins/cid=UP0334-CUSA04414_00-PALADINSXXXXXXXX?emcid=pa-st-111690",
+			"nintendo-switch": "https://www.nintendo.com/games/detail/paladins-switch",
+			"discord": "https://discordapp.com/store/skus/528145079819436043/paladins"
+		},
+		"social": {
+			"twitter": "https://twitter.com/paladinsgame",
+			"facebook": "https://facebook.com/paladinsgame",
+			"youtube": "https://www.youtube.com/paladinsgame",
+			"instagram": "https://instagram.com/paladinsgame",
+			"twitch": "https://twitch.tv/paladinsgame",
+			"mixer": "https://www.mixer.com/paladinsgame",
+			"discord": "https://discord.gg/paladinsgame"
+		},
+		"links": {
+			"esports": [ "http://www.paladinsworld.com", "http://esports.paladins.com/"],
+			"store": "https://store.paladins.com",
+			"forum": "http://forums.paladins.com/",
+			"merchandise": [ "https://paladins.merchandise.game/", "https://www.merchandise.game/collections/paladins"],
+			"wiki": "https://paladins.gamepedia.com/Paladins_Wiki"
+		}
+	},
+	"hirez-studios":{
+		"games": {
+			"smite": "https://www.smitegame.com",
+			"paladins": "https://www.paladins.com",
+			"handofthegods": "https://www.handofthegods.com",
+			"paladinsstrike": "https://www.paladinsstrike.com",
+			"realmroyale": "https://www.realmroyale.com/"
+		},
+		"links": [ "https://www.hirezstudios.com", "https://www.hirezstudios.com/careers", "https://www.hirezstudios.com/contact",
+			"https://www.hirezstudios.com/culture", "https://www.hirezstudios.com/events", "https://www.hirezstudios.com/legal",
+			"https://www.hirezstudios.com/link/xbox/", "https://www.hirezstudios.com/link/playstation/", "https://www.hirezstudios.com/my-account",
+			"https://www.hirezstudios.com/my-account/#create-account", "https://www.hirezstudios.com/my-account/#link", "https://www.hirezstudios.com/press",
+			"https://www.hirezstudios.com/privacy", "https://www.hirezstudios.com/submit-support-ticket", "https://www.hirezstudios.com/studio-tours"]
+	}
+}
