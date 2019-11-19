@@ -1,5 +1,11 @@
 {
 	"paladins": {
+		"assets": {
+			"cristal_images": "https://app.box.com/s/orqsgij1kfyyo3co5gsg6k27ai9wab5d",
+			"maps_images": "https://app.box.com/s/rji72ijexal3mzl0mwfj3gimdoj5ii1i",
+			"wallpapers": "https://app.box.com/s/xshio67sqe7wxrse4tipaw3e3oipffnd",
+			"champions_skins": "https://app.box.com/s/qzi4jn7gu0upjspab78i6pn3fsw0vvrf"
+		},
 		"game-store": {
 			"steam": "https://store.steampowered.com/app/444090/",
 			"xbox-one": "https://www.microsoft.com/en-us/store/p/paladins/c4pz0v39gxn2",
@@ -8,19 +14,21 @@
 			"discord": "https://discordapp.com/store/skus/528145079819436043/paladins"
 		},
 		"social": {
-			"twitter": "https://twitter.com/paladinsgame",
+			"discord": "https://discord.gg/paladinsgame",
 			"facebook": "https://facebook.com/paladinsgame",
-			"youtube": "https://www.youtube.com/paladinsgame",
 			"instagram": "https://instagram.com/paladinsgame",
-			"twitch": "https://twitch.tv/paladinsgame",
 			"mixer": "https://www.mixer.com/paladinsgame",
-			"discord": "https://discord.gg/paladinsgame"
+			"twitch": "https://twitch.tv/paladinsgame",
+			"twitter": "https://twitter.com/paladinsgame",
+			"youtube": "https://www.youtube.com/paladinsgame"
 		},
-		"links": {
-			"esports": [ "http://www.paladinsworld.com", "http://esports.paladins.com/"],
-			"store": "https://store.paladins.com",
+		"others": {
+			"esports": "http://esports.paladins.com/",
 			"forum": "http://forums.paladins.com/",
-			"merchandise": [ "https://paladins.merchandise.game/", "https://www.merchandise.game/collections/paladins"],
+			"merchandise": "https://www.merchandise.game/collections/paladins",
+			"official-merchandise": "https://paladins.merchandise.game/",
+			"paladins-world": "http://www.paladinsworld.com",
+			"store": "https://store.paladins.com",
 			"wiki": "https://paladins.gamepedia.com/Paladins_Wiki"
 		}
 	},
