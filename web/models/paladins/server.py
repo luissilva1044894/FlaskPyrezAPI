@@ -14,7 +14,7 @@ class Server(db.Model):
 	def __init__(self, game, version, api_version):
 		from datetime import datetime
 		self.created = datetime.utcnow()
-		self.game = game
+		self.game = game or __name__.split('.')[-2]
 		self.version = version
 		self.api_version = api_version
 		self.save()
@@ -36,16 +36,14 @@ class Server(db.Model):
 	def __str__(self):
 		return str(self.to_json())
 	def to_json(self, lang=1, error_msg=None):
+		from utils.file import read_file
+		__links__ = read_file('data/links.json', is_json=True)
+	
 		return {
 			'game': {
 				'name': self.game,
 				'version': self.version,
-				'assets': {
-					'cristal_images': 'https://app.box.com/s/orqsgij1kfyyo3co5gsg6k27ai9wab5d',
-					'maps_images': 'https://app.box.com/s/rji72ijexal3mzl0mwfj3gimdoj5ii1i',
-					'wallpapers': 'https://app.box.com/s/xshio67sqe7wxrse4tipaw3e3oipffnd',
-					'champions_skins': 'https://app.box.com/s/qzi4jn7gu0upjspab78i6pn3fsw0vvrf'
-				},
+				'links': __links__.get(self.game, ''),
 				'servers': self.platform,
 				'latest_patch_notes': self.patch_notes(lang)
 			},
