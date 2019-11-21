@@ -64,7 +64,7 @@
         "sqlalchemy", "postgresql"
     ],
     "scripts": {
-        "postdeploy": "python manage.py migrate"
+        "postdeploy": "python manage.py db migrate"
     },
     "logo": "https://raw.githubusercontent.com/luissilva1044894/FlaskPyrezAPI/master/static/img/pyrez_server.png",
     "name": "FlaskPyrezAPI",
