@@ -31,10 +31,6 @@
             "description": "The VERIFY_TOKEN used by FB messenger to verify that this bot is yours.",
             "generator": "secret"
         },
-        "ON_HEROKU": {
-            "description": "",
-            "value": "True"
-        },
         "PYREZ_AUTH_ID": {
             "description": "Used for authentication. This is the authentication key that you receive from Hi-Rez Studios.",
             "required": "true",
