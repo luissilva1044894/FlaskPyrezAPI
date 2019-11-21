@@ -65,7 +65,7 @@
         "sqlalchemy", "postgresql"
     ],
     "scripts": {
-        "postdeploy": "python wsgi.py update_db"
+        "postdeploy": ""
     },
     "logo": "https://raw.githubusercontent.com/luissilva1044894/FlaskPyrezAPI/master/static/img/pyrez_server.png",
     "name": "FlaskPyrezAPI",
