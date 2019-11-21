@@ -12,9 +12,12 @@ def get_page():
 
 @blueprint.route('/', methods=['GET'])
 def root_handler(error=None):
-	"""Homepage route."""
+	#https://gist.github.com/cybertoast/6499708
+	'''Self-documenting:
+		Get a list of all routes, and their endpoint's docstrings as a helper resource for API documentation. '''
 	from flask import jsonify, url_for, request, current_app as app
 	from utils.flask import requested_json
+	import urllib
 	if not requested_json(request): return get_page()
 	def has_no_empty_params(rule):
 		return len(rule.defaults or ()) >= len(rule.arguments or ())
@@ -22,14 +25,19 @@ def root_handler(error=None):
 		if hasattr(app.view_functions[rule.endpoint], 'import_name'):
 			return {rule.rule: '%s\n%s' % (','.join(list(rule.methods)), import_string(app.view_functions[rule.endpoint].import_name).__doc__)}
 		return app.view_functions[rule.endpoint].__doc__ #{rule.rule: app.view_functions[rule.endpoint].__doc__}
+		#.__name__ | .__module__
+	#for name, func in app.view_functions.items():
+	#	print(name, func)
+	#	input()
 	return jsonify({
-		'namespace': blueprint.name,
+		'namespace': blueprint.name.split('.')[0],
 		'routes': { #'{}{}'.format(rule, '/'.join(rule.arguments)): {'endpoint': rule.endpoint, 'methods': sorted(rule.methods), 'strict_slashes': rule.strict_slashes} for rule in app.url_map.iter_rules() if 'GET' in rule.methods and has_no_empty_params(rule) and str(rule).startswith('/api')
 			url_for(r.endpoint, **dict('[{}]'.format(_) for _ in r.arguments)): {
 			#'endpoint': r.endpoint,
-			'methods': ','.join(sorted(r.methods)), #'methods': sorted(r.methods)
-			'doc': get_doc(r),
-			'strict_slashes': r.strict_slashes} for r in app.url_map.iter_rules() if 'GET' in r.methods and has_no_empty_params(r) and str(r).startswith('/api')
+			#'line': urllib.parse.unquote('{:50s} {:20s} {}'.format(r.endpoint, ','.join(r.methods), url_for(r.endpoint, **dict('[{}]'.format(_) for _ in r.arguments)))),
+			'methods': ', '.join(sorted(r.methods)), #'methods': sorted(r.methods)
+			'description': get_doc(r),
+			'slashes': r.strict_slashes} for r in app.url_map.iter_rules() if 'GET' in r.methods and has_no_empty_params(r) and 'api' in r.rule#str(r).startswith('/api')
 		},
 		'_links': {'up': [request.base_url[:request.base_url.rfind(blueprint.name.split('.')[0])]]}
 	})
@@ -42,6 +50,7 @@ def root_handler(error=None):
 	'''
 @blueprint.route('/random/')
 def random_handler():
+	from flask import request
 	from utils import random
 	from utils.flask import get
 	from utils.num import try_int
