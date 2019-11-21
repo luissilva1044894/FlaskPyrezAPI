@@ -18,7 +18,7 @@ def configure_logging(app=None):
 				handler.setLevel(logging.DEBUG)#logging.INFO
 				handler.setFormatter(logging.Formatter('[%(levelname)s|%(filename)s:%(lineno)s] ' '%(asctime)s %(message)s \r\n'))
 				app.logger.addHandler(handler)
-def register_blueprints(app, _root=None, recursive=True, include_packages=False):
+def register_blueprints(app, _root=None, *, recursive=True, include_packages=False):
 	"""Automagically register all blueprint packages. Just take a look in the blueprints directory."""
 	from os import listdir, getcwd
 	from os.path import isfile, join, isdir
@@ -55,27 +55,64 @@ def register_jsonify(app):
 		from utils.flask import requested_json
 		if requested_json(response):#response.headers.get('Content-Type', '').lower() == app.config['JSONIFY_MIMETYPE'].lower():
 			from flask import request
+			_indent_, separators = None, (',', ':')
 			if request.args.get('format', 'json') in ['json_pretty', 'pretty'] or app.config['JSONIFY_PRETTYPRINT_REGULAR']:
-				import json
-				from datetime import datetime, timedelta, timezone
-				from email.utils import format_datetime
-				response.set_data(json.dumps(response.get_json(), sort_keys=app.config['JSON_SORT_KEYS'], ensure_ascii=app.config['JSON_AS_ASCII'], indent=2, separators=(',', ': ')))
-				response.headers['Cache-Control'] = 'public, max-age=300'
-				response.headers['Expires'] = format_datetime((datetime.utcnow() + timedelta(seconds=300)).replace(tzinfo=timezone.utc), usegmt=True)
+				_indent_, separators = 2, (',', ': ')
+			import json
+			from datetime import datetime, timedelta, timezone
+			from email.utils import format_datetime
+			response.set_data(json.dumps(response.get_json(), sort_keys=app.config['JSON_SORT_KEYS'], ensure_ascii=app.config['JSON_AS_ASCII'], indent=_indent_, separators=(',', ':')))
+			response.headers['Cache-Control'] = 'public, max-age=300'
+			response.headers['Expires'] = format_datetime((datetime.utcnow() + timedelta(seconds=300)).replace(tzinfo=timezone.utc), usegmt=True)
 		return response
 def register_teardowns(app):
 	@app.teardown_appcontext
 	#@app.teardown_request
 	def teardown_request_func(error=None):
+		"""Log the error"""
 		if error:
-			# Log the error
 			app.logger.error(error)
 
 def get_path(path, folder, _dir='data'):
 	import os
-	#input(os.path.isdir(get_path(root_path, 'static')))
 	return os.path.join(path, _dir, folder)
+def check_redirects(app):
+	@app.before_request
+	def do_before_request():
+		from flask import request
+		from utils.file import read_file
+		for _ in (read_file('data/redirects.json', is_json=True) or {}).get('redirect', {}):
+			if _.get('path') and _.get('path').lower() == request.path.lower():
+				from flask import redirect, url_for
+				return redirect(url_for(_.get('for')))
+		'''#redirect_old
+		for _ in __kwargs__:
+			for __ in __kwargs__[_]:
+				if request.path == __: #request.full_path
+					from flask import redirect, url_for
+					_split = __.split('/')[1:]
+					return redirect(url_for(f'{_split[0]}.{_}.views.{_split[1]}_handler'))
+		'''
+def check_db(app):
+	@app.before_request
+	def do_before_request():
+		from .models import db
+		try:
+			from .models import Paladins
+			from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
 
+			if not Paladins.query.all():
+				pass #new_user = Paladins(id=123, name='Nonsocial', platform='PC')#session = Session('alsalsajkas')
+		except (IntegrityError, InternalError, OperationalError, ProgrammingError) as exc:
+			try:
+				print('>>> Creating Database')
+				db.drop_all()
+				db.create_all()
+			except Exception as exc:
+				print(exc)
+		else:
+			for _ in Paladins.query.all():
+				print(_)
 def initialize_plugins(app):
 	from .models import db
 	db.init_app(app)
@@ -87,26 +124,61 @@ def initialize_plugins(app):
 	#	from .models import db
 		#db.drop_all()
 		#db.create_all()
-	try:
-		from .models import Paladins
-		from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
-		#input(getattr(Paladins, 'query').all())
+def create_manager(app):
+	from flask_script import Manager, Server
+	from flask_migrate import Migrate, MigrateCommand
 
-		if not Paladins.query.all():
-			pass
-			#new_user = Paladins(id=123, name='Nonsocial', platform='PC')
-			#session = Session('alsalsajkas')
-	except (IntegrityError, InternalError, OperationalError, ProgrammingError) as exc:
-		print('>>> Creating Database')
+	from utils import get_env
+	from web.models import db
+
+	migrate = Migrate(app=app, db=db)
+	manager = Manager(app=app)
+
+	_debug_mod = get_env('DEBUG', default=not 'heroku' in get_env('PYTHONHOME', '').lower())
+	manager.add_command('db', MigrateCommand)
+	manager.add_command('debug', Server(host=get_env('HOST', default='0.0.0.0'), port=get_env('PORT', default=5000), use_debugger=_debug_mod))
+
+	@manager.command
+	def update_db():
+		print('>>> Initializing...')
 		try:
-			db.drop_all()
-			db.create_all()
-		except Exception as exc:
-			print(exc)
-	else:
-		for _ in Paladins.query.all():
-			print(_)
-	
+			Champ.query.first()
+		except:
+			reset_db()
+		finally:
+			import pyrez
+			from utils import get_env
+			Champ.update(pyrez.PaladinsAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID')))
+		print('>>> Database updated!')
+
+	@manager.command
+	def create_db():
+		db.create_all()
+	@manager.command
+	def drop_db():
+		db.drop_all()
+	@manager.command
+	def reset_db():
+		drop_db()
+		create_db()
+	@manager.command
+	def schedule_task():
+		t = 'i am a scheduled action, yeah'
+		print(t)
+		app.logger.debug(t)
+	@app.shell_context_processor
+	def make_shell_context():
+		return dict(app=app, db=db)
+	if _debug_mod:
+		@app.route('/debug/')
+		def _debug():
+			"""deliberate error, test debug working"""
+			assert False, 'oops'
+	#@manager.command
+	#def my_function():
+	#	x = app.url_map
+	#	print("hi")
+	return manager
 def create_app(app_name=None, *, static_folder=None, template_folder=None, static_url_path=None, instance_relative_config=True):
 	from flask import Flask
 	app_name = app_name or __name__.split('.')[0]
@@ -122,6 +194,8 @@ def create_app(app_name=None, *, static_folder=None, template_folder=None, stati
 		register_blueprints(app, app.name)
 		#regiter_context_processor(app)
 		register_jsonify(app)
+		check_db(app)
+		check_redirects(app)
 	return app
 
 #The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
