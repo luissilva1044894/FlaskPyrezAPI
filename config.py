@@ -10,7 +10,7 @@ class Config(object):
 	from boolify import boolify
 	import os
 
-	ON_HEROKU = boolify(get_env('ON_HEROKU', 'heroku' in get_env('PYTHONHOME', '').lower()))
+	ON_HEROKU = boolify(get_env('ON_HEROKU')) or 'heroku' in get_env('PYTHONHOME', '').lower()
 
 	# SQLAlchemy
 	SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}'.format(get_env('DATABASE_FILE') or os.path.join(basedir, f'{__name__}.db')))#'sqlite:///:memory:'
