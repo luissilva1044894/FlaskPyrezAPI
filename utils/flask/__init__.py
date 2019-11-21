@@ -30,6 +30,8 @@ def get_player_id(player_name, _api, _db_model, platform='pc'):
 def get_lang_id(lang=None):
     if not lang:
         lang = get_accepted_languages()
+    if isinstance(lang, int):
+        return lang
     return {
         'de': 2, #https://www.paladins.com/news/?lng=de_DE
         'fr': 3, #https://www.paladins.com/news/?lng=fr_FR
@@ -70,6 +72,3 @@ def load_locate_json(message, lang=None, *, force=False, folder='lang'):
 def create_blueprint(name, *, static_url_path='', url_prefix='', split_index=1):
     from flask import Blueprint
     return Blueprint(name.split('.', 1)[split_index], name, static_url_path=static_url_path, url_prefix=static_url_path)
-
-
-
