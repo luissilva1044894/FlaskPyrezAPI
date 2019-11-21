@@ -2,8 +2,8 @@
 from web.models import db
 
 class Skin(db.Model):
-    __tablename__ = 'champ_skin'
-    __bind_key__ = 'database'
+    __tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
+    __bind_key__ = __name__.split('.')[-2]
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     id_2 = db.Column(db.Integer)
