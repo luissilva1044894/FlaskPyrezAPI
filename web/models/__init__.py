@@ -6,6 +6,7 @@ db = SQLAlchemy()
 
 class CRUD_Mixin(object):
   #__bind_key__ = 'database'
+  #__abstract__ = True
   id = db.Column(db.Integer, primary_key=True, autoincrement=False, nullable=False)
 
   def add(self, resource=None):
