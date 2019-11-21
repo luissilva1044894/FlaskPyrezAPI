@@ -10,6 +10,8 @@ class Config(object):
 	from boolify import boolify
 	import os
 
+	ON_HEROKU = get_env(ON_HEROKU, 'heroku' in get_env('PYTHONHOME', '').lower())
+
 	# SQLAlchemy
 	SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}'.format(get_env('DATABASE_FILE') or os.path.join(basedir, f'{__name__}.db')))#'sqlite:///:memory:'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -24,7 +26,7 @@ class Config(object):
 		for _ in _binds.split(','):
 			__ = _.split(':', 1)
 			SQLALCHEMY_BINDS.update({__[0].lower() : __[1] if __[1].rfind('://') != -1 else get_env(__[1])})
-	if 'heroku' in get_env('PYTHONHOME', '').lower():
+	if ON_HEROKU:
 		for _ in os.environ:
 			if _.upper().rfind('DB') != -1 and _.upper().endswith('_URL'):#if 'DB_URL' in _.upper():
 				SQLALCHEMY_BINDS.update({_.split('_', 1)[0].lower() : get_env(_)})
@@ -32,14 +34,14 @@ class Config(object):
 	
 	# SECURITY WARNING: don't run with debug turned on in production!
 	#Default: True if ENV is 'development', or False otherwise.
-	DEBUG = boolify(get_env('DEBUG', default=not 'heroku' in get_env('PYTHONHOME', '').lower() and os.sys.platform == 'win32' or os.name == 'nt'))
+	DEBUG = boolify(get_env('DEBUG', default=not ON_HEROKU and os.sys.platform == 'win32' or os.name == 'nt'))
 
 	# SECURITY WARNING: keep the secret key used in production secret!
 	SECRET_KEY = get_env('SECRET_KEY', default=random_string(size=65))
 
 	PORT, HOST = get_env('PORT', default=5000), get_env('HOST', default='0.0.0.0')
 
-	DEVELOPMENT = TESTING = not 'heroku' in get_env('PYTHONHOME', '').lower()
+	DEVELOPMENT = TESTING = not ON_HEROKU
 
 	LOG_PATH, LOG_FILENAME, LOG_LEVEL = get_env('LOG_PATH', 'logs'), get_env('LOG_FILENAME', 'flask.log'), get_env('LOG_LEVEL', 'info')
 
