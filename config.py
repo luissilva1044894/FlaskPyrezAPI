@@ -1,5 +1,8 @@
 
 """Flask config class."""
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 class Config(object):
 	"""Set Flask configuration vars."""
 	#  General Config
@@ -8,7 +11,7 @@ class Config(object):
 	import os
 
 	# SQLAlchemy
-	SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}'.format(get_env('DATABASE_FILE') or __name__))#'sqlite:///:memory:'
+	SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}'.format(get_env('DATABASE_FILE') or os.path.join(basedir, f'{__name__}.db')))#'sqlite:///:memory:'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	#SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 	_binds = get_env('SQLALCHEMY_BINDS', default=None)
