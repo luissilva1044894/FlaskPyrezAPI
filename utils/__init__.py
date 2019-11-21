@@ -21,6 +21,10 @@ class PlatformsSupported(BaseEnumeration):
 def print_exception(exc):
     print(' : '.join([str(_) for _ in [type(exc), exc.args, exc]]))
 
+def root_path():
+    import os
+    return os.path.dirname(os.path.abspath(__file__)).replace(__name__, '')
+
 def replace(_input, _old, _new='', _split='', replace_or_split=False, _index=1):
     if replace_or_split:
         return _input.split(_split)[_index] or _input.replace(_old, _new)
@@ -77,6 +81,10 @@ def get_env(name, default=None, verbose=False):
     finally:
         return os.getenv(name) or default
 
+def get_timestamp(_format='%Y-%m-%d %H:%M:%S'):
+    from datetime import datetime
+    return datetime.now().strftime(_format)
+
 def format_timestamp(timestamp, _format='MMMM D, YYYY'):
   try:
     import arrow
@@ -109,7 +117,22 @@ def last_seen(locale, date):
         if c.seconds:
             return arrow.utcnow().shift(seconds=-c.seconds).humanize(locale=locale)
         return arrow.utcnow().shift(microseconds=c.microseconds).humanize(locale=locale)
-
+def fix_champ_name(champ):
+    return champ.lower().replace(' ', '').replace("'", '').replace("-", '')
+def get_champ_names(lang=None):
+  '''
+  __champs__, __trans_champ__ = {}, {}
+  for i in [1, 2, 3, 5, 7, 9, 10, 11, 12, 13]:
+    __trans_champ__[i] = {}
+    for champ in get_url(f'https://cms.paladins.com/wp-json/api/champion-hub/{i}'):
+      if champ and not fix_champ_name(fix_champ_name(champ.get('name'))) in __champs__:
+        __champs__[fix_champ_name(champ.get('name'))] = fix_champ_name(champ.get('feName'))
+      __trans_champ__[i][fix_champ_name(champ.get('feName'))] = fix_champ_name(champ.get('name'))
+  if translated:
+    return __trans_champ__
+  return __champs__
+  '''
+  return [fix_champ_name(_.get('name')) for _ in get_url(f'https://cms.paladins.com/wp-json/api/champion-hub/{lang or 1}')]
 """
 https://stackoverflow.com/questions/715417/converting-from-a-string-to-boolean-in-python
 
