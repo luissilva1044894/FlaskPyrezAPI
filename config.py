@@ -43,9 +43,11 @@ class Config(object):
 
 	LOG_PATH, LOG_FILENAME, LOG_LEVEL = get_env('LOG_PATH', 'logs'), get_env('LOG_FILENAME', 'flask.log'), get_env('LOG_LEVEL', 'info')
 
+	SQLALCHEMY_ECHO = DEBUG
 	@property
 	def DATABASE_URI(self):
 		return SQLALCHEMY_DATABASE_URI
+	
 class Developement(Config):
 	DEVELOPMENT, ENV = True, 'development'#dev
 	LOG_LEVEL = 'debug'
