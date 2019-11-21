@@ -140,6 +140,7 @@ def create_manager(app):
 
 	@manager.command
 	def update_db():
+		from web.models.paladins import Champ
 		print('>>> Initializing...')
 		try:
 			Champ.query.first()
