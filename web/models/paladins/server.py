@@ -2,8 +2,8 @@
 from web.models import db
 
 class Server(db.Model):
-	__tablename__ = __name__.split('.', 2)[-1].replace('.', '_')#'server'
-	__bind_key__ = 'database'
+	__tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
+	__bind_key__ = __name__.split('.')[-2]
 
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
 	created = db.Column(db.DateTime, nullable=True)
