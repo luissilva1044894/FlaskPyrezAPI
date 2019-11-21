@@ -21,10 +21,11 @@ def root(error=None):
 
 @blueprint.context_processor
 def utility_processor():
+	from datetime import datetime
 	def translate(message, lang=None, *, force=False, folder='lang'):
 		from utils.flask import load_locate_json
 		return load_locate_json(message=message, lang=lang, force=force, folder=folder)
-	return { 'translate': translate }#return dict(translate=translate)
+	return { 'translate': translate,  'current_year': datetime.utcnow().year}#return dict(translate=translate)
 
 @blueprint.route('/html', methods=['GET'], strict_slashes=False)
 def html_handler():
