@@ -152,6 +152,10 @@ def create_manager(app):
 		print('>>> Database updated!')
 
 	@manager.command
+	def list_routes():
+		from urllib.parse import unquote
+		[print(_) for _ in sorted(unquote('{:50s} {:20s} {}'.format(r.endpoint, ','.join(r.methods), r)) for r in app.url_map.iter_rules())]
+	@manager.command
 	def create_db():
 		db.create_all()
 	@manager.command
