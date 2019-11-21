@@ -65,12 +65,14 @@ def get_server_status(_api, lang=1):
   return {'server': _server, 'error': error_msg}
   
 def func(_api, as_json=False, lang='1'):
-  _server = get_server_status(_api, lang)
+  from web.models import Server
+  _server = Server.get(_api)
+  #_server = get_server_status(_api, lang)
   if as_json:
     #if not _server.get('server'):
     #  _server.get('server') = 
     #NoNe se não existe Server, talvez um Server(null, null, null, ..., error=error)
-    return _server.get('server').to_json(lang, error_msg=_server.get('error'))
+    return _server.get('server').to_json(int(lang), error_msg=_server.get('error'))
   return 'api.paladins.views /api/paladins/version/;;'
   
   '''
