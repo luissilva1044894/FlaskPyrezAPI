@@ -70,8 +70,8 @@ if __name__ == '__main__':
           print(f'App is already running!')#Bot is already running!
           sys.exit()
   if _debug_mod:
-  	@app.route('/debug/')
-  	def _debug():
+    @app.route('/debug/')
+    def _debug():
       """deliberate error, test debug working"""
       assert False, 'oops'
   manager.run()
