@@ -51,7 +51,7 @@ class PatchNote(db.Model):
 '''
 class Platform(db.Model):
 	__tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
-	__bind_key__ = 'database'
+	__bind_key__ = __name__.split('.')[-2]
 
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
 	name = db.Column(db.String(10), nullable=True)
