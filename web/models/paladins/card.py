@@ -23,7 +23,7 @@ class Card(db.Model, CRUD_Mixin):
   #champ_id = db.Column(db.Integer, db.ForeignKey(f'{__bind_key__}_champ.champ_id'))
   champ_id = db.Column(db.Integer)
 
-  def __init__(self, id=0, icon_id=0, card_id=0, name=None, name_english=None, description=None, short_desc=None, actv_schedule=False, lti=False, cooldown=0, is_talent=False, lang=1, champ_id=None, auto_commit=True):
+  def __init__(self, id=0, icon_id=0, card_id=0, name=None, name_english=None, description=None, short_desc=None, actv_schedule=False, lti=False, cooldown=0, is_talent=False, lang=1, champ_id=None):
     from boolify import boolify
     from utils.paladins import extract_description
     self.item_id = int(id)
@@ -42,4 +42,4 @@ class Card(db.Model, CRUD_Mixin):
     self.champ_id = -1
     if champ_id:
       self.champ_id = int(champ_id)
-    self.save(auto_commit)
+    self.save()

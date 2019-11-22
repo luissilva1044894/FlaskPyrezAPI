@@ -22,7 +22,7 @@ class CRUD_Mixin(object):
     db.session.delete(resource or self)
     if auto_commit:
       return self.commit()
-  def save(self, auto_commit=True):
+  def save(self):
     '''
   	from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
   	try:
@@ -32,7 +32,7 @@ class CRUD_Mixin(object):
   		getattr(self.__class__, 'query').filter_by(id=self.id).first().delete()
   		self.save()
     '''
-    self.add(auto_commit)
+    self.add(auto_commit=True)
   def __repr__(self):
   	return '<{} {}>'.format(self.__class__.__name__, self.to_json())
   def __str__(self):

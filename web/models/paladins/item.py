@@ -15,7 +15,7 @@ class Item(db.Model, CRUD_Mixin):
   description = db.Column(db.Text)
   __lang__ = db.Column(db.Integer)
 
-  def __init__(self, id=0, icon_id=0, price=0, item_type=0, name=None, name_english=None, description=None, lang=1, auto_commit=True):
+  def __init__(self, id=0, icon_id=0, price=0, item_type=0, name=None, name_english=None, description=None, lang=1):
     from boolify import boolify
     self.item_id = int(id)
     self.icon_id = int(icon_id)
@@ -28,4 +28,4 @@ class Item(db.Model, CRUD_Mixin):
     #self.name_english = name_english
     self.description = description.split(']', 1)[-1][1:]
     self.__lang__ = lang
-    self.save(auto_commit)
+    self.save()

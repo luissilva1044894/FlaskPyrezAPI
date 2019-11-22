@@ -17,7 +17,7 @@ class Ability(db.Model, CRUD_Mixin):
 	#champ_id = db.Column(db.Integer, db.ForeignKey(f'{__bind_key__}_champ.champ_id'))
 	champ_id = db.Column(db.Integer)
 
-	def __init__(self, ability_id, damage_type=0, cooldown=0, description=None, summary=None, lang=1, champ_id=None, auto_commit=True):
+	def __init__(self, ability_id, damage_type=0, cooldown=0, description=None, summary=None, lang=1, champ_id=None):
 		from utils.paladins import get_dmg_type, extract_description
 		self.ability_id = int(ability_id)
 		self.damage_type = get_dmg_type(damage_type, True)
@@ -29,5 +29,5 @@ class Ability(db.Model, CRUD_Mixin):
 		self.champ_id = -1
 		if champ_id:
 			self.champ_id = int(champ_id)
-		self.save(auto_commit)
+		self.save()
 	
