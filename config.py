@@ -13,7 +13,7 @@ class Config(object):
 	ON_HEROKU = boolify(get_env('ON_HEROKU')) or 'heroku' in get_env('PYTHONHOME', '').lower()
 
 	# SQLAlchemy
-	SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}'.format(get_env('DATABASE_FILE') or os.path.join(basedir, f'{__name__}.db')))#'sqlite:///:memory:'
+	SQLALCHEMY_DATABASE_URI = DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}'.format(get_env('DATABASE_FILE') or os.path.join(basedir, f'{__name__}.db')))#'sqlite:///:memory:'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	#SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 	_binds = get_env('SQLALCHEMY_BINDS', default=None)
@@ -46,9 +46,6 @@ class Config(object):
 	LOG_PATH, LOG_FILENAME, LOG_LEVEL = get_env('LOG_PATH', 'logs'), get_env('LOG_FILENAME', 'flask.log'), get_env('LOG_LEVEL', 'info')
 
 	SQLALCHEMY_ECHO = DEBUG
-	@property
-	def DATABASE_URI(self):
-		return SQLALCHEMY_DATABASE_URI
 	
 class Developement(Config):
 	DEVELOPMENT, ENV = True, 'development'#dev
