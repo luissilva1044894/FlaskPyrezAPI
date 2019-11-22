@@ -26,6 +26,7 @@ class Champ(db.Model, CRUD_Mixin):
   #https://flask-sqlalchemy.palletsprojects.com/en/2.x/api/?highlight=backref
   #https://github.com/pallets/flask-website/blob/master/flask_website/utils.py
   #lazy=[True, 'select', 'immediate', 'joined', 'selectin'][0]
+  #Async SQLAlchemy: https://github.com/aio-libs/aiohttp_admin/blob/master/demos/blog/aiohttpdemo_blog/generate_data.py#L37-L43
 
   def __init__(self, champ_id, name, free_rotation=False, weekly_rotation=False, health=0, is_latest=False, name_english=None, patreon=None, lore=None, title=None, role=None, lang=1, abilitys=None):
     from boolify import boolify
