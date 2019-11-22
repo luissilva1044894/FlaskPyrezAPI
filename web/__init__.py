@@ -31,12 +31,12 @@ def register_blueprints(app, _root=None, *, recursive=True, include_packages=Fal
 				try:
 					mod = importlib.import_module(os.path.join(path, __).replace('\\', '.').replace('/', '.'))
 				except (ModuleNotFoundError, ImportError, AttributeError) as exc:
+					print(f'>>> Failed load blueprint: {exc}')
 					pass
 				else:
 					if hasattr(mod, 'blueprint'):
 						app.register_blueprint(mod.blueprint)
-						#print(f'>>> Loaded blueprint: {mod.blueprint.name}')
-						print('>>> Loaded blueprint: {} | {} ({})'.format(mod.blueprint.name, mod.__name__.split('.')[-2], mod.__name__))
+						print(f'>>> Loaded blueprint: {mod.blueprint.name}', '|', mod.__name__.split('.')[-2], f'({mod.__name__})')
 def load_config(app, _env_name='FLASK_ENV', _config_filename='config.cfg'):
 	from utils import get_env
 	from utils.flask import get_config
