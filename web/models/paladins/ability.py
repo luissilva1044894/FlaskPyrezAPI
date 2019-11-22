@@ -16,6 +16,7 @@ class Ability(db.Model, CRUD_Mixin):
 	cooldown = db.Column(db.Integer)
 	__lang__ = db.Column(db.Integer)
 	#champ_id = db.Column(db.Integer, db.ForeignKey(f'{__bind_key__}_champ.champ_id'))
+	champ_id = db.Column(db.Integer)
 
 	def __init__(self, ability_id, damage_type=0, cooldown=0, description=None, summary=None, lang=1, champ_id=None):
 		from utils.paladins import get_dmg_type

@@ -22,6 +22,7 @@ class Card(db.Model, CRUD_Mixin):
   ability = db.Column(db.String(50))
   __lang__ = db.Column(db.Integer)
   #champ_id = db.Column(db.Integer, db.ForeignKey(f'{__bind_key__}_champ.champ_id'))
+  champ_id = db.Column(db.Integer)
 
   def __init__(self, id=0, icon_id=0, card_id=0, name=None, name_english=None, description=None, short_desc=None, actv_schedule=False, lti=False, cooldown=0, is_talent=False, lang=1, champ_id=None):
     from boolify import boolify

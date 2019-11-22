@@ -18,11 +18,11 @@ class Champ(db.Model, CRUD_Mixin):
   title = db.Column(db.String(20))
   role = db.Column(db.String(20))
   __lang__ = db.Column(db.Integer, unique=False)
+  
   #from sqlalchemy.orm import backref, relation
   #from .champ_ability import Ability
   #abilitys = relation(Ability, backref=backref(__tablename__, lazy=True))#db.relationship('Ability', backref=__tablename__, lazy='dynamic')
   #abilitys = db.relationship('Ability', backref=__tablename__, lazy=True)
-  #abilitys = db.relationship(f'{__bind_key__}_ability', backref=__tablename__, lazy=True)
   #https://flask-sqlalchemy.palletsprojects.com/en/2.x/api/?highlight=backref
   #https://github.com/pallets/flask-website/blob/master/flask_website/utils.py
   #lazy=[True, 'select', 'immediate', 'joined', 'selectin'][0]
@@ -51,12 +51,10 @@ class Champ(db.Model, CRUD_Mixin):
     return Champ.filter_by(__lang__=lang or 1)
   @staticmethod
   def update(_api):
-    print('UPDATING')
-    '''
     from utils import get_url
     from .item import Item
-    from .champ_card import Card
-    from .champ_ability import Ability
+    from .card import Card
+    from .ability import Ability
     [ _.delete() for _ in Ability.query.all()]
     [ _.delete() for _ in Card.query.all()]
     [ _.delete() for _ in Item.query.all()]
@@ -67,7 +65,7 @@ class Champ(db.Model, CRUD_Mixin):
       for g in _api.getGods(l):
         __js0n__ = get_url('https://cms.paladins.com/wp-json/wp/v2/champions?slug={}&lang_id={}'.format(g['Name_English'], l))
         __js0n__ = __js0n__[0] if __js0n__ and len(__js0n__) > 0 else {}
-        ch = Champ(champ_id=g.godId, name=g.godName, free_rotation=g.onFreeRotation, weekly_rotation=g.onFreeWeeklyRotation, health=g.health, is_latest=g.latestGod, name_english=g['Name_English'], patreon=g.pantheon, lore=g.lore, title=g.title, role=g.roles, lang=l)
+        Champ(champ_id=g.godId, name=g.godName, free_rotation=g.onFreeRotation, weekly_rotation=g.onFreeWeeklyRotation, health=g.health, is_latest=g.latestGod, name_english=g['Name_English'], patreon=g.pantheon, lore=g.lore, title=g.title, role=g.roles, lang=l)
         for ch_cards in [_ for _ in i if _['champion_id'] == int(g.godId) and not (_['item_type'].lower().rfind('deprecated')!= -1 or _['item_type'].lower().rfind('default')!= -1)]:
           card_id, name_english, actv_schedule, lti = 0, None, False, False
           for c in __js0n__.get('cards', {}):
@@ -81,6 +79,5 @@ class Champ(db.Model, CRUD_Mixin):
           #ab_vid, time = None, None
           #for ab_vid in __js0n__.get('cards', {}):
             #if ab[-2:] == b[-2:]:
-          ch.add_ability(Ability(ability_id=ab.id, damage_type=ab.damageType, cooldown=ab.rechargeSeconds, description=ab.description, summary=ab.summary, lang=l))#, champ_id=g.godId))
+            Ability(ability_id=ab.id, damage_type=ab.damageType, cooldown=ab.rechargeSeconds, description=ab.description, summary=ab.summary, lang=l, champ_id=g.godId)
       db.session.commit()
-      '''
