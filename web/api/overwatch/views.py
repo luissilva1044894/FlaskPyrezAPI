@@ -7,7 +7,7 @@ from flask import Blueprint
 blueprint = Blueprint(__name__.split('.', 1)[-1], __name__, static_url_path='', url_prefix='/{}'.format(__name__.split('.', 1)[1].replace('.views', '').replace('.', '/')))
 
 from utils.flask import get
-from utils.flask.decoratos import player_required
+from utils.flask.decorators import player_required
 from utils.flask.exceptions import PlayerRequired
 
 def get_page():
