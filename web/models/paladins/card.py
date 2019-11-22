@@ -59,6 +59,7 @@ class Card(db.Model, CRUD_Mixin):
     self.lti = boolify(lti)
     self.cooldown = int(cooldown)
     self.__lang__ = lang
+    self.champ_id = -1
     if champ_id:
       self.champ_id = int(champ_id)
     self.save()
