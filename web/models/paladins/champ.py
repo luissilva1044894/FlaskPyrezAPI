@@ -4,7 +4,7 @@ class Champ(db.Model, CRUD_Mixin):
   __tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
   __bind_key__ = __name__.split('.')[-2]
 
-  id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+  #id = db.Column(db.Integer, primary_key=True, autoincrement=True)
   champ_id = db.Column(db.Integer)#, nullable=False, unique=False)
   name = db.Column(db.Text)
   name_english = db.Column(db.Text)
@@ -58,7 +58,7 @@ class Champ(db.Model, CRUD_Mixin):
     [ _.delete() for _ in Ability.query.all()]
     [ _.delete() for _ in Card.query.all()]
     [ _.delete() for _ in Item.query.all()]
-    for l in [1, 10]:#, 2, 3, 9, 10, 11, 12, 13]:
+    for l in [1, 2, 3, 9, 10, 11, 12, 13]:
       i = _api.getItems(l)
       for ig in [_ for _ in i if _['champion_id'] == 0]:
         Item(id=ig.itemId, icon_id=ig.iconId, price=ig.itemPrice, item_type=ig.itemType, name=ig.deviceName, name_english=None, description=ig.itemDescription, lang=l)
