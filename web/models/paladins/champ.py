@@ -48,36 +48,34 @@ class Champ(db.Model, CRUD_Mixin):
   def get(lang=None):
     return Champ.filter_by(__lang__=lang or 1)
   @staticmethod
-  def update(_api, force=False):
-    _champ = Champ.query.first()
-    if not _champ or force:
-      from utils import get_url
-      from .item import Item
-      from .card import Card
-      from .ability import Ability
-      [ _.delete() for _ in Ability.query.all()]
-      [ _.delete() for _ in Card.query.all()]
-      [ _.delete() for _ in Item.query.all()]
-      for l in [1, 10]:#, 2, 3, 9, 10, 11, 12, 13]:
-        i = _api.getItems(l)
-        for ig in [_ for _ in i if _['champion_id'] == 0]:
-          Item(id=ig.itemId, icon_id=ig.iconId, price=ig.itemPrice, item_type=ig.itemType, name=ig.deviceName, name_english=None, description=ig.itemDescription, lang=l)
-        for g in _api.getGods(l):
-          __js0n__ = get_url('https://cms.paladins.com/wp-json/wp/v2/champions?slug={}&lang_id={}'.format(g['Name_English'], l))
-          __js0n__ = __js0n__[0] if __js0n__ and len(__js0n__) > 0 else {}
-          ch = Champ(champ_id=g.godId, name=g.godName, free_rotation=g.onFreeRotation, weekly_rotation=g.onFreeWeeklyRotation, health=g.health, is_latest=g.latestGod, name_english=g['Name_English'], patreon=g.pantheon, lore=g.lore, title=g.title, role=g.roles, lang=l)
-          for ch_cards in [_ for _ in i if _['champion_id'] == int(g.godId) and not (_['item_type'].lower().rfind('deprecated')!= -1 or _['item_type'].lower().rfind('default')!= -1)]:
-            card_id, name_english, actv_schedule, lti = 0, None, False, False
-            for c in __js0n__.get('cards', {}):
-              if c.get('card_id2', 0) == ch_cards.itemId:
-                card_id = c.get('card_id1')
-                name_english = c.get('card_name_english')
-                actv_schedule = c.get('active_flag_activation_schedule')
-                lti = c.get('active_flag_lti')
-            Card(id=ch_cards.itemId, icon_id=ch_cards.iconId, card_id=card_id, name=ch_cards.deviceName, name_english=name_english, description=ch_cards['Description'], short_desc=ch_cards['ShortDesc'], actv_schedule=actv_schedule, lti=lti, cooldown=ch_cards['recharge_seconds'], is_talent=ch_cards['item_type'].lower().rfind('talent') != -1, lang=l, champ_id=g.godId)
-          for ab in g.abilitys:
-            #ab_vid, time = None, None
-            #for ab_vid in __js0n__.get('cards', {}):
-              #if ab[-2:] == b[-2:]:
-            ch.add_ability(Ability(ability_id=ab.id, damage_type=ab.damageType, cooldown=ab.rechargeSeconds, description=ab.description, summary=ab.summary, lang=l))#, champ_id=g.godId))
+  def update(_api):
+    from utils import get_url
+    from .item import Item
+    from .card import Card
+    from .ability import Ability
+    [ _.delete() for _ in Ability.query.all()]
+    [ _.delete() for _ in Card.query.all()]
+    [ _.delete() for _ in Item.query.all()]
+    for l in [1, 10]:#, 2, 3, 9, 10, 11, 12, 13]:
+      i = _api.getItems(l)
+      for ig in [_ for _ in i if _['champion_id'] == 0]:
+        Item(id=ig.itemId, icon_id=ig.iconId, price=ig.itemPrice, item_type=ig.itemType, name=ig.deviceName, name_english=None, description=ig.itemDescription, lang=l)
+      for g in _api.getGods(l):
+        __js0n__ = get_url('https://cms.paladins.com/wp-json/wp/v2/champions?slug={}&lang_id={}'.format(g['Name_English'], l))
+        __js0n__ = __js0n__[0] if __js0n__ and len(__js0n__) > 0 else {}
+        ch = Champ(champ_id=g.godId, name=g.godName, free_rotation=g.onFreeRotation, weekly_rotation=g.onFreeWeeklyRotation, health=g.health, is_latest=g.latestGod, name_english=g['Name_English'], patreon=g.pantheon, lore=g.lore, title=g.title, role=g.roles, lang=l)
+        for ch_cards in [_ for _ in i if _['champion_id'] == int(g.godId) and not (_['item_type'].lower().rfind('deprecated')!= -1 or _['item_type'].lower().rfind('default')!= -1)]:
+          card_id, name_english, actv_schedule, lti = 0, None, False, False
+          for c in __js0n__.get('cards', {}):
+            if c.get('card_id2', 0) == ch_cards.itemId:
+              card_id = c.get('card_id1')
+              name_english = c.get('card_name_english')
+              actv_schedule = c.get('active_flag_activation_schedule')
+              lti = c.get('active_flag_lti')
+          Card(id=ch_cards.itemId, icon_id=ch_cards.iconId, card_id=card_id, name=ch_cards.deviceName, name_english=name_english, description=ch_cards['Description'], short_desc=ch_cards['ShortDesc'], actv_schedule=actv_schedule, lti=lti, cooldown=ch_cards['recharge_seconds'], is_talent=ch_cards['item_type'].lower().rfind('talent') != -1, lang=l, champ_id=g.godId)
+        for ab in g.abilitys:
+          #ab_vid, time = None, None
+          #for ab_vid in __js0n__.get('cards', {}):
+            #if ab[-2:] == b[-2:]:
+          ch.add_ability(Ability(ability_id=ab.id, damage_type=ab.damageType, cooldown=ab.rechargeSeconds, description=ab.description, summary=ab.summary, lang=l))#, champ_id=g.godId))
       db.session.commit()
