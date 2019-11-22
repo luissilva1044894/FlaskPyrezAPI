@@ -146,3 +146,13 @@ def write_file(filename, content=None, *, is_async=False, mode='w', is_json=Fals
   except (FileExistsError, OSError):
     pass
 #https://medium.com/python4you/python-io-streams-in-examples-97d2c4367207
+
+'''
+def read_file(filename, charset='utf-8'):
+  with open(filename, 'r') as f:
+    return f.read().decode(charset)
+
+def write_file(filename, contents, charset='utf-8'):
+  with open(filename, 'w') as f:
+    f.write(contents.encode(charset))
+'''
