@@ -1,7 +1,6 @@
 
 from web.models import db, CRUD_Mixin
 from sqlalchemy.orm import backref, relation
-from .ability import Ability
 class Champ(db.Model, CRUD_Mixin):
   __tablename__ = 'champ'#__name__.split('.', 2)[-1].replace('.', '_')
   print(__name__.split('.', 2)[-1].replace('.', '_'))
@@ -20,7 +19,9 @@ class Champ(db.Model, CRUD_Mixin):
   title = db.Column(db.String(20))
   role = db.Column(db.String(20))
   __lang__ = db.Column(db.Integer, unique=False)
-  abilitys = relation(Ability, backref=backref(__tablename__, lazy=True))#db.relationship('Ability', backref=__tablename__, lazy='dynamic')
+  #from .ability import Ability
+  #abilitys = relation(Ability, backref=backref(__tablename__, lazy=True))#db.relationship('Ability', backref=__tablename__, lazy='dynamic')
+  abilitys = db.relationship('Ability', backref=__tablename__, lazy=True)
   #https://flask-sqlalchemy.palletsprojects.com/en/2.x/api/?highlight=backref
   #https://github.com/pallets/flask-website/blob/master/flask_website/utils.py
   #lazy=[True, 'select', 'immediate', 'joined', 'selectin'][0]
