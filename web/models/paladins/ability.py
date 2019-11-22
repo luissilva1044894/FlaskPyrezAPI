@@ -4,7 +4,6 @@ from web.models import db, CRUD_Mixin
 class Ability(db.Model, CRUD_Mixin):
 	__tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
 	__bind_key__ = __name__.split('.')[-2]
-	print(__tablename__)
 
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	ability_id = db.Column(db.Integer)

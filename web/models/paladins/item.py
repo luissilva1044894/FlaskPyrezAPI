@@ -10,7 +10,7 @@ class Item(db.Model, CRUD_Mixin):
   icon_id = db.Column(db.Integer)
   price = db.Column(db.Integer)
   item_type = db.Column(db.Integer)
-  name = db.Column(db.String(50))
+  name = db.Column(db.Text)
   #name_english = db.Column(db.String(50))
   description = db.Column(db.Text)
   __lang__ = db.Column(db.Integer)

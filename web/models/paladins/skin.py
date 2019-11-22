@@ -7,8 +7,8 @@ class Skin(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     id_2 = db.Column(db.Integer)
-    name = db.Column(db.String(20))
-    rarity = db.Column(db.String(20))
+    name = db.Column(db.Text)
+    rarity = db.Column(db.Text)
 
     @property
     def abilitys(self):

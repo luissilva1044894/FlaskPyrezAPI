@@ -3,20 +3,19 @@ from web.models import db, CRUD_Mixin
 class Champ(db.Model, CRUD_Mixin):
   __tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
   __bind_key__ = __name__.split('.')[-2]
-  print(__tablename__)
 
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
   champ_id = db.Column(db.Integer)#, nullable=False, unique=False)
-  name = db.Column(db.String(50))
-  name_english = db.Column(db.String(50))
+  name = db.Column(db.Text)
+  name_english = db.Column(db.Text)
   free_rotation = db.Column(db.Boolean)
   weekly_rotation = db.Column(db.Boolean)
   health = db.Column(db.Integer)
   is_latest = db.Column(db.Boolean)
-  patreon = db.Column(db.String(20))
+  patreon = db.Column(db.Text)
   lore = db.Column(db.Text)
-  title = db.Column(db.String(20))
-  role = db.Column(db.String(20))
+  title = db.Column(db.Text)
+  role = db.Column(db.Text)
   __lang__ = db.Column(db.Integer, unique=False)
   
   #from sqlalchemy.orm import backref, relation

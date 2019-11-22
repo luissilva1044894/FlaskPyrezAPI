@@ -4,14 +4,13 @@ from web.models import db, CRUD_Mixin
 class Card(db.Model, CRUD_Mixin):
   __tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
   __bind_key__ = __name__.split('.')[-2]
-  print(__tablename__)
 
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
   item_id = db.Column(db.Integer)
   icon_id = db.Column(db.Integer)
   card_id = db.Column(db.Integer)
-  name = db.Column(db.String(50))
-  name_english = db.Column(db.String(50))
+  name = db.Column(db.Text)
+  name_english = db.Column(db.Text)
   description = db.Column(db.Text)
   short_description = db.Column(db.Text)
   activation_schedule = db.Column(db.Boolean)
@@ -19,7 +18,7 @@ class Card(db.Model, CRUD_Mixin):
   cooldown = db.Column(db.Integer)
   is_talent = db.Column(db.Boolean)
   scale = db.Column(db.Float)
-  ability = db.Column(db.String(50))
+  ability = db.Column(db.Text)
   __lang__ = db.Column(db.Integer)
   #champ_id = db.Column(db.Integer, db.ForeignKey(f'{__bind_key__}_champ.champ_id'))
   champ_id = db.Column(db.Integer)

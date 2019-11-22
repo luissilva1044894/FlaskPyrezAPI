@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 3ae5c006353f
+Revision ID: 13b783529b58
 Revises: 
-Create Date: 2019-11-22 00:13:49.068307
+Create Date: 2019-11-22 00:40:44.319694
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3ae5c006353f'
+revision = '13b783529b58'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,8 +35,8 @@ def upgrade():
     sa.Column('item_id', sa.Integer(), nullable=True),
     sa.Column('icon_id', sa.Integer(), nullable=True),
     sa.Column('card_id', sa.Integer(), nullable=True),
-    sa.Column('name', sa.String(length=50), nullable=True),
-    sa.Column('name_english', sa.String(length=50), nullable=True),
+    sa.Column('name', sa.Text(), nullable=True),
+    sa.Column('name_english', sa.Text(), nullable=True),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('short_description', sa.Text(), nullable=True),
     sa.Column('activation_schedule', sa.Boolean(), nullable=True),
@@ -44,7 +44,7 @@ def upgrade():
     sa.Column('cooldown', sa.Integer(), nullable=True),
     sa.Column('is_talent', sa.Boolean(), nullable=True),
     sa.Column('scale', sa.Float(), nullable=True),
-    sa.Column('ability', sa.String(length=50), nullable=True),
+    sa.Column('ability', sa.Text(), nullable=True),
     sa.Column('__lang__', sa.Integer(), nullable=True),
     sa.Column('champ_id', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -52,16 +52,16 @@ def upgrade():
     op.create_table('paladins_champ',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('champ_id', sa.Integer(), nullable=True),
-    sa.Column('name', sa.String(length=50), nullable=True),
-    sa.Column('name_english', sa.String(length=50), nullable=True),
+    sa.Column('name', sa.Text(), nullable=True),
+    sa.Column('name_english', sa.Text(), nullable=True),
     sa.Column('free_rotation', sa.Boolean(), nullable=True),
     sa.Column('weekly_rotation', sa.Boolean(), nullable=True),
     sa.Column('health', sa.Integer(), nullable=True),
     sa.Column('is_latest', sa.Boolean(), nullable=True),
-    sa.Column('patreon', sa.String(length=20), nullable=True),
+    sa.Column('patreon', sa.Text(), nullable=True),
     sa.Column('lore', sa.Text(), nullable=True),
-    sa.Column('title', sa.String(length=20), nullable=True),
-    sa.Column('role', sa.String(length=20), nullable=True),
+    sa.Column('title', sa.Text(), nullable=True),
+    sa.Column('role', sa.Text(), nullable=True),
     sa.Column('__lang__', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
@@ -71,7 +71,7 @@ def upgrade():
     sa.Column('icon_id', sa.Integer(), nullable=True),
     sa.Column('price', sa.Integer(), nullable=True),
     sa.Column('item_type', sa.Integer(), nullable=True),
-    sa.Column('name', sa.String(length=50), nullable=True),
+    sa.Column('name', sa.Text(), nullable=True),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('__lang__', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -113,8 +113,8 @@ def upgrade():
     op.create_table('paladins_skin',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('id_2', sa.Integer(), nullable=True),
-    sa.Column('name', sa.String(length=20), nullable=True),
-    sa.Column('rarity', sa.String(length=20), nullable=True),
+    sa.Column('name', sa.Text(), nullable=True),
+    sa.Column('rarity', sa.Text(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('session',
