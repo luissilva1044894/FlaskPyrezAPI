@@ -2,9 +2,7 @@
 from web.models import db, CRUD_Mixin
 
 class Ability(db.Model, CRUD_Mixin):
-	__tablename__ = 'champ_alibity'#__name__.split('.', 2)[-1].replace('.', '_')
-	print(__name__.split('.', 2)[-1].replace('.', '_'))
-	print('{}_champ.champ_id'.format(__name__.split('.', 3)[-2]))
+	__tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
 	__bind_key__ = __name__.split('.')[-2]
 
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -16,8 +14,7 @@ class Ability(db.Model, CRUD_Mixin):
 	summary = db.Column(db.Text)
 	cooldown = db.Column(db.Integer)
 	__lang__ = db.Column(db.Integer)
-	#champ_id = db.Column(db.Integer, db.ForeignKey('{}_champ.champ_id'.format(__name__.split('.', 3)[-2])))
-	champ_id = db.Column(db.Integer, db.ForeignKey('champ.champ_id'))
+	champ_id = db.Column(db.Integer, db.ForeignKey('{}_champ.champ_id'.format(__name__.split('.', 3)[-2])))
 
 	def __init__(self, ability_id, damage_type=0, cooldown=0, description=None, summary=None, lang=1, champ_id=None):
 		from utils.paladins import get_dmg_type
