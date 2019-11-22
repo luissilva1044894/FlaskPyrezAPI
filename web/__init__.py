@@ -97,14 +97,12 @@ def check_redirects(app):
 def check_db(app):
 	@app.before_request
 	def do_before_request():
-		db.metadata.create_all()
 		from .models import db
+		from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
 		try:
-			from .models import Paladins
-			from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
-
-			if not Paladins.query.all():
-				pass #new_user = Paladins(id=123, name='Nonsocial', platform='PC')#session = Session('alsalsajkas')
+			from .models.paladins.player import Player
+			if not Player.query.all():
+				pass #new_user = Player(id=123, name='Nonsocial', platform='PC')#session = Session('alsalsajkas')
 		except (IntegrityError, InternalError, OperationalError, ProgrammingError) as exc:
 			try:
 				print('>>> Creating Database')
@@ -113,7 +111,7 @@ def check_db(app):
 			except Exception as exc:
 				print(exc)
 		else:
-			for _ in Paladins.query.all():
+			for _ in Player.query.all():
 				print(_)
 def initialize_plugins(app):
 	from .models import db
