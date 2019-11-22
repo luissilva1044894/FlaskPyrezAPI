@@ -49,12 +49,12 @@ class Champ(db.Model, CRUD_Mixin):
     return Champ.filter_by(__lang__=lang or 1)
   @staticmethod
   def update(_api, force=False):
-    from .ability import Ability
-    from .card import Card
-    from .item import Item
-    from utils import get_url
     _champ = Champ.query.first()
     if not _champ or force:
+      from utils import get_url
+      from .item import Item
+      from .card import Card
+      from .ability import Ability
       [ _.delete() for _ in Ability.query.all()]
       [ _.delete() for _ in Card.query.all()]
       [ _.delete() for _ in Item.query.all()]
