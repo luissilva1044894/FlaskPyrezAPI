@@ -76,10 +76,11 @@ def load_cogs(bot, cogs_dir='cogs'):
 								bot.load_extension(f'{_}.{cogs_dir}.{__[:-3]}')
 							else:
 								bot.load_extension('.'.join([_, cogs_dir, __]))
-							print(f'>>> Loaded extension: { __}')
 						except Exception as e:#(commands.errors.ExtensionNotFound, commands.errors.NoEntryPointError) as e:
 							exc = '{}: {}'.format(type(e).__name__, e)
 							print(f'Failed to load extension {__}\n{exc}')#, file=sys.stderr)
+						else:
+							print(f'>>> Loaded extension: {__}')
 			except FileNotFoundError:
 				pass
 

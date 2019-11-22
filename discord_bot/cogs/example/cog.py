@@ -17,9 +17,9 @@ class Cog(commands.Cog, name='Example'):
   @commands.command()
   async def ping(self, ctx, *args):
     import asyncio
-    await ctx.send(":ping_pong: Pong!")
+    await ctx.send(':ping_pong: Pong!')
     await asyncio.sleep(3)
-    await ctx.send(":warning:")
+    await ctx.send(':warning:')
 
   @commands.command(description='')
   @commands.guild_only()

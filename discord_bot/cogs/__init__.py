@@ -15,8 +15,8 @@ class BaseCog(commands.Cog, name='Example'):
     self.bot = bot
   def codeblock(s, lang=None):
     if lang:
-        return "```{}\n{}```".format(lang, s)
-    return "```{}```".format(s)
+        return f'```{lang}\n{s}```'
+    return f'```{s}```'
   @staticmethod
   def load_json(filename):
     """Loads a json file"""
@@ -41,13 +41,13 @@ class BaseCog(commands.Cog, name='Example'):
   def check_disabled():
     def predicate(ctx):
         if command_is_disabled(ctx.command.name, ctx.channel.id):
-            raise DisabledInChannel("{ctx.command.name} is disabled in {ctx.channel.name}".format(ctx=ctx))
+            raise DisabledInChannel('{ctx.command.name} is disabled in {ctx.channel.name}'.format(ctx=ctx))
         return True
     return commands.check(predicate)
   @staticmethod
   def server_owner_only():
     async def predicate(ctx):
-        return ctx.guild.owner == ctx.author #raise NotServerOwner("Only the server owner: " + str(ctx.guild.owner) + " can use this command")
+        return ctx.guild.owner == ctx.author #raise NotServerOwner('Only the server owner: ' + str(ctx.guild.owner) + ' can use this command')
     return commands.check(predicate)
   @staticmethod
   def isAuthorized():

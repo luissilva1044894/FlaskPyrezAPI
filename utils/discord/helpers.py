@@ -1,11 +1,11 @@
 def codeblock(s, lang=None):
   if lang:
-    return "```{}\n{}```".format(lang, s)
-  return "```{}```".format(s)
+    return f'```{lang}\n{s}```'
+  return f'```{s}```'
 #https://github.com/Harmon758/Harmonbot
 def get_prefix(bot, message):
     import discord
-    with open(data_path + "/prefixes.json", 'r') as prefixes_file:
+    with open(f'{data_path}/prefixes.json', 'r') as prefixes_file:
         all_prefixes = json.load(prefixes_file)
         if isinstance(message.channel, discord.DMChannel):
             return all_prefixes.get(str(message.channel.id), '!')
