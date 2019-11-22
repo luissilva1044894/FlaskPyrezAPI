@@ -77,7 +77,8 @@ def get_path(path, folder, _dir='data'):
 	import os
 	return os.path.join(path, _dir, folder)
 def check_redirects(app):
-	@app.before_request
+	#@app.before_request
+	@app.before_first_request
 	def do_before_request():
 		from flask import request
 		from utils.file import read_file
