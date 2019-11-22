@@ -1,7 +1,7 @@
 {
     "addons": [
         { "plan": "scheduler:standard" },
-        { "plan": "heroku-redis:hobby-dev" },
+        { "plan": "heroku-redis:hobby-dev", "as": "TEMP_DB" },
         { "plan": "heroku-postgresql:hobby-dev", "as": "PALADINS_DB" },
         { "plan": "heroku-postgresql:hobby-dev", "as": "SMITE_DB" },
         { "plan": "heroku-postgresql:hobby-dev", "as": "DISCORD_DB" },
