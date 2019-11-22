@@ -34,7 +34,9 @@ def jsonify_func(args):
     'latest_patch_notes': [format_patch_notes(_) for _ in args['patch_notes']],
   }
 def get_server_status(_api, lang=1):
-  from web.models import Platform, Server, PatchNote
+  from ....models.paladins.server import Server
+  from ....models.paladins.platform import Platform
+  from ....models.paladins.patch_note import PatchNote
   error_msg = None
   _server = Server.query.first()
   if not _server or _server and not _server.updated:
@@ -65,7 +67,7 @@ def get_server_status(_api, lang=1):
   return {'server': _server, 'error': error_msg}
   
 def func(_api, as_json=False, lang='1'):
-  from web.models import Server
+  from ....models.paladins.server import Server
   _server = Server.get(_api)
   #_server = get_server_status(_api, lang)
   if as_json:
