@@ -28,7 +28,7 @@ class Config(object):
 			SQLALCHEMY_BINDS.update({__[0].lower() : __[1] if __[1].rfind('://') != -1 else get_env(__[1])})
 	if ON_HEROKU:
 		for _ in os.environ:
-			if _.upper().rfind('DB') != -1 and _.upper().endswith('_URL'):#if 'DB_URL' in _.upper():
+			if _.upper().endswith('_URL'):#if 'DB_URL' in _.upper(): | _.upper().rfind('DB') != -1 and
 				SQLALCHEMY_BINDS.update({_.split('_', 1)[0].lower() : get_env(_)})
 	print(SQLALCHEMY_BINDS)
 	
