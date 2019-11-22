@@ -97,6 +97,7 @@ def check_redirects(app):
 def check_db(app):
 	@app.before_request
 	def do_before_request():
+		db.metadata.create_all()
 		from .models import db
 		try:
 			from .models import Paladins
@@ -130,7 +131,7 @@ def create_manager(app):
 	from flask_migrate import Migrate, MigrateCommand
 
 	from utils import get_env
-	from web.models import db
+	from .models import db
 
 	migrate = Migrate(app=app, db=db)
 	manager = Manager(app=app)
@@ -141,7 +142,7 @@ def create_manager(app):
 
 	@manager.command
 	def update_db():
-		from web.models.paladins import Champ
+		from .models.paladins.champ import Champ
 		print('>>> Initializing...')
 		try:
 			Champ.query.first()
