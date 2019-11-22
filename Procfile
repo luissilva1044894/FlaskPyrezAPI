@@ -11,3 +11,4 @@ downgrade: python wsgi.py db downgrade
 create_db: python wsgi.py create_db
 drop_db: python wsgi.py drop_db
 reset_db: python wsgi.py reset_db
+update_db: python wsgi.py update_db
