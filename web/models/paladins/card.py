@@ -3,6 +3,7 @@ from web.models import db, CRUD_Mixin
 
 class Card(db.Model, CRUD_Mixin):
   __tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
+  print(__tablename__)
   __bind_key__ = __name__.split('.')[-2]
 
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -20,7 +21,8 @@ class Card(db.Model, CRUD_Mixin):
   scale = db.Column(db.Float)
   ability = db.Column(db.String(50))
   __lang__ = db.Column(db.Integer)
-  champ_id = db.Column(db.Integer, db.ForeignKey('{}_champ.champ_id'.format(__name__.split('.', 3)[-2])))
+  #champ_id = db.Column(db.Integer, db.ForeignKey('{}_champ.champ_id'.format(__name__.split('.', 3)[-2])))
+  champ_id = db.Column(db.Integer, db.ForeignKey('champ.champ_id'.format(__name__.split('.', 3)[-2])))
 
   def __init__(self, id=0, icon_id=0, card_id=0, name=None, name_english=None, description=None, short_desc=None, actv_schedule=False, lti=False, cooldown=0, is_talent=False, lang=1, champ_id=None):
     from boolify import boolify
