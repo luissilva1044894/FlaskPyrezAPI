@@ -4,6 +4,7 @@ from sqlalchemy.orm import backref, relation
 class Champ(db.Model, CRUD_Mixin):
   __tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
   __bind_key__ = __name__.split('.')[-2]
+  print(__tablename__)
 
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
   champ_id = db.Column(db.Integer)#, nullable=False, unique=False)
@@ -52,7 +53,7 @@ class Champ(db.Model, CRUD_Mixin):
     from utils import get_url
     from .item import Item
     from .card import Card
-    from .ability import Ability
+    from .champ_ability import Ability
     [ _.delete() for _ in Ability.query.all()]
     [ _.delete() for _ in Card.query.all()]
     [ _.delete() for _ in Item.query.all()]
