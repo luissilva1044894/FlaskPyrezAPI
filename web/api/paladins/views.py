@@ -24,7 +24,7 @@ def app_errorhandler(error=None):
 		return error
 	return '?'
 '''
-from ...models.paladins.player import Paladins
+from ...models.paladins.player import Player
 from utils import flask
 from utils.flask import get_player_id, get, get_lang_id
 import requests
@@ -65,7 +65,7 @@ def root_handler():
 def decks_handler():
 	from .controllers.decks import func
 
-	_player_id = get_player_id(player_name=get('player'), _db_model=Paladins, _api=blueprint.__api__, platform=get('platform', 'pc'))
+	_player_id = get_player_id(player_name=get('player'), _db_model=Player, _api=blueprint.__api__, platform=get('platform', 'pc'))
 	__rt = func(get('champ', ''), player_id=_player_id, _api=blueprint.__api__, lang=get('lang', get_lang_id()), nodeck_exc=flask.exceptions.NoDeck, nochamp_exc=flask.exceptions.NoChamp)
 	if isinstance(__rt, dict):
 		from flask import jsonify
@@ -94,7 +94,7 @@ def rank_handler():
 	#from flask import url_for
 	#print(url_for('api.paladins.views.rank_handler', external=True)) > /api/paladins/rank/?external=True
 	#print(url_for('api.paladins.views.rank_handler', external=True, _external=True))
-	return str(get_player_id(player_name=get('player'), _db_model=Paladins, _api=blueprint.__api__, platform=get('platform', 'pc')))
+	return str(get_player_id(player_name=get('player'), _db_model=Player, _api=blueprint.__api__, platform=get('platform', 'pc')))
 @blueprint.route('/stalk', methods=['GET'], strict_slashes=False)
 @flask.decorators.player_required
 def stalk_handler():
