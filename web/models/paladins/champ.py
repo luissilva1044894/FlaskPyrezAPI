@@ -3,7 +3,8 @@ from web.models import db, CRUD_Mixin
 from sqlalchemy.orm import backref, relation
 from .ability import Ability
 class Champ(db.Model, CRUD_Mixin):
-  __tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
+  __tablename__ = 'champ'#__name__.split('.', 2)[-1].replace('.', '_')
+  print(__name__.split('.', 2)[-1].replace('.', '_'))
   __bind_key__ = __name__.split('.')[-2]
 
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
