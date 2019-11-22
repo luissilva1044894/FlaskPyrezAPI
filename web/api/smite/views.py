@@ -10,8 +10,7 @@ if not hasattr(blueprint, '__api__'):
 	from utils import get_env
 	blueprint.__api__ = getattr(pyrez, '{}API'.format(__name__.split('.')[-2].capitalize()))(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'))
 
-from utils.flask import get
-from utils.flask.decoratos import player_required
+from utils.flask import get, decorators
 from utils.flask.exceptions import PlayerRequired
 
 def get_page():
@@ -24,27 +23,27 @@ def root_handler(error=None):
 	return str(blueprint.__api__.ping())
 
 @blueprint.route('/kda', methods=['GET'], strict_slashes=False)
-@player_required
+@decorators.player_required
 def kda_handler():
 	return get_page()
 
 @blueprint.route('/last_match', methods=['GET'], strict_slashes=False)
-@player_required
+@decorators.player_required
 def lastmatch_handler():
 	return get_page()
 
 @blueprint.route('/live_match', methods=['GET'], strict_slashes=False)
-@player_required
+@decorators.player_required
 def livematch_handler():
 	return get_page()
 
 @blueprint.route('/rank', methods=['GET'], strict_slashes=False)
-@player_required
+@decorators.player_required
 def rank_handler():
 	return get_page()
 
 @blueprint.route('/stalk', methods=['GET'], strict_slashes=False)
-@player_required
+@decorators.player_required
 def stalk_handler():
 	return get_page()
 
