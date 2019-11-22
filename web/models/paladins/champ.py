@@ -18,10 +18,12 @@ class Champ(db.Model, CRUD_Mixin):
   title = db.Column(db.String(20))
   role = db.Column(db.String(20))
   __lang__ = db.Column(db.Integer, unique=False)
-  from sqlalchemy.orm import backref, relation
-  from .champ_ability import Ability
-  abilitys = relation(Ability, backref=backref(__tablename__, lazy=True))#db.relationship('Ability', backref=__tablename__, lazy='dynamic')
+  #from sqlalchemy.orm import backref, relation
+  #from .champ_ability import Ability
+  #abilitys = relation(Ability, backref=backref(__tablename__, lazy=True))#db.relationship('Ability', backref=__tablename__, lazy='dynamic')
   #abilitys = db.relationship('Ability', backref=__tablename__, lazy=True)
+  abilitys = db.relationship(f'{__bind_key__}_ability', backref=__tablename__, lazy=True)
+  cards = db.relationship(f'{__bind_key__}_card', backref=__tablename__, lazy=True)
   #https://flask-sqlalchemy.palletsprojects.com/en/2.x/api/?highlight=backref
   #https://github.com/pallets/flask-website/blob/master/flask_website/utils.py
   #lazy=[True, 'select', 'immediate', 'joined', 'selectin'][0]
@@ -54,7 +56,7 @@ class Champ(db.Model, CRUD_Mixin):
     '''
     from utils import get_url
     from .item import Item
-    from .card import Card
+    from .champ_card import Card
     from .champ_ability import Ability
     [ _.delete() for _ in Ability.query.all()]
     [ _.delete() for _ in Card.query.all()]
