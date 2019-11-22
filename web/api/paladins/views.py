@@ -25,8 +25,7 @@ def app_errorhandler(error=None):
 	return '?'
 '''
 from ...models.paladins.player import Player
-from utils import flask
-from utils.flask import get_player_id, get, get_lang_id
+from utils.flask import decorators, exceptions, get_player_id, get, get_lang_id
 import requests
 from flask import g
 
@@ -34,19 +33,19 @@ from flask import g
 def connection_error_handler(error=None):
 	return 'Internal Error!'
 
-@blueprint.errorhandler(flask.exceptions.PlayerRequired)
+@blueprint.errorhandler(exceptions.PlayerRequired)
 def player_required_error_handler(error=None):
 	return f"🚫 ERROR: No player name!."
 
-@blueprint.errorhandler(flask.exceptions.ChampRequired)
+@blueprint.errorhandler(exceptions.ChampRequired)
 def champ_required_error_handler(error=None):
 	return f"🚫 ERROR: No champ name!."
 
-@blueprint.errorhandler(flask.exceptions.NoDeck)
+@blueprint.errorhandler(exceptions.NoDeck)
 def no_deck_error_handler(error=None):
 	return f"🚫 ERROR: “{g.__player__}” doesn't have any “{g.__champ__}” custom loadouts!."
 
-@blueprint.errorhandler(flask.exceptions.NoChamp)
+@blueprint.errorhandler(exceptions.NoChamp)
 def no_champ_error_handler(error=None):
 	return f"🚫 ERROR: Invalid champ name “{g.__champ__}”!"
 
@@ -60,13 +59,13 @@ def root_handler():
 	return str(blueprint.__api__.ping())
 
 @blueprint.route('/decks', methods=['GET'], strict_slashes=False)
-@flask.decorators.player_required
-@flask.decorators.champ_required
+@decorators.player_required
+@decorators.champ_required
 def decks_handler():
 	from .controllers.decks import func
 
 	_player_id = get_player_id(player_name=get('player'), _db_model=Player, _api=blueprint.__api__, platform=get('platform', 'pc'))
-	__rt = func(get('champ', ''), player_id=_player_id, _api=blueprint.__api__, lang=get('lang', get_lang_id()), nodeck_exc=flask.exceptions.NoDeck, nochamp_exc=flask.exceptions.NoChamp)
+	__rt = func(get('champ', ''), player_id=_player_id, _api=blueprint.__api__, lang=get('lang', get_lang_id()), nodeck_exc=exceptions.NoDeck, nochamp_exc=exceptions.NoChamp)
 	if isinstance(__rt, dict):
 		from flask import jsonify
 		return jsonify(__rt)
@@ -74,29 +73,29 @@ def decks_handler():
 	return get_page()
 
 @blueprint.route('/kda', methods=['GET'], strict_slashes=False)
-@flask.decorators.player_required
+@decorators.player_required
 def kda_handler():
 	return get_page()
 
 @blueprint.route('/last_match', methods=['GET'], strict_slashes=False)
-@flask.decorators.player_required
+@decorators.player_required
 def lastmatch_handler():
 	return get_page()
 
 @blueprint.route('/live_match', methods=['GET'], strict_slashes=False)
-@flask.decorators.player_required
+@decorators.player_required
 def livematch_handler():
 	return get_page()
 
 @blueprint.route('/rank', methods=['GET'], strict_slashes=False)
-@flask.decorators.player_required
+@decorators.player_required
 def rank_handler():
 	#from flask import url_for
 	#print(url_for('api.paladins.views.rank_handler', external=True)) > /api/paladins/rank/?external=True
 	#print(url_for('api.paladins.views.rank_handler', external=True, _external=True))
 	return str(get_player_id(player_name=get('player'), _db_model=Player, _api=blueprint.__api__, platform=get('platform', 'pc')))
 @blueprint.route('/stalk', methods=['GET'], strict_slashes=False)
-@flask.decorators.player_required
+@decorators.player_required
 def stalk_handler():
 	return get_page()
 
