@@ -22,7 +22,7 @@ class Champ(db.Model, CRUD_Mixin):
   #from .champ_ability import Ability
   #abilitys = relation(Ability, backref=backref(__tablename__, lazy=True))#db.relationship('Ability', backref=__tablename__, lazy='dynamic')
   #abilitys = db.relationship('Ability', backref=__tablename__, lazy=True)
-  abilitys = db.relationship(f'{__bind_key__}_ability', backref=__tablename__, lazy=True)
+  #abilitys = db.relationship(f'{__bind_key__}_ability', backref=__tablename__, lazy=True)
   #https://flask-sqlalchemy.palletsprojects.com/en/2.x/api/?highlight=backref
   #https://github.com/pallets/flask-website/blob/master/flask_website/utils.py
   #lazy=[True, 'select', 'immediate', 'joined', 'selectin'][0]
