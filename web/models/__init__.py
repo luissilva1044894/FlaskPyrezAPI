@@ -36,10 +36,10 @@ class CRUD_Mixin(object):
   	#return {c.name: getattr(self, c.name) for c in self.__table__.columns}
   	return {_: self.__dict__[_] for _ in self.__dict__ if not _.startswith('_')}
 
-from .player import Paladins, Smite
-from .session import Session
-from .paladins.server import Server
-from .paladins.platform import Platform
-from .paladins.patch_note import PatchNote
-from .paladins import champ
+#from .paladins import player
+#from .session import Session
+#from .paladins.server import Server
+#from .paladins.platform import Platform
+#from .paladins.patch_note import PatchNote
+#from .paladins import champ
 #, ChampInfo, Ability, AbilityInfo
