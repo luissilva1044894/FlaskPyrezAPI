@@ -31,7 +31,7 @@ def register_blueprints(app, _root=None, *, recursive=True, include_packages=Fal
 				try:
 					mod = importlib.import_module(os.path.join(path, __).replace('\\', '.').replace('/', '.'))
 				except (ModuleNotFoundError, ImportError, AttributeError) as exc:
-					print(f'>>> Failed load blueprint: {exc}')
+					print(f'>>> Failed to load: {exc}')
 					pass
 				else:
 					if hasattr(mod, 'blueprint'):
@@ -125,18 +125,15 @@ def initialize_plugins(app):
 		#db.drop_all()
 		#db.create_all()
 def create_manager(app):
-	from flask_script import Manager, Server
+	from flask_script import Manager, Server, Shell
 	from flask_migrate import Migrate, MigrateCommand
 
 	from utils import get_env
 	from .models import db
+	from boolify import boolify
 
 	migrate = Migrate(app=app, db=db)
 	manager = Manager(app=app)
-
-	_debug_mod = get_env('DEBUG', default=not 'heroku' in get_env('PYTHONHOME', '').lower())
-	manager.add_command('db', MigrateCommand)
-	manager.add_command('debug', Server(host=get_env('HOST', default='0.0.0.0'), port=get_env('PORT', default=5000), use_debugger=_debug_mod))
 
 	@manager.command
 	def update_db():
@@ -151,6 +148,10 @@ def create_manager(app):
 			from utils import get_env
 			Champ.update(pyrez.PaladinsAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID')))
 		print('>>> Database updated!')
+		import sys
+		sys.exit(0)
+
+	_debug_mod = boolify(get_env('DEBUG')) or not 'heroku' in get_env('PYTHONHOME', '').lower()
 
 	@manager.command
 	def list_routes():
@@ -171,7 +172,7 @@ def create_manager(app):
 		t = 'i am a scheduled action, yeah'
 		print(t)
 		app.logger.debug(t)
-	@app.shell_context_processor
+	#@app.shell_context_processor
 	def make_shell_context():
 		return dict(app=app, db=db)
 	if _debug_mod:
@@ -183,6 +184,11 @@ def create_manager(app):
 	#def my_function():
 	#	x = app.url_map
 	#	print("hi")
+
+	manager.add_command('db', MigrateCommand)
+	manager.add_command('debug', Server(host=get_env('HOST', default='0.0.0.0'), port=get_env('PORT', default=5000), use_debugger=_debug_mod))
+	manager.add_command('shell', Shell(make_context=make_shell_context))
+
 	return manager
 def create_app(app_name=None, *, static_folder=None, template_folder=None, static_url_path=None, instance_relative_config=True):
 	from flask import Flask
@@ -197,10 +203,13 @@ def create_app(app_name=None, *, static_folder=None, template_folder=None, stati
 		## Initialize Plugins
 		initialize_plugins(app)
 		register_blueprints(app, app.name)
-		#regiter_context_processor(app)
+		#register_context_processor(app)
 		register_jsonify(app)
 		check_db(app)
 		check_redirects(app)
 	return app
 
 #The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+#https://philipwalton.github.io/solved-by-flexbox/demos/input-add-ons/
+#https://www.maujor.com/tutorial/anti-heroi-css-display-table.php#header
