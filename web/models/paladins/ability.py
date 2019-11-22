@@ -32,6 +32,7 @@ class Ability(db.Model, CRUD_Mixin):
 		self.description = description
 		self.summary = summary
 		self.__lang__ = int(lang)
+		self.champ_id = -1
 		if champ_id:
 			self.champ_id = int(champ_id)
 		self.save()
