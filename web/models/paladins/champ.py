@@ -50,6 +50,8 @@ class Champ(db.Model, CRUD_Mixin):
     return Champ.filter_by(__lang__=lang or 1)
   @staticmethod
   def update(_api):
+    print('UPDATING')
+    '''
     from utils import get_url
     from .item import Item
     from .card import Card
@@ -80,3 +82,4 @@ class Champ(db.Model, CRUD_Mixin):
             #if ab[-2:] == b[-2:]:
           ch.add_ability(Ability(ability_id=ab.id, damage_type=ab.damageType, cooldown=ab.rechargeSeconds, description=ab.description, summary=ab.summary, lang=l))#, champ_id=g.godId))
       db.session.commit()
+      '''
