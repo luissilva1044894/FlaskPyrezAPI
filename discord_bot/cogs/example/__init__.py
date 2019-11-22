@@ -10,11 +10,11 @@
 # The setup function below is neccesarry. Remember we give bot.add_cog() the name of the class in this case ExampleCog.
 # When we load the cog, we use the name of the file.
 def setup(bot):
-	"""Adds the cog to the bot (Required). You can do whatever you want here. Most common usage is to simply add the cog.
-	Note: The "setup" function has to be there in every cog file
-	"""
-	from .cog import Cog
-	bot.add_cog(Cog(bot))
+  """Adds the cog to the bot (Required). You can do whatever you want here. Most common usage is to simply add the cog.
+  Note: The "setup" function has to be there in every cog file
+  """
+  from .cog import Cog
+  bot.add_cog(Cog(bot))
 def teardown(bot):
-	"""Optional. Cogs automatically get removed regardless of whether or not this is here."""
-	pass
+  """Optional. Cogs automatically get removed regardless of whether or not this is here."""
+  pass

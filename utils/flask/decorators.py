@@ -1,31 +1,31 @@
 
 def player_required(f):
-    from functools import wraps
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        from flask import request, g
-        from .__init__ import get #from . import get
-        __player__ = request.headers.get('player', None) or get('player', None, args=request.args)
-        if not __player__ or len(__player__) < 4:
-            from .exceptions import PlayerRequired
-            raise PlayerRequired
-        g.__player__ = __player__
-        return f(*args, **kwargs)
-    return decorated_function
+  from functools import wraps
+  @wraps(f)
+  def decorated_function(*args, **kwargs):
+    from flask import request, g
+    from .__init__ import get #from . import get
+    __player__ = request.headers.get('player', None) or get('player', None, args=request.args)
+    if not __player__ or len(__player__) < 4:
+        from .exceptions import PlayerRequired
+        raise PlayerRequired
+    g.__player__ = __player__
+    return f(*args, **kwargs)
+  return decorated_function
 
 def champ_required(f):
-    from functools import wraps
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        from flask import request, g
-        from . import get
-        __champ__ = request.headers.get('champ', None) or get('champ', None, args=request.args)
-        if not __champ__ or len(__champ__) < 2:
-            from .exceptions import ChampRequired
-            raise ChampRequired
-        g.__champ__ = __champ__
-        return f(*args, **kwargs)
-    return decorated_function
+  from functools import wraps
+  @wraps(f)
+  def decorated_function(*args, **kwargs):
+    from flask import request, g
+    from . import get
+    __champ__ = request.headers.get('champ', None) or get('champ', None, args=request.args)
+    if not __champ__ or len(__champ__) < 2:
+        from .exceptions import ChampRequired
+        raise ChampRequired
+    g.__champ__ = __champ__
+    return f(*args, **kwargs)
+  return decorated_function
 
 def restricted(access_level):
   def decorator(func):
