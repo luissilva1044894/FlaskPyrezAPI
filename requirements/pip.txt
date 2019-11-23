@@ -16,4 +16,4 @@ Pillow==6.2.1
 pyrez==1.1.0.1
 #-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez
 
-quart
+quart;python_version>='3.7.0'
