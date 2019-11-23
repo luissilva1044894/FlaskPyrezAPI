@@ -1,3 +1,0 @@
-
-asyncio==3.4.3
-uvloop==0.14.0;platform_system!='Windows' and implementation_name=='cpython'
