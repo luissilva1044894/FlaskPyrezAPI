@@ -47,7 +47,12 @@ if __name__ == '__main__':
 		import uvloop
 	except ImportError:
 		print('>>> Using asyncio')
-		event_loop, event_loop_policy = asyncio.new_event_loop(), asyncio.DefaultEventLoopPolicy()
+		import sys
+		if sys.platform == 'win32':
+			event_loop = asyncio.ProactorEventLoop()
+		else:
+			event_loop = asyncio.new_event_loop()#asyncio.get_event_loop_policy().new_event_loop()
+		event_loop, event_loop_policy = asyncio.DefaultEventLoopPolicy()
 	else:
 		#uvloop.install()
 		print('>>> Using uvloop')
