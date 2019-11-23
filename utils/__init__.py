@@ -144,7 +144,7 @@ True
 """
 def supports_quart(force_async=False):
   import sys
-  return sys.version_info >= (3, 7, 0) and (force_async or get_env('ASYNC', None))
+  return sys.version_info >= (3, 7, 0) and (force_async or get_env('SERVER_MODE', None))
 def create_blueprint(name, import_name, *, package=None, force_async=False, **options):
   try:
     import importlib

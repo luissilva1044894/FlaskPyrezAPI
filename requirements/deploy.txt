@@ -1,3 +1,6 @@
 -r pip.txt
 
 gunicorn==20.0.0;python_version>='3.4'
+
+#async
+uvicorn==0.10.8;python_version>='3.6'

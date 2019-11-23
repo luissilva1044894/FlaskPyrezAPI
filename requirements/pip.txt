@@ -16,4 +16,5 @@ Pillow==6.2.1
 pyrez==1.1.0.1
 #-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez
 
-quart;python_version>='3.7.0'
+Quart==0.10.0;python_version>='3.7.0'
+uvloop==0.14.0;platform_system!='Windows' and implementation_name=='cpython'
