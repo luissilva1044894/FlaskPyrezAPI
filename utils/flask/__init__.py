@@ -63,6 +63,7 @@ def get_language():
         return LanguagesSupported(aux).value
     except ValueError:
         return LanguagesSupported.English.value
+
 def load_locate_json(message, lang=None, *, force=False, folder='lang'):
     from flask import g
     if force or '_json' not in g:
