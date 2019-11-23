@@ -28,4 +28,4 @@ class Item(db.Model, CRUD_Mixin):
     #self.name_english = name_english
     self.description = description.split(']', 1)[-1][1:]
     self.__lang__ = lang
-    self.save()
+    self.add()
