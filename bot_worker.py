@@ -1,5 +1,9 @@
 
 if __name__ == '__main__':
+	import asyncio
+	from utils.loop import get_event_loop
+	asyncio.set_event_loop(get_event_loop())
+
 	from discord_bot import Bot
 	from utils.discord import DiscordConfig
 	from utils import get_env
