@@ -20,14 +20,44 @@ def extract_description(description, pattern=r'\[(.+?)\] (.*)'):
 def extract_scale(description, pattern=('=(.+?)\|', '{(.*?)}')):
 	import re
 	_search = re.search(pattern[0], description)
-	_scale = None
+	_scale = -1
 	try:
-		_scale = float(str(scale.group(1)).replace(',', '.'))
-		# if scale % 2 == 0 or scale % 2 == scale: scale = int(scale)
+		_scale = float(str(_search.group(1)).replace(',', '.'))
 	except AttributeError:
 		pass
+	'''
+	else:
+
+		print(_scale % 2 in [0, 1], not _scale % 2 == _scale, _scale, int(_scale))
+		if _scale % 2 in [0, 1]: _scale = int(_scale)#_scale % 2 == 0 and not (_scale % 2 == _scale)
+	'''
 	try:
 		description = description.replace('{' + str(re.search(pattern[1], description).group(1)) + '}', '{SCALE}')
 	except AttributeError:
 		pass
 	return _scale, description
+
+'''
+self.ability = None
+match = re.compile(r'\[(.+?)\] (.*)').match(description)
+if match:
+  self.ability = match.group(1)
+  description = match.group(2).strip()
+self.is_talent = boolify(is_talent)
+self.description = description
+match = re.compile(r'\[(.+?)\] (.*)').match(short_desc)
+if match:
+  short_desc = match.group(2).strip()
+
+import re
+scale = re.search('=(.+?)\|', description)
+try:
+  self.scale = float(str(scale.group(1)).replace(',', '.'))
+  # if scale % 2 == 0 or scale % 2 == scale: scale = int(scale)
+except AttributeError:
+  pass
+try:
+  description = description.replace('{' + str(re.search('{(.*?)}', description).group(1)) + '}', '{SCALE}')
+except AttributeError:
+  pass
+'''
