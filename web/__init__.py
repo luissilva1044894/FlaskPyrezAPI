@@ -190,6 +190,9 @@ def create_manager(app):
 	manager.add_command('shell', Shell(make_context=make_shell_context))
 
 	return manager
+
+from utils.flask import decorators
+@decorators.auto_register_blueprints(attr='blueprint', meth='register_blueprint')
 def create_app(app_name=None, *, static_folder=None, template_folder=None, static_url_path=None, instance_relative_config=True):
 	from flask import Flask
 	app_name = app_name or __name__.split('.')[0]
@@ -202,7 +205,7 @@ def create_app(app_name=None, *, static_folder=None, template_folder=None, stati
 	with app.app_context():
 		## Initialize Plugins
 		initialize_plugins(app)
-		register_blueprints(app, app.name)
+		#register_blueprints(app, app.name)
 		#register_context_processor(app)
 		register_jsonify(app)
 		check_db(app)
