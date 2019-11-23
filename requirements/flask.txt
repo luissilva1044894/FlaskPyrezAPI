@@ -1,5 +1,6 @@
 
 -r db.txt
+-r common.txt
 
 Flask[dotenv]==1.1.1;python_version>='3.6'
 
