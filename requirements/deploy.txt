@@ -2,6 +2,5 @@
 -r discord.txt
 -r flask.txt
 -r quart.txt
--r common.txt
 
 gunicorn==20.0.0;python_version>='3.6'
