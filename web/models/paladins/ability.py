@@ -5,7 +5,7 @@ class Ability(db.Model, CRUD_Mixin):
 	__tablename__ = __name__.split('.', 2)[-1].replace('.', '_')
 	__bind_key__ = __name__.split('.')[-2]
 
-	#id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	ability_id = db.Column(db.Integer)
 	#damage_type = db.Column(db.Integer)
 	ability = db.Column(db.Text)
@@ -29,5 +29,5 @@ class Ability(db.Model, CRUD_Mixin):
 		self.champ_id = -1
 		if champ_id:
 			self.champ_id = int(champ_id)
-		self.save()
+		self.add()
 	
