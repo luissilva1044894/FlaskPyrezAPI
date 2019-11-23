@@ -34,7 +34,7 @@ class DiscordConfig(object):
 	def load(self, path):
 		import os
 		if not os.path.isfile(path):#os.path.isdir(path)
-			path = join(path, 'config.json')
+			path = './../data/config.json'#os.join(path, 'config.json')
 		from utils.file import read_file
 		self.__kwargs__ = read_file(path, is_json=True)
 	def get(self, key, default=None):
