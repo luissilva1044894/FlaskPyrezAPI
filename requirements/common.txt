@@ -1,0 +1,14 @@
+arrow==0.15.4
+
+-e git+https://github.com/luissilva1044894/boolify.git@master#egg=boolify
+
+pyrez==1.1.0.1
+#-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez
+
+aiohttp==3.6.2
+beautifulsoup4==4.8.1
+psutil
+requests==2.22.0
+urllib3==1.25.7
+
+#simplejson==3.13.2

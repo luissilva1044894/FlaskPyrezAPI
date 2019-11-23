@@ -1,0 +1,5 @@
+
+-r async.txt
+
+discord.py[voice]==1.2.5;python_version>='3.5.3'
+Pillow==6.2.1
