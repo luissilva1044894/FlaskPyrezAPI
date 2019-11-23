@@ -8,4 +8,4 @@ if __name__ == '__main__':
   if sys.argv and len(sys.argv) > 1:
   	from web import create_manager
   	create_manager(app).run()
-  app.run(debug=app.config['DEBUG'], use_debugger=app.config['DEBUG'], use_reloader=app.config['DEBUG'], port=app.config['PORT'], host=app.config['HOST'])
+  app.run(debug=app.config['DEBUG'], port=app.config['PORT'], host=app.config['HOST'])
