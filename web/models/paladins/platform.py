@@ -80,6 +80,8 @@ class Platform(db.Model):
 		return '<{} {}>'.format(self.__class__.__name__, self.to_json())
 	def __str__(self):
 		return str(self.to_json())
+	def __iter__(self):
+		return (_ for _ in self.to_json())#self.__kwargs__
 	def to_json(self):
 		return {
 			'name': self.name,
