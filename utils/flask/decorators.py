@@ -49,3 +49,34 @@ def decorator2(take_a_function):
     # logic here
     return takes_a_function(*args, **kwargs)
   return wrapper
+
+#C:\Program Files\Python37\Lib\site-packages\flask\app.py#1286
+# https://realpython.com/primer-on-python-decorators/
+# https://pythonacademy.com.br/blog/domine-decorators-em-python
+# https://github.com/dabeaz/python-cookbook/blob/master/src/9/defining_a_decorator_that_takes_an_optional_argument/example.py
+def auto_register_blueprints(f=None, **options):
+  """Automagically register all blueprint packages."""
+  import functools
+  def decorator(f):
+    @functools.wraps(f)
+    def wrapper(*args, **kwargs):
+      app, __attr_name__ = f(*args, **kwargs), options.get('attr', 'blueprint'), 
+      __func__ = getattr(app, options.get('meth', 'register_blueprint'))
+      if __attr_name__:
+        import importlib
+        import os
+        for _ in [ _ for _ in os.listdir('.') if not _[0]=='_' and not _[0]=='.']:
+          for path, subdirs, files in os.walk(_):
+            for __ in [ _[:-3] for _ in files if not _[0]=='_' and not _[0]=='.' and _[-3:]=='.py']:
+              try:
+                mod = importlib.import_module(os.path.join(path, __).replace('\\', '.').replace('/', '.'))
+              except (ModuleNotFoundError, ImportError, AttributeError) as exc:
+                print(f'>>> Failed to load: {exc}!')
+              else:
+                if hasattr(mod, __attr_name__):
+                  __func__(getattr(mod, __attr_name__))
+                  print(f'>>> Loaded {__attr_name__}: ', getattr(mod, __attr_name__).name, '|', mod.__name__.split('.')[-2], f'({mod.__name__})')
+      return app
+    return wrapper
+  if f: return decorator(f)
+  return decorator#functools.partial(auto_register_blueprints, options=options)
