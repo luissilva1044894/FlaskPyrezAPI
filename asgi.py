@@ -43,24 +43,8 @@ async def a_():
 	return '???'
 if __name__ == '__main__':
 	import asyncio
-	try:
-		import uvloop
-	except ImportError:
-		print('>>> Using asyncio')
-		import sys
-		if sys.platform == 'win32':
-			event_loop = asyncio.ProactorEventLoop()
-		else:
-			event_loop = asyncio.new_event_loop()#asyncio.get_event_loop_policy().new_event_loop()
-		event_loop, event_loop_policy = asyncio.DefaultEventLoopPolicy()
-	else:
-		#uvloop.install()
-		print('>>> Using uvloop')
-		event_loop, event_loop_policy = uvloop.new_event_loop(), uvloop.EventLoopPolicy()
-	finally:
-		asyncio.set_event_loop_policy(event_loop_policy)
-		asyncio.set_event_loop(event_loop)
-		#loop.set_debug(False)
+	from utils.loop import get_event_loop
+	asyncio.set_event_loop(get_event_loop())
 
 	app.register_blueprint(blueprint)
 	#from web.api.twitch import views
