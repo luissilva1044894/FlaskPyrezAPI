@@ -38,13 +38,13 @@ class Server(db.Model):
 	def to_json(self, lang=1, error_msg=None):
 		from utils.file import read_file
 		__links__ = read_file('data/links.json', is_json=True)
-	
+		__platform__ = self.platform
 		return {
 			'game': {
 				'name': self.game,
-				'version': self.version,
+				'version': __platform__[0].version,#self.version
 				'links': __links__.get(self.game, ''),
-				'servers': self.platform,
+				'servers': [_.to_json() for _ in __platform__] or None,
 				'latest_patch_notes': self.patch_notes(lang)
 			},
 			'version': self.api_version,
@@ -85,7 +85,7 @@ class Server(db.Model):
 	@property
 	def platform(self):
 		from .platform import Platform
-		return [_.to_json() for _ in Platform.query.all()] or None
+		return Platform.query.all() or None
 	def patch_notes(self, lang=1):
 		from .patch_note import PatchNote
 		#return [_.to_json() for _ in PatchNote.query.all()] or None
