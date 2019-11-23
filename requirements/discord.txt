@@ -1,4 +1,4 @@
 
-discord.py[voice]==1.2.5;python_version>='3.5.3'
-Pillow==6.2.1
-psutil
+discord.py[voice]==1.2.5;python_version>='3.6'
+Pillow==6.2.1;python_version>='3.6'
+psutil;python_version>='3.6'

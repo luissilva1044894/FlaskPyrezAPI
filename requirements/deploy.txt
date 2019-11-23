@@ -4,4 +4,4 @@
 -r quart.txt
 -r common.txt
 
-gunicorn==20.0.0;python_version>='3.4'
+gunicorn==20.0.0;python_version>='3.6'
