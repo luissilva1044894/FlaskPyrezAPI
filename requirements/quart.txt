@@ -1,9 +1,7 @@
 
--r async.txt
 -r flask.txt
 
 Quart==0.10.0;python_version>='3.7.0'
 
 #async
 uvicorn==0.10.8;python_version>='3.6'
-websockets==8.1
