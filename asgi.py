@@ -42,6 +42,20 @@ blueprint = create_blueprint('api', __name__, static_url_path='', url_prefix='/a
 async def a_():
 	return '???'
 if __name__ == '__main__':
+	import asyncio
+	try:
+		import uvloop
+	except ImportError:
+		print('>>> Using asyncio')
+		asyncio.set_event_loop_policy(asyncio.DefaultEventLoopPolicy())
+		asyncio.set_event_loop(asyncio.new_event_loop())
+	else:
+		print('>>> Using uvloop')
+		#uvloop.install()
+		asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+		asyncio.set_event_loop(uvloop.new_event_loop())
+		#loop.set_debug(False)
+        
 	app.register_blueprint(blueprint)
 	#from web.api.twitch import views
 	#app.register_blueprint(views.blueprint)
