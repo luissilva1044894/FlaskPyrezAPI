@@ -3,3 +3,4 @@
 
 Quart==0.10.0;python_version>='3.7.0'
 uvicorn==0.10.8;python_version>='3.6'
+websockets==8.1;python_version>='3.6.1'
