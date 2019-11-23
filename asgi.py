@@ -47,15 +47,16 @@ if __name__ == '__main__':
 		import uvloop
 	except ImportError:
 		print('>>> Using asyncio')
-		asyncio.set_event_loop_policy(asyncio.DefaultEventLoopPolicy())
-		asyncio.set_event_loop(asyncio.new_event_loop())
+		event_loop, event_loop_policy = asyncio.new_event_loop(), asyncio.DefaultEventLoopPolicy()
 	else:
-		print('>>> Using uvloop')
 		#uvloop.install()
-		asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
-		asyncio.set_event_loop(uvloop.new_event_loop())
+		print('>>> Using uvloop')
+		event_loop, event_loop_policy = uvloop.new_event_loop(), uvloop.EventLoopPolicy()
+	finally:
+		asyncio.set_event_loop_policy(event_loop_policy)
+		asyncio.set_event_loop(event_loop)
 		#loop.set_debug(False)
-        
+
 	app.register_blueprint(blueprint)
 	#from web.api.twitch import views
 	#app.register_blueprint(views.blueprint)
