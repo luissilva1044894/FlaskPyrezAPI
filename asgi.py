@@ -42,9 +42,9 @@ blueprint = create_blueprint('api', __name__, static_url_path='', url_prefix='/a
 async def a_():
 	return '???'
 if __name__ == '__main__':
-	import asyncio
-	from utils.loop import get_event_loop
-	asyncio.set_event_loop(get_event_loop())
+	#import asyncio
+	#from utils.loop import get_event_loop
+	#asyncio.set_event_loop(get_event_loop())
 
 	app.register_blueprint(blueprint)
 	#from web.api.twitch import views
