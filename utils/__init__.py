@@ -142,3 +142,22 @@ False
 >>> json.loads("True".lower())
 True
 """
+def supports_quart(force_async=False):
+  import sys
+  return sys.version_info >= (3, 7, 0) and (force_async or get_env('ASYNC', None))
+def create_blueprint(name, import_name, *, package=None, force_async=False, **options):
+  try:
+    import importlib
+    module = importlib.import_module(package)# or 'flask'
+  except (ImportError, AttributeError):
+    if supports_quart(force_async):
+        package, force_async = 'quart', True
+    return create_blueprint(name=name, import_name=import_name, package=package or 'flask', force_async=force_async, **options)
+  return module.Blueprint(name, import_name, **options)
+'''
+  if sys.version_info > (3, 7, 0) and (force_async or get_env('ASYNC', None)):
+    from quart import Blueprint
+    return Blueprint(name, import_name, **options)
+  from flask import Blueprint
+  return Blueprint(name, import_name, **options)
+'''
