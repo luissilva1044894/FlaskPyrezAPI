@@ -1,5 +1,5 @@
-web: sh ./scripts/heroku.sh
 web: gunicorn -b 0.0.0.0:$PORT wsgi:app --env FLASK_ENV=default --preload
+web: sh ./scripts/heroku.sh
 bot: python bot_worker.py
 #release: python wsgi.py db migrate
 
