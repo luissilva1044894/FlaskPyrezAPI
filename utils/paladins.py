@@ -6,8 +6,8 @@ def get_dmg_type(arg, as_int=False):
 
 def get_item_type(arg, as_int=False):
 	if as_int:
-		return { 'utility': 0, 'healing': 1, 'defense': 2, 'damage': 3 }.get(arg.lower(), -1)
-	return { 0: 'Utility', 1: 'Healing', 2: 'Defense', 3: 'Damage' }.get(arg, 'Unknown')
+		return { 'utility': 0, 'healing': 1, 'defense': 2, 'offense': 3 }.get(arg.lower(), -1)
+	return { 0: 'Utility', 1: 'Healing', 2: 'Defense', 3: 'Offense' }.get(arg, 'Unknown')
 
 def extract_description(description, pattern=r'\[(.+?)\] (.*)'):
 	import re

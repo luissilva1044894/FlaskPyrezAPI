@@ -142,22 +142,24 @@ False
 >>> json.loads("True".lower())
 True
 """
-def supports_quart(force_async=False):
+
+def get_root_path(import_name):
   import sys
-  return sys.version_info >= (3, 7, 0) and (force_async or get_env('SERVER_MODE', None))
-def create_blueprint(name, import_name, *, package=None, force_async=False, **options):
-  try:
-    import importlib
-    module = importlib.import_module(package)# or 'flask'
-  except (ImportError, AttributeError):
-    if supports_quart(force_async):
-        package, force_async = 'quart', True
-    return create_blueprint(name=name, import_name=import_name, package=package or 'flask', force_async=force_async, **options)
-  return module.Blueprint(name, import_name, **options)
-'''
-  if sys.version_info > (3, 7, 0) and (force_async or get_env('ASYNC', None)):
-    from quart import Blueprint
-    return Blueprint(name, import_name, **options)
-  from flask import Blueprint
-  return Blueprint(name, import_name, **options)
-'''
+  import pkgutil
+  import os
+  mod = sys.modules.get(import_name)
+  if mod is not None and hasattr(mod, '__file__'):
+    return os.path.dirname(os.path.abspath(mod.__file__))
+  loader = pkgutil.get_loader(import_name)
+  if loader is None or import_name == '__main__':
+    return os.getcwd()
+  if hasattr(loader, 'get_filename'):
+    filepath = loader.get_filename(import_name)
+  else:
+    __import__(import_name)
+    mod = sys.modules[import_name]
+    filepath = getattr(mod, '__file__', None)
+    if not filepath:
+      raise RuntimeError(f'No root path can be found for the provided module "{import_name}"')
+  # filepath is import_name.py for a module, or __init__.py for a package.
+  return os.path.dirname(os.path.abspath(filepath))

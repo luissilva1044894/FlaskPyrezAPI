@@ -1,4 +1,12 @@
 
+def get_sys_exec_root_or_drive():
+  import sys
+  import os
+  path = sys.executable
+  while os.path.split(path)[1]:
+    path = os.path.split(path)[0]
+  return path
+
 def open_if_exists(filename, mode='rb', encoding='utf-8'):
   """Returns a file descriptor for the filename if that file exists, otherwise ``None``."""
   import os
