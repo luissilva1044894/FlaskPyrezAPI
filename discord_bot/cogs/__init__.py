@@ -29,25 +29,15 @@ class BaseCog(commands.Cog, name='Example'):
     with open(filename, 'w') as f:
         json.dump(contents, f, ensure_ascii=True, indent=4)
   @staticmethod
-  def isOwner():# for decorators
-    async def predicate(ctx):
-        return ctx.bot.isOwner(ctx)
-    return commands.check(predicate)
-  @staticmethod
   def root(*chunks, root_='..'):
     import os#.path
     return os.path.abspath(os.path.join(os.path.dirname(__file__), root_, *chunks))
   @staticmethod
   def check_disabled():
     def predicate(ctx):
-        if command_is_disabled(ctx.command.name, ctx.channel.id):
-            raise DisabledInChannel('{ctx.command.name} is disabled in {ctx.channel.name}'.format(ctx=ctx))
-        return True
-    return commands.check(predicate)
-  @staticmethod
-  def server_owner_only():
-    async def predicate(ctx):
-        return ctx.guild.owner == ctx.author #raise NotServerOwner('Only the server owner: ' + str(ctx.guild.owner) + ' can use this command')
+      if command_is_disabled(ctx.command.name, ctx.channel.id):
+        raise DisabledInChannel('{ctx.command.name} is disabled in {ctx.channel.name}'.format(ctx=ctx))
+      return True
     return commands.check(predicate)
   @staticmethod
   def isAuthorized():

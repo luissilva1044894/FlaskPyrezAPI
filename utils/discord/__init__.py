@@ -62,6 +62,15 @@ class DiscordConfig(object):
 			return json.dumps(self.__kwargs__, ensure_ascii=True, sort_keys=True, indent=2)
 		return ''
 
+def _load_cogs(bot):
+	from pathlib import Path
+	for extension in [x.stem for x in Path('cogs').glob('*.py')]:
+		try:
+			bot.load_extension(f'cogs.{extension}')
+		except Exception as e:
+			error = f'{extension}\n {type(e).__name__}: {e}'
+			print(f'Failed to load extension {error}')
+
 def load_cogs(bot, cogs_dir='cogs'):
 	"""Automagically register all cogs packages inside a 'cogs' folder."""
 	from os import listdir, getcwd

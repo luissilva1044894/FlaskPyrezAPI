@@ -4,7 +4,7 @@
 
 import discord
 from discord.ext import commands
-
+from utils.discord.helpers import get_aliases
 class ExtendedEmbed(discord.Embed):
   """An extended discord.Embed class"""
   def __init__(self, **kwargs):
@@ -13,11 +13,20 @@ class ExtendedEmbed(discord.Embed):
 class Cog(commands.Cog, name='Example'):
   def __init__(self, bot):
     self.bot = bot
+    print('?')
 
   @commands.command()
   async def ping(self, ctx, *args):
     import asyncio
-    await ctx.send(':ping_pong: Pong!')
+    from datetime import datetime
+
+    await ctx.send(':ping_pong:')
+    latency=str(round(self.bot.latency*1000, 2))
+    embed=discord.Embed(title='', colour=0x7289da, timestamp=datetime.utcnow())
+    embed.set_author(name='Pong!')
+    embed.add_field(name='Bot latency', value=f'{latency} ms')
+    await ctx.send(embed=embed)
+
     await asyncio.sleep(3)
     await ctx.send(':warning:')
 
@@ -31,25 +40,22 @@ class Cog(commands.Cog, name='Example'):
   async def cool_bot(self, ctx):
     """Is the bot cool?"""
     await ctx.send('This bot is cool. :)')
-  def get_aliases(x):
-    return ['toprole']
   @commands.command(description='', name='top_role', aliases=get_aliases('show_toprole'))
   @commands.guild_only()
-  async def show_toprole(self, ctx, *, member: discord.Member=None):
+  async def show_toprole(self, ctx, *, member=None):
     """Simple command which shows the members Top Role."""
-
     if member is None:
-        member = ctx.author
+      member = ctx.author
     await ctx.send(f'The top role for {member.display_name} is {member.top_role.name}')
-    
-  @commands.command(description='', name='perms', aliases=['perms_for', 'permissions'])
+
+  @commands.command(description='', name='perms', aliases=get_aliases(['perms_for', 'permissions']))
   @commands.guild_only()
-  async def check_permissions(self, ctx, *, member: discord.Member=None):
+  async def check_permissions(self, ctx, *, member=None):
     """A simple command which checks a members Guild Permissions.
     If member is not provided, the author will be checked."""
 
     if not member:
-        member = ctx.author
+      member = ctx.author
     # Here we check if the value of each permission is True.
     perms = '\n'.join(perm for perm, value in member.guild_permissions if value)
 

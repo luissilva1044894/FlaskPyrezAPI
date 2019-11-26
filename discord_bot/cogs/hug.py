@@ -8,8 +8,8 @@ from discord import File
 lenny_hug = [ '(つ ♡ ͜ʖ ♡)つ', 'ლ(▀̿Ĺ̯▀̿ ̿ლ)', '(づ ͡° ³ ͡°)づ'  ]
 
 class Hug(commands.Cog):
-  def __init__(self, client):
-    self.client = client
+  def __init__(self, bot):
+    self.bot = bot
 
   @commands.command(name='hug', description='Da un abrazo', brief='Abrazos everywhere',)
   async def hug(self, ctx, *, member: discord.Member = None):
@@ -25,5 +25,5 @@ class Hug(commands.Cog):
     except Exception as e:
         exc = '{}: {}'.format(type(e).__name__, e)
         await ctx.send(f'{exc}')
-def setup(client):
-  client.add_cog(Hug(client))
+def setup(bot):
+  bot.add_cog(Hug(bot))
