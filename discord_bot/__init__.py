@@ -42,8 +42,6 @@ class Bot(commands.Bot):
 		if not hasattr(self, 'start_time'):
 			from datetime import datetime
 			self.start_time = datetime.utcnow()
-		from utils.discord import load_cogs
-		load_cogs(self)
 		if not self.initialised:
 			import aiohttp
 			import discord
@@ -54,6 +52,9 @@ class Bot(commands.Bot):
 			#await self.change_presence(activity=discord.Activity(name="my meat", type=3))
 			#self.loop.create_task(change_bot_presence_task())
 			print(f'\nTotal Startup: {datetime.utcnow() - self.start_time}', end='\n')
+
+			from utils.discord import load_cogs
+			load_cogs(self)
 		import platform
 		print('=' * 75, end='\n\n')
 		print(f'Logged in as: {self.user.name} - ID: {self.user.id}\nConnected to {len(self.guilds)} servers | Connected to {len(set(self.get_all_members()))} users', end='\n')
