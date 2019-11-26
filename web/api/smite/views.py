@@ -1,17 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint
-
-blueprint = Blueprint(__name__.split('.', 1)[1], __name__, static_url_path='', url_prefix='/{}'.format(__name__.split('.', 1)[1].replace('.views', '').replace('.', '/')))
+from utils.web import create_blueprint
+blueprint = create_blueprint(__name__.split('.', 1)[1], __name__, static_url_path='', url_prefix='/{}'.format('/'.join(__name__.split('.')[1:-1])))
 
 if not hasattr(blueprint, '__api__'):
 	import pyrez
 	from utils import get_env
 	blueprint.__api__ = getattr(pyrez, '{}API'.format(__name__.split('.')[-2].capitalize()))(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'))
 
-from utils.flask import get, decorators
-from utils.flask.exceptions import PlayerRequired
+from utils.web import get, decorators
+from utils.web.exceptions import PlayerRequired
 
 def get_page():
 	from flask import request
