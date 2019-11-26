@@ -50,12 +50,21 @@ class Champ(db.Model, CRUD_Mixin):
   @staticmethod
   def get(lang=None):
     return Champ.filter_by(__lang__=lang or 1)
+  @property
+  def cards(self, lang=None):
+    from .card import Card
+    __cards__ = [_ for _ in Card.query.all() if _.champ_id == self.champ_id or (lang and _.__lang__ == lang and _.champ_id == self.champ_id)]
+    __cards__.sort(key=lambda k: k.ability)
+    return __cards__
+  
   @staticmethod
   def update(_api, langs=[1, 2, 3, 9, 10, 11, 12, 13]):
     from utils import get_url
     from .item import Item
     from .card import Card
     from .ability import Ability
+    #from .server import Server
+    #_server = Server.get(_api)
     [ _.delete() for _ in Ability.query.all()]
     [ _.delete() for _ in Card.query.all()]
     [ _.delete() for _ in Item.query.all()]
