@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-section">
+  <form method="POST" action="">
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Log In</legend>
+      <div class="form-group">
+        <label class="form-control-label" for="form-token">Token: </label>
+        <input class="form-control form-control-lg" id="form-token" name="form-token" required type="password" value="">
+      </div>
+    </fieldset>
+    <div class="form-group">
+      <button class="btn btn-outline-info" id="form-submit" name="form-submit" type="submit" value="Login">Send</button>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" id="form-remember" name="form-remember" type="checkbox" value="y">
+      <label class="form-check-label" for="form-remember">Remember me</label>
+    </div>
+  </form>
+</div>
+{% endblock content %}
