@@ -8,6 +8,7 @@ class Player(db.Model):
   __bind_key__ = __name__.split('.')[-2]
 
   id = db.Column(db.Integer, primary_key=True, autoincrement=False, nullable=False)
+  #: the name of the player as unicode string
   name = db.Column(db.String(120), nullable=False)
   platform = db.Column(db.String(4), nullable=False)
   discord_id = db.Column(db.Integer, nullable=True)
