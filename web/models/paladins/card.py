@@ -52,11 +52,4 @@ try:
 except exc.IntegrityError:
   return JSONResponse({"message": "User already exists."})
 return JSONResponse({"message": "Created user."})
-
-try:
-  for _ in Card.query.all():
-    if _.__lang__ == 1:
-      input(_.to_json())
-except:
-  pass
 '''
