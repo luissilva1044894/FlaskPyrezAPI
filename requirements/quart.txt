@@ -1,6 +1,6 @@
 
--r flask.txt
+Quart==0.10.0;python_version>='3.7.0' # https://github.com/pgjones/quart
+uvicorn==0.10.8;python_version>='3.6' # https://github.com/encode/uvicorn
+websockets==8.1;python_version>='3.6.1' # https://github.com/aaugustin/websockets
 
-Quart==0.10.0;python_version>='3.7.0'
-uvicorn==0.10.8;python_version>='3.6'
-websockets==8.1;python_version>='3.6.1'
+-r flask.txt

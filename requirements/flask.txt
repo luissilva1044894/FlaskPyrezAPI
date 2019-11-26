@@ -1,9 +1,11 @@
 
--r db.txt
--r common.txt
+## Flask
+Flask[dotenv]==1.1.1;python_version>='3.6' # https://github.com/pallets/flask
+Jinja2==2.10.3;python_version>='3.6' # https://github.com/pallets/jinja
 
-Flask[dotenv]==1.1.1;python_version>='3.6'
-Jinja2==2.10.3;python_version>='3.6'
+## Deployment
+Werkzeug==0.16.0;python_version>='3.6' # https://github.com/pallets/werkzeug
+gunicorn==20.0.3;python_version>='3.6' # https://github.com/benoitc/gunicorn
 
-Werkzeug==0.16.0;python_version>='3.6'
-gunicorn==20.0.3;python_version>='3.6'
+-r ./db.txt
+-r base.txt
