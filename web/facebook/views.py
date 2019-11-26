@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint
-from utils import replace
+from utils.web import create_blueprint
 
-#blueprint = Blueprint(__name__.split('.', 1)[1], __name__, static_url_path='', url_prefix='')#'/'
-blueprint = Blueprint(__name__.split('.', 1)[1], __name__, static_url_path='', url_prefix='/{}'.format(__name__.split('.', 1)[1].replace('.views', '').replace('.', '/')))
+__blueprint__name = __name__.split('.')[1:]
+blueprint = create_blueprint('.'.join(__blueprint__name), __name__, static_url_path='', url_prefix='/{}'.format('/'.join(__blueprint__name[:-1])))
 
 @blueprint.route('/', methods=['GET'])
 def health():

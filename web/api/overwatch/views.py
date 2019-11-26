@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint
+from utils.web import create_blueprint
 
-#print(f'Path: {__name__}', 'Name: %s' % __name__.split('.')[-2])
-blueprint = Blueprint(__name__.split('.', 1)[-1], __name__, static_url_path='', url_prefix='/{}'.format(__name__.split('.', 1)[1].replace('.views', '').replace('.', '/')))
+__blueprint__name = __name__.split('.')[1:]
+blueprint = create_blueprint('.'.join(__blueprint__name), __name__, static_url_path='', url_prefix='/{}'.format('/'.join(__blueprint__name[:-1])))
 
-from utils.flask import get
-from utils.flask.decorators import player_required
-from utils.flask.exceptions import PlayerRequired
+from utils.web import get
+from utils.web.decorators import player_required
+from utils.web.exceptions import PlayerRequired
 
 def get_page():
 	from flask import request

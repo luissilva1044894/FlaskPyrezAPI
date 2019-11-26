@@ -1,4 +1,39 @@
 
+from functools import wraps
+
+def cached(timeout=5 * 60, key='view/%s'):
+  def decorator(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+      from flask import request
+      cache_key = key % request.path
+      rv = cache.get(cache_key)
+      if rv:
+        return rv
+      rv = f(*args, **kwargs)
+      cache.set(cache_key, rv, timeout=timeout)
+      return rv
+    return decorated_function
+  return decorator
+
+def templated(template=None):
+  def decorator(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+      from . import is_async
+      if is_async():
+        from quart import request, render_template
+      else:
+        from flask import request, render_template
+      template_name = template
+      if template_name is None:
+        template_name = request.endpoint.replace('.', '/') + '.html'
+      ctx = f(*args, **kwargs)
+      if not isinstance(ctx, dict):
+        return ctx
+      return render_template(template_name, **ctx or {})
+    return decorated_function
+  return decorator
 def player_required(f):
   from functools import wraps
   @wraps(f)
@@ -80,3 +115,23 @@ def auto_register_blueprints(f=None, **options):
     return wrapper
   if f: return decorator(f)
   return decorator#functools.partial(auto_register_blueprints, options=options)
+
+'''
+def html_tag_generator(tag, attrs):
+  def decorator(func):
+    import functools
+    @functools.wraps(func)
+    def wrapper(text):
+      attr_string = ' '.join(f'{k}="{v}"' for k, v in attrs.items())
+      return func(f'<{tag} {attr_string}>{text}</{tag}>')
+    return wrapper
+  return decorator
+
+@html_tag_generator(tag='div', attrs={'class': 'container col-s-12', 'id': 'mydiv'})
+def modify_text(text):
+  """<- `text` has been modified by the decorator!"""
+  print(text)
+
+modify_text('Python')
+>><div class='container col-s-12' id='mydiv'>Python</div>
+'''

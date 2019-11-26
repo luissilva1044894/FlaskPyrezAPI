@@ -4,7 +4,7 @@ def func(champ_name, player_id, _api, lang=1, nodeck_exc=Exception, nochamp_exc=
   champ_name, __champs__ = fix_champ_name(champ_name), get_champ_names()
   if not champ_name in __champs__:
     raise nochamp_exc
-  from utils.flask import get_lang_id
+  from utils.web import get_lang_id
   p_loadouts = _api.getPlayerLoadouts(player_id, get_lang_id(int(lang)))
   if len(p_loadouts) <= 1:
     raise nodeck_exc

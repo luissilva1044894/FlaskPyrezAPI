@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint
-
-blueprint = Blueprint(__name__.split('.', 1)[1], __name__, static_url_path='', url_prefix='/{}'.format(__name__.split('.', 1)[1].replace('.views', '').replace('.', '/')))
+from utils.web import create_blueprint
+blueprint = create_blueprint(__name__.split('.', 1)[1], __name__, static_url_path='', url_prefix='/{}'.format('/'.join(__name__.split('.')[1:-1])))
 
 if not hasattr(blueprint, '__api__'):
 	#setattr(self, credential.replace('.', '_'), os.getenv(credential))
@@ -25,7 +24,7 @@ def app_errorhandler(error=None):
 	return '?'
 '''
 from ...models.paladins.player import Player
-from utils.flask import decorators, exceptions, get_player_id, get, get_lang_id
+from utils.web import decorators, exceptions, get_player_id, get, get_lang_id
 import requests
 from flask import g
 

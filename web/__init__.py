@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import flask
+
 def configure_logging(app=None):
 	"""Register root logging"""
 	import logging
@@ -39,7 +41,7 @@ def register_blueprints(app, _root=None, *, recursive=True, include_packages=Fal
 						print(f'>>> Loaded blueprint: {mod.blueprint.name}', '|', mod.__name__.split('.')[-2], f'({mod.__name__})')
 def load_config(app, _env_name='FLASK_ENV', _config_filename='config.cfg'):
 	from utils import get_env
-	from utils.flask import get_config
+	from utils.web import get_config
 	import os
 
 	# Config from object
@@ -48,23 +50,19 @@ def load_config(app, _env_name='FLASK_ENV', _config_filename='config.cfg'):
 	#app.config.from_envvar('APP_CONFIG') # Config from filepath in env
 
 def register_jsonify(app):
-	@app.after_request
-	def jsonify_func(response):
-		"""JSONify the response. https://github.com/Fuyukai/OWAPI/blob/master/owapi/app.py#L208"""
-		#if flask.request.headers.get('Content-Type', '').lower() == 'application/json': print(flask.request.get_data().decode('utf-8'))#request.data
-		from utils.flask import requested_json
-		if requested_json(response):#response.headers.get('Content-Type', '').lower() == app.config['JSONIFY_MIMETYPE'].lower():
-			from flask import request
-			_indent_, separators = None, (',', ':')
-			if request.args.get('format', 'json') in ['json_pretty', 'pretty'] or app.config['JSONIFY_PRETTYPRINT_REGULAR']:
-				_indent_, separators = 2, (',', ': ')
-			import json
-			from datetime import datetime, timedelta, timezone
-			from email.utils import format_datetime
-			response.set_data(json.dumps(response.get_json(), sort_keys=app.config['JSON_SORT_KEYS'], ensure_ascii=app.config['JSON_AS_ASCII'], indent=_indent_, separators=(',', ':')))
-			response.headers['Cache-Control'] = 'public, max-age=300'
-			response.headers['Expires'] = format_datetime((datetime.utcnow() + timedelta(seconds=300)).replace(tzinfo=timezone.utc), usegmt=True)
-		return response
+	from utils.web import is_async
+	if is_async():
+		@app.after_request
+		async def jsonify_func(response):
+			from utils.web import ajsonify
+			return await ajsonify(app, response)
+	else:
+		@app.after_request
+		def jsonify_func(response):
+			"""JSONify the response. https://github.com/Fuyukai/OWAPI/blob/master/owapi/app.py#L208"""
+			#if flask.request.headers.get('Content-Type', '').lower() == 'application/json': print(flask.request.get_data().decode('utf-8'))#request.data
+			from utils.web import jsonify
+			return jsonify(app, response)
 def register_teardowns(app):
 	@app.teardown_appcontext
 	#@app.teardown_request
@@ -80,11 +78,17 @@ def check_redirects(app):
 	#@app.before_request
 	@app.before_first_request
 	def do_before_request():
-		from flask import request
+		if isinstance(app, flask.Flask):
+			from flask import request
+		else:
+			from quart import request
 		from utils.file import read_file
 		for _ in (read_file('data/redirects.json', is_json=True) or {}).get('redirect', {}):
 			if _.get('path') and _.get('path').lower() == request.path.lower():
-				from flask import redirect, url_for
+				if isinstance(app, flask.Flask):
+					from flask import redirect, url_for
+				else:
+					from quart import redirect, url_for
 				return redirect(url_for(_.get('for')))
 		'''#redirect_old
 		for _ in __kwargs__:
@@ -191,17 +195,26 @@ def create_manager(app):
 
 	return manager
 
-from utils.flask import decorators
+from utils.web import decorators
 @decorators.auto_register_blueprints(attr='blueprint', meth='register_blueprint')
-def create_app(app_name=None, *, static_folder=None, template_folder=None, static_url_path=None, instance_relative_config=True):
-	from flask import Flask
+def create_app(app_name=None, *, is_async=False, static_folder=None, template_folder=None, static_url_path=None, instance_relative_config=True):
 	app_name = app_name or __name__.split('.')[0]
 	root_path = __file__[:__file__.rfind(app_name)]
-	app = Flask(app_name, static_folder=static_folder or get_path(root_path, 'static'), template_folder=template_folder or get_path(root_path, 'templates'), static_url_path=static_url_path or '', instance_relative_config=instance_relative_config)
-	#app = Flask(app_name, static_folder=static_folder or 'static', template_folder=template_folder or g'templates', static_url_path=static_url_path or '', instance_relative_config=instance_relative_config)
+	import os
+	if is_async or os.environ.get('SERVER_MODE'):
+		from quart import Quart
+		app = Quart(app_name, static_folder=static_folder or get_path(root_path, 'static'), template_folder=template_folder or get_path(root_path, 'templates'), static_url_path=static_url_path or '', instance_relative_config=instance_relative_config)
+		os.environ.update({'SERVER_MODE': 'SERVER_MODE'})
+	else:
+		app = flask.Flask(app_name, static_folder=static_folder or get_path(root_path, 'static'), template_folder=template_folder or get_path(root_path, 'templates'), static_url_path=static_url_path or '', instance_relative_config=instance_relative_config)
+		os.environ.pop('SERVER_MODE', None)
+		#app = Flask(app_name, static_folder=static_folder or 'static', template_folder=template_folder or g'templates', static_url_path=static_url_path or '', instance_relative_config=instance_relative_config)
 	load_config(app)
 	#configure_logging(app)
 	#configure_extensions(app)
+	if is_async:
+		initialize_plugins(app)
+	'''
 	with app.app_context():
 		## Initialize Plugins
 		initialize_plugins(app)
@@ -210,6 +223,11 @@ def create_app(app_name=None, *, static_folder=None, template_folder=None, stati
 		register_jsonify(app)
 		check_db(app)
 		check_redirects(app)
+	'''
+	#initialize_plugins(app)
+	register_jsonify(app)
+	#check_db(app)
+	check_redirects(app)
 	return app
 
 #The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.

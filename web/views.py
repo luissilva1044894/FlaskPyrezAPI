@@ -1,8 +1,8 @@
 
-from flask import Blueprint
-from utils import replace
+from utils.web import create_blueprint
 
-blueprint = Blueprint(__name__.split('.', 1)[1], __name__, static_url_path='', url_prefix='')#'/'
+__blueprint__name = __name__.split('.')[1:]
+blueprint = create_blueprint('.'.join(__blueprint__name), __name__, static_url_path='', url_prefix='')
 
 @blueprint.route('/', methods=['GET'])
 @blueprint.route('/index/', methods=['GET'])
@@ -23,7 +23,7 @@ def root(error=None):
 def utility_processor():
 	from datetime import datetime
 	def translate(message, lang=None, *, force=False, folder='lang'):
-		from utils.flask import load_locate_json
+		from utils.web import load_locate_json
 		return load_locate_json(message=message, lang=lang, force=force, folder=folder)
 	return { 'translate': translate,  'current_year': datetime.utcnow().year}#return dict(translate=translate)
 
