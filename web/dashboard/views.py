@@ -22,7 +22,7 @@ def login_required(f):
 		if 'logged_in' in session:
 			return f(*args, **kwargs)
 		# if user is not logged in, redirect to login page
-		return redirect(url_for('.secret_page'))
+		return redirect(url_for('.secret_page', redirect_to=request.url))
 	return decorated_function
 #https://scotch.io/tutorials/authentication-and-authorization-with-flask-login
 #https://pythonspot.com/login-authentication-with-flask/
@@ -41,7 +41,7 @@ def home():
 	return dict(title='HOME')
 	#return render_template('index.html')
 #https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
-#<input type="hidden" value="{{ request.args.get('next', '') }}"/>
+#<input type="hidden" value="{{ request.args.get('redirect_to', '') }}"/>
 @blueprint.route('/login', methods=['GET', 'POST'])
 @decorators.templated('login.html')
 def secret_page():
@@ -52,7 +52,7 @@ def secret_page():
 		from boolify import boolify
 		#if boolify(request.form.get('form-remember')):
 		session['logged_in'] = True
-		return redirect(request.args.get('url_refer', url_for('.home')))
+		return redirect(request.args.get('redirect_to', url_for('.home')))
 	return dict(title='Login')
 '''
 @blueprint.route('/<short_url>', methods=['GET'])
