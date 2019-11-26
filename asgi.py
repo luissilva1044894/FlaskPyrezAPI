@@ -3,14 +3,7 @@ def get_path(path, folder, _dir='data'):
 	import os
 	return os.path.join(path, _dir, folder)
 
-def load_config(app, _env_name='FLASK_ENV', _config_filename='config.cfg'):
-	from utils import get_env
-	from utils.flask import get_config
-	import os
-
-	app.config.from_object(get_config(get_env(_env_name, default='dev' if os.sys.platform == 'win32' or os.name == 'nt' else 'prod')))
-	app.config.from_pyfile(_config_filename, silent=True)
-
+'''
 def create_app(app_name=None, *, static_folder=None, template_folder=None, static_url_path=None, instance_relative_config=True):
 	from quart import Quart
 	app_name = app_name or __name__.split('.')[0]
@@ -21,8 +14,9 @@ def create_app(app_name=None, *, static_folder=None, template_folder=None, stati
 	load_config(app)
 
 	return app
-
-app = create_app()
+'''
+from web import create_app
+app = create_app(is_async=True)
 
 @app.before_serving
 async def startup():
@@ -35,8 +29,27 @@ async def cleanup():
 async def hello():
     return 'Hello World!'
 
-from utils import create_blueprint
+from utils.web import create_blueprint
 blueprint = create_blueprint('api', __name__, static_url_path='', url_prefix='/api', force_async=True, package='quart')
+
+@app.route('/render')
+async def index():
+	from quart import render_template
+	return await render_template('index.html')
+
+@app.route('/video')
+async def auto_video():
+	# Automatically respond to the request
+	from quart import send_file
+	return await send_file('data/video.mp4', conditional=True)
+
+@app.route('/chunked')
+async def chunked_video():
+	from quart import request, send_file
+	# Force the response to be chunked in a 100_000 bytes max size.
+	response = await send_file('data/video.mp4')
+	await response.make_conditional(request.range, max_partial_size=100_000)
+	return response
 
 @blueprint.route('/a/')
 async def a_():
