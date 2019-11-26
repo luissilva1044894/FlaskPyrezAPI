@@ -6,4 +6,4 @@ Flask[dotenv]==1.1.1;python_version>='3.6'
 Jinja2==2.10.3;python_version>='3.6'
 
 Werkzeug==0.16.0;python_version>='3.6'
-gunicorn==20.0.2;python_version>='3.6'
+gunicorn==20.0.3;python_version>='3.6'
