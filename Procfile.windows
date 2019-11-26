@@ -1,4 +1,4 @@
-web: python wsgi.py
+web: python wsgi.py runserver 0.0.0.0:5000
 bot: python bot_worker.py
 release: python manage.py db migrate
 
