@@ -4,13 +4,19 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
-	"""Set Flask configuration vars."""
-	#  General Config
+	"""General Configuration."""
 	from utils import random_string, get_env
 	from boolify import boolify
 	import os
 
 	ON_HEROKU = boolify(get_env('ON_HEROKU')) or 'heroku' in get_env('PYTHONHOME', '').lower()
+
+	PYREZ_DEV_ID=get_env('PYREZ_DEV_ID', -1)
+	PYREZ_AUTH_ID=get_env('PYREZ_AUTH_ID', None)
+
+
+	DEV_SERVER = get_env('DEV_DISCORD_SERVER', 'https://discord.gg/XkydRPS')
+	GITHUB_REPO = get_env('GITHUB_REPO', 'https://github.com/luissilva1044894/FlaskPyrezAPI')
 
 	# SQLAlchemy
 	SQLALCHEMY_DATABASE_URI = DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}'.format(get_env('DATABASE_FILE') or os.path.join(basedir, f'{__name__}.db')))#'sqlite:///:memory:'
@@ -30,7 +36,7 @@ class Config(object):
 		for _ in os.environ:
 			if _.upper().endswith('_URL'):#if 'DB_URL' in _.upper(): | _.upper().rfind('DB') != -1 and
 				SQLALCHEMY_BINDS.update({_.split('_', 1)[0].lower() : get_env(_)})
-	print(SQLALCHEMY_BINDS)
+		print(SQLALCHEMY_BINDS)
 	
 	# SECURITY WARNING: don't run with debug turned on in production!
 	#Default: True if ENV is 'development', or False otherwise.
@@ -39,23 +45,9 @@ class Config(object):
 	# SECURITY WARNING: keep the secret key used in production secret!
 	SECRET_KEY = get_env('SECRET_KEY', default=random_string(size=65))
 
-	PORT, HOST = get_env('PORT', default=5000), get_env('HOST', default='0.0.0.0')
-
 	DEVELOPMENT = TESTING = not ON_HEROKU
 
-	LOG_PATH, LOG_FILENAME, LOG_LEVEL = get_env('LOG_PATH', 'logs'), get_env('LOG_FILENAME', 'flask.log'), get_env('LOG_LEVEL', 'info')
-
-	SQLALCHEMY_ECHO = DEBUG
-	
-class Developement(Config):
-	DEVELOPMENT, ENV = True, 'development'#dev
-	LOG_LEVEL = 'debug'
-
-class Testing(Config):#Staging
-	TESTING = DEVELOPMENT = DEBUG = True
-	LOG_LEVEL = 'info'
-
-class Production(Config):
-	TESTING = DEVELOPMENT = DEBUG = False
-	ENV = 'production'
-	LOG_LEVEL = 'error'
+from .developement import Developement
+from .discord import Discord
+from .testing import Testing
+from .production import Production
