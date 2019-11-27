@@ -1,7 +1,12 @@
 
-discord.py[voice]==1.2.5;python_version>='3.6' # https://github.com/Rapptz/discord.py
-Pillow==6.2.1;python_version>='3.6' # https://github.com/python-pillow/Pillow
-psutil;python_version>='3.6' # https://github.com/giampaolo/psutil
+# https://github.com/Rapptz/discord.py
+discord.py[voice]==1.2.5;python_version>='3.6'
+
+# https://github.com/python-pillow/Pillow
+Pillow==6.2.1;python_version>='3.6'
+
+# https://github.com/giampaolo/psutil
+psutil==5.6.7;python_version>='3.6'
 
 -r db.txt
 -r base.txt

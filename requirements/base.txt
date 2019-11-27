@@ -1,16 +1,23 @@
 
-# base requirements
+# Base requirements
 
-arrow==0.15.4;python_version>='3.6' # https://github.com/crsmithdev/arrow
+# https://github.com/crsmithdev/arrow
+arrow==0.15.4;python_version>='3.6'
 
 -e git+https://github.com/luissilva1044894/boolify.git@master#egg=boolify
 
 pyrez==1.1.0.1;python_version>='3.6'
 #-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez
 
-aiohttp==3.6.2;python_version>='3.6' # https://github.com/aio-libs/aiohttp
+# https://github.com/aio-libs/aiohttp
+aiohttp==3.6.2;python_version>='3.6'
+
 beautifulsoup4==4.8.1
-urllib3==1.25.7;python_version>='3.6' # https://github.com/urllib3/urllib3
+
+# https://github.com/urllib3/urllib3
+urllib3==1.25.7;python_version>='3.6'
 
 #simplejson==3.13.2
-uvloop==0.14.0;platform_system!='Windows' and sys_platform != 'cygwin' and implementation_name != 'pypy' # https://github.com/MagicStack/uvloop
+
+# https://github.com/MagicStack/uvloop
+uvloop==0.14.0;platform_system!='Windows' and sys_platform != 'cygwin' and implementation_name != 'pypy'
