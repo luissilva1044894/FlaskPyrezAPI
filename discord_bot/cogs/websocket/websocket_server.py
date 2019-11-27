@@ -61,17 +61,6 @@ class WebSocket(commands.Cog):
     if msg == 'list_info':  # first contact
       await websocket.send(json.dumps(self.build_bot_json(), indent=2))
 
-def setup(bot):
-	import asyncio
-	import websockets
-
-	w = WebSocket(bot)
-	try:
-		asyncio.get_event_loop().run_until_complete(websockets.serve(w.websocket_listener, 'localhost', 8785))
-	except RuntimeError:
-		pass
-	bot.add_cog(w)
-
 """
 {
   "connection": {
