@@ -5,7 +5,7 @@ Jinja2==2.10.3;python_version>='3.6' # https://github.com/pallets/jinja
 
 ## Deployment
 Werkzeug==0.16.0;python_version>='3.6' # https://github.com/pallets/werkzeug
-gunicorn==20.0.3;python_version>='3.6' # https://github.com/benoitc/gunicorn
+gunicorn==20.0.4;python_version>='3.6' # https://github.com/benoitc/gunicorn
 
 -r ./db.txt
 -r base.txt
