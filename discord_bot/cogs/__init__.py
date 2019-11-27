@@ -15,19 +15,19 @@ class BaseCog(commands.Cog, name='Example'):
     self.bot = bot
   def codeblock(s, lang=None):
     if lang:
-        return f'```{lang}\n{s}```'
+      return f'```{lang}\n{s}```'
     return f'```{s}```'
   @staticmethod
   def load_json(filename):
     """Loads a json file"""
     import json
     with open(filename, encoding='utf-8') as f:
-        return json.load(f)
+      return json.load(f)
   @staticmethod
   def write_json(filename, contents):
     """Updates a json file"""
     with open(filename, 'w') as f:
-        json.dump(contents, f, ensure_ascii=True, indent=4)
+      json.dump(contents, f, ensure_ascii=True, indent=4)
   @staticmethod
   def root(*chunks, root_='..'):
     import os#.path
@@ -42,12 +42,12 @@ class BaseCog(commands.Cog, name='Example'):
   @staticmethod
   def isAuthorized():
     async def predicate(ctx):
-        return ctx.bot.isAuthorized(ctx)
+      return ctx.bot.isAuthorized(ctx)
     return commands.check(predicate)
   @staticmethod
   def isMod():
     async def predicate(ctx):
-        return ctx.bot.isMod(ctx)# or ctx.bot.isOwner(ctx)
+      return ctx.bot.isMod(ctx)# or ctx.bot.isOwner(ctx)
     return commands.check(predicate)
   @staticmethod
   async def mark_check(ctx, mark=None):
@@ -65,8 +65,8 @@ class BaseCog(commands.Cog, name='Example'):
     await ctx.send(msg)
   async def dl_image(self, url: str):
     async with self.session.get(str(url)) as resp:
-        if resp.status == 200:
-            test = await resp.read()
-            return BytesIO(test)
-        else:
-            return None
+      if resp.status == 200:
+        test = await resp.read()
+        return BytesIO(test)
+      else:
+        return None
