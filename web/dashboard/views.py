@@ -13,13 +13,15 @@ else:
 	from flask import g, request, redirect, url_for, render_template, session, abort
 
 def auth(x):
-	return True
+	#return request.cookies.get('logged_in', None)
+	return 'logged_in' in session
 
 def login_required(f):
 	@wraps(f)
 	def decorated_function(*args, **kwargs):
 		print(request.url[request.url.rfind('://')+ 3:].split('/', 1)[0])
-		if 'logged_in' in session:
+		#input(dir(request))
+		if auth(request):
 			return f(*args, **kwargs)
 		# if user is not logged in, redirect to login page
 		return redirect(url_for('.secret_page', redirect_to=request.url))
@@ -47,6 +49,9 @@ def home():
 def secret_page():
 	if request.method == 'POST':
 		from utils import get_env
+		if not hasattr(g, '__cookies__'):
+			g.__cookies__ = []
+		g.__cookies__.append({'name': 'logged_in'})
 		if not request.form.get('form-token', '') == get_env('DISCORD_BOT_TOKEN'):
 			abort(403)
 		from boolify import boolify

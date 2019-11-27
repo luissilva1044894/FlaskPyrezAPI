@@ -79,9 +79,10 @@ def check_redirects(app):
 	@app.before_first_request
 	def do_before_request():
 		if isinstance(app, flask.Flask):
-			from flask import request
+			from flask import request, g
 		else:
-			from quart import request
+			from quart import request, g
+		g.__cookies__ = []
 		from utils.file import read_file
 		for _ in (read_file('data/redirects.json', is_json=True) or {}).get('redirect', {}):
 			if _.get('path') and _.get('path').lower() == request.path.lower():
