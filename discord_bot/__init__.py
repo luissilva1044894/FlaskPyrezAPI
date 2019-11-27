@@ -8,6 +8,9 @@ from web.models.paladins.player import Player
 from boolify import boolify
 class Bot(commands.Bot):
 	def __init__(self, *, config=None, import_name=None, command_prefix=None, **kwargs):
+		if not hasattr(self, 'start_time'):
+			from datetime import datetime
+			self.start_time = datetime.utcnow()
 		from utils import get_root_path
 		from utils.config import Config
 		self.root_path = get_root_path(kwargs.pop('import_name', None) or __name__)
@@ -39,9 +42,6 @@ class Bot(commands.Bot):
 	async def on_ready(self):
 		if not hasattr(self, 'app_info'):
 			self.app_info = await self.application_info()
-		if not hasattr(self, 'start_time'):
-			from datetime import datetime
-			self.start_time = datetime.utcnow()
 		if not self.initialised:
 			import aiohttp
 			import discord
