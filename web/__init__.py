@@ -82,6 +82,11 @@ def check_redirects(app):
 			from flask import request, g
 		else:
 			from quart import request, g
+		scheme = request.headers.get('X-Forwarded-Proto')
+		# https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/50041843
+		# if not request.is_secure and app.env != 'development':
+		if scheme and scheme == 'http' and request.url.startswith('http://'):
+			return redirect(request.url.replace('http://', 'https://', 1), code=301)
 		g.__cookies__ = []
 		from utils.file import read_file
 		for _ in (read_file('data/redirects.json', is_json=True) or {}).get('redirect', {}):
@@ -130,7 +135,7 @@ def initialize_plugins(app):
 		#db.drop_all()
 		#db.create_all()
 def create_manager(app):
-	from flask_script import Manager, Server, Shell
+	from flask_script import Manager, Server, Shell #flask.ext.script
 	from flask_migrate import Migrate, MigrateCommand
 
 	from utils import get_env
@@ -177,7 +182,6 @@ def create_manager(app):
 		t = 'i am a scheduled action, yeah'
 		print(t)
 		app.logger.debug(t)
-	#@app.shell_context_processor
 	def make_shell_context():
 		return dict(app=app, db=db)
 	if _debug_mod:
@@ -214,7 +218,8 @@ def create_app(app_name=None, *, is_async=False, static_folder=None, template_fo
 	#configure_logging(app)
 	#configure_extensions(app)
 	if is_async:
-		initialize_plugins(app)
+		pass
+	initialize_plugins(app)
 	'''
 	with app.app_context():
 		## Initialize Plugins
