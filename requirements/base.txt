@@ -4,7 +4,8 @@
 # https://github.com/crsmithdev/arrow
 arrow==0.15.4;python_version>='3.6'
 
--e git+https://github.com/luissilva1044894/boolify.git@master#egg=boolify
+# https://github.com/luissilva1044894/boolify
+boolify==0.0.3.dev0;python_version>='3.6.1'
 
 pyrez==1.1.0.1;python_version>='3.6'
 #-e git+https://github.com/luissilva1044894/pyrez.git@master#egg=pyrez
