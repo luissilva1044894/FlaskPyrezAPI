@@ -15,7 +15,7 @@ class PatchNote(db.Model):
 	lang = db.Column(db.Integer, nullable=False)
 	
 	def __init__(self, author, content, image_header, image_thumb, timestamp, title, lang=1):
-		from utils import format_timestamp
+		from utils.time import format_timestamp
 		self.author = author
 		self.content = content
 		self.image_header = image_header
