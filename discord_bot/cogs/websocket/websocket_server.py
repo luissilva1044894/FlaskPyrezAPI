@@ -35,10 +35,10 @@ class WebSocket(commands.Cog):
     '''
     return {
       'connection': {
-        'user': { 'name': str(self.bot.user) },
+        'user': { 'id': self.bot.user.id, 'name': str(self.bot.user) },#.split('#', 1)[0]
         '_servers': [str(g) for g in self.bot.guilds]
       },
-      'config': self.bot.config,
+      'config': {_: self.bot.config[_] for _ in self.bot.config if _.lower().rfind('token') == -1 and _.lower().rfind('pyrez') == -1}, #self.bot.config,
       #'cogs': ['{} - {}\n{}'.format(str(x), self.bot.cogs[x].__doc__, '<br/>'.join(f'{y.name} - {y.help}' for y in self.bot.get_cog(x).get_commands())) for x in self.bot.cogs],
       'cogs': [ { 'name': x, 'doc': self.bot.cogs[x].__doc__, 'cmds': [f'{y.name} - {y.help}' for y in self.bot.get_cog(x).get_commands()] } for x in self.bot.cogs if x != self.__class__.__name__ ],
       #'cogs': [(f'{x} - {self.bot.cogs[x].__doc__}\n') for x in self.bot.cogs],
@@ -47,7 +47,7 @@ class WebSocket(commands.Cog):
       'commands': { str(c): c.help for c in self.bot.walk_commands() if not c.cog_name },#and not y.hidden #__commands__,
       'settings': {
         'bot_settings': {
-          'PREFIXES': {'0': str('TODO')},
+          'PREFIXES': self.bot['PREFIXES'],#{'0': str('TODO')},
           'default': {
             'ADMIN_ROLE': str('TODO: Remove this'),
             'MOD_ROLE': str('TODO: Remove this')
