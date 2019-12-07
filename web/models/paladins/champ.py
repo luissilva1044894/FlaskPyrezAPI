@@ -59,7 +59,7 @@ class Champ(db.Model, CRUD_Mixin):
   
   @staticmethod
   def update(_api, langs=[1, 2, 3, 9, 10, 11, 12, 13]):
-    from utils import get_url
+    from utils.http import get_url
     from .item import Item
     from .card import Card
     from .ability import Ability
