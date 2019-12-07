@@ -62,7 +62,7 @@ class Server(db.Model):
 				[ _.delete() for _ in Platform.query.all()]
 				for _ in _server_status:
 					Platform(name=_.platform if _.environment.lower() != 'pts' else _.environment, limited_access=_.limitedAccess, online=_.status, version=_.version)
-				from utils import get_url
+				from utils.http import get_url
 				_title = get_url('https://cms.paladins.com/wp-json/api/get-posts/1?&search=update%20notes')[0].get('title')
 				_patch_notes, _patch_note = get_url('https://cms.paladins.com/wp-json/api/get-posts/1?&search={}'.format(_title[:_title.rfind('update') - 1])), []
 				[ _.delete() for _ in PatchNote.query.all()]
