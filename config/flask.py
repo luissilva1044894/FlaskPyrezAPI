@@ -14,6 +14,8 @@ class Flask(Config):
 
 	SQLALCHEMY_ECHO = False
 
+	CSRF_ENABLED = True
+
 	#app.permanent_session_lifetime = datetime.timedelta(days=365) # you can also do this
 	from datetime import timedelta
 	PERMANENT_SESSION_LIFETIME = timedelta(minutes=10)
