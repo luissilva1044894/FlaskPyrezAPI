@@ -49,22 +49,6 @@ def load_locate_json(lang, folder='lang'):
   from utils.file import read_file, join_path
   return read_file(join_path(['data', folder, '{}.json'.format(lang)]), is_json=True)
 
-def get_url(url, as_json=True):
-  import requests
-  for _ in range(5):
-    try:
-      _request = requests.get(url)
-      if as_json:
-        from json.decoder import JSONDecodeError
-        try:
-          return _request.json()
-        except (JSONDecodeError, ValueError):
-          pass
-      return _request.text
-    except requests.exceptions.ConnectionError:
-      import time
-      time.sleep(1)
-  return None
 def get_env(name, default=None, verbose=False):
   import os
   try:
@@ -85,42 +69,6 @@ def on_heroku():
   from boolify import boolify
   return boolify(get_env('ON_HEROKU')) or 'heroku' in get_env('PYTHONHOME', '').lower()
 
-def get_timestamp(_format='%Y-%m-%d %H:%M:%S'):
-  from datetime import datetime
-  return datetime.now().strftime(_format)
-
-def format_timestamp(timestamp, _format='MMMM D, YYYY'):
-  try:
-    import arrow
-    try:
-      _timestamp = arrow.get(timestamp, _format)
-    except (arrow.parser.ParserMatchError, arrow.parser.ParserError):
-      pass
-    else:
-      return _timestamp.isoformat()#_timestamp.format('DD-MMM-YYYY HH:mm:SS ZZ')
-      # 2019-11-12T23:31Z | 2019-11-18T18:36:32+00:00
-  except importError:
-    pass
-
-def last_seen(locale, date):
-  try:
-    import arrow
-  except ImportError:
-    from datetime import datetime
-    delta = datetime.utcnow() - date
-    hours, remainder = divmod(int(delta.total_seconds()), 3600)
-    minutes, seconds = divmod(remainder, 60)
-    days, hours = divmod(hours, 24)
-    years, days = divmod(days, 365)
-    fmt = '{y}y, {d}d' if years else '{d}d, {h}h' if days else '{h}h, {m}m' if hours else '{m}m, {s}s'
-    return fmt.format(y=years, d=days, h=hours, m=minutes, s=seconds)
-  else:
-    c = arrow.utcnow() - date
-    if c.days:
-      return arrow.utcnow().shift(days=-c.days, seconds=c.seconds, microseconds=c.microseconds).humanize(locale=locale)
-    if c.seconds:
-      return arrow.utcnow().shift(seconds=-c.seconds).humanize(locale=locale)
-    return arrow.utcnow().shift(microseconds=c.microseconds).humanize(locale=locale)
 def fix_champ_name(champ):
   return champ.lower().replace(' ', '').replace("'", '').replace("-", '')
 def get_champ_names(lang=None):
@@ -136,6 +84,7 @@ def get_champ_names(lang=None):
     return __trans_champ__
   return __champs__
   '''
+  from .http import get_url
   return [fix_champ_name(_.get('name')) for _ in get_url(f'https://cms.paladins.com/wp-json/api/champion-hub/{lang or 1}')]
 """
 https://stackoverflow.com/questions/715417/converting-from-a-string-to-boolean-in-python
@@ -152,18 +101,23 @@ def get_root_path(import_name):
   import pkgutil
   import os
   mod = sys.modules.get(import_name)
-  if mod is not None and hasattr(mod, '__file__'):
+  if mod and hasattr(mod, '__file__'):
     return os.path.dirname(os.path.abspath(mod.__file__))
   loader = pkgutil.get_loader(import_name)
-  if loader is None or import_name == '__main__':
+  if not loader or import_name == '__main__':
     return os.getcwd()
   if hasattr(loader, 'get_filename'):
     filepath = loader.get_filename(import_name)
   else:
     __import__(import_name)
-    mod = sys.modules[import_name]
-    filepath = getattr(mod, '__file__', None)
+    filepath = getattr(sys.modules[import_name], '__file__', None)
     if not filepath:
       raise RuntimeError(f'No root path can be found for the provided module "{import_name}"')
   # filepath is import_name.py for a module, or __init__.py for a package.
   return os.path.dirname(os.path.abspath(filepath))
+
+def get_ip_address():
+  import socket
+  s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+  s.connect(("8.8.8.8", 80))
+  return s.getsockname()[0]
