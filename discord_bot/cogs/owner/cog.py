@@ -26,6 +26,11 @@ class Cog(BaseCog, name='Owner'):
   async def set_status(self, ctx, *, terms):
     """Change the bot status (Owner only)"""
     await self.bot.change_presence(status=discord.Status.online, activity=discord.activity.Game(name=terms))
+  @commands.command(name='debug')#, cls=utils.Command)
+  @commands.is_owner()
+  async def debug_(self, ctx, *, bool_):
+    self.debug = bool_
+    await ctx.send(f'Debug mode has been set to: `{bool_}`.')
   @commands.command(description='')
   @commands.is_owner()
   async def restart(self, ctx):
@@ -119,7 +124,7 @@ class Cog(BaseCog, name='Owner'):
         except Exception as e:
           await self.bot.send(e)
         else:
-          await self.bot.send('Avatar set.')
+          await ctx.send(f'Avatar has been set to: `{link}`.')
       else:
         await self.bot.send('Unable to download image.')
   @commands.command(description='', name='reload', hidden=True)#pass_context=True, 
