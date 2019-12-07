@@ -9,22 +9,11 @@ def create_platform_dict(arg):
 def format_patch_notes(args):
   if args:
     _timestamp = format_timestamp(args.get('timestamp'))
-    try:
-      import arrow
-      try:
-        _timestamp = arrow.get(_timestamp, 'MMMM D, YYYY')
-      except (arrow.parser.ParserMatchError, arrow.parser.ParserError):
-        pass
-      else:
-        _timestamp = _timestamp.isoformat()#_timestamp.format('DD-MMM-YYYY HH:mm:SS ZZ')
-        # 2019-11-12T23:31Z | 2019-11-18T18:36:32+00:00
-    except importError:
-      pass
     return {'author': args.get('author'), 'content': args.get('content'), 'image': { 'thumb': args.get('image'), 'header': args.get('featured_image') }, 'timestamp': _timestamp, 'title': args.get('title')}
   return None
 
 def jsonify_func(args):
-  print(args['ping'])
+  # print(args['ping'])
   return {
     'game': args['ping'].apiName[:-3].lower(),
     'version': args['ping'].gamePatch,
@@ -45,7 +34,7 @@ def get_server_status(_api, lang=1):
       [ _.delete() for _ in Platform.query.all()]
       for _ in _server_status:
         Platform(name=_.platform if _.environment.lower() != 'pts' else _.environment, limited_access=_.limitedAccess, online=_.status, version=_.version)
-      from utils import get_url
+      from utils.http import get_url
       _title = get_url('https://cms.paladins.com/wp-json/api/get-posts/1?&search=update%20notes')[0].get('title')
       _patch_notes, _patch_note = get_url('https://cms.paladins.com/wp-json/api/get-posts/1?&search={}'.format(_title[:_title.rfind('update') - 1])), []
       [ _.delete() for _ in PatchNote.query.all()]
