@@ -57,7 +57,7 @@ def secret_page():
 		from boolify import boolify
 		#if boolify(request.form.get('form-remember')):
 		session['logged_in'] = True
-		return redirect(request.args.get('redirect_to', url_for('.home')))
+		return redirect(request.args.get('redirect_to', url_for('.home')))#return_to
 	return dict(title='Login')
 '''
 @blueprint.route('/<short_url>', methods=['GET'])
