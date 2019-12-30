@@ -13,7 +13,6 @@ class ExtendedEmbed(discord.Embed):
 class Cog(commands.Cog, name='Example'):
   def __init__(self, bot):
     self.bot = bot
-    print('?')
 
   @commands.command()
   async def ping(self, ctx, *args):
