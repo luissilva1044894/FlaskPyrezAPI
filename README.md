@@ -1,7 +1,9 @@
+
 <div  align="center">
 <a href="https://github.com/luissilva1044894/FlaskPyrezAPI" title="FlaskPyrezAPI - Github repository" alt="FlaskPyrezAPI · Github repository"><img src="./data/static/img/pyrez.png" height="96" width="96"></a>
 
 ## FlaskPyrezAPI
+
 [![License](https://img.shields.io/github/license/luissilva1044894/FlaskPyrezAPI.svg?logo=github&logoColor=white&logoWidth=10style=plastic)](./LICENSE "FlaskPyrezAPI · LICENSE")
 [![Runtime Version](https://img.shields.io/pypi/pyversions/flask.svg?style=plastic&logo=python&logoColor=white&logoWidth=10)](https://pypi.org/project/pyrez "Python Runtime Versions")
 [![Discord Server](https://img.shields.io/discord/549020573846470659.svg?logo=discord&logoColor=white&logoWidth=10&style=plastic)](https://discord.gg/XkydRPS "Support Server · Discord")
@@ -14,8 +16,8 @@ Built with:  [![Python](https://img.shields.io/badge/Python-3.7.5-blue.svg?style
 [![Discord.py][badge-discord-py]][discord-py]
 [![Flask](https://img.shields.io/badge/Flask-1.1.1-orange.svg?logo=flask&logoColor=white&style=plastic)](https://pypi.org/project/Flask/1.1.1/ "Flask · 1.1.1")
 
-[![Bootstrap 4](https://img.shields.io/badge/Bootstrap-4.4.0-orange.svg?logo=bootstrap&logoColor=white&style=plastic)](https://getbootstrap.com/docs/4.4/getting-started/introduction/ "Bootstrap · 4.4.0")
-[![Font Awesome](https://img.shields.io/badge/Font_Awesome-5.11.2-orange.svg?style=plastic)](https://github.com/FortAwesome/Font-Awesome/blob/master/CHANGELOG.md#5112---2019-09-23 "Font Awesome · 5.11.2")
+[![Bootstrap 4](https://img.shields.io/badge/Bootstrap-4.4.1-orange.svg?logo=bootstrap&logoColor=white&style=plastic)](https://getbootstrap.com/docs/4.4/getting-started/introduction/ "Bootstrap · 4.4.1")
+[![Font Awesome](https://img.shields.io/badge/Font_Awesome-5.12.0-orange.svg?style=plastic)](https://github.com/FortAwesome/Font-Awesome/blob/master/CHANGELOG.md#5120---2019-12-10 "Font Awesome · 5.12.0")
 [![Pillow][badge-pillow]][pillow]
 </div>
 
@@ -28,7 +30,7 @@ FlaskPyrezAPI is an endpoint for custom commands ([`Twitch`](https://twitch.tv "
 
 ### Requirements
 - [Access](https://pyrez.readthedocs.io/en/stable/gettingstarted.html#registration "Form access to Hi-Rez Studios API") to Hi-Rez Studios API.
-- [Bot Token - Discord](https://discordapp.com/developers/applications/me) - In order to run the bot, you'll have to provide your own token, provided by Discord.
+- [Bot Token - Discord](https://discordapp.com/developers/applications/me) - In order to run the bot, you'll have to provide your own token, provided by Discord. See [here](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token) for a tutorial on creating a Discord bot account.
 
 ### Support
 For support using Pyrez, please join the official [*support server*](
@@ -72,8 +74,8 @@ This is an open source [![Open Source](https://raw.githubusercontent.com/abhishe
 
 > Raw data provided by Hi-Rez Studios API and is thus their property. © 2019 Hi-Rez Studios, Inc. All rights reserved.
 
-[badge-discord-py]: https://img.shields.io/badge/Discord.py-1.2.5-orange.svg?logo=discord&logoColor=white&style=plastic
-[badge-pillow]: https://img.shields.io/badge/Pillow-6.2.1-orange.svg?logoColor=white&style=plastic
+[badge-discord-py]: https://img.shields.io/badge/discord.py-1.2.5-orange.svg?logo=discord&logoColor=white&style=plastic
+[badge-pillow]: https://img.shields.io/badge/Pillow-7.0.0-orange.svg?logoColor=white&style=plastic
 
 [discord-py]: https://discordpy.readthedocs.io/en/v1.2.5/ "Discord.py 1.2.5"
-[pillow]: https://pillow.readthedocs.io/en/stable/releasenotes/6.2.1.html "Pillow 6.2.1"
+[pillow]: https://pillow.readthedocs.io/en/stable/releasenotes/7.0.0.html "Pillow 7.0.0"
