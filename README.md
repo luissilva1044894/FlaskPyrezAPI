@@ -9,7 +9,7 @@
 [![Discord Server](https://img.shields.io/discord/549020573846470659.svg?logo=discord&logoColor=white&logoWidth=10&style=plastic)](https://discord.gg/XkydRPS "Support Server · Discord")
 
 
-Built with:  [![Python](https://img.shields.io/badge/Python-3.7.5-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html#python-3-7-5-final "Python 3.7.5")
+Built with:  [![Python](https://img.shields.io/badge/Python-3.7.6-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html#python-3-7-6-final "Python 3.7.6")
 
 
 [![Pyrez](https://img.shields.io/badge/Pyrez-1.1.0.1-00bb88.svg?logo=github&logoColor=white&style=plastic)](https://github.com/luissilva1044894/Pyrez/tree/1.1.x "Pyrez · 1.1.0.1")
