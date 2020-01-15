@@ -62,10 +62,11 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 2. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli "Heroku CLI").
 3. Sign in using `heroku login`.
 4. Create an app using `heroku create your-app-name` if needed.
-  You may add the flag `--region eu` if you want to use their European servers instead of the US ones.
-  If your-app-name is not already taken, Heroku should now create your app.
+  - You may add the flag `--region eu` if you want to use their European servers instead of the US ones.
+  - If your-app-name is not already taken, Heroku should now create your app.
 5. Create a database using `heroku addons:create heroku-postgresql`
-  You should now have access to an empty [Postgres database](https://elements.heroku.com/addons/heroku-postgresql) whose address was automatically saved as an environment variable named `DATABASE_URL`. The app will automatically connect to it when deployed.
+  - You should now have access to an empty [Postgres database](https://elements.heroku.com/addons/heroku-postgresql) whose address was automatically saved as an environment variable named `DATABASE_URL`.
+  - The app will automatically connect to it when deployed.
 <!--
 6. Now, generate a secret key and save it to an ENV variable named SECRET_KEY using `heroku config:set SECRET_KEY=ruby -rsecurerandom -e "puts SecureRandom.hex(64)"`
 -->
@@ -73,7 +74,7 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 7. `heroku git:remote -a your-app-name`
 8. Download this repo and copy all files into `your-app-name` folder
 9. Edit [`.env`](./.env.example) and replace the `PYREZ_AUTH_ID` and `PYREZ_DEV_ID` with the `auth_key` and `dev_id` that you receive from [`Hi-Rez Studios`](https://pyrez.readthedocs.io/en/stable/getting_started.html#registration "Form access to Hi-Rez Studios API").
-10. `heroku config:push`
+10. `heroku config:push` - [Config addon](https://github.com/xavdid/heroku-config) is needed
 11. `git add .`
 12. `git commit -m "Going to Heroku"`
 13. You can now push your app using `git push heroku master`
