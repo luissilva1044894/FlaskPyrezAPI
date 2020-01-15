@@ -80,7 +80,7 @@ https://discord.gg/XkydRPS "Support Server · Discord") on [Discord](https://dis
 13. You can now push your app using `git push heroku master`
 14. `heroku run python manage.py db migrate`
 15. Your app should now be ready to use. You can open it with `heroku open`
-  You also can run the console on heroku using `heroku console --app your-app-name`
+  - You also can run the console on heroku using `heroku console --app your-app-name`
 
 ### Thanks
 * [`Lukash (Paladins Poland)`](https://www.facebook.com/PaladinsPoland/ "Paladins Poland") - Polish translation.
