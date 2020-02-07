@@ -17,7 +17,7 @@ Built with:  [![Python](https://img.shields.io/badge/Python-3.7.6-blue.svg?style
 [![Flask](https://img.shields.io/badge/Flask-1.1.1-orange.svg?logo=flask&logoColor=white&style=plastic)](https://pypi.org/project/Flask/1.1.1/ "Flask · 1.1.1")
 
 [![Bootstrap 4](https://img.shields.io/badge/Bootstrap-4.4.1-orange.svg?logo=bootstrap&logoColor=white&style=plastic)](https://getbootstrap.com/docs/4.4/getting-started/introduction/ "Bootstrap · 4.4.1")
-[![Font Awesome](https://img.shields.io/badge/Font_Awesome-5.12.0-orange.svg?style=plastic)](https://github.com/FortAwesome/Font-Awesome/blob/master/CHANGELOG.md#5120---2019-12-10 "Font Awesome · 5.12.0")
+[![Font Awesome](https://img.shields.io/badge/Font_Awesome-5.12.1-orange.svg?style=plastic)](https://github.com/FortAwesome/Font-Awesome/blob/master/CHANGELOG.md#5121---2020-02-04 "Font Awesome · 5.12.1")
 [![Pillow][badge-pillow]][pillow]
 
 [![Become a Patron!][bagde-patreon]](https://www.patreon.com/bePatron?u=14686910 "Become a Patron!")
