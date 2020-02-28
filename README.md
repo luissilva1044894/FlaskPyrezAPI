@@ -12,7 +12,7 @@
 
 Built with:  [![Python](https://img.shields.io/badge/Python-3.7.6-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html#python-3-7-6-final "Python 3.7.6")
 
-[![Pyrez](https://img.shields.io/badge/Pyrez-1.1.0.1-00bb88.svg?logo=github&logoColor=white&style=plastic)](https://github.com/luissilva1044894/Pyrez/tree/1.1.x "Pyrez · 1.1.0.1")
+[![Pyrez](https://img.shields.io/badge/Pyrez-1.1.0.2-00bb88.svg?logo=github&logoColor=white&style=plastic)](https://github.com/luissilva1044894/Pyrez/tree/1.1.x "Pyrez · 1.1.0.2")
 [![discord.py][badge-discord-py]][discord-py]
 [![Flask](https://img.shields.io/badge/Flask-1.1.1-orange.svg?logo=flask&logoColor=white&style=plastic)](https://pypi.org/project/Flask/1.1.1/ "Flask · 1.1.1")
 
@@ -90,10 +90,10 @@ This is an open source [![Open Source](https://raw.githubusercontent.com/abhishe
 
 > Raw data provided by Hi-Rez Studios API and is thus their property. © 2019 Hi-Rez Studios, Inc. All rights reserved.
 
-[badge-discord-py]: https://img.shields.io/badge/discord.py-1.2.5-orange.svg?logo=discord&logoColor=white&style=plastic
+[badge-discord-py]: https://img.shields.io/badge/discord.py-1.3.2-orange.svg?logo=discord&logoColor=white&style=plastic
 [badge-pillow]: https://img.shields.io/badge/Pillow-7.0.0-orange.svg?logoColor=white&style=plastic
 
-[discord-py]: https://discordpy.readthedocs.io/en/v1.2.5/ "Discord.py 1.2.5"
+[discord-py]: https://discordpy.readthedocs.io/en/v1.3.2/ "Discord.py 1.3.2"
 [pillow]: https://pillow.readthedocs.io/en/stable/releasenotes/7.0.0.html "Pillow 7.0.0"
 
 [bagde-patreon]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.herokuapp.com%2Fnonsocial&logoColor=white&style=plastic
