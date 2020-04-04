@@ -10,14 +10,14 @@
 [![Runtime Version](https://img.shields.io/pypi/pyversions/flask.svg?style=plastic&logo=python&logoColor=white&logoWidth=10)](https://pypi.org/project/pyrez "Python Runtime Versions")
 [![Discord Server](https://img.shields.io/discord/549020573846470659.svg?logo=discord&logoColor=white&logoWidth=10&style=plastic)](https://discord.gg/XkydRPS "Support Server · Discord")
 
-Built with:  [![Python](https://img.shields.io/badge/Python-3.7.6-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html#python-3-7-6-final "Python 3.7.6")
+Built with:  [![Python](https://img.shields.io/badge/Python-3.7.7-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html#python-3-7-7-final "Python 3.7.7")
 
 [![Pyrez](https://img.shields.io/badge/Pyrez-1.1.0.2-00bb88.svg?logo=github&logoColor=white&style=plastic)](https://github.com/luissilva1044894/Pyrez/tree/1.1.x "Pyrez · 1.1.0.2")
 [![discord.py][badge-discord-py]][discord-py]
-[![Flask](https://img.shields.io/badge/Flask-1.1.1-orange.svg?logo=flask&logoColor=white&style=plastic)](https://pypi.org/project/Flask/1.1.1/ "Flask · 1.1.1")
+[![Flask](https://img.shields.io/badge/Flask-1.1.2-orange.svg?logo=flask&logoColor=white&style=plastic)](https://pypi.org/project/Flask/1.1.2/ "Flask · 1.1.2")
 
 [![Bootstrap 4](https://img.shields.io/badge/Bootstrap-4.4.1-orange.svg?logo=bootstrap&logoColor=white&style=plastic)](https://getbootstrap.com/docs/4.4/getting-started/introduction/ "Bootstrap · 4.4.1")
-[![Font Awesome](https://img.shields.io/badge/Font_Awesome-5.12.1-orange.svg?style=plastic)](https://github.com/FortAwesome/Font-Awesome/blob/master/CHANGELOG.md#5121---2020-02-04 "Font Awesome · 5.12.1")
+[![Font Awesome](https://img.shields.io/badge/Font_Awesome-5.13.0-orange.svg?style=plastic)](https://github.com/FortAwesome/Font-Awesome/blob/master/CHANGELOG.md#5130---2020-03-23 "Font Awesome · 5.13.0")
 [![Pillow][badge-pillow]][pillow]
 
 [![Become a Patron!][bagde-patreon]](https://www.patreon.com/bePatron?u=14686910 "Become a Patron!")
@@ -90,11 +90,11 @@ This is an open source [![Open Source](https://raw.githubusercontent.com/abhishe
 
 > Raw data provided by Hi-Rez Studios API and is thus their property. © 2019 Hi-Rez Studios, Inc. All rights reserved.
 
-[badge-discord-py]: https://img.shields.io/badge/discord.py-1.3.2-orange.svg?logo=discord&logoColor=white&style=plastic
-[badge-pillow]: https://img.shields.io/badge/Pillow-7.0.0-orange.svg?logoColor=white&style=plastic
+[badge-discord-py]: https://img.shields.io/badge/discord.py-1.3.3-orange.svg?logo=discord&logoColor=white&style=plastic
+[badge-pillow]: https://img.shields.io/badge/Pillow-7.1.1-orange.svg?logoColor=white&style=plastic
 
-[discord-py]: https://discordpy.readthedocs.io/en/v1.3.2/ "Discord.py 1.3.2"
-[pillow]: https://pillow.readthedocs.io/en/stable/releasenotes/7.0.0.html "Pillow 7.0.0"
+[discord-py]: https://discordpy.readthedocs.io/en/v1.3.3/ "Discord.py 1.3.3"
+[pillow]: https://pillow.readthedocs.io/en/stable/releasenotes/7.1.1.html "Pillow 7.1.1"
 
 [bagde-patreon]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.herokuapp.com%2Fnonsocial&logoColor=white&style=plastic
 [github-repo]: https://github.com/luissilva1044894/FlaskPyrezAPI
