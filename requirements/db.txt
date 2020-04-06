@@ -16,4 +16,4 @@ Flask-SQLAlchemy==2.4.1;python_version>='3.6'
 # psycopg2==2.8.4 --no-binary psycopg2;python_version>='3.6'
 
 # https://github.com/psycopg/psycopg2
-psycopg2-binary==2.8.4;python_version>='3.6'
+psycopg2-binary==2.8.5;python_version>='3.6'
