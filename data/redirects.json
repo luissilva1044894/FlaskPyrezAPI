@@ -1,6 +1,7 @@
 {
-	"redirect": [
-		{"path": "/api/stalk", "for": "api.paladins.views.stalk_handler"},
-		{"path": "/api/rank", "for": "api.paladins.views.rank_handler"},
-		{"path": "/api/version", "for": "api.paladins.views.version_handler"}]
+  "redirect": [
+  	{"path": "/api/stalk", "for": "api.paladins.views.stalk_handler"},
+  	{"path": "/api/rank", "for": "api.paladins.views.rank_handler"},
+  	{"path": "/api/version", "for": "api.paladins.views.version_handler"}
+  ]
 }

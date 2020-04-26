@@ -1,11 +1,22 @@
 
 from functools import wraps
 
+from flask import jsonify, request
+def maybe_json(f):
+  def decorator(f):
+    @wraps(f)
+    def decorated_function(*args, **kw):
+      r = f(*args, **kw)
+      if isinstance(r, dict):
+        return jsonify(r)
+      return r
+    return decorated_function
+  return decorator
+
 def cached(timeout=5 * 60, key='view/%s'):
   def decorator(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-      from flask import request
       cache_key = key % request.path
       rv = cache.get(cache_key)
       if rv:
@@ -35,7 +46,6 @@ def templated(template=None):
     return decorated_function
   return decorator
 def player_required(f):
-  from functools import wraps
   @wraps(f)
   def decorated_function(*args, **kwargs):
     from flask import request, g
@@ -49,7 +59,6 @@ def player_required(f):
   return decorated_function
 
 def champ_required(f):
-  from functools import wraps
   @wraps(f)
   def decorated_function(*args, **kwargs):
     from flask import request, g

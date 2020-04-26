@@ -40,7 +40,7 @@ class CRUD_Mixin(object):
     db.session.delete(resource or self)
     return self
   def __repr__(self):
-  	return '<{} {}>'.format(self.__class__.__name__, self.to_json())
+  	return f'<{self.__class__.__name__} {self.to_json()}>'
   def __str__(self):
   	return str(self.to_json())
   def to_json(self):

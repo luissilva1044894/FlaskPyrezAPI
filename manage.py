@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
+import sys
+
 from flask_script import Manager, Server
 from flask_migrate import Migrate, MigrateCommand
 #from web import app
@@ -62,11 +65,9 @@ if __name__ == '__main__':
   except ImportError:
     pass
   else:
-    import os
     for q in psutil.process_iter():
       if q.name().startswith('python'):
         if not _debug_mod and q.pid != os.getpid() and [_ for _ in q.cmdline() if os.path.basename(__file__) in _]:
-          import sys
           print(f'App is already running!')#Bot is already running!
           sys.exit()
   if _debug_mod:

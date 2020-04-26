@@ -100,7 +100,7 @@ def create_blueprint(name, import_name, *, package=None, force_async=False, **op
     module = importlib.import_module(package)# or 'flask'
   except (ImportError, AttributeError):
     if supports_quart(force_async):
-        package, force_async = 'quart', True
+      package, force_async = 'quart', True
     return create_blueprint(name=name, import_name=import_name, package=package or 'flask', force_async=force_async, **options)
   return module.Blueprint(name, import_name, **options)
 '''
