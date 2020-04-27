@@ -1,6 +1,4 @@
 
-# Everything needed in production
+-r pip.txt
 
--r discord.txt
--r flask.txt
--r quart.txt
+gunicorn==20.0.4

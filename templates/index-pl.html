@@ -1,0 +1,110 @@
+
+{% extends 'index.html' %}
+
+
+{% block title %}Custom APIs for Twitch · Command builder{% endblock %}
+
+{% block metacontent %}FlaskPyrezAPI is an open-source endpoint for Twitch commands, written in Python, that provides datas about players, matches and others stats of the game Paladins. This API uses Pyrez for handling connections and requests to Hi-Rez Studios API.{% endblock %}
+
+{% block navbard_title %}Paladins Endpoints{% endblock %}
+
+{% block header_titles_github %}Github repository{% endblock %}
+{% block header_titles_twitch %}Twitch · Nonsocial{% endblock %}
+{% block header_titles_discord %}Discord Server{% endblock %}
+{% block header_titles_pastebin %}Pastebin Sample{% endblock %}
+
+{% block commands_table_titles_title %}Command List{% endblock %}
+
+{% block commands_table_titles_action %}Action{% endblock %}
+{% block commands_table_titles_desc %}Description{% endblock %}
+{% block commands_table_titles_url %}URL{% endblock %}
+{% block commands_table_titles_option1 %}Option 1{% endblock %}
+{% block commands_table_titles_option2 %}Option 2{% endblock %}
+{% block commands_table_titles_option3 %}Option 3{% endblock %}
+{% block commands_table_titles_option4 %}Option 4{% endblock %}
+
+{% block commands_table_contents_currentmatch %}Current Match{% endblock %}
+{% block commands_table_contents_currentmatch_desc %}All players' ranks in a live match{% endblock %}
+{% block commands_table_contents_currentmatch_ign %}IGN{% endblock %}
+{% block commands_table_contents_currentmatch_plat %}PLATFORM{% endblock %}
+
+{% block commands_table_contents_decks %}Decks{% endblock %}
+{% block commands_table_contents_decks_desc %}Decks of a champion{% endblock %}
+{% block commands_table_contents_decks_ign %}IGN{% endblock %}
+{% block commands_table_contents_decks_champ %}CHAMPION{% endblock %}
+{% block commands_table_contents_decks_plat %}PLATFORM{% endblock %}
+
+{% block commands_table_contents_winrate %}KDA{% endblock %}
+{% block commands_table_contents_winrate_desc %}KDA of a player or champion{% endblock %}
+{% block commands_table_contents_winrate_ign %}IGN{% endblock %}
+{% block commands_table_contents_winrate_champ %}CHAMPION{% endblock %}
+{% block commands_table_contents_winrate_plat %}PLATFORM{% endblock %}
+
+{% block commands_table_contents_lastmatch %}Last Match{% endblock %}
+{% block commands_table_contents_lastmatch_desc %}Info about the last played match{% endblock %}
+{% block commands_table_contents_lastmatch_ign %}IGN{% endblock %}
+{% block commands_table_contents_lastmatch_plat %}PLATFORM{% endblock %}
+
+{% block commands_table_contents_rank %}Rank{% endblock %}
+{% block commands_table_contents_rank_desc %}Currently rank of a specified player{% endblock %}
+{% block commands_table_contents_rank_ign %}IGN{% endblock %}
+{% block commands_table_contents_rank_plat %}PLATFORM{% endblock %}
+
+{% block commands_table_contents_version %}Server{% endblock %}
+{% block commands_table_contents_version_desc %}Currently status of Paladins Server{% endblock %}
+{% block commands_table_contents_version_plat %}PLATFORM{% endblock %}
+
+{% block commands_table_contents_stalk %}Stalk{% endblock %}
+{% block commands_table_contents_stalk_desc %}Currently online status of a specified player{% endblock %}
+{% block commands_table_contents_stalk_ign %}IGN{% endblock %}
+{% block commands_table_contents_stalk_plat %}PLATFORM{% endblock %}
+
+{% block commands_generator_cmdname %}Command name{% endblock %}
+{% block commands_generator_cmdtype %}Command{% endblock %}
+{% block commands_generator_cmdcd %}Cooldown{% endblock %}
+{% block commands_generator_paladinsign %}Paladins IGN{% endblock %}
+{% block commands_generator_paladinsplat %}Platform{% endblock %}
+{% block commands_generator_cmdlang %}Language{% endblock %}
+{% block commands_generator_chatbot %}Bot{% endblock %}
+{% block commands_generator_chatbotuseraccess %}User Access{% endblock %}
+
+{% block commands_generator_cmdname_placeholder %}currentmatch{% endblock %}
+{% block commands_generator_cmdname_title %}Command Name (without !){% endblock %}
+{% block commands_generator_player_name_title %}Player Name · Paladins{% endblock %}
+{% block commands_generator_player_name_placeholder %}Faenex{% endblock %}
+
+{% block commands_generator_cmdtype_cmdcurrentmatch %}currentmatch{% endblock %}
+{% block commands_generator_cmdtype_cmdwinrate %}winrate{% endblock %}
+{% block commands_generator_cmdtype_cmddecks %}decks{% endblock %}
+{% block commands_generator_cmdtype_cmdlastmatch %}lastmatch{% endblock %}
+{% block commands_generator_cmdtype_cmdrank %}rank{% endblock %}
+{% block commands_generator_cmdtype_cmdserver %}server{% endblock %}
+{% block commands_generator_cmdtype_cmdstalk %}stalk{% endblock %}
+
+{% block commands_generator_langs_order %}
+                <option title="English" value="EN">English 🇺🇸</option>
+                <option title="Spanih" value="ES">Español 🇪🇸</option>
+                <option title="Polish" value="PL" selected="selected">Polski 🇵🇱</option>
+                <option title="Portuguese" value="PT">Português 🇧🇷</option>
+{% endblock %}
+
+{% block commands_generator_usercanuse %}Viewers can also check their own stats{% endblock %}
+
+{% block commands_generator_userlvl_everybody %}Everybody{% endblock %}
+{% block commands_generator_userlvl_regular %}Regular{% endblock %}
+{% block commands_generator_userlvl_subscriber %}Subscriber{% endblock %}
+{% block commands_generator_userlvl_mod %}Mod{% endblock %}
+{% block commands_generator_userlvl_owner %}Owner{% endblock %}
+
+{% block commands_generator_generatebtn %}Generate{% endblock %}
+
+{% block warning_unsupported_msg_bar %}You are using an unsupported browser, upgrade to a newer version.{% endblock %}
+{% block warning_unsupported_msg_title %}Warning{% endblock %}
+
+{% block warning_nojs_msg_bar %}Some features may not work without JavaScript. Please try enabling it if you encounter problems.{% endblock %}
+{% block warning_nojs_msg_title %}Warning{% endblock %}
+
+{% block footer_createby %}Made with ❤️ by{% endblock %}
+{% block footer_github %}Source code available on{% endblock %}
+{% block footer_copyright %}All rights to their respective owners.{% endblock %}
+{% block footer_hi_rez_copyright %}Raw data provided by Hi-Rez. © 2020 Hi-Rez Studios, Inc.{% endblock %}
