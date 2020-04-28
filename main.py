@@ -127,14 +127,14 @@ class PlatformsSupported(BaseEnumeration):
 def sessionCreated(session):
   _session = Session(session_id=session.sessionId)
 
-#try:
-#  last_session = Session.query.first()
-#except (OperationalError, ProgrammingError):
-#  last_session = None
-#else:
-#  last_session = last_session.session_id or None
-paladinsAPI = PaladinsAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=last_session.get_session_id())
-print('Paladins Session: ', last_session.get_session_id())
+try:
+  last_session = Session.query.first()
+except (OperationalError, ProgrammingError):
+  last_session = None
+else:
+  last_session = last_session.session_id
+paladinsAPI = PaladinsAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=last_session or None)
+print('Paladins Session: ', last_session)
 
 @app.context_processor
 def utility_processor():

@@ -15,9 +15,16 @@ from sqlalchemy.exc import OperationalError, ProgrammingError
 from models import Session
 def sessionCreated(session):
   _session = Session(session_id=session.sessionId)
-print('Smite Session: ', Session.get_session_id())
 
-smiteAPI = SmiteAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=Session.get_session_id())
+try:
+  last_session = Session.query.first()
+except (OperationalError, ProgrammingError):
+  last_session = None
+else:
+  last_session = last_session.session_id
+print('Smite Session: ', last_session)
+
+smiteAPI = SmiteAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=last_session or None)
 smiteAPI.onSessionCreated += sessionCreated
 
 S_PLAYER_NOT_FOUND_STRINGS = {
