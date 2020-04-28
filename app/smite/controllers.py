@@ -15,9 +15,9 @@ from sqlalchemy.exc import OperationalError, ProgrammingError
 from models import Session
 def sessionCreated(session):
   _session = Session(session_id=session.sessionId)
-print('Smite Session: ', last_session.get_session_id())
+print('Smite Session: ', Session.get_session_id())
 
-smiteAPI = SmiteAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=last_session.get_session_id())
+smiteAPI = SmiteAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=Session.get_session_id())
 smiteAPI.onSessionCreated += sessionCreated
 
 S_PLAYER_NOT_FOUND_STRINGS = {
