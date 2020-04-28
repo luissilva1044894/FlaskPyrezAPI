@@ -20,7 +20,7 @@ try:
   last_session = Session.query.first()
 except (OperationalError, ProgrammingError):
   last_session = None
-else:
+if last_session and hasattr(last_session, 'session_id'):
   last_session = last_session.session_id
 print('Smite Session: ', last_session)
 

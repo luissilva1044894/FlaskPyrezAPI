@@ -131,7 +131,7 @@ try:
   last_session = Session.query.first()
 except (OperationalError, ProgrammingError):
   last_session = None
-else:
+if last_session and hasattr(last_session, 'session_id'):
   last_session = last_session.session_id
 paladinsAPI = PaladinsAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=last_session or None)
 print('Paladins Session: ', last_session)
