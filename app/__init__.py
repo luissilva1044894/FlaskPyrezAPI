@@ -6,33 +6,22 @@
 #https://flask.palletsprojects.com/en/1.1.x/patterns/favicon/
 
 #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
+
+import os
+
+from .views import blueprint
+from .utils import replace
+from .utils.lib import import_from
+
 def register(app):
-	from .views import blueprint
-	from .utils import replace
-	app.register_blueprint(blueprint, url_prefix='/{}'.format(replace(__name__, 'app', 'api')))
+  app.register_blueprint(blueprint, url_prefix='/{}'.format(replace(__name__, 'app', 'api')))
 
-	import os
-	os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
-	#import importlib
-	#for _mod in [_ for _ in os.listdir('.') if os.path.isdir(_) and not _.startswith('_')]:
-	#	try:
-	#		_lib = importlib.import_module('.'.join([__name__, _mod]))
-	#	except ModuleNotFoundError:
-	#		pass
-	#	else:
-	#		try:
-	#			_lib.register(app)
-	#		except AttributeError:
-	#			pass
-	from .utils.lib import import_from
-	for _mod in [_ for _ in os.listdir('.') if os.path.isdir(_) and not _ in ['utils', 'migrations'] and not _.startswith('_')]:
-		try:
-			_lib = import_from('.'.join([__name__, _mod]))
-		except ModuleNotFoundError:
-			pass
-		else:
-			try:
-				_lib.register(app)
-			except AttributeError:
-				pass
-
+  os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+  for _mod in [_ for _ in os.listdir('.') if os.path.isdir(_) and not _ in ['utils', 'migrations'] and not _.startswith('_')]:
+    try:
+      _lib = import_from('.'.join([__name__, _mod]))
+      _lib.register(app)
+    except (ModuleNotFoundError, AttributeError):
+      print(f'>>> Failed to load: {_lib.__name__}')
+    else:
+      print(f'>>> Blueprint loaded: {_lib.__name__}')

@@ -1,6 +1,9 @@
 import pyrez
 from pyrez.api import *
-from pyrez.exceptions import PlayerNotFound, MatchException
+from pyrez.exceptions import (
+  PlayerNotFound,
+  MatchException,
+)
 from pyrez.exceptions.PrivatePlayer import PrivatePlayer
 from pyrez.enumerations import Tier
 from pyrez import SmiteAPI
@@ -10,22 +13,16 @@ from ..utils import get_env
 from ..utils.num import formatDecimal
 from langs import *
 
-from sqlalchemy.exc import OperationalError, ProgrammingError
+import requests
 
-from models import Session
-def sessionCreated(session):
-  _session = Session(session_id=session.sessionId)
+#from main import Session #circular import
+#try:
+#  last_session = Session.query.first()
+#except (OperationalError, ProgrammingError):
+#  last_session = None
+#print('Smite Session: ', last_session)
 
-try:
-  last_session = Session.query.first()
-except (OperationalError, ProgrammingError):
-  last_session = None
-if last_session and hasattr(last_session, 'session_id'):
-  last_session = last_session.session_id
-print('Smite Session: ', last_session)
-
-smiteAPI = SmiteAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=last_session or None)
-smiteAPI.onSessionCreated += sessionCreated
+smiteAPI = SmiteAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'))
 
 S_PLAYER_NOT_FOUND_STRINGS = {
   'en' : "🚫 ERROR: “{0}” doesn't exist or it's hidden! Make sure that your account is marked as “Public Profile”'",
@@ -82,6 +79,9 @@ def rank_func(player, platform, language='en'):
     if not playerId or playerId == -1:
       return PLAYER_NULL_STRINGS[language] if not playerId else S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
     getPlayerRequest = smiteAPI.getPlayer(playerId)
+  except requests.exceptions.HTTPError as exc:
+    printException(exc)
+    return UNABLE_TO_CONNECT_STRINGS[language]
   except PlayerNotFound as exc:
     printException(exc)
     return S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
@@ -105,6 +105,9 @@ def live_match_func(player, platform, language='en'):
     if not playerId or playerId == -1:
       return PLAYER_NULL_STRINGS[language] if not playerId else S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
     playerStatusRequest = smiteAPI.getPlayerStatus(playerId)
+  except requests.exceptions.HTTPError as exc:
+    printException(exc)
+    return UNABLE_TO_CONNECT_STRINGS[language]
   except Exception as exc:
     printException(exc)
     return INTERNAL_ERROR_500_STRINGS[language]

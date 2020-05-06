@@ -1,16 +1,40 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, render_template, request
-from sqlalchemy.exc import IntegrityError, InternalError, OperationalError, ProgrammingError
-
 import os
 
+from flask import (
+  Blueprint,
+  render_template,
+  request,
+)
 import pyrez
 from pyrez.api import *
-from pyrez.enumerations import Champions, Tier
+from pyrez.enumerations import (
+  Champions,
+  Tier,
+)
+from pyrez.exceptions import (
+  MatchException,
+  PlayerNotFound,
+)
+from sqlalchemy.exc import (
+  IntegrityError,
+  InternalError,
+  OperationalError,
+  ProgrammingError,
+)
 
-from ..utils import getPlatform, getPlayerName, PlatformsSupported, LanguagesSupported, get_env
+from ..utils import (
+  fix_url_for,
+  get_env,
+  get_json,
+  get_language,
+  getPlatform,
+  getPlayerName,
+  LanguagesSupported,
+  PlatformsSupported,
+)
 
 blueprint = Blueprint('paladins', __name__, static_folder='static', template_folder='templates', static_url_path='')
 
@@ -28,37 +52,33 @@ blueprint = Blueprint('paladins', __name__, static_folder='static', template_fol
 @blueprint.errorhandler(404)
 @blueprint.route('/', methods=['GET'])
 def root(error=None):
-	"""Homepage route."""
-	from ..utils import fix_url_for, get_json, get_language
-	lang = get_language(request)
-	return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(lang), blueprint.name), lang=lang, my_name=blueprint.name.upper())
+  """Homepage route."""
+  lang = get_language(request)
+  return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(lang), blueprint.name), lang=lang, my_name=blueprint.name.upper())
 
-from pyrez.exceptions import MatchException, PlayerNotFound
 @blueprint.errorhandler(MatchException)
 @blueprint.errorhandler(PlayerNotFound)
 def player_not_found_error(error=None):
-	return PLAYER_NOT_FOUND_STRINGS[language].format(playerName)
+  return PLAYER_NOT_FOUND_STRINGS[language].format(player_name)
 
-@blueprint.route('/deck', methods=['GET'])
 @blueprint.route('/decks', methods=['GET'])
-def getDecks():
-	return '?'
+def decks_handler():
+  return '?'
 @blueprint.route('/version', methods=['GET'])
-def getGameVersion():
-	return '?'
+def version_handler():
+  return '?'
 @blueprint.route('/stalk', methods=['GET'])
-def getStalk():
-	return '?'
-@blueprint.route('/lastmatch', methods=['GET'])
-def getLastMatch():
-	return '?'
-@blueprint.route('/currentmatch', methods=['GET'])
-def getCurrentMatch():
-	return '?'
+def stalk_handler():
+  return '?'
+@blueprint.route('/last_match', methods=['GET'])
+def last_match_handler():
+  return '?'
+@blueprint.route('/live_match', methods=['GET'])
+def live_match_handler():
+  return '?'
 @blueprint.route('/rank', methods=['GET'])
-def getRank():
-	return '?'
-@blueprint.route('/winrate', methods=['GET'])
+def rank_handler():
+  return '?'
 @blueprint.route('/kda', methods=['GET'])
-def getWinrate():
-	return '?'
+def kda_handler():
+  return '?'

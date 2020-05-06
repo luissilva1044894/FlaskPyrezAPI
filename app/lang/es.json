@@ -77,16 +77,16 @@
          "BUTTTON": "Command List",
          "TITLES": [ "Action", "Description", "URL", "Option 1", "Option 2", "Option 3", "Option 4" ],
          "PALADINS": [
-            [ "Partida actual", "Todos los rank del jugadores en una partida", "url_for:getCurrentMatch", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ],
-            [ "Decks", "Decks de un campeón", "url_for:getDecks", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=ES" ],
-            [ "KDA", "KDA de un jugador o campeón", "url_for:getWinrate", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=ES" ],
-            [ "Última partida", "Información sobre la última partida jugada", "url_for:getLastMatch", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ],
-            [ "Rank", "Rank actual de un jugador específico", "url_for:getRank", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ],
-            [ "Server", "Estado actual del servidor Paladins", "url_for:getGameVersion", "&platform=PLATFORM", "&language=ES", "", "" ],
-            [ "Stalk", "Estado actual en línea de un jugador específico", "url_for:getStalk", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ]
+            [ "Partida actual", "Todos los rank del jugadores en una partida", "url_for:live_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ],
+            [ "Decks", "Decks de un campeón", "url_for:decks_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=ES" ],
+            [ "KDA", "KDA de un jugador o campeón", "url_for:kda_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=ES" ],
+            [ "Última partida", "Información sobre la última partida jugada", "url_for:last_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ],
+            [ "Rank", "Rank actual de un jugador específico", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ],
+            [ "Server", "Estado actual del servidor Paladins", "url_for:version_handler", "&platform=PLATFORM", "&language=ES", "", "" ],
+            [ "Stalk", "Estado actual en línea de un jugador específico", "url_for:stalk_handler", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ]
          ],
          "OVERWATCH": [
-            [ "Rank", "Currently rank of a specified player", "url_for:rank", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ]
+            [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ]
          ]
       }
    }

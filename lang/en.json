@@ -77,16 +77,16 @@
          "BUTTTON": "Command List",
          "TITLES": [ "Action", "Description", "URL", "Option 1", "Option 2", "Option 3", "Option 4" ],
          "PALADINS": [
-            [ "Current Match", "All players rank in a live match", "url_for:getCurrentMatch", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-            [ "Decks", "Decks of a champion", "url_for:getDecks", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=EN" ],
-            [ "KDA", "KDA of a player or champion", "url_for:getWinrate", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=EN" ],
-            [ "Last Match", "Info about the last played match", "url_for:getLastMatch", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-            [ "Rank", "Currently rank of a specified player", "url_for:getRank", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-            [ "Server", "Currently status of Paladins Server", "url_for:getGameVersion", "&platform=PLATFORM", "&language=EN", "", "" ],
-            [ "Stalk", "Currently online status of a specified player", "url_for:getStalk", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
+            [ "Current Match", "All players rank in a live match", "url_for:live_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
+            [ "Decks", "Decks of a champion", "url_for:decks_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=EN" ],
+            [ "KDA", "KDA of a player or champion", "url_for:kda_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=EN" ],
+            [ "Last Match", "Info about the last played match", "url_for:last_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
+            [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
+            [ "Server", "Currently status of Paladins Server", "url_for:version_handler", "&platform=PLATFORM", "&language=EN", "", "" ],
+            [ "Stalk", "Currently online status of a specified player", "url_for:stalk_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
          ],
          "OVERWATCH": [
-            [ "Rank", "Currently rank of a specified player", "url_for:rank", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
+            [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
          ]
       }
    }
