@@ -1,93 +1,107 @@
 {
-   "ERROR_404": "🚫 INTERNAL SERVER ERROR: Página não encontrada.",
-   "ERROR_500": "🚫 INTERNAL SERVER ERROR: Um erro inesperado ocorreu. Se o erro persistir, report no server do Discord: https://discord.gg/XkydRPS",
-   "LIVE_MATCH": "Partida atual - {0} ({1}):{2} | VS |{3}",
-   "LIVE_MATCH_PLAYER": " {0}: {1} ({2})",
-   "PLAYER_NULL": "🚫 ERROR: Player not specified!",
-   "PLAYER_NOT_FOUND": "🚫 ERRO: “{0}” não existe ou tem perfil privado!",
-   "PLAYER_NOT_MATCH": {
-      "0": "🚫 ERRO: “{0}” está Offline.",
-      "1": "🚫 ERRO: “{0}” ainda está no Lobby.",
-      "2": "🚫 ERRO: “{0}” ainda está escolhendo um campeão. Você precisa esperar a partida começar.",
-      "4": "🚫 ERRO: “{0}” está Online, mas não em partida.",
-      "5": "🚫 ERRO: “{0}” não existe ou tem perfil privado."
-   },
-   "PLAYER_LEVEL": "{0} (Nível {1})",
-   "UNABLE_TO_CONNECT": "🚫 ERRO: Não foi possível conectar à API da Hi-Rez Studios!",
-   "QUEUE_ID_NOT_SUPPORTED": "🚫 ERRO: “{0}” não é suportado! “{1}” não está jogando casual ou ranked, você não pode ver detalhes sobre a partida.",
-   "WINS_LOSSES": " com {0} vitórias e {1} derrotas",
-   "PLAYER_GET_RANK": "{0} é {1}{2}{3}.{4}",
-   "PLAYER_REGION": {
-      "LATIN_AMERICA_NORTH": "América Latina", "BRAZIL": "🇧🇷", "EUROPE": "Europa", "EU": "Europa", "NORTH_AMERICA": "🇺🇸", "NA": "🇺🇸",
-      "SOUTHEAST_ASIA": "Sudeste Asiático", "AUSTRALIA": "🇦🇺", "JAPAN": "🇯🇵", "JP": "🇯🇵", "": "❓"
-   },
-   "MATCH_RESULT": { "WIN": "Vitória", "LOSS": "Derrota" },
-   "QUALIFYING": "MD5",
-   "ON_LEADERBOARD": ", {0}° no rank",
-   "CHAMP_WINRATE": "{0}: {1} vitórias, {2} derrotas (Kills: {3} / Deaths: {4} / Assists: {5} - {6} KDA) - Win rate: {7}%",
-   "HOUR_FORMAT": "%d/%m/%Y %H:%M:%S",
-   "GAME_VERSION": "{0} {1} está {2} - Versão atual: {3} ({4})",
-   "LAST_MATCH": "{0} (Id da partida: {1} | Duração: {10}m | Região: {11}): {2} ({3}/{4}/{5} - {6} KDA) Sequência: {7} | Dano: {8} | Créditos: {9} - {12} (Pontuação: {13})",
-   "CURRENTLY_MATCH": "em partida (Fila: {0} | ID da partida: {1})",
-   "PLAYER_STALK": "{0} está {1} - Criado em: {2} | Último login: {3} atrás | Horas jogadas: {4}h | Platforma: {5} | Região: {6}",
-   "PALADINS_UP": "OPERANTE{0}",
-   "PALADINS_DOWN": "INOPERANTE",
-   "PALADINS_LIMITED_ACCESS": " mas está em manutenção (Acesso limitado)",
-   "CHAMP_NOT_PLAYED": "🚫 ERRO: “{0}” não jogou com “{1}”! Talvez você tenha digitado um campeão incorreto.",
-   "PLAYER_LOW_LEVEL": "🚫 ERRO: O jogador precisa ter pelo menos nível 5.",
-   "CHAMP_NULL": "🚫 ERROR: Campeão não especificado!",
-   "DONT_HAVE_DECKS": "🚫 ERRO: “{0}” não tem baralhos para “{1}”!",
-   "PLAYER_RANK": {
-      "0": "Unranked",
-      "1": "Bronze 5", "2": "Bronze 4", "3": "Bronze 3", "4": "Bronze 2", "5": "Bronze 1",
-      "6": "Prata 5", "7": "Prata 4", "8": "Prata 3", "9": "Prata 2", "10": "Prata 1",
-      "11": "Ouro 5", "12": "Ouro 4", "13": "Ouro 3", "14": "Ouro 2", "15": "Ouro 1",
-      "16": "Platina 5", "17": "Platina 4", "18": "Platina 3", "19": "Platina 2", "20": "Platina 1",
-      "21": "Diamante 5", "22": "Diamante 4", "23": "Diamante 3", "24": "Diamante 2", "25": "Diamante 1",
-      "26": "Mestre",
-      "27": "Grão-mestre"
-   },
-   "QUEUE_IDS": {
-      "423": "Custom/Cerco", "430": "Custom/Cerco", "431": "Custom/Cerco", "432": "Custom/Cerco", "433": "Custom/Cerco", "438": "Custom/Cerco",
-      "439": "Custom/Cerco", "440": "Custom/Cerco", "458": "Custom/Cerco", "459": "Custom/Cerco", "473": "Custom/Cerco", "485": "Custom/Cerco", "487": "Custom/Cerco",
-      "454": "Custom/Chacina", "455": "Custom/Chacina", "462": "Custom/Chacina", "464": "Custom/Chacina", "483": "Custom/Chacina",
-      "468": "Custom/Mata mata", "471": "Custom/Mata mata", "472": "Custom/Mata mata", "479": "Custom/Mata mata", "480": "Custom/Mata mata", "484": "Custom/Mata mata",
-      "424": "Casual/Cerco",
-      "428": "Ranked/Gamepad", "486": "Ranked/Keyboard",
-      "445": "Casual/Mapa de teste", "452": "Casual/Chacina", "469": "Casual/Mata mata",
-      "477": "Evento/Cerco ao Pico da Ascensão", "478": "Evento/O surgimento de Furia", "488": "Evento/Fim dos Tempos",
-      "489": "Custom/Fim dos Tempos",
-      "425": "Treinamento/Cerco", "453": "Treinamento/Chacina", "470": "Treinamento/Mata mata", "434": "Treinamento/Galeria de tiro", "427": "Treinamento/Tutorial",
-      "465": "Classic/Siege",
-      "10200": "Custom/KOTH", "10201": "Custom/KOTH", "10202": "Custom/KOTH", "10203": "Custom/KOTH"
-   },
-   "HTML": {
-      "JS": {
-         "CHAT_MSG": "Copie e cole o código em seu chat",
-         "DONT_CHANGE": "(VOCÊ NÃO PRECISA MUDAR NADA)",
-         "BACKEND_MSG": "Ou adicione diretamente como comando nas configurações do <span id=\"backend-title-bot\">{BOT_NAME}</span>",
-         "CLOSE": "Fechar",
-         "CMD_CREATED": "Comando !{CMD_NAME} <strong>criado</strong> com sucesso!",
-         "INVALID_CMD_NAME": "<strong>Nome do comando inválido</strong>!",
-         "INVALID_PLAYER_NAME": "<strong>Nome do comando inválido</strong>!",
-         "COPY_TO_CLIPBOARD_SUCCESS": "Código copiado!",
-         "COPY_TO_CLIPBOARD_MSG": "Copiar comando"
-      },
-      "CMD_TABLE": {
-         "BUTTTON": "Comandos disponíveis",
-         "TITLES": [ "Comando", "Descrição", "Link", "Opção 1", "Opção 2", "Opção 3", "Opção 4" ],
-         "PALADINS": [
-            [ "Partida", "Mostra os ranks dos jogadores em uma partida", "url_for:live_match_handler", "?player=JOGADOR", "&platform=PLATAFORMA", "&language=PT", "" ],
-            [ "Decks", "Baralhos de um campeão", "url_for:decks_handler", "?player=JOGADOR", "&champion=CAMPEÃO", "&platform=PLATAFORMA", "&language=PT" ],
-            [ "KDA", "KDA de um jogador ou campeão", "url_for:kda_handler", "?player=JOGADOR", "&champion=CAMPEÃO", "&platform=PLATAFORMA", "&language=PT" ],
-            [ "Última partida", "Informações sobre a última partida jogada", "url_for:last_match_handler", "?player=JOGADOR", "&platform=PLATAFORMA", "&language=PT", "" ],
-            [ "Rank", "O rank atual de um jogador", "url_for:rank_handler", "?player=JOGADOR", "&platform=PLATAFORMA", "&language=PT", "" ],
-            [ "Server", "Status do servidor do Paladins", "url_for:version_handler", "&platform=PLATAFORMA", "&language=PT", "", "" ],
-            [ "Stalk", "Status sobre um jogador", "url_for:stalk_handler", "?player=JOGADOR", "&platform=PLATAFORMA", "&language=PT", "" ]
-         ],
-         "OVERWATCH": [
-            [ "Rank", "O rank atual de um jogador", "url_for:rank_handler", "?player=JOGADOR", "&platform=PLATAFORMA", "&language=PT", "" ]
-         ]
-      }
-   }
+  "ERROR_404": "🚫 INTERNAL SERVER ERROR: Página não encontrada.",
+  "ERROR_500": "🚫 INTERNAL SERVER ERROR: Um erro inesperado ocorreu. Se o erro persistir, report no server do Discord: https://discord.gg/XkydRPS",
+  "LIVE_MATCH": "Partida atual - {0} ({1}):{2} | VS |{3}",
+  "LIVE_MATCH_PLAYER": " {0}: {1} ({2})",
+  "PLAYER_NULL": "🚫 ERROR: Player not specified!",
+  "PLAYER_NOT_FOUND": "🚫 ERRO: “{0}” não existe ou tem perfil privado!",
+  "PLAYER_NOT_MATCH": {
+    "0": "🚫 ERRO: “{0}” está Offline.",
+    "1": "🚫 ERRO: “{0}” ainda está no Lobby.",
+    "2": "🚫 ERRO: “{0}” ainda está escolhendo um campeão. Você precisa esperar a partida começar.",
+    "4": "🚫 ERRO: “{0}” está Online, mas não em partida.",
+    "5": "🚫 ERRO: “{0}” não existe ou tem perfil privado."
+  },
+  "PLAYER_LEVEL": "{0} (Nível {1})",
+  "UNABLE_TO_CONNECT": "🚫 ERRO: Não foi possível conectar à API da Hi-Rez Studios!",
+  "QUEUE_ID_NOT_SUPPORTED": "🚫 ERRO: “{0}” não é suportado! “{1}” não está jogando casual ou ranked, você não pode ver detalhes sobre a partida.",
+  "WINS_LOSSES": " com {0} vitórias e {1} derrotas",
+  "PLAYER_GET_RANK": "{0} é {1}{2}{3}.{4}",
+  "PLAYER_REGION": {
+    "LATIN_AMERICA_NORTH": "América Latina", "BRAZIL": "🇧🇷", "EUROPE": "Europa", "EU": "Europa", "NORTH_AMERICA": "🇺🇸", "NA": "🇺🇸",
+    "SOUTHEAST_ASIA": "Sudeste Asiático", "AUSTRALIA": "🇦🇺", "JAPAN": "🇯🇵", "JP": "🇯🇵", "": "❓"
+  },
+  "MATCH_RESULT": { "WIN": "Vitória", "LOSS": "Derrota" },
+  "QUALIFYING": "MD5",
+  "ON_LEADERBOARD": ", {0}° no rank",
+  "CHAMP_WINRATE": "{0}: {1} vitórias, {2} derrotas (Kills: {3} / Deaths: {4} / Assists: {5} - {6} KDA) - Win rate: {7}%",
+  "HOUR_FORMAT": "%d/%m/%Y %H:%M:%S",
+  "GAME_VERSION": "{0} {1} está {2} - Versão atual: {3} ({4})",
+  "LAST_MATCH": "{0} (Id da partida: {1} | Duração: {10}m | Região: {11}): {2} ({3}/{4}/{5} - {6} KDA) Sequência: {7} | Dano: {8} | Créditos: {9} - {12} (Pontuação: {13})",
+  "CURRENTLY_MATCH": "em partida (Fila: {0} | ID da partida: {1})",
+  "PLAYER_STALK": "{0} está {1} - Criado em: {2} | Último login: {3} atrás | Horas jogadas: {4}h | Platforma: {5} | Região: {6}",
+  "PALADINS_UP": "OPERANTE{0}",
+  "PALADINS_DOWN": "INOPERANTE",
+  "PALADINS_LIMITED_ACCESS": " mas está em manutenção (Acesso limitado)",
+  "CHAMP_NOT_PLAYED": "🚫 ERRO: “{0}” não jogou com “{1}”! Talvez você tenha digitado um campeão incorreto.",
+  "PLAYER_LOW_LEVEL": "🚫 ERRO: O jogador precisa ter pelo menos nível 5.",
+  "CHAMP_NULL": "🚫 ERROR: Campeão não especificado!",
+  "DONT_HAVE_DECKS": "🚫 ERRO: “{0}” não tem baralhos para “{1}”!",
+  "PLAYER_RANK": {
+    "0": "Unranked",
+    "1": "Bronze 5", "2": "Bronze 4", "3": "Bronze 3", "4": "Bronze 2", "5": "Bronze 1",
+    "6": "Prata 5", "7": "Prata 4", "8": "Prata 3", "9": "Prata 2", "10": "Prata 1",
+    "11": "Ouro 5", "12": "Ouro 4", "13": "Ouro 3", "14": "Ouro 2", "15": "Ouro 1",
+    "16": "Platina 5", "17": "Platina 4", "18": "Platina 3", "19": "Platina 2", "20": "Platina 1",
+    "21": "Diamante 5", "22": "Diamante 4", "23": "Diamante 3", "24": "Diamante 2", "25": "Diamante 1",
+    "26": "Mestre",
+    "27": "Grão-mestre"
+  },
+  "QUEUE_IDS": {
+    "423": "Custom/Cerco", "430": "Custom/Cerco", "431": "Custom/Cerco", "432": "Custom/Cerco", "433": "Custom/Cerco", "438": "Custom/Cerco",
+    "439": "Custom/Cerco", "440": "Custom/Cerco", "458": "Custom/Cerco", "459": "Custom/Cerco", "473": "Custom/Cerco", "485": "Custom/Cerco", "487": "Custom/Cerco",
+    "454": "Custom/Chacina", "455": "Custom/Chacina", "462": "Custom/Chacina", "464": "Custom/Chacina", "483": "Custom/Chacina",
+    "468": "Custom/Mata mata", "471": "Custom/Mata mata", "472": "Custom/Mata mata", "479": "Custom/Mata mata", "480": "Custom/Mata mata", "484": "Custom/Mata mata",
+    "424": "Casual/Cerco",
+    "428": "Ranked/Gamepad", "486": "Ranked/Keyboard",
+    "445": "Casual/Mapa de teste", "452": "Casual/Chacina", "469": "Casual/Mata mata",
+    "477": "Evento/Cerco ao Pico da Ascensão", "478": "Evento/O surgimento de Furia", "488": "Evento/Fim dos Tempos",
+    "489": "Custom/Fim dos Tempos",
+    "425": "Treinamento/Cerco", "453": "Treinamento/Chacina", "470": "Treinamento/Mata mata", "434": "Treinamento/Galeria de tiro", "427": "Treinamento/Tutorial",
+    "465": "Classic/Siege",
+    "10200": "Custom/KOTH", "10201": "Custom/KOTH", "10202": "Custom/KOTH", "10203": "Custom/KOTH"
+  },
+  "HTML": {
+    "JS": {
+      "CHAT_MSG": "Copie e cole o código em seu chat",
+      "DONT_CHANGE": "(VOCÊ NÃO PRECISA MUDAR NADA)",
+      "BACKEND_MSG": "Ou adicione diretamente como comando nas configurações do <span id=\"backend-title-bot\">{BOT_NAME}</span>",
+      "CLOSE": "Fechar",
+      "CMD_CREATED": "Comando !{CMD_NAME} <strong>criado</strong> com sucesso!",
+      "INVALID_CMD_NAME": "<strong>Nome do comando inválido</strong>!",
+      "INVALID_PLAYER_NAME": "<strong>Nome do comando inválido</strong>!",
+      "COPY_TO_CLIPBOARD_SUCCESS": "Código copiado!",
+      "COPY_TO_CLIPBOARD_MSG": "Copiar comando"
+    },
+    "CMD_TABLE": {
+      "BUTTTON": "Comandos disponíveis",
+      "TITLES": [ "Comando", "Descrição", "Link", "Opção 1", "Opção 2", "Opção 3", "Opção 4" ],
+      "PALADINS": [
+        [ "Partida", "Mostra os ranks dos jogadores em uma partida", "url_for:live_match_handler", "?player=JOGADOR", "&platform=PLATAFORMA", "&language=PT", "" ],
+        [ "Decks", "Baralhos de um campeão", "url_for:decks_handler", "?player=JOGADOR", "&champion=CAMPEÃO", "&platform=PLATAFORMA", "&language=PT" ],
+        [ "KDA", "KDA de um jogador ou campeão", "url_for:kda_handler", "?player=JOGADOR", "&champion=CAMPEÃO", "&platform=PLATAFORMA", "&language=PT" ],
+        [ "Última partida", "Informações sobre a última partida jogada", "url_for:last_match_handler", "?player=JOGADOR", "&platform=PLATAFORMA", "&language=PT", "" ],
+        [ "Rank", "O rank atual de um jogador", "url_for:rank_handler", "?player=JOGADOR", "&platform=PLATAFORMA", "&language=PT", "" ],
+        [ "Server", "Status do servidor do Paladins", "url_for:version_handler", "&platform=PLATAFORMA", "&language=PT", "", "" ],
+        [ "Stalk", "Status sobre um jogador", "url_for:stalk_handler", "?player=JOGADOR", "&platform=PLATAFORMA", "&language=PT", "" ]
+      ],
+      "OVERWATCH": [
+        [ "Rank", "O rank atual de um jogador", "url_for:rank_handler", "?player=JOGADOR", "&platform=PLATAFORMA", "&language=PT", "" ]
+      ],
+      "API": [
+        [ "Random Number", "", "url_for:random_number_route", "?max=NUM_MAX", "&min=NUM_MIN", "&query=Q,U,E,R,Y", "" ],
+        [ "Timestamp", "", "url_for:server_timestamp_route", "", "", "", "" ]
+      ],
+      "SMITE": [
+        [ "Rank", "Currently rank of a specified player", "url_for:_rank_viewer_route", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
+        [ "Current Match", "All players rank in a live match", "url_for:_live_match_route", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
+      ],
+      "TWITCH": [
+        [ "Random viewer", "", "url_for:_random_viewer_route", "?channel=CHANNEL", "&exclude=EXCLUDE", "&ignore=IGNORE", "" ]
+      ],
+      "YOUTUBE": [
+        [ "Latest Video", "", "url_for:latest_video_handler", "?channel=CHANNEL", "", "", "" ]
+      ]
+    }
+  }
 }

@@ -4,6 +4,7 @@
 from flask import (
   Blueprint,
   jsonify,
+  render_template,
   request,
 )
 from requests.exceptions import (
@@ -13,6 +14,9 @@ from requests.exceptions import (
 
 from .controllers.latest_video import latest_video_func
 from ..utils import (
+  fix_url_for,
+  get_json,
+  get_language,
   get_query,
   replace,
 )
@@ -24,10 +28,13 @@ blueprint = Blueprint(replace(__name__, 'app.', 'api/', '.', replace_or_split=Tr
 def connection_error_handler(error=None):
   return 'Internal Error!'
 
+@blueprint.errorhandler(404)
 @blueprint.route('/', methods=['GET'])
-def root_handler(error=None):
+def root(error=None):
   """Homepage route."""
-  return 'Homepage'
+  print(blueprint.root_path)
+  lang = get_language(request)
+  return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(lang), blueprint.name), lang=lang, my_name=blueprint.name.upper())
 
 @blueprint.route('latest_video', methods=['GET'])
 def latest_video_handler():
