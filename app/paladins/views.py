@@ -35,7 +35,7 @@ from ..utils import (
   LanguagesSupported,
   PlatformsSupported,
 )
-
+from .controllers.patch_notes import patch_notes_func
 blueprint = Blueprint('paladins', __name__, static_folder='static', template_folder='templates', static_url_path='')
 
 #paladinsAPI = PaladinsAPI(devId=get_env('PYREZ_AUTH_ID'), authKey=get_env('PYREZ_DEV_ID'), sessionId=lastSession.sessionId if lastSession else None)
@@ -76,6 +76,9 @@ def last_match_handler():
 @blueprint.route('/live_match', methods=['GET'])
 def live_match_handler():
   return '?'
+@blueprint.route('/patch_notes', methods=['GET'])
+def patch_notes_handler():
+  return patch_notes_func()
 @blueprint.route('/rank', methods=['GET'])
 def rank_handler():
   return '?'
