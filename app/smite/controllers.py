@@ -30,7 +30,7 @@ S_PLAYER_NOT_FOUND_STRINGS = {
   'pl' : '🚫 BŁĄD: Nie znaleziono gracza “{0}”! Make sure that your account is marked as “Public Profile”',
   'pt' : '🚫 ERRO: “{0}” não existe ou tem perfil privado!',
 }
-
+_info = '🚫 ERROR: Hi-Rez are restricting API access due to high influx of players. More info: https://old.reddit.com/r/Smite/comments/fpmc4a/a_developer_update_regarding_recent_server_issues/'
 #https://www.twitch.tv/benai
 def getPlayerId(playerName, platform=None):
   if not playerName or (playerName in ['none', '0', 'null', '$(1)', 'query=$(querystring)', '[invalid%20variable]', 'your_ign', '$target']):
@@ -81,7 +81,7 @@ def rank_func(player, platform, language='en'):
     getPlayerRequest = smiteAPI.getPlayer(playerId)
   except requests.exceptions.HTTPError as exc:
     printException(exc)
-    return UNABLE_TO_CONNECT_STRINGS[language]
+    return _info#UNABLE_TO_CONNECT_STRINGS[language]
   except PlayerNotFound as exc:
     printException(exc)
     return S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
@@ -107,7 +107,7 @@ def live_match_func(player, platform, language='en'):
     playerStatusRequest = smiteAPI.getPlayerStatus(playerId)
   except requests.exceptions.HTTPError as exc:
     printException(exc)
-    return UNABLE_TO_CONNECT_STRINGS[language]
+    return _info
   except Exception as exc:
     printException(exc)
     return INTERNAL_ERROR_500_STRINGS[language]
