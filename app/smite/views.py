@@ -31,7 +31,7 @@ def root(error=None):
 
 @blueprint.route('/rank', methods=['GET'])
 def _rank_viewer_route():
-  return rank_func(getPlayerName(request.args), getPlatform(request.args), get_language(request))
+  return rank_func(getPlayerName(request.args), getPlatform(request.args), g._language_)
 
 @blueprint.route('/patch_notes', methods=['GET'])
 def patch_notes_handler():
