@@ -77,24 +77,27 @@
       "BUTTTON": "Command List",
       "TITLES": [ "Action", "Description", "URL", "Option 1", "Option 2", "Option 3", "Option 4" ],
       "PALADINS": [
-        [ "Current Match", "All players rank in a live match", "url_for:live_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-        [ "Decks", "Decks of a champion", "url_for:decks_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=EN" ],
-        [ "KDA", "KDA of a player or champion", "url_for:kda_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=EN" ],
-        [ "Last Match", "Info about the last played match", "url_for:last_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-        [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-        [ "Server", "Currently status of Paladins Server", "url_for:version_handler", "&platform=PLATFORM", "&language=EN", "", "" ],
-        [ "Stalk", "Currently online status of a specified player", "url_for:stalk_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
+        [ "Current Match", "All players rank in a live match", "url_for:live_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
+        [ "Decks", "Decks of a champion", "url_for:decks_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=PL" ],
+        [ "KDA", "KDA of a player or champion", "url_for:kda_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=PL" ],
+        [ "Last Match", "Info about the last played match", "url_for:last_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
+        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=EN", "", "", "" ],
+        [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
+        [ "Server", "Currently status of Paladins Server", "url_for:version_handler", "&platform=PLATFORM", "&language=PL", "", "" ],
+        [ "Stalk", "Currently online status of a specified player", "url_for:stalk_handler", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ]
       ],
       "OVERWATCH": [
-        [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
+        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=EN", "", "", "" ],
+        [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ]
       ],
       "API": [
         [ "Random Number", "", "url_for:random_number_route", "?max=NUM_MAX", "&min=NUM_MIN", "&query=Q,U,E,R,Y", "" ],
         [ "Timestamp", "", "url_for:server_timestamp_route", "", "", "", "" ]
       ],
       "SMITE": [
-        [ "Rank", "Currently rank of a specified player", "url_for:_rank_viewer_route", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-        [ "Current Match", "All players rank in a live match", "url_for:_live_match_route", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
+        [ "Current Match", "All players rank in a live match", "url_for:_live_match_route", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
+        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=EN", "", "", "" ],
+        [ "Rank", "Currently rank of a specified player", "url_for:_rank_viewer_route", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ]
       ],
       "TWITCH": [
         [ "Random viewer", "", "url_for:_random_viewer_route", "?channel=CHANNEL", "&exclude=EXCLUDE", "&ignore=IGNORE", "" ]

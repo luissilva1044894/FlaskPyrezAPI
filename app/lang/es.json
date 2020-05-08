@@ -81,11 +81,13 @@
         [ "Decks", "Decks de un campeón", "url_for:decks_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=ES" ],
         [ "KDA", "KDA de un jugador o campeón", "url_for:kda_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=ES" ],
         [ "Última partida", "Información sobre la última partida jugada", "url_for:last_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ],
+        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=ES", "", "", "" ],
         [ "Rank", "Rank actual de un jugador específico", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ],
         [ "Server", "Estado actual del servidor Paladins", "url_for:version_handler", "&platform=PLATFORM", "&language=ES", "", "" ],
         [ "Stalk", "Estado actual en línea de un jugador específico", "url_for:stalk_handler", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ]
       ],
       "OVERWATCH": [
+        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=ES", "", "", "" ],
         [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ]
       ],
       "API": [
@@ -93,8 +95,9 @@
         [ "Timestamp", "", "url_for:server_timestamp_route", "", "", "", "" ]
       ],
       "SMITE": [
-        [ "Rank", "Currently rank of a specified player", "url_for:_rank_viewer_route", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-        [ "Current Match", "All players rank in a live match", "url_for:_live_match_route", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
+        [ "Current Match", "All players rank in a live match", "url_for:_live_match_route", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ],
+        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=ES", "", "", "" ],
+        [ "Rank", "Currently rank of a specified player", "url_for:_rank_viewer_route", "?player=IGN", "&platform=PLATFORM", "&language=ES", "" ]
       ],
       "TWITCH": [
         [ "Random viewer", "", "url_for:_random_viewer_route", "?channel=CHANNEL", "&exclude=EXCLUDE", "&ignore=IGNORE", "" ]

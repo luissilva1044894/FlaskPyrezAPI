@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import pyrez
 from pyrez.api import *
 from pyrez.exceptions import (
@@ -10,7 +13,7 @@ from pyrez import SmiteAPI
 from pyrez.enumerations.QueueSmite import QueueSmite
 
 from ..utils import get_env
-from ..utils.num import formatDecimal
+from ..utils.num import format_decimal
 from langs import *
 
 import requests
@@ -32,7 +35,7 @@ S_PLAYER_NOT_FOUND_STRINGS = {
 }
 _info = '🚫 ERROR: Hi-Rez are restricting API access due to high influx of players. More info: https://old.reddit.com/r/Smite/comments/fpmc4a/a_developer_update_regarding_recent_server_issues/'
 #https://www.twitch.tv/benai
-def getPlayerId(playerName, platform=None):
+def get_player_id(playerName, platform=None):
   if not playerName or (playerName in ['none', '0', 'null', '$(1)', 'query=$(querystring)', '[invalid%20variable]', 'your_ign', '$target']):
     return 0
   playerName = playerName.strip().lower()
@@ -42,7 +45,7 @@ def getPlayerId(playerName, platform=None):
   if not temp:
     return -1
   return temp[0].playerId
-def getInName(player):
+def get_in_game_name(player):
   try:
     return (player.hzPlayerName or player.hzGamerTag) or player.playerName
   except Exception:
@@ -68,31 +71,31 @@ def get_rank_name(tier):
     return 'Unranked'
   return '???'
 
-def printException(exc):
+def print_exception(exc):
   print(f'{type(exc)} : {exc.args} : {exc} : {str(exc)}')
 
 #language = 'pt'
 
 def rank_func(player, platform, language='en'):
   try:
-    playerId = getPlayerId(player, platform)
+    playerId = get_player_id(player, platform)
     if not playerId or playerId == -1:
       return PLAYER_NULL_STRINGS[language] if not playerId else S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
     getPlayerRequest = smiteAPI.getPlayer(playerId)
   except requests.exceptions.HTTPError as exc:
-    printException(exc)
+    print_exception(exc)
     return _info#UNABLE_TO_CONNECT_STRINGS[language]
   except PlayerNotFound as exc:
-    printException(exc)
+    print_exception(exc)
     return S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
   except PrivatePlayer as exc:
-    printException(exc)
+    print_exception(exc)
     return S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
   except Exception as exc:
-    printException(exc)
+    print_exception(exc)
     return INTERNAL_ERROR_500_STRINGS[language]
   r1 = getPlayerRequest.rankedConquest
-  return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(getInName(getPlayerRequest), getPlayerRequest.accountLevel),
+  return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(get_in_game_name(getPlayerRequest), getPlayerRequest.accountLevel),
       PLAYER_RANK_STRINGS[language][r1.currentRank.value] if r1.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r1.wins + r1.losses == 0 else QUALIFYING_STRINGS[language],
       '' if r1.currentRank == Tier.Unranked or r1.currentTrumpPoints <= 0 else ' ({2} MMR, {0} TP{1})'.format(formatDecimal(r1.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r1.leaderboardIndex) if r1.leaderboardIndex > 0 else '', round(r1.rankStat)),
       '' if r1.currentRank == Tier.Unranked and r1.wins + r1.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r1.wins), formatDecimal(r1.losses)),
@@ -101,15 +104,15 @@ def rank_func(player, platform, language='en'):
 
 def live_match_func(player, platform, language='en'):
   try:
-    playerId = getPlayerId(player, platform)
+    playerId = get_player_id(player, platform)
     if not playerId or playerId == -1:
       return PLAYER_NULL_STRINGS[language] if not playerId else S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
     playerStatusRequest = smiteAPI.getPlayerStatus(playerId)
   except requests.exceptions.HTTPError as exc:
-    printException(exc)
+    print_exception(exc)
     return _info
   except Exception as exc:
-    printException(exc)
+    print_exception(exc)
     return INTERNAL_ERROR_500_STRINGS[language]
   print(playerStatusRequest.status)
   if playerStatusRequest.status != 3:
@@ -128,7 +131,7 @@ def live_match_func(player, platform, language='en'):
   try:
     players = smiteAPI.getMatch(playerStatusRequest.matchId, True)
   except LiveMatchException as exc:
-    printException(exc)
+    print_exception(exc)
     return QUEUE_ID_NOT_SUPPORTED_STRINGS[language].format(QUEUE_IDS_STRINGS[language][playerStatusRequest.queueId], player)
   if players:
     for player in players:

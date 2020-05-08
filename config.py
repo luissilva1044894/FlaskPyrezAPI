@@ -1,11 +1,20 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import os
+
+from app.utils import (
+  get_env,
+  to_bool,
+)
+from app.utils.num import (
+  random_func,
+)
 
 app_dir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
-  from app.utils import random_func, get_env, to_bool
-
-  SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default='sqlite:///{}.db'.format('app' or __name__))#'sqlite:///:memory:'
+  SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default=f'sqlite:///{"app" or __name__}.db')#'sqlite:///:memory:'
   SQLALCHEMY_TRACK_MODIFICATIONS = False
 
   _binds = get_env('SQLALCHEMY_BINDS', default=None)

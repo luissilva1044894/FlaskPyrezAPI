@@ -1,11 +1,16 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 from bs4 import BeautifulSoup
 import time
 
-from ..utils import (
-  winratio,
+from ...utils import (
   get_url,
 )
+from ...utils.num import (
+  winratio,
+)
+
 
 def get_battle_net(battle_net):
   return battle_net.replace('#', '-', 1)

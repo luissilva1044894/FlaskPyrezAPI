@@ -1,6 +1,6 @@
 {
   "addons": [
-    { "plan": "heroku-postgresql:hobby-dev", "options": { "version": "11" } },
+    { "plan": "heroku-postgresql:hobby-dev" },
     { "plan": "heroku-postgresql:hobby-dev", "as": "PALADINS_DB" },
     { "plan": "heroku-postgresql:hobby-dev", "as": "SMITE_DB" }
   ],

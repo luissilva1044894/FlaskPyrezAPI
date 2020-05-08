@@ -1,5 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-from ..utils import get_url, random_func
+from ..utils import get_url
+from ..utils.num import random_func
+
 def random_viewer_function(_channel, _exclude, _ignore):
   _json = get_url(f'http://tmi.twitch.tv/group/user/{str(_channel).lower()}/chatters')
   for x in str(_ignore).split(','):
