@@ -3,6 +3,7 @@
 
 from flask import (
   Blueprint,
+  g,
   jsonify,
   render_template,
   request,
@@ -16,7 +17,6 @@ from .controllers.latest_video import latest_video_func
 from ..utils import (
   fix_url_for,
   get_json,
-  get_language,
   get_query,
   replace,
 )
@@ -32,9 +32,7 @@ def connection_error_handler(error=None):
 @blueprint.route('/', methods=['GET'])
 def root(error=None):
   """Homepage route."""
-  print(blueprint.root_path)
-  lang = get_language(request)
-  return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(lang), blueprint.name), lang=lang, my_name=blueprint.name.upper())
+  return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(g._language_), blueprint.name), lang=g._language_, my_name=blueprint.name.upper())
 
 @blueprint.route('latest_video', methods=['GET'])
 def latest_video_handler():

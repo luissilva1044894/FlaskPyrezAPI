@@ -3,18 +3,19 @@
 
 from flask import (
   Blueprint,
+  g,
   render_template,
   request,
 )
 
-from .controllers import (
+from .controller import (
   rank_func,
   live_match_func,
 )
+from .controllers.patch_notes import patch_notes_func
 from ..utils import (
   fix_url_for,
   get_json,
-  get_language,
   getPlatform,
   getPlayerName,
   replace,
@@ -26,20 +27,22 @@ blueprint = Blueprint(replace(__name__, 'app.', 'api/', '.', replace_or_split=Tr
 @blueprint.route('/', methods=['GET'])
 def root(error=None):
   """Homepage route."""
-  print(blueprint.root_path)
-  lang = get_language(request)
-  return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(lang), blueprint.name), lang=lang, my_name=blueprint.name.upper())
+  return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(g._language_), blueprint.name), lang=g._language_, my_name=blueprint.name.upper())
 
 @blueprint.route('/rank', methods=['GET'])
 def _rank_viewer_route():
   return rank_func(getPlayerName(request.args), getPlatform(request.args), get_language(request))
+
+@blueprint.route('/patch_notes', methods=['GET'])
+def patch_notes_handler():
+  return patch_notes_func(lang=g._language_id_)
 
 @blueprint.route('/currentmatch', methods=['GET'])
 @blueprint.route('/current_match', methods=['GET'])
 @blueprint.route('/livematch', methods=['GET'])
 @blueprint.route('/live_match', methods=['GET'])
 def _live_match_route():
-  return live_match_func(getPlayerName(request.args), getPlatform(request.args), get_language(request))
+  return live_match_func(getPlayerName(request.args), getPlatform(request.args), g._language_)
 #https://github.com/iforvard/SmiteLiveMatchCheck/blob/master/SLMChek.py
 #https://cors-anywhere.herokuapp.com/
 #https://github.com/enchom/chatbot-smite-api/blob/master/chatbot-smite-api/Smite_Api.py
