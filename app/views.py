@@ -1,8 +1,10 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from flask import (
 	abort,
 	Blueprint,
+  g,
 	jsonify,
 	render_template,
 	request,
@@ -14,10 +16,11 @@ from arrow import (
 from .utils import (
   fix_url_for,
   get_json,
-  get_language,
   get_query,
-  random_func,
   replace,
+)
+from .utils.num import (
+  random_func,
   try_int,
 )
 
@@ -27,16 +30,12 @@ blueprint = Blueprint(replace(__name__, 'app.', 'api').replace('views', ''), __n
 #https://exploreflask.com/en/latest/blueprints.html
 #https://flask.palletsprojects.com/en/1.1.x/patterns/urlprocessors/#internationalized-blueprint-urls
 #https://flask.palletsprojects.com/en/1.1.x/patterns/favicon/
-
 @blueprint.route('/', methods=['GET'])
 def root():
-  """Homepage route."""
-  lang = get_language(request)
-  #abort(404)
-  return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(lang), 'paladins'), lang=lang, my_name='PALADINS')
+  return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(g._language_), blueprint.name), lang=g._language_, my_name=blueprint.name.upper())
 
 @blueprint.route('/random')
-def randon_number_route():
+def random_number_route():
   max, min, query = try_int(get_query(request.args, 'max', 100), 100), try_int(get_query(request.args, 'min', 0), 0), get_query(request.args, 'query', None)
   if query:
     _ = str(query).split(',')
