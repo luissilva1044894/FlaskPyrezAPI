@@ -162,6 +162,7 @@ try:
   last_session = Session.query.first()
 except (OperationalError, ProgrammingError) as e:
   last_session = None
+  db.create_all()
   print(e)
 finally:
   print(dir(last_session))
