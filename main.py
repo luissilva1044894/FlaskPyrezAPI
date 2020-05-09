@@ -63,7 +63,7 @@ with app.app_context() as current_app:
       'prod': 'ProductionConfig'
     }.get(str(x).lower(), 'ProductionConfig')
   #init_db()
-  current_app.push()
+  #current_app.push()
   app.config.from_object(get_config(get_env('FLASK_ENV', default='dev' if os.sys.platform == 'win32' else 'prod')))# object-based default configuration
   app.config.from_pyfile('config.cfg', silent=True)#https://flask.palletsprojects.com/en/1.1.x/config/
   print(app.secret_key)
@@ -160,9 +160,11 @@ def sessionCreated(session):
   _session = Session(sessionId=session.sessionId)
 try:
   last_session = Session.query.first()
-except (OperationalError, ProgrammingError):
+except (OperationalError, ProgrammingError) as e:
   last_session = None
+  print(e)
 finally:
+  print(dir(last_session))
   if hasattr(last_session, 'sessionId'):
     last_session = last_session.sessionId
 print('Paladins Session: ', last_session)
