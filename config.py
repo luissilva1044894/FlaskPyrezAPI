@@ -16,7 +16,7 @@ app_dir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
   SQLALCHEMY_DATABASE_URI = get_env('DATABASE_URL', default=f'sqlite:///{"app" or __name__}.db')#'sqlite:///:memory:'
   SQLALCHEMY_TRACK_MODIFICATIONS = False
-  SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+  #SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
   _binds = get_env('SQLALCHEMY_BINDS', default=None)
   if _binds:
