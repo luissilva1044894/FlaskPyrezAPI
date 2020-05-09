@@ -60,26 +60,26 @@ def player_not_found_error(error=None):
   return PLAYER_NOT_FOUND_STRINGS[g._language_].format(player_name)
 
 @blueprint.route('/decks', methods=['GET'])
-def decks_handler():
-  return '?'
-@blueprint.route('/version', methods=['GET'])
-def version_handler():
-  return '?'
-@blueprint.route('/stalk', methods=['GET'])
-def stalk_handler():
-  return '?'
-@blueprint.route('/last_match', methods=['GET'])
-def last_match_handler():
-  return '?'
-@blueprint.route('/live_match', methods=['GET'])
-def live_match_handler():
-  return '?'
-@blueprint.route('/patch_notes', methods=['GET'])
-def patch_notes_handler():
-  return patch_notes_func(lang=g._language_id_)
-@blueprint.route('/rank', methods=['GET'])
-def rank_handler():
+def _decks_route_():
   return '?'
 @blueprint.route('/kda', methods=['GET'])
-def kda_handler():
+def _kda_route_():
+  return '?'
+@blueprint.route('/last_match', methods=['GET'])
+def _last_match_route_():
+  return '?'
+@blueprint.route('/live_match', methods=['GET'])
+def _live_match_route_():
+  return '?'
+@blueprint.route('/patch_notes', methods=['GET'])
+def _patch_notes_route_():
+  return patch_notes_func(lang=g._language_id_)
+@blueprint.route('/rank', methods=['GET'])
+def _rank_route_():
+  return '?'
+@blueprint.route('/stalk', methods=['GET'])
+def _stalk_route_():
+  return '?'
+@blueprint.route('/version', methods=['GET'])
+def _version_route_():
   return '?'

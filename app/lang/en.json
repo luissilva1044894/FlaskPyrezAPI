@@ -1,22 +1,22 @@
 {
   "ERROR_404": "🚫 INTERNAL SERVER ERROR: Page not found.",
   "ERROR_500": "🚫 INTERNAL SERVER ERROR: An unexpected error has occurred. If something isn't working, report on Discord Server: https://discord.gg/XkydRPS",
-  "LIVE_MATCH": "{0} ({1}):{2} | VS |{3}",
-  "LIVE_MATCH_PLAYER": " {0} as {1} ({2})",
+  "LIVE_MATCH": "{map_name} ({map_type}):{team_1} | VS |{team_2}",
+  "LIVE_MATCH_PLAYER": " {player_name} as {champ_name} ({player_rank})",
   "PLAYER_NULL": "🚫 ERROR: Player not specified!",
-  "PLAYER_NOT_FOUND": "🚫 ERROR: “{0}” doesn't exist or it's hidden! Make sure that your account is marked as “Public Profile”'",
+  "PLAYER_NOT_FOUND": "🚫 ERROR: “{player_name}” doesn't exist or it's hidden! Make sure that your account is marked as “Public Profile”'",
   "PLAYER_NOT_MATCH": {
-    "0": "🚫 ERROR: “{0}” is Offline.",
-    "1": "🚫 ERROR: “{0}” is still in Lobby.",
-    "2": "🚫 ERROR: “{0}” is still selecting a champion. You need to wait until the match has started.",
-    "4": "🚫 ERROR: “{0}” is Online, but not in a match.",
-    "5": "🚫 ERROR: “{0}” doesn't exist or it's hidden."
+    "0": "🚫 ERROR: “{player_name}” is Offline.",
+    "1": "🚫 ERROR: “{player_name}” is still in Lobby.",
+    "2": "🚫 ERROR: “{player_name}” is still selecting a champion. You need to wait until the match has started.",
+    "4": "🚫 ERROR: “{player_name}” is Online, but not in a match.",
+    "5": "🚫 ERROR: “{player_name}” doesn't exist or it's hidden."
   },
-  "PLAYER_LEVEL": "{0} (Level {1})",
+  "PLAYER_LEVEL": "{player_name} (Level {player_level})",
   "UNABLE_TO_CONNECT": "🚫 ERROR: Unable to connect to Hi-Rez Studios API!",
-  "QUEUE_ID_NOT_SUPPORTED": "🚫 ERROR: “{0}” isn't supported! “{1}” isn't playing casual or ranked, so you can't get details about their match.",
-  "WINS_LOSSES": " with {0} wins and {1} losses",
-  "PLAYER_GET_RANK": "{0} is {1}{2}{3}.{4}",
+  "QUEUE_ID_NOT_SUPPORTED": "🚫 ERROR: “{queue_name}” isn't supported! “{player_name}” isn't playing casual or ranked, so you can't get details about their match.",
+  "WINS_LOSSES": " with {player_wins} wins and {player_losses} losses",
+  "PLAYER_GET_RANK": "{0} is {player_rank}{2}{3}.{4}",
   "PLAYER_REGION_STRINGS": {
     "LATIN_AMERICA_NORTH": "Latin America North", "BRAZIL": "🇧🇷", "EUROPE": "Europe", "EU": "Europe", "NORTH_AMERICA": "🇺🇸", "NA": "🇺🇸",
     "SOUTHEAST_ASIA": "Southeast Asia", "AUSTRALIA": "🇦🇺", "JAPAN": "🇯🇵", "JP": "🇯🇵", "": "❓"
@@ -29,14 +29,14 @@
   "GAME_VERSION": "{0} {1} is {2} - Current version: {3} ({4})",
   "LAST_MATCH": "{0} (Match Id: {1} | Duration: {10}m | Region: {11}): {2} ({3}/{4}/{5} - {6} KDA) Killing spree: {7} | Damage: {8} | Credits: {9} - {12} (Score: {13})",
   "CURRENTLY_MATCH": "currently in a match (Queue: {0} | Match ID: {1})",
-  "PLAYER_STALK": "{0} is {1} - Created at: {2} | Last Seen: {3} ago | Playtime: {4}h | Platform: {5} | Region: {6}",
+  "PLAYER_STALK": "{0} is {1} - Created at: {2} | Last Seen: {3} ago | Playtime: {4}h | Platform: {5} | Region: {player_region}",
   "PALADINS_UP": "UP{0}",
   "PALADINS_DOWN": "DOWN",
   "PALADINS_LIMITED_ACCESS": " but it's in maintenance (Limited Access)",
-  "CHAMP_NOT_PLAYED": "🚫 ERROR: “{0}” doesn't played with “{1}”! Maybe you misspelled the champName.",
+  "CHAMP_NOT_PLAYED": "🚫 ERROR: “{player_name}” doesn't played with “{1}”! Maybe you misspelled the champName.",
   "PLAYER_LOW_LEVEL": "🚫 ERROR: Player must be at least level 5.",
   "CHAMP_NULL": "🚫 ERROR: ChampName not specified!",
-  "DONT_HAVE_DECKS": "🚫 ERROR: “{0}” doesn't have any “{1}” custom loadouts!.",
+  "DONT_HAVE_DECKS": "🚫 ERROR: “{player_name}” doesn't have any “{1}” custom loadouts!.",
   "PLAYER_RANK": {
     "0": "Unranked",
     "1": "Bronze 5", "2": "Bronze 4", "3": "Bronze 3", "4": "Bronze 2", "5": "Bronze 1",
@@ -77,33 +77,33 @@
       "BUTTTON": "Command List",
       "TITLES": [ "Action", "Description", "URL", "Option 1", "Option 2", "Option 3", "Option 4" ],
       "PALADINS": [
-        [ "Current Match", "All players rank in a live match", "url_for:live_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-        [ "Decks", "Decks of a champion", "url_for:decks_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=EN" ],
-        [ "KDA", "KDA of a player or champion", "url_for:kda_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=EN" ],
-        [ "Last Match", "Info about the last played match", "url_for:last_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=EN", "", "", "" ],
-        [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-        [ "Server", "Currently status of Paladins Server", "url_for:version_handler", "&platform=PLATFORM", "&language=EN", "", "" ],
-        [ "Stalk", "Currently online status of a specified player", "url_for:stalk_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
+        [ "Decks", "Decks of a champion", "url_for:_decks_route_", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=EN" ],
+        [ "KDA", "KDA of a player or champion", "url_for:_kda_route_", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=EN" ],
+        [ "Last Match", "Info about the last played match", "url_for:_last_match_route_", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
+        [ "Live Match", "All players rank in a live match", "url_for:_live_match_route_", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
+        [ "Patch Notes", "", "url_for:_patch_notes_route_", "&language=EN", "", "", "" ],
+        [ "Rank", "Currently rank of a specified player", "url_for:_rank_route_", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
+        [ "Server", "Currently status of Paladins Server", "url_for:_version_route_", "&platform=PLATFORM", "&language=EN", "", "" ],
+        [ "Stalk", "Currently online status of a specified player", "url_for:_stalk_route_", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
       ],
       "OVERWATCH": [
-        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=EN", "", "", "" ],
-        [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
+        [ "Patch Notes", "", "url_for:_patch_notes_route_", "&language=EN", "", "", "" ],
+        [ "Rank", "Currently rank of a specified player", "url_for:_rank_route_", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
       ],
       "API": [
-        [ "Random Number", "", "url_for:random_number_route", "?max=NUM_MAX", "&min=NUM_MIN", "&query=Q,U,E,R,Y", "" ],
-        [ "Timestamp", "", "url_for:server_timestamp_route", "", "", "", "" ]
+        [ "Random Number", "", "url_for:_random_number_route_", "?max=NUM_MAX", "&min=NUM_MIN", "&query=Q,U,E,R,Y", "" ],
+        [ "Timestamp", "", "url_for:_server_timestamp_route_", "", "", "", "" ]
       ],
       "SMITE": [
-        [ "Current Match", "All players rank in a live match", "url_for:_live_match_route", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
-        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=EN", "", "", "" ],
-        [ "Rank", "Currently rank of a specified player", "url_for:_rank_viewer_route", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
+        [ "Live Match", "All players rank in a live match", "url_for:_live_match_route_", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ],
+        [ "Patch Notes", "", "url_for:_patch_notes_route_", "&language=EN", "", "", "" ],
+        [ "Rank", "Currently rank of a specified player", "url_for:_rank_route_", "?player=IGN", "&platform=PLATFORM", "&language=EN", "" ]
       ],
       "TWITCH": [
-        [ "Random viewer", "", "url_for:_random_viewer_route", "?channel=CHANNEL", "&exclude=EXCLUDE", "&ignore=IGNORE", "" ]
+        [ "Random viewer", "", "url_for:_random_viewer_route_", "?channel=CHANNEL", "&exclude=EXCLUDE", "&ignore=IGNORE", "" ]
       ],
       "YOUTUBE": [
-        [ "Latest Video", "", "url_for:latest_video_handler", "?channel=CHANNEL", "", "", "" ]
+        [ "Latest Video", "", "url_for:_latest_video_route_", "?channel=CHANNEL", "", "", "" ]
       ]
     }
   }

@@ -35,15 +35,15 @@
 {% block scripts %}
     function get_translated_string(msg) {
       var arr_msgs = [];
-      arr_msgs["chatMsg"] = "{{ _json['HTML']['JS']['CHAT_MSG'] }}";
-      arr_msgs["dontChange"] = "{{ _json['HTML']['JS']['DONT_CHANGE'] }}";
-      arr_msgs["backendMsg"] = "{{ _json['HTML']['JS']['BACKEND_MSG'] }}";
+      arr_msgs["chat_msg"] = "{{ _json['HTML']['JS']['CHAT_MSG'] }}";
+      arr_msgs["dont_change"] = "{{ _json['HTML']['JS']['DONT_CHANGE'] }}";
+      arr_msgs["backend_msg"] = "{{ _json['HTML']['JS']['BACKEND_MSG'] }}";
       arr_msgs["close"] = "{{ _json['HTML']['JS']['CLOSE'] }}";
-      arr_msgs["cmdCreated"] = "{{ _json['HTML']['JS']['CMD_CREATED'] }}";
-      arr_msgs["invalidCmdName"] = "{{ _json['HTML']['JS']['INVALID_CMD_NAME'] }}";
-      arr_msgs["invalidPlayerName"] = "{{ _json['HTML']['JS']['INVALID_PLAYER_NAME'] }}";
-      arr_msgs["copyToClipboardSuccess"] = "{{ _json['HTML']['JS']['COPY_TO_CLIPBOARD_SUCCESS'] }}";
-      arr_msgs["copyToClipboardMsg"] = "{{ _json['HTML']['JS']['COPY_TO_CLIPBOARD_MSG'] }}";
+      arr_msgs["cmd_created"] = "{{ _json['HTML']['JS']['CMD_CREATED'] }}";
+      arr_msgs["invalid_cmd_name"] = "{{ _json['HTML']['JS']['INVALID_CMD_NAME'] }}";
+      arr_msgs["invalid_player_name"] = "{{ _json['HTML']['JS']['INVALID_PLAYER_NAME'] }}";
+      arr_msgs["copy_to_clipboard_success"] = "{{ _json['HTML']['JS']['COPY_TO_CLIPBOARD_SUCCESS'] }}";
+      arr_msgs["copy_to_clipboard_msg"] = "{{ _json['HTML']['JS']['COPY_TO_CLIPBOARD_MSG'] }}";
       return arr_msgs[msg];
     }
 {% endblock %}

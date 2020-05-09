@@ -9,5 +9,5 @@ def patch_notes_func(website_api='https://cms.paladins.com/wp-json/api/', websit
     _patch_notes = get_url(f'{website_api}get-posts/{int(lang) or 1}?&search={_title[:_title.rfind("update") - 1]}')
     if _patch_notes and isinstance(_patch_notes, list) and len(_patch_notes) > 0:
       _patch_notes = _patch_notes[-1]
-      return f"{_patch_notes['title']} - {website}news/{_patch_notes['slug']}?lng={lang.lang_code}"
+      return f"{_patch_notes['title']} · {website}news/{_patch_notes['slug']}?lng={lang.lang_code}"
   return f'{website}news/?lng={lang.lang_code}'

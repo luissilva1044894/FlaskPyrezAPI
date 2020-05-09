@@ -1,7 +1,7 @@
 {
   "ERROR_404": "🚫 BŁĄD SERWERA: Nie znaleziono strony",
   "ERROR_500": "🚫 BŁĄD SERWERA: Wystąpił nieoczekiwany błąd. If something isn't working, report on Discord Server: https://discord.gg/XkydRPS",
-  "LIVE_MATCH": "Tryb gry - {0} ({1}):{2} | VS |{3}",
+  "LIVE_MATCH": "{0} ({1}):{2} | VS |{3}",
   "LIVE_MATCH_PLAYER": " {0}: {1} ({2})",
   "PLAYER_NULL": "🚫 BŁĄD: Nie podano nazwy gracza!",
   "PLAYER_NOT_FOUND": "🚫 BŁĄD: Nie znaleziono gracza “{0}”! Make sure that your account is marked as “Public Profile”",
@@ -77,33 +77,33 @@
       "BUTTTON": "Command List",
       "TITLES": [ "Action", "Description", "URL", "Option 1", "Option 2", "Option 3", "Option 4" ],
       "PALADINS": [
-        [ "Current Match", "All players rank in a live match", "url_for:live_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
-        [ "Decks", "Decks of a champion", "url_for:decks_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=PL" ],
-        [ "KDA", "KDA of a player or champion", "url_for:kda_handler", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=PL" ],
-        [ "Last Match", "Info about the last played match", "url_for:last_match_handler", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
-        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=EN", "", "", "" ],
-        [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
-        [ "Server", "Currently status of Paladins Server", "url_for:version_handler", "&platform=PLATFORM", "&language=PL", "", "" ],
-        [ "Stalk", "Currently online status of a specified player", "url_for:stalk_handler", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ]
+        [ "Current Match", "All players rank in a live match", "url_for:_live_match_route_", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
+        [ "Decks", "Decks of a champion", "url_for:_decks_route_", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=PL" ],
+        [ "KDA", "KDA of a player or champion", "url_for:_kda_route_", "?player=IGN", "&champion=CHAMPION", "&platform=PLATFORM", "&language=PL" ],
+        [ "Last Match", "Info about the last played match", "url_for:_last_match_route_", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
+        [ "Patch Notes", "", "url_for:_patch_notes_route_", "&language=EN", "", "", "" ],
+        [ "Rank", "Currently rank of a specified player", "url_for:_rank_route_", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
+        [ "Server", "Currently status of Paladins Server", "url_for:_version_route_", "&platform=PLATFORM", "&language=PL", "", "" ],
+        [ "Stalk", "Currently online status of a specified player", "url_for:_stalk_route_", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ]
       ],
       "OVERWATCH": [
-        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=EN", "", "", "" ],
-        [ "Rank", "Currently rank of a specified player", "url_for:rank_handler", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ]
+        [ "Patch Notes", "", "url_for:_patch_notes_route_", "&language=EN", "", "", "" ],
+        [ "Rank", "Currently rank of a specified player", "url_for:_rank_route_", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ]
       ],
       "API": [
-        [ "Random Number", "", "url_for:random_number_route", "?max=NUM_MAX", "&min=NUM_MIN", "&query=Q,U,E,R,Y", "" ],
-        [ "Timestamp", "", "url_for:server_timestamp_route", "", "", "", "" ]
+        [ "Random Number", "", "url_for:_random_number_route_", "?max=NUM_MAX", "&min=NUM_MIN", "&query=Q,U,E,R,Y", "" ],
+        [ "Timestamp", "", "url_for:_server_timestamp_route_", "", "", "", "" ]
       ],
       "SMITE": [
-        [ "Current Match", "All players rank in a live match", "url_for:_live_match_route", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
-        [ "Patch Notes", "", "url_for:patch_notes_handler", "&language=EN", "", "", "" ],
-        [ "Rank", "Currently rank of a specified player", "url_for:_rank_viewer_route", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ]
+        [ "Current Match", "All players rank in a live match", "url_for:_live_match_route_", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ],
+        [ "Patch Notes", "", "url_for:_patch_notes_route_", "&language=EN", "", "", "" ],
+        [ "Rank", "Currently rank of a specified player", "url_for:_rank_route_", "?player=IGN", "&platform=PLATFORM", "&language=PL", "" ]
       ],
       "TWITCH": [
-        [ "Random viewer", "", "url_for:_random_viewer_route", "?channel=CHANNEL", "&exclude=EXCLUDE", "&ignore=IGNORE", "" ]
+        [ "Random viewer", "", "url_for:_random_viewer_route_", "?channel=CHANNEL", "&exclude=EXCLUDE", "&ignore=IGNORE", "" ]
       ],
       "YOUTUBE": [
-        [ "Latest Video", "", "url_for:latest_video_handler", "?channel=CHANNEL", "", "", "" ]
+        [ "Latest Video", "", "url_for:_latest_video_route_", "?channel=CHANNEL", "", "", "" ]
       ]
     }
   }

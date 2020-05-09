@@ -35,7 +35,7 @@ def root():
   return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(g._language_), blueprint.name), lang=g._language_, my_name=blueprint.name.upper())
 
 @blueprint.route('/random')
-def random_number_route():
+def _random_number_route_():
   max, min, query = try_int(get_query(request.args, 'max', 100), 100), try_int(get_query(request.args, 'min', 0), 0), get_query(request.args, 'query', None)
   if query:
     _ = str(query).split(',')
@@ -43,6 +43,6 @@ def random_number_route():
   return str(random_func(min, max))
 
 @blueprint.route('/timestamp')
-def server_timestamp_route():
+def _server_timestamp_route_():
   """This endpoint returns the current server and UTC time."""
   return jsonify({ 'local': now().format('DD-MMM-YYYY HH:mm:SS ZZ'), 'unix': now().timestamp, 'utc': utcnow().format('DD-MMM-YYYY HH:mm:SS ZZ') })

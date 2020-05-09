@@ -3,33 +3,43 @@
 
 import json
 import os
+import sys
 import glob
+import json
+from json.decoder import JSONDecodeError
+def get_sys_exec_root_or_drive():
+  path = sys.executable
+  while os.path.split(path)[1]:
+    path = os.path.split(path)[0]
+  return path
+
 def open_if_exists(filename, mode='rb', encoding='utf-8'):
   """Returns a file descriptor for the filename if that file exists, otherwise ``None``."""
-
-  #os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir))) # allow setup.py to be run from any path
-  ##print(os.path.join(os.path.abspath(os.path.dirname(__file__)).replace('app\\utils', ''), filename))
-  ##print([f for f in glob.glob("**/", recursive=True) if f.rfind('__') == -1])
-
-  app_dir = os.path.abspath(os.path.dirname(__file__))
-
-  #print(os.listdir())
-  ##print(['{}'.format(f) for f in os.listdir() if not f.startswith('__')])
-  #print(os.path.join(os.path.abspath(os.path.dirname(__file__)).replace('app\\utils', ''), filename))
-  #print(app_dir.replace('app\\utils', '') + filename)
-  #print('EXIST: {} '.format(os.path.isfile(filename)))
-  #print('EXIST: {} '.format(os.path.isfile(''.join([app_dir.replace('app\\utils', ''), filename]))))
-  if not os.path.isfile(filename):
+  if not os.path.isfile(filename) and (mode.rfind('r') != -1 or mode.rfind('a') != -1):
     return None
-  return open(filename, mode=mode)#, encoding=encoding)
+  try:
+    import codecs
+  except ImportError:
+    try:
+        f = open(filename, mode=mode, encoding=encoding)
+    except ValueError:
+        f = open(filename, mode=mode)
+  else:
+    f = codecs.open(filename, mode)
+  finally:
+    return f
 
-def read_json(filename, mode='rb', encoding='utf-8'):
-  _file = open_if_exists(filename, mode, encoding)
-  if _file:
-    with _file as f:
-      return json.load(f)
-  return {}
-  #from json.decoder import JSONDecodeError
-  #try:
-  #except json.decoder.JSONDecodeError:
-  #	pass
+def read_file(filename, *, mode='rb', encoding='utf-8', is_json=False):
+  """Loads a file"""
+  f, is_json = open_if_exists(filename, mode, encoding), 'json' in filename or is_json
+  if f:
+    if is_json:
+      try:
+        with f:
+          return json.load(f)
+      except json.decoder.JSONDecodeError:
+        pass
+      return {}
+    if f.readable():
+      return f.read()
+    return f

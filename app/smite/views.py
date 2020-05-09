@@ -30,18 +30,15 @@ def root(error=None):
   return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(g._language_), blueprint.name), lang=g._language_, my_name=blueprint.name.upper())
 
 @blueprint.route('/rank', methods=['GET'])
-def _rank_viewer_route():
+def _rank_route_():
   return rank_func(getPlayerName(request.args), getPlatform(request.args), g._language_)
 
 @blueprint.route('/patch_notes', methods=['GET'])
-def patch_notes_handler():
+def _patch_notes_route_():
   return patch_notes_func(lang=g._language_id_)
 
-@blueprint.route('/currentmatch', methods=['GET'])
-@blueprint.route('/current_match', methods=['GET'])
-@blueprint.route('/livematch', methods=['GET'])
 @blueprint.route('/live_match', methods=['GET'])
-def _live_match_route():
+def _live_match_route_():
   return live_match_func(getPlayerName(request.args), getPlatform(request.args), g._language_)
 #https://github.com/iforvard/SmiteLiveMatchCheck/blob/master/SLMChek.py
 #https://cors-anywhere.herokuapp.com/

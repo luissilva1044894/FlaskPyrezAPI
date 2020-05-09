@@ -44,10 +44,15 @@ from app.utils import (
 from app.lang import (
   get_language,
 )
-
+'''
+from models.paladins_player import PaladinsPlayer
+from models.smite_player import SmitePlayer
+from models.session import Session
+from models import db
+'''
 
 app = Flask(__name__, static_folder='static', template_folder='templates', static_url_path='', instance_relative_config=True) #https://stackoverflow.com/questions/4239825/static-files-in-flask-robot-txt-sitemap-xml-mod-wsgi
-with app.app_context():
+with app.app_context() as current_app:
   def get_config(x=None):
     return 'config.' + {
       'development': 'DevelopementConfig',
@@ -58,10 +63,12 @@ with app.app_context():
       'prod': 'ProductionConfig'
     }.get(str(x).lower(), 'ProductionConfig')
   #init_db()
+  current_app.push()
   app.config.from_object(get_config(get_env('FLASK_ENV', default='dev' if os.sys.platform == 'win32' else 'prod')))# object-based default configuration
   app.config.from_pyfile('config.cfg', silent=True)#https://flask.palletsprojects.com/en/1.1.x/config/
   print(app.secret_key)
   db = SQLAlchemy(app)
+  #db.init_app(app)
 
   from app import register
   register(app)
@@ -75,7 +82,6 @@ with app.app_context():
     _(app)
   app.register_blueprint(blueprint, url_prefix='/api')
   '''
-
 class Session(db.Model):
   __tablename__ = 'session'
     
@@ -159,6 +165,7 @@ except (OperationalError, ProgrammingError):
 finally:
   if hasattr(last_session, 'sessionId'):
     last_session = last_session.sessionId
+print('Paladins Session: ', last_session)
 paladinsAPI = PaladinsAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=last_session or None)
 
 @app.context_processor

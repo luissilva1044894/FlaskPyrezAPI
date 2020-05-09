@@ -1,6 +1,10 @@
 <!-- "Parent Template" -->
 <!DOCTYPE html>
+{% if g._language_ %}
+<html lang="{{ g._language_ }}">
+{% else %}
 <html>
+{% endif %}
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0 minimal-ui">
@@ -29,7 +33,7 @@
     <title>{% block title %}{% endblock %}</title>
   {% endblock %}
 </head>
-<body>
+<body id="body" class="dark-mode">
   <div class="container">
     <section id="sticky-notifications" class="stick-to-top js-stick-to-top">
       <!-- Add browser warning. Will show for ie9 and below -->
@@ -87,7 +91,7 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
   <!--<script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>-->
   <script>
-    function toggleDarkLight() {
+    function toggle_dark_light() {
       // https://codepen.io/HarlemSquirrel/pen/NdMebZ
       var body = getElementById("body");
       body.className = body.className == "dark-mode" ? "light-mode" : "dark-mode";
@@ -108,7 +112,7 @@
         });
       }
     });
-    function getEndpoint() { return "{{ url_for('.root', _external=True).replace('index.html', '').replace('http://', 'https://') }}" }
+    function get_endpoint() { return "{{ url_for('.root', _external=True).replace('http://', 'https://') }}" }
     {% block scripts %}{% endblock %}
   </script>
 </body>

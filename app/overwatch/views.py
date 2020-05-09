@@ -29,11 +29,11 @@ def root(error=None):
   return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(g._language_), blueprint.name), lang=g._language_, my_name=blueprint.name.upper())
 
 @blueprint.route('/patch_notes', methods=['GET'])
-def patch_notes_handler():
+def _patch_notes_route_():
   return patch_notes_func()
 
 @blueprint.route('/rank', methods=['GET'])
-def rank_handler():
+def _rank_route_():
   print(get_query(request.args, 'wr', False))
   print(get_query(request.args, 'average_sr', False))
 

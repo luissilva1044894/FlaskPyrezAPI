@@ -13,7 +13,7 @@ from flask import (
 )
 import requests
 
-from app.utils.file import read_json
+from app.utils.file import read_file
 
 class BaseEnumeration(Enum):
   def __str__(self):
@@ -112,11 +112,11 @@ def getPlatform(request_args):
 
 #def get_json(filename='langs'):
 #  if '_json' not in g:
-#    g._json = read_json(filename + '.json')
+#    g._json = read_file(filename + '.json')
 #  return g._json
 def get_json(lang='en', *, key=None, force=False, folder='lang/'):
   if force or '_json' not in g:
-    g._json = read_json(f'{folder}{lang}.json')
+    g._json = read_file(f'{folder}{lang}.json')
   if key:
     return g._json[key]
   return g._json

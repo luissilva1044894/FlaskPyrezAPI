@@ -18,30 +18,36 @@ from langs import *
 
 import requests
 
+'''
 #from main import Session #circular import
-#try:
-#  last_session = Session.query.first()
-#except (OperationalError, ProgrammingError):
-#  last_session = None
-#print('Smite Session: ', last_session)
+from models import Session
+try:
+  last_session = Session.query.first()
+except (OperationalError, ProgrammingError):
+  last_session = None
+finally:
+  if hasattr(last_session, 'sessionId'):
+    last_session = last_session.sessionId
+print('Smite Session: ', last_session)
+'''
 
 smiteAPI = SmiteAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'))
 
 S_PLAYER_NOT_FOUND_STRINGS = {
-  'en' : "🚫 ERROR: “{0}” doesn't exist or it's hidden! Make sure that your account is marked as “Public Profile”'",
-  'es' : '🚫 ERROR: ¡“{0}” no existe o tienes perfil oculto! Make sure that your account is marked as “Public Profile”',
-  'pl' : '🚫 BŁĄD: Nie znaleziono gracza “{0}”! Make sure that your account is marked as “Public Profile”',
-  'pt' : '🚫 ERRO: “{0}” não existe ou tem perfil privado!',
+  'en' : "🚫 ERROR: “{player_name}” doesn't exist or it's hidden! Make sure that your account is marked as “Public Profile”'",
+  'es' : '🚫 ERROR: ¡“{player_name}” no existe o tienes perfil oculto! Make sure that your account is marked as “Public Profile”',
+  'pl' : '🚫 BŁĄD: Nie znaleziono gracza “{player_name}”! Make sure that your account is marked as “Public Profile”',
+  'pt' : '🚫 ERRO: “{player_name}” não existe ou tem perfil privado!',
 }
 _info = '🚫 ERROR: Hi-Rez are restricting API access due to high influx of players. More info: https://old.reddit.com/r/Smite/comments/fpmc4a/a_developer_update_regarding_recent_server_issues/'
 #https://www.twitch.tv/benai
-def get_player_id(playerName, platform=None):
-  if not playerName or (playerName in ['none', '0', 'null', '$(1)', 'query=$(querystring)', '[invalid%20variable]', 'your_ign', '$target']):
+def get_player_id(player_name, platform=None):
+  if not player_name or player_name in ['$(queryencode%20$(1:)', 'none', '0', 'null', '$(1)', 'query=$(querystring)', '[invalid%20variable]', 'your_ign', '$target']:
     return 0
-  playerName = playerName.strip().lower()
-  if str(playerName).isnumeric():
-    return playerName if len(str(playerName)) > 5 or len(str(playerName)) < 12 else 0
-  temp = smiteAPI.getPlayerId(playerName, platform) if platform and str(platform).isnumeric() else smiteAPI.getPlayerId(playerName)
+  player_name = player_name.strip().lower()
+  if str(player_name).isnumeric():
+    return player_name if len(str(player_name)) > 5 or len(str(player_name)) < 12 else 0
+  temp = smiteAPI.getPlayerId(player_name, platform) if platform and str(platform).isnumeric() else smiteAPI.getPlayerId(player_name)
   if not temp:
     return -1
   return temp[0].playerId
@@ -80,17 +86,17 @@ def rank_func(player, platform, language='en'):
   try:
     playerId = get_player_id(player, platform)
     if not playerId or playerId == -1:
-      return PLAYER_NULL_STRINGS[language] if not playerId else S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
+      return PLAYER_NULL_STRINGS[language] if not playerId else S_PLAYER_NOT_FOUND_STRINGS[language].format(player_name=player)
     getPlayerRequest = smiteAPI.getPlayer(playerId)
   except requests.exceptions.HTTPError as exc:
     print_exception(exc)
     return _info#UNABLE_TO_CONNECT_STRINGS[language]
   except PlayerNotFound as exc:
     print_exception(exc)
-    return S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
+    return S_PLAYER_NOT_FOUND_STRINGS[language].format(player_name=player)
   except PrivatePlayer as exc:
     print_exception(exc)
-    return S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
+    return S_PLAYER_NOT_FOUND_STRINGS[language].format(player_name=player)
   except Exception as exc:
     print_exception(exc)
     return INTERNAL_ERROR_500_STRINGS[language]
@@ -106,7 +112,7 @@ def live_match_func(player, platform, language='en'):
   try:
     playerId = get_player_id(player, platform)
     if not playerId or playerId == -1:
-      return PLAYER_NULL_STRINGS[language] if not playerId else S_PLAYER_NOT_FOUND_STRINGS[language].format(player)
+      return PLAYER_NULL_STRINGS[language] if not playerId else S_PLAYER_NOT_FOUND_STRINGS[language].format(player_name=player)
     playerStatusRequest = smiteAPI.getPlayerStatus(playerId)
   except requests.exceptions.HTTPError as exc:
     print_exception(exc)

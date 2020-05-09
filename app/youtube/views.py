@@ -35,5 +35,5 @@ def root(error=None):
   return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(g._language_), blueprint.name), lang=g._language_, my_name=blueprint.name.upper())
 
 @blueprint.route('latest_video', methods=['GET'])
-def latest_video_handler():
+def _latest_video_route_():
   return latest_video_func(get_query(request.args, 'channel_id'))
