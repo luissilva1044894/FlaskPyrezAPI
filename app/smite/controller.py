@@ -103,8 +103,8 @@ def rank_func(player, platform, language='en'):
   r1 = getPlayerRequest.rankedConquest
   return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(get_in_game_name(getPlayerRequest), getPlayerRequest.accountLevel),
       PLAYER_RANK_STRINGS[language][r1.currentRank.value] if r1.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r1.wins + r1.losses == 0 else QUALIFYING_STRINGS[language],
-      '' if r1.currentRank == Tier.Unranked or r1.currentTrumpPoints <= 0 else ' ({2} MMR, {0} TP{1})'.format(formatDecimal(r1.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r1.leaderboardIndex) if r1.leaderboardIndex > 0 else '', round(r1.rankStat)),
-      '' if r1.currentRank == Tier.Unranked and r1.wins + r1.losses == 0 else WINS_LOSSES_STRINGS[language].format(formatDecimal(r1.wins), formatDecimal(r1.losses)),
+      '' if r1.currentRank == Tier.Unranked or r1.currentTrumpPoints <= 0 else ' ({2} MMR, {0} TP{1})'.format(format_decimal(r1.currentTrumpPoints), ON_LEADERBOARD_STRINGS[language].format(r1.leaderboardIndex) if r1.leaderboardIndex > 0 else '', round(r1.rankStat)),
+      '' if r1.currentRank == Tier.Unranked and r1.wins + r1.losses == 0 else WINS_LOSSES_STRINGS[language].format(format_decimal(r1.wins), format_decimal(r1.losses)),
       ' (Win rate Global: {0}%{1})'.format(getPlayerRequest.winratio, '' if r1.wins + r1.losses == 0 else ' & Ranked: {0}%'.format(r1.winratio)))
   #As informações importantes são essas. Level, Win/Losses, Ranks e RankStats. Para ser sincero, Rank_Stat é mais importante no dia de hoje quando perguntam do elo que ranks
 
