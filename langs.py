@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #https://www.w3schools.com/tags/ref_language_codes.asp
