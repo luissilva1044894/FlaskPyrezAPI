@@ -13,4 +13,4 @@ def latest_video_func(channel_id):
    pass
   else:
     return f'{_title} - https://youtu.be/{_url.replace("/watch?v=", "")}'
-  return requests.get(f'https://api.crunchprank.net/youtube/latest_video?id={channel_id}').text
+  return get_url(f'https://api.crunchprank.net/youtube/latest_video?id={channel_id}')
