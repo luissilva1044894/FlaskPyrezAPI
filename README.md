@@ -8,9 +8,9 @@
 
 
 Built with: [![Python](https://img.shields.io/badge/Python-3.7.7-blue.svg?style=plastic&logo=python&logoWidth=15&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html#python-3-7-7-final "Python 3.7.7")
-[![Pyrez](https://img.shields.io/badge/Pyrez-1.1.0.2-00bb88.svg?logo=github&logoColor=white&style=plastic)](https://github.com/luissilva1044894/Pyrez/tree/1.1.x "Pyrez · 1.1.0.2")
+[![Pyrez](https://img.shields.io/badge/Pyrez-1.1.0.3-00bb88.svg?logo=github&logoColor=white&style=plastic)](https://github.com/luissilva1044894/Pyrez/tree/1.1.x "Pyrez · 1.1.0.3")
 [![Flask](https://img.shields.io/badge/Flask-1.1.2-orange.svg?logo=flask&logoColor=white&style=plastic)](https://pypi.org/project/Flask/1.1.2/ "Flask · 1.1.2")
-[![Bootstrap 4](https://img.shields.io/badge/Bootstrap-4.4.1-orange.svg?logo=bootstrap&logoColor=white&style=plastic)](https://getbootstrap.com/docs/4.4/getting-started/introduction/ "Bootstrap · 4.4.1")
+[![Bootstrap 4](https://img.shields.io/badge/Bootstrap-4.5.0-orange.svg?logo=bootstrap&logoColor=white&style=plastic)](https://getbootstrap.com/docs/4.5/getting-started/introduction/ "Bootstrap · 4.5.0")
 [![Font Awesome](https://img.shields.io/badge/Font_Awesome-5.13.0-orange.svg?style=plastic)](https://github.com/FortAwesome/Font-Awesome/blob/master/CHANGELOG.md#5130---2020-03-23 "Font Awesome · 5.13.0")
 
 </div>
