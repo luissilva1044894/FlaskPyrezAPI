@@ -28,7 +28,7 @@ def patch_notes_func():
             return str(title).strip()
     return 'Latest Overwatch Patch Notes'
   _page = BeautifulSoup(get_url('https://playoverwatch.com/en-us/news/patch-notes/pc'), features='html.parser')
-  return f'{get_patch_note_title(_page)} - Click here to view all the patch notes: https://playoverwatch.com/en-us/news/patch-notes/pc#{get_patch_note_id(_page)}'
+  return f'{get_patch_note_title(_page)} · Click here to view all the patch notes: https://playoverwatch.com/en-us/news/patch-notes/pc#{get_patch_note_id(_page)}'
 '''
 """Overwatch API url (unofficial)."""
 api = "https://ow-api.com/"
