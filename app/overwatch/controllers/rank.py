@@ -77,12 +77,12 @@ def rank_func(battle_net, platform, paladins_like=False, format_average_sr=False
     for x in _json.get('ratings', ()):
       if x['level'] > high_sr:
         high_sr = x['level']
-      _ratings.append('{} {} SR'.format(x['role'].title(), x['level']))
+      _ratings.append(f'{x["role"].title()} {x["level"]} SR')
     _rat = ' | '.join(_ratings)
     _rank = _json['rating'] if format_average_sr else high_sr
     if paladins_like:
       return "{} is {} ({} SR{}) with {} wins and {} losses. (Win rate: {}%)".format(_json['name'].split('#')[0], get_rank_name(_rank), _rank, ' - {}'.format(_rat) if _rat else '', _json['competitiveStats']['games']['won'], _json['competitiveStats']['games']['played'] - _json['competitiveStats']['games']['won'], winratio(_json['competitiveStats']['games']['won'], _json['competitiveStats']['games']['played']))
-    return F'{_json["name"].split("#")[0]} is {get_rank_name(_rank)} ({_rank} SR){f" - {_rat}" if _rat else ""}'
+    return f'{_json["name"].split("#")[0]} is {get_rank_name(_rank)} ({_rank} SR){f" - {_rat}" if _rat else ""}'
   return '🚫 ERROR'
 #valid_regions = ['en-us', 'en-gb', 'es-es', 'es-mx', 'pt-br', 'pl-pl']
 #valid_platforms = ['pc', 'psn', 'xbl']
