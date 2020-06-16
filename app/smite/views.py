@@ -7,6 +7,8 @@ from flask import (
   render_template,
   request,
 )
+from pyrez.exceptions.ServiceUnavailable import ServiceUnavailable
+import requests
 
 from .controller import (
   rank_func,
@@ -20,8 +22,14 @@ from ..utils import (
   getPlayerName,
   replace,
 )
-
 blueprint = Blueprint(replace(__name__, 'app.', 'api/', '.', replace_or_split=True), __name__, static_folder='static', template_folder='templates', static_url_path='')
+
+_info = '🚫 ERROR: Hi-Rez are restricting API access due to high influx of players. More info: https://old.reddit.com/r/Smite/comments/fpmc4a/a_developer_update_regarding_recent_server_issues/'
+
+@blueprint.errorhandler(ServiceUnavailable)
+@blueprint.errorhandler(requests.exceptions.HTTPError)
+def service_unavailable_handler(error=None):
+  return _info
 
 @blueprint.errorhandler(404)
 @blueprint.route('/', methods=['GET'])

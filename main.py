@@ -25,6 +25,7 @@ from pyrez.exceptions import (
   MatchException,
 )
 from pyrez.exceptions.PrivatePlayer import PrivatePlayer
+from pyrez.exceptions.ServiceUnavailable import ServiceUnavailable
 from pyrez.enumerations import (
   Champions,
   Tier,
@@ -68,7 +69,6 @@ with app.app_context() as current_app:
   app.config.from_pyfile('config.cfg', silent=True)#https://flask.palletsprojects.com/en/1.1.x/config/
   print(app.secret_key)
   db = SQLAlchemy(app)
-  #db.init_app(app)
 
   from app import register
   register(app)
@@ -82,6 +82,7 @@ with app.app_context() as current_app:
     _(app)
   app.register_blueprint(blueprint, url_prefix='/api')
   '''
+
 class Session(db.Model):
   __tablename__ = 'session'
     
@@ -165,10 +166,9 @@ except (OperationalError, ProgrammingError) as e:
   db.create_all()
   print(e)
 finally:
-  print(dir(last_session))
   if hasattr(last_session, 'sessionId'):
     last_session = last_session.sessionId
-print('Paladins Session: ', last_session)
+  print('Paladins Session: ', last_session)
 paladinsAPI = PaladinsAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'), sessionId=last_session or None)
 
 @app.context_processor
@@ -325,7 +325,10 @@ def getDecks():
   #except NoResult as exc:
   #  print('{} : {} : {} : {}'.format(type(exc), exc.args, exc, str(exc)))
   #  return 'Maybe “{}” profile isn't public.'.format(playerName)
-  except requests.exceptions.HTTPError as exc:
+  #except requests.exceptions.HTTPError as exc:
+  #  printException(exc)
+  #  return UNABLE_TO_CONNECT_STRINGS[g._language_]
+  except ServiceUnavailable as exc:
     printException(exc)
     return UNABLE_TO_CONNECT_STRINGS[g._language_]
   except Exception as exc:
@@ -339,7 +342,7 @@ def getGameVersion():
     hiRezServerStatus = paladinsAPI.getServerStatus()
     hiRezServerStatus = hiRezServerStatus[1] if platform == PlatformsSupported.Xbox or platform == PlatformsSupported.Switch else hiRezServerStatus[len(hiRezServerStatus) - 2] if platform == PlatformsSupported.PS4 else hiRezServerStatus[len(hiRezServerStatus) - 1] if platform == PlatformsSupported.PTS else hiRezServerStatus[0]
     patchInfo = paladinsAPI.getPatchInfo()
-  except requests.exceptions.HTTPError as exc:
+  except ServiceUnavailable as exc:
     printException(exc)
     return UNABLE_TO_CONNECT_STRINGS[g._language_]
   except Exception as exc:
@@ -358,7 +361,7 @@ def getStalk():
       return PLAYER_NULL_STRINGS[g._language_] if not playerId else PLAYER_NOT_FOUND_STRINGS[g._language_].format(playerName)
     getPlayerRequest = paladinsAPI.getPlayer(playerId)
     playerStalkRequest = paladinsAPI.getPlayerStatus(playerId)
-  except requests.exceptions.HTTPError as exc:
+  except ServiceUnavailable as exc:
     printException(exc)
     return UNABLE_TO_CONNECT_STRINGS[g._language_]
   except PlayerNotFound as exc:
@@ -386,7 +389,7 @@ def getLastMatch():
     if not lastMatchRequest or not len(lastMatchRequest) > 0:
       raise MatchException
     lastMatchRequest = lastMatchRequest[0]    
-  except requests.exceptions.HTTPError as exc:
+  except ServiceUnavailable as exc:
     printException(exc)
     return UNABLE_TO_CONNECT_STRINGS[g._language_]
   except MatchException as exc:
@@ -414,7 +417,7 @@ def getCurrentMatch():
     if not playerId or playerId == -1:
       return PLAYER_NULL_STRINGS[g._language_] if not playerId else PLAYER_NOT_FOUND_STRINGS[g._language_].format(playerName)
     playerStatusRequest = paladinsAPI.getPlayerStatus(playerId)
-  except requests.exceptions.HTTPError as exc:
+  except ServiceUnavailable as exc:
     printException(exc)
     return UNABLE_TO_CONNECT_STRINGS[g._language_]
   except Exception as exc:
@@ -471,7 +474,7 @@ def getRank():
     if not playerId or playerId == -1:
       return PLAYER_NULL_STRINGS[g._language_] if not playerId else PLAYER_NOT_FOUND_STRINGS[g._language_].format(playerName)
     getPlayerRequest = paladinsAPI.getPlayer(playerId)
-  except requests.exceptions.HTTPError as exc:
+  except ServiceUnavailable as exc:
     printException(exc)
     return UNABLE_TO_CONNECT_STRINGS[g._language_]
   except PlayerNotFound as exc:
@@ -513,7 +516,7 @@ def getWinrate():
     if getPlayerRequest.accountLevel <= 5:
       return PLAYER_LOW_LEVEL_STRINGS[g._language_]
     playerGlobalKDA = paladinsAPI.getChampionRanks(playerId)
-  except requests.exceptions.HTTPError as exc:
+  except ServiceUnavailable as exc:
     printException(exc)
     return UNABLE_TO_CONNECT_STRINGS[g._language_]
   except (PlayerNotFound, PrivatePlayer) as exc:

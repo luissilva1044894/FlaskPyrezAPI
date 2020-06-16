@@ -7,6 +7,7 @@ import sys
 import glob
 import json
 from json.decoder import JSONDecodeError
+
 def get_sys_exec_root_or_drive():
   path = sys.executable
   while os.path.split(path)[1]:
@@ -21,9 +22,9 @@ def open_if_exists(filename, mode='rb', encoding='utf-8'):
     import codecs
   except ImportError:
     try:
-        f = open(filename, mode=mode, encoding=encoding)
+      f = open(filename, mode=mode, encoding=encoding)
     except ValueError:
-        f = open(filename, mode=mode)
+      f = open(filename, mode=mode)
   else:
     f = codecs.open(filename, mode)
   finally:

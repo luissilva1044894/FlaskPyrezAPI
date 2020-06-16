@@ -16,8 +16,6 @@ from ..utils import get_env
 from ..utils.num import format_decimal
 from langs import *
 
-import requests
-
 '''
 #from main import Session #circular import
 from models import Session
@@ -30,7 +28,6 @@ finally:
     last_session = last_session.sessionId
 print('Smite Session: ', last_session)
 '''
-
 smiteAPI = SmiteAPI(devId=get_env('PYREZ_DEV_ID'), authKey=get_env('PYREZ_AUTH_ID'))
 
 S_PLAYER_NOT_FOUND_STRINGS = {
@@ -39,7 +36,6 @@ S_PLAYER_NOT_FOUND_STRINGS = {
   'pl' : '🚫 BŁĄD: Nie znaleziono gracza “{player_name}”! Make sure that your account is marked as “Public Profile”',
   'pt' : '🚫 ERRO: “{player_name}” não existe ou tem perfil privado!',
 }
-_info = '🚫 ERROR: Hi-Rez are restricting API access due to high influx of players. More info: https://old.reddit.com/r/Smite/comments/fpmc4a/a_developer_update_regarding_recent_server_issues/'
 #https://www.twitch.tv/benai
 def get_player_id(player_name, platform=None):
   if not player_name or player_name in ['$(queryencode%20$(1:)', 'none', '0', 'null', '$(1)', 'query=$(querystring)', '[invalid%20variable]', 'your_ign', '$target']:
@@ -88,18 +84,15 @@ def rank_func(player, platform, language='en'):
     if not playerId or playerId == -1:
       return PLAYER_NULL_STRINGS[language] if not playerId else S_PLAYER_NOT_FOUND_STRINGS[language].format(player_name=player)
     getPlayerRequest = smiteAPI.getPlayer(playerId)
-  except requests.exceptions.HTTPError as exc:
-    print_exception(exc)
-    return _info#UNABLE_TO_CONNECT_STRINGS[language]
   except PlayerNotFound as exc:
     print_exception(exc)
     return S_PLAYER_NOT_FOUND_STRINGS[language].format(player_name=player)
   except PrivatePlayer as exc:
     print_exception(exc)
     return S_PLAYER_NOT_FOUND_STRINGS[language].format(player_name=player)
-  except Exception as exc:
-    print_exception(exc)
-    return INTERNAL_ERROR_500_STRINGS[language]
+  #except Exception as exc:
+  #  print_exception(exc)
+  #  return INTERNAL_ERROR_500_STRINGS[language]
   r1 = getPlayerRequest.rankedConquest
   return PLAYER_GET_RANK_STRINGS[language].format(PLAYER_LEVEL_STRINGS[language].format(get_in_game_name(getPlayerRequest), getPlayerRequest.accountLevel),
       PLAYER_RANK_STRINGS[language][r1.currentRank.value] if r1.currentRank != Tier.Unranked else PLAYER_RANK_STRINGS[language][0] if r1.wins + r1.losses == 0 else QUALIFYING_STRINGS[language],
@@ -109,17 +102,10 @@ def rank_func(player, platform, language='en'):
   #As informações importantes são essas. Level, Win/Losses, Ranks e RankStats. Para ser sincero, Rank_Stat é mais importante no dia de hoje quando perguntam do elo que ranks
 
 def live_match_func(player, platform, language='en'):
-  try:
-    playerId = get_player_id(player, platform)
-    if not playerId or playerId == -1:
-      return PLAYER_NULL_STRINGS[language] if not playerId else S_PLAYER_NOT_FOUND_STRINGS[language].format(player_name=player)
-    playerStatusRequest = smiteAPI.getPlayerStatus(playerId)
-  except requests.exceptions.HTTPError as exc:
-    print_exception(exc)
-    return _info
-  except Exception as exc:
-    print_exception(exc)
-    return INTERNAL_ERROR_500_STRINGS[language]
+  playerId = get_player_id(player, platform)
+  if not playerId or playerId == -1:
+    return PLAYER_NULL_STRINGS[language] if not playerId else S_PLAYER_NOT_FOUND_STRINGS[language].format(player_name=player)
+  playerStatusRequest = smiteAPI.getPlayerStatus(playerId)
   print(playerStatusRequest.status)
   if playerStatusRequest.status != 3:
     return PLAYER_NOT_MATCH_STRINGS[language][playerStatusRequest.status].format(player)

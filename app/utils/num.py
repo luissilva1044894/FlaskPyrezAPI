@@ -10,7 +10,7 @@ from random import (
 def try_int(value, default):
   try:
     return int(value)
-  except (ValueError, TypeError):
+  except (TypeError, ValueError):
     return default
 
 def format_decimal(data, form = ',d'):
