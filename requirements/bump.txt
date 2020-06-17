@@ -27,7 +27,7 @@ python-dateutil==2.8.1
 python-dotenv==0.13.0
 python-editor==1.0.4
 pytz==2020.1
-requests==2.23.0
+requests==2.24.0
 requests-aeaweb==0.0.1
 requests-toolbelt==0.9.1
 setuptools==47.3.1
