@@ -1,2 +1,2 @@
 web: python wsgi.py
-bot: python bot.py
+bot: python bot_worker.py
