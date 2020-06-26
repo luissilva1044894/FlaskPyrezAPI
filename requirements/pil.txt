@@ -1,0 +1,3 @@
+
+# https://github.com/python-pillow/Pillow
+Pillow==7.1.2

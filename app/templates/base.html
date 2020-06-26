@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 minimal-ui">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <title>Boilerplate Flask app</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body id="body">
+    <div class="container">
+      {% for message in get_flashed_messages() %}
+      <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="container">
+      <h1>Boilerplate Flask App</h1>
+
+      {% block body %}{% endblock %}
+
+      <p>
+        <a href="/">Home</a>,
+        <a href="/hello">Hello World</a>
+        <a href="/hello/Jhon">Hello Jhon</a>
+        <a href="/setup">Setup</a>
+      </p>
+    </div>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>

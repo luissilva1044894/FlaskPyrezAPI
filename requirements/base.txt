@@ -1,0 +1,11 @@
+
+# Base requirements
+
+# https://github.com/luissilva1044894/boolify
+boolify==0.0.4.dev0;python_version>='3.6.1'
+
+# https://github.com/psf/requests
+requests==2.24.0
+
+# https://github.com/urllib3/urllib3
+urllib3==1.25.9

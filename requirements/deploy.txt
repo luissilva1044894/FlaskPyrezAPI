@@ -1,3 +1,12 @@
 
--r pip.txt
+# Everything needed in production
+
+## Deployment
+# https://github.com/pallets/werkzeug
+Werkzeug==1.0.1
+
+# https://github.com/benoitc/gunicorn
 gunicorn==20.0.4
+
+-r flask.txt
+-r discord.txt

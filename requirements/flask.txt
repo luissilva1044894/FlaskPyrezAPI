@@ -1,0 +1,9 @@
+
+## Flask
+# https://github.com/pallets/flask
+Flask[dotenv]==1.1.2
+
+# https://github.com/pallets/jinja
+Jinja2==2.11.2
+
+-r base.txt

@@ -2,47 +2,33 @@
 # -*- coding: utf-8 -*-
 
 from flask import (
-	abort,
-	Blueprint,
-  g,
-	jsonify,
-	render_template,
-	request,
-)
-from arrow import (
-  now,
-  utcnow,
-)
-from .utils import (
-  fix_url_for,
-  get_json,
-  get_query,
-  replace,
-)
-from .utils.num import (
-  random_func,
-  try_int,
+  jsonify,
+  render_template,
 )
 
-blueprint = Blueprint(replace(__name__, 'app.', 'api').replace('views', ''), __name__, static_folder='static', template_folder='templates', static_url_path='')
+from utils.web import create_blueprint
 
-#https://danidee10.github.io/2016/11/20/flask-by-example-8.html
-#https://exploreflask.com/en/latest/blueprints.html
-#https://flask.palletsprojects.com/en/1.1.x/patterns/urlprocessors/#internationalized-blueprint-urls
-#https://flask.palletsprojects.com/en/1.1.x/patterns/favicon/
-@blueprint.route('/', methods=['GET'])
-def root():
-  return render_template('new_index.html'.format(blueprint.name.lower()), _json=fix_url_for(get_json(g._language_), blueprint.name), lang=g._language_, my_name=blueprint.name.upper())
+app = create_blueprint(__name__)
 
-@blueprint.route('/random')
-def _random_number_route_():
-  max, min, query = try_int(get_query(request.args, 'max', 100), 100), try_int(get_query(request.args, 'min', 0), 0), get_query(request.args, 'query', None)
-  if query:
-    _ = str(query).split(',')
-    return _[random_func(0, len(_) - 1)]
-  return str(random_func(min, max))
+# Sample main page
+@app.route('/')
+def home():
+  """Homepage route."""
+  return render_template('index.html')
 
-@blueprint.route('/timestamp')
-def _server_timestamp_route_():
-  """This endpoint returns the current server and UTC time."""
-  return jsonify({ 'local': now().format('DD-MMM-YYYY HH:mm:SS ZZ'), 'unix': now().timestamp, 'utc': utcnow().format('DD-MMM-YYYY HH:mm:SS ZZ') })
+@app.route('/hello/<name>', methods=['GET'])
+def hello_someone(name):
+  return render_template('index.html', name=name.title())
+
+@app.route('/hello')
+def hello():
+  return 'Hello, World!'
+
+# Sample setup script
+@app.route('/setup/', strict_slashes=False)
+def setup_route():
+  data = {
+    'worked': True,
+    'msg': 'It worked!'
+  }
+  return jsonify(data)
