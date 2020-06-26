@@ -1,8 +1,16 @@
 
 # Base requirements
 
+# https://github.com/crsmithdev/arrow
+arrow==0.15.7
+
+beautifulsoup4==4.9.1
+
 # https://github.com/luissilva1044894/boolify
 boolify==0.0.4.dev0;python_version>='3.6.1'
+
+# https://github.com/luissilva1044894/pyrez
+pyrez==1.1.0.3.1
 
 # https://github.com/psf/requests
 requests==2.24.0
