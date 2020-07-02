@@ -4,6 +4,9 @@
 # https://github.com/pallets/flask
 Flask[dotenv]==1.1.2;python_version>='3.6'
 
+# https://github.com/pallets/itsdangerous
+itsdangerous==1.1.0
+
 # https://github.com/theskumar/python-dotenv
 python-dotenv==0.13.0;python_version>='3.6'
 

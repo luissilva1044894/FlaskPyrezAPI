@@ -1,0 +1,9 @@
+
+# https://code.launchpad.net/beautifulsoup
+beautifulsoup4==4.9.1;python_version>='3.6'
+
+# https://github.com/html5lib/html5lib-python
+html5lib==1.1
+
+# https://github.com/lxml/lxml
+lxml==4.5.1
