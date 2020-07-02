@@ -9,3 +9,5 @@ python-dotenv==0.13.0;python_version>='3.6'
 
 # https://github.com/pallets/jinja
 Jinja2==2.11.2;python_version>='3.6'
+
+-r db.txt
