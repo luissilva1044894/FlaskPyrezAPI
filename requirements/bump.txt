@@ -41,5 +41,5 @@ virtualenv==20.0.30
 virtualenv-clone==0.5.4
 webencodings==0.5.1
 Werkzeug==1.0.1
-wheel==0.34.2
+wheel==0.35.0
 yarl==1.5.1
