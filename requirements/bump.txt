@@ -22,7 +22,7 @@ packaging==20.4
 pip==20.2.3
 pipenv==2020.8.13
 pkginfo==1.5.0.1
-Pygments==2.6.1
+Pygments==2.7.1
 pyparsing==2.4.7
 python-dateutil==2.8.1
 python-dotenv==0.14.0
