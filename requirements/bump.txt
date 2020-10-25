@@ -1,6 +1,6 @@
 -r deploy.txt
 
-aiohttp==3.6.3
+aiohttp==3.7.0
 alembic==1.4.3
 async-timeout==3.0.1
 attrs==20.2.0
