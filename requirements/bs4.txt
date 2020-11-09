@@ -6,4 +6,4 @@ beautifulsoup4==4.9.3;python_version>='3.6.1'
 html5lib==1.1;python_version>='3.6.1'
 
 # https://github.com/lxml/lxml
-lxml==4.5.2;python_version>='3.6.1'
+lxml==4.6.1;python_version>='3.6.1'
