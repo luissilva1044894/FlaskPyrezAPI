@@ -9,7 +9,7 @@ aiohttp[speedups]>=2.3.0,<4;python_version>='3.6.1'
 discord.py[voice]==1.5.1;python_version>='3.6.1'
 
 # https://github.com/giampaolo/psutil
-psutil==5.7.2;python_version>='3.6.1'
+psutil==5.7.3;python_version>='3.6.1'
 
 # https://github.com/pyca/pynacl/
 PyNaCl==1.4.0;python_version>='3.6.1'
