@@ -1,0 +1,2 @@
+python wsgi.py
+pause
