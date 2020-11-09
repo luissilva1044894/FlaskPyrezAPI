@@ -10,7 +10,7 @@ Flask-Migrate==2.5.3;python_version>='3.6.1'
 Flask-Script==2.0.6;python_version>='3.6.1'
 
 # https://github.com/pallets/flask-sqlalchemy
-Flask-SQLAlchemy==2.4.3;python_version>='3.6.1'
+Flask-SQLAlchemy==2.4.4;python_version>='3.6.1'
 
 # https://github.com/n0nSmoker/SQLAlchemy-serializer
 # SQLAlchemy-serializer==1.3.4.2
