@@ -1,6 +1,6 @@
 
 # https://code.launchpad.net/beautifulsoup
-beautifulsoup4==4.9.1;python_version>='3.6.1'
+beautifulsoup4==4.9.3;python_version>='3.6.1'
 
 # https://github.com/html5lib/html5lib-python
 html5lib==1.1;python_version>='3.6.1'
