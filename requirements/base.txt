@@ -14,7 +14,7 @@ colorama>=0.4.4;python_version>='3.6.1' and os_name=='nt'
 pyrez==1.1.0.3.1;python_version>='3.6.1'
 
 # https://github.com/psf/requests
-requests==2.24.0;python_version>='3.6.1'
+requests==2.25.0;python_version>='3.6.1'
 
 # https://github.com/urllib3/urllib3
 urllib3==1.26.1;python_version>='3.6.1'
