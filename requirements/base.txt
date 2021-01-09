@@ -10,6 +10,9 @@ boolify==0.0.4.dev0;python_version>='3.6.1'
 # https://github.com/tartley/colorama
 colorama>=0.4.4;python_version>='3.6.1' and os_name=='nt'
 
+# https://github.com/pyca/cryptography
+cryptography==3.3.1;python_version>='3.6.1'
+
 # https://github.com/encode/httpx
 httpx==0.16.1;python_version>='3.6.1'
 
