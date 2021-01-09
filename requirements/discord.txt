@@ -3,22 +3,22 @@
 aiofiles>=0.6.0;python_version>='3.6.1'
 
 # https://github.com/aio-libs/aiohttp
-aiohttp[speedups]>=2.3.0,<4;python_version>='3.6.1'
+# aiohttp[speedups]>=2.3.0,<4;python_version>='3.6.1'
 
 # https://github.com/Rapptz/discord.py
-discord.py[voice]==1.5.1;python_version>='3.6.1'
+discord.py[voice]==1.6.0;python_version>='3.6.1'
 
 # https://github.com/giampaolo/psutil
-psutil==5.7.3;python_version>='3.6.1'
+psutil==5.8.0;python_version>='3.6.1'
 
 # https://github.com/pyca/pynacl/
-PyNaCl==1.4.0;python_version>='3.6.1'
+# PyNaCl==1.4.0;python_version>='3.6.1'
 
 # https://github.com/MagicStack/uvloop
 uvloop==0.14.0;platform_system!='Windows' and sys_platform != 'cygwin' and implementation_name != 'pypy'
 
 # https://github.com/aaugustin/websockets
-websockets==8.1;python_version>='3.6.1'
+# websockets==8.1;python_version>='3.6.1'
 
 -r pil.txt
 -r yt.txt
