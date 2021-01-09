@@ -19,7 +19,7 @@ def load_config(app, *, config_filename='web/config.cfg', config_name=None, env_
     if not cfg or not isinstance(cfg, str):
       if os.sys.platform == 'win32' or os.name == 'nt':
         return 'dev'
-      return prod
+      return 'prod'
     return cfg
   app.config.from_object(get_config(get_config_name(config_name)))
   app.config.from_pyfile(config_filename, silent=silent)
