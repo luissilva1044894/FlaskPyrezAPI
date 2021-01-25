@@ -19,7 +19,7 @@ Mako==1.1.4
 MarkupSafe==1.1.1
 multidict==5.1.0
 packaging==20.8
-pip==20.3.3
+pip==21.0
 pipenv==2020.11.15
 pkginfo==1.7.0
 Pygments==2.7.4
