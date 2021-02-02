@@ -14,7 +14,7 @@ docutils==0.16
 idna==3.1
 imagesize==1.2.0
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 Mako==1.1.4
 MarkupSafe==1.1.1
 multidict==5.1.0
