@@ -10,4 +10,4 @@ Flask-SQLAlchemy==2.4.4
 #psycopg2==2.8.5 --no-binary psycopg2
 psycopg2-binary==2.8.6
 
-pyrez==1.1.0.3.1
+pyrez==1.1.1
