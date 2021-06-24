@@ -1,5 +1,5 @@
 
-arrow==1.0.3
+arrow==1.1.0
 
 Flask[dotenv]==1.1.2
 Flask-Migrate==2.7.0
