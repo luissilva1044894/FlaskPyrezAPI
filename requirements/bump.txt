@@ -40,6 +40,6 @@ urllib3==1.26.6
 virtualenv==20.4.7
 virtualenv-clone==0.5.4
 webencodings==0.5.1
-Werkzeug==1.0.1
+Werkzeug==2.0.1
 wheel==0.36.2
 yarl==1.6.3
