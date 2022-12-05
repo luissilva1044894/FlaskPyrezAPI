@@ -37,7 +37,7 @@ soupsieve==2.2.1
 SQLAlchemy==1.4.20
 tqdm==4.61.1
 urllib3==1.26.6
-virtualenv==20.4.7
+virtualenv==20.17.0
 virtualenv-clone==0.5.4
 webencodings==0.5.1
 Werkzeug==2.0.1
